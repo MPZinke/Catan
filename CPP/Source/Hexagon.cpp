@@ -1,11 +1,11 @@
 
 
 /*
-       ONE    SIX
+   TWO ONE SIX
       \ | /
         ⬢
-
-  THREE    FOUR
+      / | \
+ THREE FIVE FOUR
 */
 enum CornerType
 {
@@ -39,7 +39,7 @@ enum SideType
 
 enum HexagonType
 {
-	DeserT,
+	DESERT,
 	WOOD,
 	STONE,
 	BRICK,
@@ -51,7 +51,7 @@ enum HexagonType
 class Side
 {
 	private:
-		int
+		SideType _type
 }
 
 
