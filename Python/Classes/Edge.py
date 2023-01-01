@@ -1,30 +1,12 @@
 
 
+from enum import Enum
 from typing import Optional, Union
 
 
-Corner = type('Corner', (object,), {})
-Hexagon = type('Hexagon', (object,), {})
-
-
-class Edge:
+class Corner:
 	"""
-	Edges relative to corner
-	 TOP
-	   \__ SIDE
-	   /
-	 BOTTOM
-
-	        TOP
-	 SIDE __/
-	        \
-	        BOTTOM
-	"""
-	BOTTOM = 0
-	TOP = 1
-	SIDE = 2
-	"""
-	Edges relative to hexagon
+	Corners relative to edges
 	 Edges
 	  4  3  2
 	   \ | / 
@@ -32,16 +14,63 @@ class Edge:
 	   / | \
 	  5  0  1
 
+	 0, 3.
+	  LEFT————RIGHT
+
+	 1, 4.
+	      RIGHT
+	      /
+	     /
+	  LEFT
+
+	 2, 5.
+	  LEFT
+	   \
+	    \
+	    RIGHT
 	"""
+	LEFT, RIGHT = range(2)
+
+
+class Hexagon:
+	"""
+	Hexagon relative to edge
+	 Edges
+	  4  3  2
+	   \ | / 
+	     ⬣
+	   / | \
+	  5  0  1
+
+	 0, 3.
+	   TOP
+	  ——————
+	  BOTTOM
+
+	 1, 4.
+	  TOP /
+	     / BOTTOM
+
+	 2, 5.
+	        \ TOP
+	  BOTTOM \
+	"""
+	BOTTOM, TOP = range(2)
+
+
+class Edge:
+	CORNERS = Corner
+	HEXAGONS = Hexagon
+
 	def __init__(self, id: int, *, top: Optional[Hexagon]=None, bottom: Optional[Hexagon]=None):
 		self._id: int = id
 
 		self._hexagons: list[Optional[Hexagon]] = [None for _ in range(2)]
-		self._corners: list[Optional[Corner]] = [None for _ in range(3)]
+		self._corners: list[Optional[Corner]] = [None for _ in range(2)]
 
 
 	def __xor__(self, right: Hexagon) -> Hexagon:
-		return self._hexagons[self._top == right]
+		return self._hexagons[self._hexagons[0] == right]
 
 
 	def __rxor__(right: Hexagon, self) -> Hexagon:

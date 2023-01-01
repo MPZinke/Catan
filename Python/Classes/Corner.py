@@ -1,70 +1,62 @@
 
 
 from typing import Optional
+from enum import Enum
 
 
-Edge = type('Edge', (object,), {})
-Hexagon = type('Hexagon', (object,), {})
+class Edge:
+	"""
+	Edges relative to corner
+	 TOP
+	   \__ SIDE
+	   /
+	 BOTTOM
+
+	        TOP
+	 SIDE __/
+	        \
+	        BOTTOM
+	"""
+	BOTTOM, TOP, SIDE = range(3)
+
+
+
+class Hexagon:
+	"""
+	Hexagons relative to corners
+	          ______
+	         /      \
+	  ______/        \
+	 /      \  TOP   /
+	/  SIDE  \______/
+	\        /      \
+	 \______/ BOTTOM \
+	        \        /
+	         \______/
+	  ______
+	 /      \
+	/        \______
+	\   TOP  /      \
+	 \______/  SIDE  \
+	 /      \        /
+	/ BOTTOM \______/
+	\        /
+	 \______/
+	"""
+	BOTTOM, TOP, SIDE = range(3)
 
 
 class Corner:
-
-	# EvenCorner: BottomLeftCorner, RightCorner, TopLeftCorner
-	# OddCorner: BottomRightCorner, LeftCorner, TopRightCorner
-
-	"""
-	Corners relative to hexagon
-	   4    3
-	    \  / 
-	 5 — ⬣ — 2
-	    /  \
-	   0    1
-	"""
-	BOTTOM_LEFT: int = 0  # BottomLeft corner when referenced by Hexagon
-	BOTTOM_RIGHT: int = 1  # BottomRight corner when referenced by Hexagon
-	RIGHT: int = 2  # Right corner when referenced by Hexagon
-	TOP_RIGHT: int = 3  # TopRight corner when referenced by Hexagon
-	TOP_LEFT: int = 4  # TopLeft corner when referenced by Hexagon
-	LEFT: int = 5  # Left corner when referenced by Hexagon
-
-	"""
-	Corners relative to edges
-	 Edges
-	  4  3  2
-	   \ | / 
-	     ⬣
-	   / | \
-	  5  0  1
-
-	 0, 3.
-	  LEFT————RIGHT
-
-	 1, 4.
-	      RIGHT
-	      /
-	     /
-	  LEFT
-
-	 2, 5.
-	  LEFT
-	   \
-	    \
-	    RIGHT
-	"""
-	LEFT = 0
-	RIGHT = 1
+	EDGES = Edge
+	HEXAGONS = Hexagon
 
 	def __init__(self, id: int):
 		self._id: int = id
 		self._settlement = None
 		self._port = None
 
-		self._top_edge: Optional[Edge] = None
-
-		self._bottom_hexagon: Optional[Hexagon] = None
-		self._side_hexagon: Optional[Hexagon] = None
-		self._top_hexagon: Optional[Hexagon] = None
-
+		self._edges: list[Optional[Edge]] = [None for _ in range(3)]
+		self._hexagons: list[Optional[Hexagon]] = [None for _ in range(3)]
 
 
 def test():

@@ -5,7 +5,7 @@ __author__ = "MPZinke"
 ########################################################################################################################
 #                                                                                                                      #
 #   created by: MPZinke                                                                                                #
-#   on 2022.12.31                                                                                                      #
+#   on 2023.01.01                                                                                                      #
 #                                                                                                                      #
 #   DESCRIPTION:                                                                                                       #
 #   BUGS:                                                                                                              #
@@ -14,6 +14,5 @@ __author__ = "MPZinke"
 ########################################################################################################################
 
 
-from Classes.Corner import Corner
-from Classes.Edge import Edge
-from Classes.Hexagon import Hexagon
+from Drawing.Canvas import Canvas
+from Drawing.Hexagon import Hexagon
