@@ -44,10 +44,7 @@ class Hexagon:
 		self._type: Type = type
 		self._value: int = value  # the value rolled for this hexagon
 
-		# Corners
 		self._corners: list[Optional[Corner]] = [None for _ in range(6)]
-
-		# Edges
 		self._edges: list[Optional[Edge]] = [None for _ in range(6)]
 
 
