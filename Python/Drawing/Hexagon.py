@@ -37,6 +37,7 @@ class Hexagon:
 
 	def __init__(self, hexagon, canvas, position):
 		# position = (position[0] + canvas.size[0] / 2, canvas.size[1] / 2 - position[1])
+		position = (position[0], canvas.size[1]-position[1])
 		x_60_degree_difference = self.COS_60_DEG * self.DEFAULT_RADIUS
 		y_60_degree_difference = self.SIN_60_DEG * self.DEFAULT_RADIUS
 

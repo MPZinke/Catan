@@ -62,7 +62,7 @@ class Edge:
 	CORNERS = Corner
 	HEXAGONS = Hexagon
 
-	def __init__(self, id: int, *, top: Optional[Hexagon]=None, bottom: Optional[Hexagon]=None):
+	def __init__(self, id: int):
 		self._id: int = id
 
 		self._hexagons: list[Optional[Hexagon]] = [None for _ in range(2)]
@@ -78,16 +78,8 @@ class Edge:
 
 
 def test():
-	top = "ABC"
-	bottom = "DEF"
-	edge = Edge(1, top=top, bottom=bottom)
-	print(edge ^ top)
-	print(edge ^ bottom)
-	print()
-	print(top ^ edge)
-	print(bottom ^ edge)
+	pass
 
 
 if(__name__ == "__main__"):
 	test()
-

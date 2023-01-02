@@ -12,7 +12,7 @@ import Parts
 
 def draw_hexagon(canvas, hexagon, position, visited_hexagon_ids) -> None:
 	Drawing.Hexagon(hexagon, canvas, position)
-	print(f"Drawing hexagon: {hexagon._id} type {hexagon._type}")
+	print(f"Drawing hexagon: {hexagon._id} type {hexagon._type} position {position}")
 	visited_hexagon_ids.append(hexagon._id)
 	edge_ids = Hexagon.EDGES
 	for edge_id in [edge_ids.BOTTOM, edge_ids.BOTTOM_RIGHT, edge_ids.TOP_RIGHT, edge_ids.TOP, edge_ids.TOP_LEFT, edge_ids.BOTTOM_LEFT]:
@@ -23,18 +23,31 @@ def draw_hexagon(canvas, hexagon, position, visited_hexagon_ids) -> None:
 		opposing_hexagon = edge ^ hexagon
 		if(opposing_hexagon is not None and opposing_hexagon._id not in visited_hexagon_ids):
 			if(edge_id == edge_ids.BOTTOM):
-				position = (position[0], position[1] + 103)
+				next_position = (position[0], position[1] - 103)
 			if(edge_id == edge_ids.TOP):
-				position = (position[0], position[1] - 103)
-			if(edge_id in [edge_ids.BOTTOM_RIGHT, edge_ids.BOTTOM_LEFT]):
-				position = (position[0], position[1] + 60 * math.sin(60 * math.pi / 180.0))
-			if(edge_id in [edge_ids.TOP_RIGHT, edge_ids.TOP_LEFT]):
-				position = (position[0], position[1] - 60 * math.sin(60 * math.pi / 180.0))
-			if(edge_id in [edge_ids.BOTTOM_LEFT, edge_ids.TOP_LEFT]):
-				position = (position[0] - 60 - 60 * math.cos(60 * math.pi / 180.0), position[1])
-			if(edge_id in [edge_ids.BOTTOM_RIGHT, edge_ids.TOP_RIGHT]):
-				position = (position[0] + 60 + 60 * math.cos(60 * math.pi / 180.0), position[1])
-			draw_hexagon(canvas, opposing_hexagon, position, visited_hexagon_ids)
+				next_position = (position[0], position[1] + 103)
+			if(edge_id == edge_ids.BOTTOM_RIGHT):
+				next_position = (
+				  position[0] + 60 + 60 * math.cos(60 * math.pi / 180.0),
+				  position[1] - 60 * math.sin(60 * math.pi / 180.0)
+				)
+			if(edge_id == edge_ids.BOTTOM_LEFT):
+				next_position = (
+				  position[0] - 60 - 60 * math.cos(60 * math.pi / 180.0),
+				  position[1] - 60 * math.sin(60 * math.pi / 180.0)
+				)
+			if(edge_id == edge_ids.TOP_RIGHT):
+				next_position = (
+				  position[0] + 60 + 60 * math.cos(60 * math.pi / 180.0),
+				  position[1] + 60 * math.sin(60 * math.pi / 180.0)
+				)
+			if(edge_id == edge_ids.TOP_LEFT):
+				next_position = (
+				  position[0] + 60 + 60 * math.cos(60 * math.pi / 180.0),
+				  position[1] + 60 * math.sin(60 * math.pi / 180.0)
+				)
+
+			draw_hexagon(canvas, opposing_hexagon, next_position, visited_hexagon_ids)
 
 
 
