@@ -8,7 +8,7 @@ class Canvas:
 	def __init__(self, size: Set[int], mode: str="RGBA"):
 		self.size: Set[int] = size
 		self.mode: str = mode
-		self.image: Image = Image.new(mode=mode, size=self.size)
+		self.image: Image = Image.new(mode=mode, size=self.size, color=(40, 40, 100))
 		self.draw_area: ImageDraw = ImageDraw.Draw(self.image)
 
 
@@ -16,10 +16,10 @@ class Canvas:
 		return self.size
 
 
-	def resize(self, width: int, height: int) -> None:
+	def resize(self, width: int, height: int, offset: Set[int]=None) -> None:
 		self.size = (width, height)
 		new: Image = Image.new(size=self.size, mode=self.mode)
-		new.paste(self.image)
+		new.paste(self.image, box=offset)
 		self.image = new
 		self.draw_area = ImageDraw.Draw(self.image)
 

@@ -20,9 +20,6 @@ class Board:
 		self._associate_edges_corners_and_edges_hexagons(data)
 		self._associate_hexagons_corners_and_hexagons_edges(data)
 
-		for edge in self._edges.values():
-			print(edge._corners)
-
 
 	def _associate_corners_edges_and_corners_hexagons(self, data: dict) -> None:
 		"""

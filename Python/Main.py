@@ -1,201 +1,52 @@
 
 
+import math
+
+
 from Classes.Board import Board
 from Classes import Corner, Edge, Hexagon
 import Drawing
 from Drawing import Canvas
+import Parts
+
+
+def draw_hexagon(canvas, hexagon, position, visited_hexagon_ids) -> None:
+	Drawing.Hexagon(hexagon, canvas, position)
+	print(f"Drawing hexagon: {hexagon._id} type {hexagon._type}")
+	visited_hexagon_ids.append(hexagon._id)
+	edge_ids = Hexagon.EDGES
+	for edge_id in [edge_ids.BOTTOM, edge_ids.BOTTOM_RIGHT, edge_ids.TOP_RIGHT, edge_ids.TOP, edge_ids.TOP_LEFT, edge_ids.BOTTOM_LEFT]:
+		edge = hexagon._edges[edge_id]
+		if(edge is None):
+			continue
+
+		opposing_hexagon = edge ^ hexagon
+		if(opposing_hexagon is not None and opposing_hexagon._id not in visited_hexagon_ids):
+			if(edge_id == edge_ids.BOTTOM):
+				position = (position[0], position[1] + 103)
+			if(edge_id == edge_ids.TOP):
+				position = (position[0], position[1] - 103)
+			if(edge_id in [edge_ids.BOTTOM_RIGHT, edge_ids.BOTTOM_LEFT]):
+				position = (position[0], position[1] + 60 * math.sin(60 * math.pi / 180.0))
+			if(edge_id in [edge_ids.TOP_RIGHT, edge_ids.TOP_LEFT]):
+				position = (position[0], position[1] - 60 * math.sin(60 * math.pi / 180.0))
+			if(edge_id in [edge_ids.BOTTOM_LEFT, edge_ids.TOP_LEFT]):
+				position = (position[0] - 60 - 60 * math.cos(60 * math.pi / 180.0), position[1])
+			if(edge_id in [edge_ids.BOTTOM_RIGHT, edge_ids.TOP_RIGHT]):
+				position = (position[0] + 60 + 60 * math.cos(60 * math.pi / 180.0), position[1])
+			draw_hexagon(canvas, opposing_hexagon, position, visited_hexagon_ids)
+
 
 
 def draw_board(board: Board) -> None:
+	visited_hexagon_ids: list[int] = []
 	canvas: Canvas = Canvas((500, 500))
-	Drawing.Hexagon(board._hexagons[1], canvas, (0, 0))
+	draw_hexagon(canvas, board._hexagons[1], (250, 250), visited_hexagon_ids)
 	canvas.show()
 
 
 def main():
-	"""
-	{
-		"hexagons": {
-			<hexagon_id>: {
-				"corners": {
-					<hexagon's corner>: <corner_id>,
-					...
-				},
-				"edges": {
-					<hexagon's edge>: <edge_id>,
-					...
-				},
-				"type": <type>,
-				"value": <dice roll value>
-			},
-			...
-		},
-		"corners": {
-			<corner_id>: {
-				"hexagons": {
-					<corner's hexagon>: <hexagon_id>,
-					...
-				},
-				"edges": {
-					<corner's edge>: <edge_id>,
-					...
-				}
-			},
-			...
-		},
-		"edges": {
-			<edge_id>: {
-				"hexagons": {
-					<edge's hexagon>: <hexagon_id>,
-					...
-				},
-				"corners": {
-					<edge's corner>: <corner_id>,
-					...
-				}
-			},
-			...
-		}
-	}
-	"""
-	parts = {
-		"hexagons": {
-			1: {
-				"corners": {
-					Hexagon.CORNERS.BOTTOM_LEFT: 1,
-					Hexagon.CORNERS.BOTTOM_RIGHT: 2,
-					Hexagon.CORNERS.RIGHT: 3,
-					Hexagon.CORNERS.TOP_RIGHT: 4,
-					Hexagon.CORNERS.TOP_LEFT: 5,
-					Hexagon.CORNERS.LEFT: 6
-				},
-				"edges": {
-					Hexagon.EDGES.BOTTOM: 1,
-					Hexagon.EDGES.BOTTOM_RIGHT: 2,
-					Hexagon.EDGES.TOP_RIGHT: 3,
-					Hexagon.EDGES.TOP: 4,
-					Hexagon.EDGES.TOP_LEFT: 5,
-					Hexagon.EDGES.BOTTOM_LEFT: 6
-				},
-				"type": "DESSERT",
-				"value": 6
-			}
-		},
-		"corners": {
-			1: {
-				"hexagons": {
-					Corner.HEXAGONS.TOP: 1
-				},
-				"edges": {
-					Corner.EDGES.TOP: 6,
-					Corner.EDGES.SIDE: 1
-				}
-			},
-			2: {
-				"hexagons": {
-					Corner.HEXAGONS.TOP: 1
-				},
-				"edges": {
-					Corner.EDGES.SIDE: 1,
-					Corner.EDGES.TOP: 2
-				}
-			},
-			3: {
-				"hexagons": {
-					Corner.HEXAGONS.SIDE: 1
-				},
-				"edges": {
-					Corner.EDGES.BOTTOM: 2,
-					Corner.EDGES.TOP: 3
-				}
-			},
-			4: {
-				"hexagons": {
-					Corner.HEXAGONS.BOTTOM: 1
-				},
-				"edges": {
-					Corner.EDGES.BOTTOM: 3,
-					Corner.EDGES.SIDE: 4
-				}
-			},
-			5: {
-				"hexagons": {
-					Corner.HEXAGONS.BOTTOM: 1
-				},
-				"edges": {
-					Corner.EDGES.BOTTOM: 5,
-					Corner.EDGES.SIDE: 4
-				}
-			},
-			6: {
-				"hexagons": {
-					Corner.HEXAGONS.SIDE: 1
-				},
-				"edges": {
-					Corner.EDGES.BOTTOM: 6,
-					Corner.EDGES.TOP: 5
-				}
-			}
-		},
-		"edges": {
-			1: {
-				"corners": {
-					Edge.CORNERS.LEFT: 1,
-					Edge.CORNERS.RIGHT: 2
-				},
-				"hexagons": {
-					Edge.HEXAGONS.TOP: 1
-				}
-			},
-			2: {
-				"corners": {
-					Edge.CORNERS.LEFT: 2,
-					Edge.CORNERS.RIGHT: 3
-				},
-				"hexagons": {
-					Edge.HEXAGONS.TOP: 1
-				}
-			},
-			3: {
-				"corners": {
-					Edge.CORNERS.LEFT: 4,
-					Edge.CORNERS.RIGHT: 3
-				},
-				"hexagons": {
-					Edge.HEXAGONS.BOTTOM: 1
-				}
-			},
-			4: {
-				"corners": {
-					Edge.CORNERS.LEFT: 5,
-					Edge.CORNERS.RIGHT: 4
-				},
-				"hexagons": {
-					Edge.HEXAGONS.BOTTOM: 1
-				}
-			},
-			5: {
-				"corners": {
-					Edge.CORNERS.LEFT: 6,
-					Edge.CORNERS.RIGHT: 5
-				},
-				"hexagons": {
-					Edge.HEXAGONS.BOTTOM: 1
-				}
-			},
-			6: {
-				"corners": {
-					Edge.CORNERS.LEFT: 6,
-					Edge.CORNERS.RIGHT: 1
-				},
-				"hexagons": {
-					Edge.HEXAGONS.TOP: 1
-				}
-			}
-		}
-	}
-
-	board = Board(parts)
+	board = Board(Parts.PARTS)
 
 	print(board)
 	print()
