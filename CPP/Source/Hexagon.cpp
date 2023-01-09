@@ -61,5 +61,5 @@ class Hexagon
 		int _id;
 		HexagonType _type;
 
+		bool _has_robber = false;
 }
-

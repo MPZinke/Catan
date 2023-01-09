@@ -5,6 +5,7 @@
 
 class Edge;
 class Hexagon;
+class Settlement;
 
 
 class Corner
@@ -32,8 +33,8 @@ class Corner
 
 	private:
 		uint16_t _id;
-		// Settlement* _settlement = nullptr;
-		// Port* _port = nullptr;
+		Settlement* _settlement = nullptr;
+		Port* _port = nullptr;
 
 		Edge* _edges[3] = {nullptr, nullptr, nullptr};
 		Hexagon* _hexagons[3] = {nullptr, nullptr, nullptr};
