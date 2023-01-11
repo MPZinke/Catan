@@ -16,6 +16,7 @@
 int main()
 {
 	Hexagon desert(1, DESERT);
+	Edge top_left1_bottom_right2(1);
 
 	desert.corner(Hexagon::Corners::BOTTOM_LEFT);
 

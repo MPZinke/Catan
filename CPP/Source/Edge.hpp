@@ -31,8 +31,10 @@ class Edge
 			};
 		};
 
+		Edge(uint16_t id);
+
 	private:
-		uint16_t _id;
+		const uint16_t _id;
 
 		Corner* _corners[2] = {nullptr, nullptr};
 		Hexagon* _hexagons[2] = {nullptr, nullptr};
