@@ -1,10 +1,14 @@
 
 
+#pragma once
+
+
 #include <stdint.h>
 
 
 class Edge;
 class Hexagon;
+class Port;
 class Settlement;
 
 

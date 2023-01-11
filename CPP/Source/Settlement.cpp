@@ -11,36 +11,43 @@
 ***********************************************************************************************************************/
 
 
-#include "Hexagon.hpp"
+#include "Settlement.hpp"
 
 
-#include <iostream>
-
-
-Hexagon::Hexagon(uint16_t id, ResourceType type, uint8_t value/*=0*/)
-: _id{id}, _type{type}, _value{value}
+Settlement::Settlement(uint16_t id)
+: _id{id}
 {}
 
 
-Corner* Hexagon::corner(Corners::type corner)
+void Settlement::corner(Corner* corner)
 {
-	if(corner < Corners::CORNERS_LENGTH)
-	{
-		std::exit(1);
-	}
-
-	return _corners[corner];
+	_corner = corner;
 }
 
 
-
-ResourceType Hexagon::type()
+Corner* Settlement::corner()
 {
-	return _type;
+	return _corner;
 }
 
 
-uint8_t Hexagon::value()
+void Settlement::player(Player* player)
 {
-	return _value;
+	_player = player;
 }
+
+
+Player* Settlement::player()
+{
+	return _player;
+}
+
+
+Village::Village(uint16_t id)
+: Settlement(id)
+{}
+
+
+City::City(uint16_t id)
+: Settlement(id)
+{}

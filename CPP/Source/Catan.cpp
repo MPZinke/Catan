@@ -6,13 +6,18 @@
 */
 
 
+#include "Corner.hpp"
 #include "Edge.hpp"
 #include "Hexagon.hpp"
+#include "ResourceType.hpp"
+#include "Settlement.hpp"
 
 
 int main()
 {
-	Hexagon::Corners::BOTTOM_LEFT;
-	Hexagon::Edges::BOTTOM;
+	Hexagon desert(1, DESERT);
+
+	desert.corner(Hexagon::Corners::BOTTOM_LEFT);
+
 	return 0;
 }

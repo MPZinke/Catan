@@ -1,3 +1,3 @@
 
 all:
-	g++ --std=c++14 *.cpp -o Catan
+	g++ --std=c++14 -Wall *.cpp -o Catan

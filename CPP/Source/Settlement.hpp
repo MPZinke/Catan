@@ -1,20 +1,35 @@
 
 
+#pragma once
+
+
+#include <stdint.h>
+
+
 class Corner;
 class Player;
 
 
 class Settlement
 {
-	enum Type
-	{
-		VILLAGE,
-		CITY
-	};
+	public:
+		enum Type
+		{
+			VILLAGE,
+			CITY
+		};
 
-	private:
+		Settlement(uint16_t id);
+
+		void corner(Corner* corner);
+		Corner* corner();
+
+		void player(Player* player);
+		Player* player();
+
+	protected:
 		uint16_t _id;
-		Type _type = Settlement::VILLAGE;
+		const Type _type = Settlement::VILLAGE;
 
 		Player* _player = nullptr;
 		Corner* _corner = nullptr;
@@ -24,18 +39,18 @@ class Settlement
 class Village: Settlement
 {
 	private:
-		Type _type = Settlement::VILLAGE;
+		const Type _type = Settlement::VILLAGE;
 
 	public:
-		Village();
+		Village(uint16_t id);
 };
 
 
 class City: Settlement
 {
 	private:
-		Type _type = Settlement::CITY;
+		const Type _type = Settlement::CITY;
 
 	public:
-		City();
+		City(uint16_t id);
 };
