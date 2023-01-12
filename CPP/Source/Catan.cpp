@@ -10,15 +10,20 @@
 #include "Edge.hpp"
 #include "Hexagon.hpp"
 #include "ResourceType.hpp"
+#include "Terrain.hpp"
 #include "Settlement.hpp"
+
 
 
 int main()
 {
-	Hexagon desert(1, DESERT);
-	Edge top_left1_bottom_right2(1);
 
-	desert.corner(Hexagon::Corners::BOTTOM_LEFT);
+	// desert.edge(Hexagon::Edges::TOP_LEFT, top_left1_bottom_right2);
+	// top_left1_bottom_right2.hexagon(Edge::Hexagons::BOTTOM, desert);
+	// wheat.edge(Hexagon::Edges::BOTTOM_RIGHT, top_left1_bottom_right2);
+	// top_left1_bottom_right2.hexagon(Edge::Hexagons::TOP, wheat);
+
+	// desert.corner(Hexagon::Corners::BOTTOM_LEFT);
 
 	return 0;
 }

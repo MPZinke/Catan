@@ -15,23 +15,33 @@ class Edge
 	public:
 		struct Corners
 		{
-			enum
+			enum Corner
 			{
 				LEFT,
-				RIGHT
+				RIGHT,
+				CORNERS_LENGTH
 			};
 		};
 
 		struct Hexagons
 		{
-			enum
+			enum Hexagon
 			{
 				BOTTOM,
-				TOP
+				TOP,
+				HEXAGONS_LENGTH
 			};
 		};
 
 		Edge(uint16_t id);
+
+		// ———— GETTERS ———— //
+		Corner& corner(Corners::Corner corner);
+		Hexagon& hexagon(Hexagons::Hexagon hexagon);
+
+		// ———— SETTERS ———— //
+		void corner(Corners::Corner corner, Corner& new_corner);
+		void hexagon(Hexagons::Hexagon hexagon, Hexagon& new_hexagon);
 
 	private:
 		const uint16_t _id;

@@ -26,7 +26,7 @@ Hexagon::Hexagon(uint16_t id, ResourceType type, uint8_t value/*=0*/)
 
 Corner& Hexagon::corner(Corners::Corner corner)
 {
-	if(corner < Corners::CORNERS_LENGTH)
+	if(corner >= Corners::CORNERS_LENGTH)
 	{
 		std::exit(1);
 	}
@@ -37,7 +37,7 @@ Corner& Hexagon::corner(Corners::Corner corner)
 
 Edge& Hexagon::edge(Edges::Edge edge)
 {
-	if(edge < Edges::EDGES_LENGTH)
+	if(edge >= Edges::EDGES_LENGTH)
 	{
 		std::exit(1);
 	}
