@@ -10,5 +10,6 @@ enum ResourceType
 	STONE,
 	BRICK,
 	WHEAT,
-	SHEEP
+	SHEEP,
+	RESOURCETYPE_LENGTH
 };
