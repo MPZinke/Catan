@@ -9,6 +9,9 @@
 #include "ResourceType.hpp"
 
 
+#define NUMBER_OF_HEXAGONS 19
+
+
 /*
    TWO ONE SIX
       \ | /
@@ -65,18 +68,22 @@ class Hexagon
 		Hexagon(uint16_t id, ResourceType type, uint8_t value=0);
 
 		// ———— GETTERS ———— //
-		Corner& corner(uint16_t corner);
-		Edge& edge(uint16_t edge);
+		Corner* corner(uint16_t corner);
+		Edge* edge(uint16_t edge);
 
 		ResourceType type();
 		uint8_t value();
 
 		// ———— SETTERS ———— //
 		void corner(uint16_t corner, Corner& new_corner);
+		void corner(uint16_t corner, Corner* new_corner);
+
 		void edge(uint16_t edge, Edge& new_edge);
+		void edge(uint16_t edge, Edge* new_edge);
 
 	private:
 		const uint16_t _id;
+		static bool _visited_hexagons[NUMBER_OF_HEXAGONS];
 		const ResourceType _type;
 		const uint8_t _value;
 

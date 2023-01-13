@@ -40,12 +40,15 @@ class Corner
 		Corner(uint16_t id);
 
 		// ———— GETTERS ———— //
-		Edge& edge(uint16_t edge);
-		Hexagon& hexagon(uint16_t hexagon);
+		Edge* edge(uint16_t edge);
+		Hexagon* hexagon(uint16_t hexagon);
 
 		// ———— SETTERS ———— //
 		void edge(uint16_t edge, Edge& new_edge);
+		void edge(uint16_t edge, Edge* new_edge);
+
 		void hexagon(uint16_t hexagon, Hexagon& new_hexagon);
+		void hexagon(uint16_t hexagon, Hexagon* new_hexagon);
 
 	private:
 		uint16_t _id;
