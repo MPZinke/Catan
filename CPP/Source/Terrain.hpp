@@ -1,12 +1,12 @@
 
 
+#include <stdint.h>
+
+
 #include "Corner.hpp"
 #include "Edge.hpp"
 #include "Hexagon.hpp"
 #include "ResourceType.hpp"
-
-
-
 
 
 Hexagon TERRAIN[] = 
@@ -94,7 +94,7 @@ Corner CORNERS[] =
 
 Edge EDGES[] =
 {
-		Edge(1),
+	Edge(1),
 	Edge(2),
 	Edge(3),
 	Edge(4),
@@ -306,7 +306,7 @@ uint8_t HEXAGON_CORNERS[][3] =  // {HexagonID, EdgeID}
 };
 
 
-uint8_t HEXAGON_EDGES[][2] =  // {HexagonID, EdgeID}
+uint8_t HEXAGON_EDGES[][3] =  // {HexagonID, EdgeID}
 {
 	{1, 1, Hexagon::Edges::BOTTOM},
 	{1, 3, Hexagon::Edges::BOTTOM_RIGHT},

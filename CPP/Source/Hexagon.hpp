@@ -36,7 +36,7 @@ class Hexagon
 		//  AND: https://en.cppreference.com/w/cpp/language/nested_types
 		struct Corners
 		{
-			enum Corner
+			enum
 			{
 				BOTTOM_LEFT,
 				BOTTOM_RIGHT,
@@ -50,7 +50,7 @@ class Hexagon
 
 		struct Edges
 		{
-			enum Edge
+			enum
 			{
 				BOTTOM,
 				BOTTOM_RIGHT,
@@ -65,15 +65,15 @@ class Hexagon
 		Hexagon(uint16_t id, ResourceType type, uint8_t value=0);
 
 		// ———— GETTERS ———— //
-		Corner& corner(Corners::Corner corner);
-		Edge& edge(Edges::Edge edge);
+		Corner& corner(uint16_t corner);
+		Edge& edge(uint16_t edge);
 
 		ResourceType type();
 		uint8_t value();
 
 		// ———— SETTERS ———— //
-		void corner(Corners::Corner corner, Corner& new_corner);
-		void edge(Edges::Edge edge, Edge& new_edge);
+		void corner(uint16_t corner, Corner& new_corner);
+		void edge(uint16_t edge, Edge& new_edge);
 
 	private:
 		const uint16_t _id;

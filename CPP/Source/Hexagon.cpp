@@ -24,10 +24,11 @@ Hexagon::Hexagon(uint16_t id, ResourceType type, uint8_t value/*=0*/)
 
 // ———————————————————————————————————————————————————— SETTERS  ———————————————————————————————————————————————————— //
 
-Corner& Hexagon::corner(Corners::Corner corner)
+Corner& Hexagon::corner(uint16_t corner)
 {
 	if(corner >= Corners::CORNERS_LENGTH)
 	{
+		
 		std::exit(1);
 	}
 
@@ -35,10 +36,11 @@ Corner& Hexagon::corner(Corners::Corner corner)
 }
 
 
-Edge& Hexagon::edge(Edges::Edge edge)
+Edge& Hexagon::edge(uint16_t edge)
 {
 	if(edge >= Edges::EDGES_LENGTH)
 	{
+		
 		std::exit(1);
 	}
 
@@ -60,9 +62,9 @@ uint8_t Hexagon::value()
 
 // ———————————————————————————————————————————————————— SETTERS  ———————————————————————————————————————————————————— //
 
-void Hexagon::corner(Corners::Corner corner, Corner& new_corner)
+void Hexagon::corner(uint16_t corner, Corner& new_corner)
 {
-	if(corner < Corners::CORNERS_LENGTH)
+	if(corner >= Corners::CORNERS_LENGTH)
 	{
 		std::exit(1);
 	}
@@ -71,9 +73,9 @@ void Hexagon::corner(Corners::Corner corner, Corner& new_corner)
 }
 
 
-void Hexagon::edge(Edges::Edge edge, Edge& new_edge)
+void Hexagon::edge(uint16_t edge, Edge& new_edge)
 {
-	if(edge < Edges::EDGES_LENGTH)
+	if(edge >= Edges::EDGES_LENGTH)
 	{
 		std::exit(1);
 	}

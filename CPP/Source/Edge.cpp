@@ -22,7 +22,7 @@ Edge::Edge(uint16_t id)
 {}
 
 // ———— GETTERS ———— //
-Corner& Edge::corner(Corners::Corner corner)
+Corner& Edge::corner(uint16_t corner)
 {
 	if(corner >= Corners::CORNERS_LENGTH)
 	{
@@ -33,7 +33,7 @@ Corner& Edge::corner(Corners::Corner corner)
 }
 
 
-Hexagon& Edge::hexagon(Hexagons::Hexagon hexagon)
+Hexagon& Edge::hexagon(uint16_t hexagon)
 {
 	if(hexagon >= Hexagons::HEXAGONS_LENGTH)
 	{
@@ -45,7 +45,7 @@ Hexagon& Edge::hexagon(Hexagons::Hexagon hexagon)
 
 
 // ———— SETTERS ———— //
-void Edge::corner(Corners::Corner corner, Corner& new_corner)
+void Edge::corner(uint16_t corner, Corner& new_corner)
 {
 	if(corner >= Corners::CORNERS_LENGTH)
 	{
@@ -56,7 +56,7 @@ void Edge::corner(Corners::Corner corner, Corner& new_corner)
 }
 
 
-void Edge::hexagon(Hexagons::Hexagon hexagon, Hexagon& new_hexagon)
+void Edge::hexagon(uint16_t hexagon, Hexagon& new_hexagon)
 {
 	if(hexagon >= Hexagons::HEXAGONS_LENGTH)
 	{

@@ -11,7 +11,7 @@ Corner::Corner(uint16_t id)
 {}
 
 
-Edge& Corner::edge(Edges::Edge edge)
+Edge& Corner::edge(uint16_t edge)
 {
 	if(edge >= Edges::EDGES_LENGTH)
 	{
@@ -22,7 +22,7 @@ Edge& Corner::edge(Edges::Edge edge)
 }
 
 
-Hexagon& Corner::hexagon(Hexagons::Hexagon hexagon)
+Hexagon& Corner::hexagon(uint16_t hexagon)
 {
 	if(hexagon >= Hexagons::HEXAGONS_LENGTH)
 	{
