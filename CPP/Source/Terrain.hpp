@@ -441,3 +441,204 @@ uint8_t HEXAGON_EDGES[][2] =  // {HexagonID, EdgeID}
 	{19, 70, Hexagon::Edges::TOP_LEFT},
 	{19, 65, Hexagon::Edges::BOTTOM_LEFT}
 };
+
+
+uint8_t CORNER_EDGES[][3] =
+{	{1, 1, Corner::Edges::SIDE},
+	{1, 2, Corner::Edges::TOP},
+
+	{2, 1, Corner::Edges::SIDE},
+	{2, 3, Corner::Edges::TOP},
+
+	{3, 4, Corner::Edges::SIDE},
+	{3, 6, Corner::Edges::TOP},
+
+	{4, 2, Corner::Edges::BOTTOM},
+	{4, 4, Corner::Edges::SIDE},
+	{4, 7, Corner::Edges::TOP},
+
+	{5, 3, Corner::Edges::BOTTOM},
+	{5, 5, Corner::Edges::SIDE},
+	{5, 8, Corner::Edges::TOP},
+
+	{6, 5, Corner::Edges::SIDE},
+	{6, 9, Corner::Edges::TOP},
+
+	{7, 10, Corner::Edges::SIDE},
+	{7, 13, Corner::Edges::TOP},
+
+	{8, 6, Corner::Edges::BOTTOM},
+	{8, 10, Corner::Edges::SIDE},
+	{8, 14, Corner::Edges::TOP},
+
+	{9, 7, Corner::Edges::BOTTOM},
+	{9, 11, Corner::Edges::SIDE},
+	{9, 15, Corner::Edges::TOP},
+
+	{10, 8, Corner::Edges::BOTTOM},
+	{10, 11, Corner::Edges::SIDE},
+	{10, 16, Corner::Edges::TOP},
+
+	{11, 9, Corner::Edges::BOTTOM},
+	{11, 12, Corner::Edges::SIDE},
+	{11, 17, Corner::Edges::TOP},
+
+	{12, 12, Corner::Edges::SIDE},
+	{12, 18, Corner::Edges::TOP},
+
+	{13, 13, Corner::Edges::BOTTOM},
+	{13, 21, Corner::Edges::TOP},
+
+	{14, 14, Corner::Edges::BOTTOM},
+	{14, 19, Corner::Edges::SIDE},
+	{14, 22, Corner::Edges::TOP},
+
+	{15, 15, Corner::Edges::BOTTOM},
+	{15, 19, Corner::Edges::SIDE},
+	{15, 23, Corner::Edges::TOP},
+
+	{16, 16, Corner::Edges::BOTTOM},
+	{16, 20, Corner::Edges::SIDE},
+	{16, 24, Corner::Edges::TOP},
+
+	{17, 17, Corner::Edges::BOTTOM},
+	{17, 20, Corner::Edges::SIDE},
+	{17, 25, Corner::Edges::TOP},
+
+	{18, 18, Corner::Edges::BOTTOM},
+	{18, 26, Corner::Edges::TOP},
+
+	{19, 21, Corner::Edges::BOTTOM},
+	{19, 27, Corner::Edges::SIDE},
+	{19, 30, Corner::Edges::TOP},
+
+	{20, 22, Corner::Edges::BOTTOM},
+	{20, 27, Corner::Edges::SIDE},
+	{20, 31, Corner::Edges::TOP},
+
+	{21, 23, Corner::Edges::BOTTOM},
+	{21, 28, Corner::Edges::SIDE},
+	{21, 32, Corner::Edges::TOP},
+
+	{22, 24, Corner::Edges::BOTTOM},
+	{22, 28, Corner::Edges::SIDE},
+	{22, 33, Corner::Edges::TOP},
+
+	{23, 25, Corner::Edges::BOTTOM},
+	{23, 29, Corner::Edges::SIDE},
+	{23, 42, Corner::Edges::TOP},
+
+	{24, 26, Corner::Edges::BOTTOM},
+	{24, 29, Corner::Edges::SIDE},
+	{24, 35, Corner::Edges::TOP},
+
+	{25, 30, Corner::Edges::BOTTOM},
+	{25, 38, Corner::Edges::TOP},
+
+	{26, 31, Corner::Edges::BOTTOM},
+	{26, 36, Corner::Edges::SIDE},
+	{26, 39, Corner::Edges::TOP},
+
+	{27, 32, Corner::Edges::BOTTOM},
+	{27, 36, Corner::Edges::SIDE},
+	{27, 40, Corner::Edges::TOP},
+
+	{28, 33, Corner::Edges::BOTTOM},
+	{28, 37, Corner::Edges::SIDE},
+	{28, 41, Corner::Edges::TOP},
+
+	{29, 34, Corner::Edges::BOTTOM},
+	{29, 37, Corner::Edges::SIDE},
+	{29, 42, Corner::Edges::TOP},
+
+	{30, 35, Corner::Edges::BOTTOM},
+	{30, 43, Corner::Edges::TOP},
+
+	{31, 38, Corner::Edges::BOTTOM},
+	{31, 44, Corner::Edges::SIDE},
+	{31, 47, Corner::Edges::TOP},
+
+	{32, 39, Corner::Edges::BOTTOM},
+	{32, 44, Corner::Edges::SIDE},
+	{32, 48, Corner::Edges::TOP},
+
+	{33, 40, Corner::Edges::BOTTOM},
+	{33, 45, Corner::Edges::SIDE},
+	{33, 49, Corner::Edges::TOP},
+
+	{34, 41, Corner::Edges::BOTTOM},
+	{34, 45, Corner::Edges::SIDE},
+	{34, 50, Corner::Edges::TOP},
+
+	{35, 42, Corner::Edges::BOTTOM},
+	{35, 46, Corner::Edges::SIDE},
+	{35, 51, Corner::Edges::TOP},
+
+	{36, 43, Corner::Edges::BOTTOM},
+	{36, 46, Corner::Edges::SIDE},
+	{36, 52, Corner::Edges::TOP},
+
+	{37, 47, Corner::Edges::BOTTOM},
+	{37, 48, Corner::Edges::TOP},
+
+	{38, 48, Corner::Edges::BOTTOM},
+	{38, 53, Corner::Edges::SIDE},
+	{38, 56, Corner::Edges::TOP},
+
+	{39, 49, Corner::Edges::BOTTOM},
+	{39, 53, Corner::Edges::SIDE},
+	{39, 57, Corner::Edges::TOP},
+
+	{40, 50, Corner::Edges::BOTTOM},
+	{40, 54, Corner::Edges::SIDE},
+	{40, 58, Corner::Edges::TOP},
+
+	{41, 51, Corner::Edges::BOTTOM},
+	{41, 54, Corner::Edges::SIDE},
+	{41, 59, Corner::Edges::TOP},
+
+	{42, 52, Corner::Edges::BOTTOM},
+	{42, 60, Corner::Edges::TOP},
+
+	{43, 55, Corner::Edges::BOTTOM},
+	{43, 61, Corner::Edges::SIDE},
+
+	{44, 56, Corner::Edges::BOTTOM},
+	{44, 61, Corner::Edges::SIDE},
+	{44, 64, Corner::Edges::TOP},
+
+	{45, 57, Corner::Edges::BOTTOM},
+	{45, 62, Corner::Edges::SIDE},
+	{45, 65, Corner::Edges::TOP},
+
+	{46, 58, Corner::Edges::BOTTOM},
+	{46, 62, Corner::Edges::SIDE},
+	{46, 66, Corner::Edges::TOP},
+
+	{47, 59, Corner::Edges::BOTTOM},
+	{47, 63, Corner::Edges::SIDE},
+	{47, 67, Corner::Edges::TOP},
+
+	{48, 60, Corner::Edges::BOTTOM},
+	{48, 63, Corner::Edges::SIDE},
+
+	{49, 64, Corner::Edges::BOTTOM},
+	{49, 68, Corner::Edges::SIDE},
+
+	{50, 65, Corner::Edges::BOTTOM},
+	{50, 68, Corner::Edges::SIDE},
+	{50, 70, Corner::Edges::TOP},
+
+	{51, 66, Corner::Edges::BOTTOM},
+	{51, 69, Corner::Edges::SIDE},
+	{51, 71, Corner::Edges::TOP},
+
+	{52, 67, Corner::Edges::BOTTOM},
+	{52, 69, Corner::Edges::SIDE},
+
+	{53, 70, Corner::Edges::BOTTOM},
+	{53, 72, Corner::Edges::SIDE},
+
+	{54, 71, Corner::Edges::BOTTOM},
+	{54, 72, Corner::Edges::SIDE}
+};
