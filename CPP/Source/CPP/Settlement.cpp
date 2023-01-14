@@ -41,13 +41,3 @@ Player* Settlement::player()
 {
 	return _player;
 }
-
-
-Village::Village(uint16_t id)
-: Settlement(id)
-{}
-
-
-City::City(uint16_t id)
-: Settlement(id)
-{}

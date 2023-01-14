@@ -15,6 +15,30 @@ class Edge
 	public:
 		struct Corners
 		{
+			/*
+			Corners relative to edges
+			 Edges
+			  4  3  2
+			   \ | / 
+			     ⬣
+			   / | \
+			  5  0  1
+
+			 0, 3.
+			  LEFT————RIGHT
+
+			 1, 4.
+			      RIGHT
+			      /
+			     /
+			  LEFT
+
+			 2, 5.
+			  LEFT
+			   \
+			    \
+			    RIGHT
+			*/
 			enum
 			{
 				LEFT,
@@ -25,6 +49,28 @@ class Edge
 
 		struct Hexagons
 		{
+			/*
+			Hexagon relative to edge
+			 Edges
+			  4  3  2
+			   \ | / 
+			     ⬣
+			   / | \
+			  5  0  1
+
+			 0, 3.
+			   TOP
+			  ——————
+			  BOTTOM
+
+			 1, 4.
+			  TOP /
+			     / BOTTOM
+
+			 2, 5.
+			        \ TOP
+			  BOTTOM \
+			*/
 			enum
 			{
 				BOTTOM,

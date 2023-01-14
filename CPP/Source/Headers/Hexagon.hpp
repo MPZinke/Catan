@@ -13,22 +13,6 @@
 #define NUMBER_OF_HEXAGONS 19
 
 
-/*
-   TWO ONE SIX
-      \ | /
-        ⬢
-      / | \
- THREE FIVE FOUR
-
-
-    ONE    SIX
-       \ /
-  TWO — ⬢ — FIVE
-       / \
-  THREE    FOUR
-*/
-
-
 class Corner;
 class Edge;
 
@@ -40,6 +24,14 @@ class Hexagon
 		//  AND: https://en.cppreference.com/w/cpp/language/nested_types
 		struct Corners
 		{
+			/*
+			Corners relative to hexagon
+			   4    3
+			    \  / 
+			 5 — ⬣ — 2
+			    /  \
+			   0    1
+			*/
 			enum
 			{
 				BOTTOM_LEFT,
@@ -54,6 +46,15 @@ class Hexagon
 
 		struct Edges
 		{
+			/*
+			Edges relative to hexagon
+			 Edges
+			  4  3  2
+			   \ | / 
+			     ⬣
+			   / | \
+			  5  0  1
+			*/
 			enum
 			{
 				BOTTOM,
