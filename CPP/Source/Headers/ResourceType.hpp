@@ -3,6 +3,9 @@
 #pragma once
 
 
+typedef uint16_t Resource;
+
+
 enum ResourceType
 {
 	DESERT,

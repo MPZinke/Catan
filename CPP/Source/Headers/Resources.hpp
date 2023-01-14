@@ -15,5 +15,5 @@ class Resources
 		void replace(ResourceType resource_type, uint16_t amount);
 
 	private:
-		uint16_t _resource_counts[6] = {30, 30, 30, 30, 30, 30};
+		uint16_t _resource_counts[RESOURCETYPE_LENGTH] = {0, 30, 30, 30, 30, 30};
 };

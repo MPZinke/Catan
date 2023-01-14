@@ -2,9 +2,14 @@
 # Directories::Source
 
 
-Catan.o: Corner.o Edge.o Hexagon.o Resources.o Settlement.o
+Catan.o: Board.o Corner.o Edge.o Hexagon.o Resources.o Settlement.o
 	@$(eval CATAN_OBJ:=$(OBJECTS_DIR)/Catan.o)
 	$(CXX) $(FLAGS) $(INCLUDES) -c Catan.cpp -o $(CATAN_OBJ)
+
+
+Board.o:
+	@$(eval BOARD_OBJ:=$(OBJECTS_DIR)/Board.o)
+	$(CXX) $(FLAGS) $(INCLUDES) -c Board.cpp -o $(BOARD_OBJ)
 
 
 Corner.o:
