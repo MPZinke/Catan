@@ -1,7 +1,7 @@
 
 # Compiles
 CXX=g++
-FLAGS=--std=c++17 -Wall
+FLAGS="--std=c++17 -Wall"
 
 # Directories
 SOURCE_DIR=$(PWD)

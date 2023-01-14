@@ -11,11 +11,13 @@
 ***********************************************************************************************************************/
 
 
-#include "Edge.hpp"
+#include <iostream>
+
+
 #include "Hexagon.hpp"
 
 
-#include <iostream>
+#include "Edge.hpp"
 
 
 // FROM: https://stackoverflow.com/a/9282425
@@ -31,6 +33,29 @@ Hexagon::Hexagon(uint16_t id, ResourceType type, uint8_t value/*=0*/)
 
 
 // ———————————————————————————————————————————————————— GETTERS  ———————————————————————————————————————————————————— //
+// —————————————————————————————————————————————————————————————————————————————————————————————————————————————————— //
+
+// ————————————————————————————————————————————————— GETTERS::INFO  ————————————————————————————————————————————————— //
+
+uint16_t Hexagon::id()
+{
+	return _id;
+}
+
+
+ResourceType Hexagon::type()
+{
+	return _type;
+}
+
+
+uint8_t Hexagon::value()
+{
+	return _value;
+}
+
+
+// ————————————————————————————————————————————————— GETTERS::BOARD ————————————————————————————————————————————————— //
 
 Corner* Hexagon::corner(uint16_t corner)
 {
@@ -75,33 +100,25 @@ Hexagon* Hexagon::hexagon(uint16_t id)
 		}
 
 		Hexagon* opposing_hexagon = *_edges[x] ^ this;
-		if(Hexagon::can_be_queued(opposing_hexagon))
+		if(Hexagon::can_be_enqueued(opposing_hexagon))
 		{
 			_bfs_queue.push_back(opposing_hexagon);
 		}
 	}
 
 	Hexagon* next_hexagon = pop_bfs_queue();
-	std::cout << _id << std::endl;
-	return next_hexagon != nullptr ? next_hexagon->hexagon(id) : nullptr;
+	if(next_hexagon == nullptr)
+	{
+		clear_bfs_data();
+		return nullptr;
+	}
+	return next_hexagon->hexagon(id);
 }
 
 
-uint16_t Hexagon::id()
+Robber* Hexagon::robber()
 {
-	return _id;
-}
-
-
-ResourceType Hexagon::type()
-{
-	return _type;
-}
-
-
-uint8_t Hexagon::value()
-{
-	return _value;
+	return _robber;
 }
 
 
@@ -153,7 +170,7 @@ void Hexagon::edge(uint16_t edge, Edge* new_edge)
 
 // ————————————————————————————————————————————————————— STATIC ————————————————————————————————————————————————————— //
 
-bool Hexagon::can_be_queued(Hexagon* hexagon)
+bool Hexagon::can_be_enqueued(Hexagon* hexagon)
 {
 	if(hexagon == nullptr)
 	{
@@ -180,11 +197,7 @@ bool Hexagon::can_be_queued(Hexagon* hexagon)
 void Hexagon::clear_bfs_data()
 {
 	_bfs_queue.clear();
-
-	for(uint16_t x = 0; x < NUMBER_OF_HEXAGONS; x++)
-	{
-		_visited_hexagons[x] = false;
-	}
+	std::fill(_visited_hexagons, _visited_hexagons + NUMBER_OF_HEXAGONS, false);
 }
 
 

@@ -21,11 +21,17 @@ class Settlement
 
 		Settlement(uint16_t id);
 
-		void corner(Corner* corner);
+		// ———— GETTERS ———— //
 		Corner* corner();
-
-		void player(Player* player);
 		Player* player();
+
+		// ———— SETTERS ———— //
+		void corner(Corner& corner);
+		void corner(Corner* corner);
+		void player(Player* player);
+		void player(Player& player);
+
+		bool is_blocked();
 
 	private:
 		uint16_t _id;

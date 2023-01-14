@@ -27,7 +27,9 @@ int main()
 	std::cout << "Hexagon0: " << (hexagon0 ? "True" : "False") << std::endl;
 	std::cout << "Hexagon1: " << (hexagon1 ? "True" : "False") << std::endl;
 
+	std::cout << "HEXAGONS[9].hexagon(18): " << HEXAGONS[9].hexagon(18) << std::endl;
 	std::cout << "HEXAGONS[9].hexagon(19): " << HEXAGONS[9].hexagon(19) << std::endl;
+	std::cout << "HEXAGONS[9].hexagon(7): " << HEXAGONS[9].hexagon(7) << std::endl;
 
 	return 0;
 }

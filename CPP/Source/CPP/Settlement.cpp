@@ -14,9 +14,35 @@
 #include "Settlement.hpp"
 
 
+#include "Corner.hpp"
+#include "Hexagon.hpp"
+
+
 Settlement::Settlement(uint16_t id)
 : _id{id}
 {}
+
+
+// ———————————————————————————————————————————————————— GETTERS  ———————————————————————————————————————————————————— //
+
+Corner* Settlement::corner()
+{
+	return _corner;
+}
+
+
+Player* Settlement::player()
+{
+	return _player;
+}
+
+
+// ———————————————————————————————————————————————————— SETTERS  ———————————————————————————————————————————————————— //
+
+void Settlement::corner(Corner& corner)
+{
+	_corner = &corner;
+}
 
 
 void Settlement::corner(Corner* corner)
@@ -25,9 +51,9 @@ void Settlement::corner(Corner* corner)
 }
 
 
-Corner* Settlement::corner()
+void Settlement::player(Player& player)
 {
-	return _corner;
+	_player = &player;
 }
 
 
@@ -37,7 +63,15 @@ void Settlement::player(Player* player)
 }
 
 
-Player* Settlement::player()
+bool Settlement::is_blocked()
 {
-	return _player;
+	for(uint16_t x = 0; x < Corner::Hexagons::HEXAGONS_LENGTH; x++)
+	{
+		if(_corner->hexagon(x) && _corner->hexagon(x)->robber())
+		{
+			return true;
+		}
+	}
+
+	return false;
 }

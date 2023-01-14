@@ -15,6 +15,7 @@
 
 class Corner;
 class Edge;
+class Robber;
 
 
 class Hexagon
@@ -70,13 +71,16 @@ class Hexagon
 		Hexagon(uint16_t id, ResourceType type, uint8_t value=0);
 
 		// ———— GETTERS ———— //
-		Corner* corner(uint16_t corner);
-		Edge* edge(uint16_t edge);
-		Hexagon* hexagon(uint16_t id);
-
+		// ———— GETTERS::INFO ———— //
 		uint16_t id();
 		ResourceType type();
 		uint8_t value();
+
+		// ———— GETTERS::BOARD ———— //
+		Corner* corner(uint16_t corner);
+		Edge* edge(uint16_t edge);
+		Hexagon* hexagon(uint16_t id);
+		Robber* robber();
 
 		// ———— SETTERS ———— //
 		void corner(uint16_t corner, Corner& new_corner);
@@ -92,11 +96,12 @@ class Hexagon
 
 		Corner* _corners[Corners::CORNERS_LENGTH] = {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr};
 		Edge* _edges[6] = {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr};
+		Robber* _robber = nullptr;
 
 		static std::vector<Hexagon*> _bfs_queue;
 		static bool _visited_hexagons[NUMBER_OF_HEXAGONS];
 
-		static bool can_be_queued(Hexagon* hexagon);
+		static bool can_be_enqueued(Hexagon* hexagon);
 		static void clear_bfs_data();
 		static Hexagon* pop_bfs_queue();
 };
