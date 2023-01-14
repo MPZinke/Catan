@@ -46,6 +46,13 @@ Hexagon* Edge::hexagon(uint16_t hexagon)
 }
 
 
+Hexagon* Edge::operator^(Hexagon* hexagon)
+{
+	return _hexagons[hexagon == _hexagons[Hexagons::BOTTOM]];
+}
+
+
+
 // ———————————————————————————————————————————————————— SETTERS  ———————————————————————————————————————————————————— //
 
 void Edge::corner(uint16_t corner, Corner& new_corner)

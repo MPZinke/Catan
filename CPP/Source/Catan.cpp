@@ -55,33 +55,12 @@ int main()
 {
 	associate_terrain();
 
-	Hexagon& hexagon = *EDGES[0].hexagon(Hexagon::Edges::BOTTOM);
-	if(&hexagon)
-	{
-		std::cout << "True" << std::endl;
-	}
-	else
-	{
-		std::cout << "False" << std::endl;
-	}
-
+	Hexagon* hexagon0 = EDGES[0].hexagon(Hexagon::Edges::BOTTOM);
 	Hexagon* hexagon1 = EDGES[0].hexagon(Edge::Hexagons::TOP);
-	// Hexagon& hexagon1 = *EDGES[0].hexagon(Edge::Hexagons::TOP);
-	if(hexagon1)
-	{
-		std::cout << "True" << std::endl;
-	}
-	else
-	{
-		std::cout << "False" << std::endl;
-	}
+	std::cout << "Hexagon0: " << (hexagon0 ? "True" : "False") << std::endl;
+	std::cout << "Hexagon1: " << (hexagon1 ? "True" : "False") << std::endl;
 
-	// desert.edge(Hexagon::Edges::TOP_LEFT, top_left1_bottom_right2);
-	// top_left1_bottom_right2.hexagon(Edge::Hexagons::BOTTOM, desert);
-	// wheat.edge(Hexagon::Edges::BOTTOM_RIGHT, top_left1_bottom_right2);
-	// top_left1_bottom_right2.hexagon(Edge::Hexagons::TOP, wheat);
-
-	// desert.corner(Hexagon::Corners::BOTTOM_LEFT);
+	std::cout << "TERRAIN[0].hexagon(4): " << TERRAIN[0].hexagon(4) << std::endl;
 
 	return 0;
 }

@@ -4,6 +4,7 @@
 
 
 #include <stdint.h>
+#include <vector>
 
 
 #include "ResourceType.hpp"
@@ -70,7 +71,9 @@ class Hexagon
 		// ———— GETTERS ———— //
 		Corner* corner(uint16_t corner);
 		Edge* edge(uint16_t edge);
+		Hexagon* hexagon(uint16_t id);
 
+		uint16_t id();
 		ResourceType type();
 		uint8_t value();
 
@@ -83,10 +86,16 @@ class Hexagon
 
 	private:
 		const uint16_t _id;
-		static bool _visited_hexagons[NUMBER_OF_HEXAGONS];
 		const ResourceType _type;
 		const uint8_t _value;
 
 		Corner* _corners[Corners::CORNERS_LENGTH] = {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr};
 		Edge* _edges[6] = {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr};
+
+		static std::vector<Hexagon*> _bfs_queue;
+		static bool _visited_hexagons[NUMBER_OF_HEXAGONS];
+
+		static bool can_be_queued(Hexagon* hexagon);
+		static void clear_bfs_data();
+		static Hexagon* pop_bfs_queue();
 };
