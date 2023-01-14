@@ -58,7 +58,8 @@ Edge* Hexagon::edge(uint16_t edge)
 
 Hexagon* Hexagon::hexagon(uint16_t id)
 {
-	_visited_hexagons[_id-1] = true;
+	_visited_hexagons[_id] = true;
+
 
 	if(_id == id)
 	{
@@ -81,6 +82,7 @@ Hexagon* Hexagon::hexagon(uint16_t id)
 	}
 
 	Hexagon* next_hexagon = pop_bfs_queue();
+	std::cout << _id << std::endl;
 	return next_hexagon != nullptr ? next_hexagon->hexagon(id) : nullptr;
 }
 
@@ -158,7 +160,7 @@ bool Hexagon::can_be_queued(Hexagon* hexagon)
 		return false;
 	}
 
-	if(_visited_hexagons[hexagon->id()-1] == true)
+	if(_visited_hexagons[hexagon->id()] == true)
 	{
 		return false;
 	}
