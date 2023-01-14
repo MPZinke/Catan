@@ -1,2 +1,3 @@
 Catan
+*.o
 __pycache__/
