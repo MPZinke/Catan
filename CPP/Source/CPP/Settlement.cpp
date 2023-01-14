@@ -18,56 +18,33 @@
 #include "Hexagon.hpp"
 
 
-Settlement::Settlement(uint16_t id)
-: _id{id}
+Settlement::Settlement(uint16_t id, Player& player, Corner& corner)
+: _id{id}, _player{player}, _corner{corner}
 {}
 
 
 // ———————————————————————————————————————————————————— GETTERS  ———————————————————————————————————————————————————— //
 
-Corner* Settlement::corner()
+Corner& Settlement::corner()
 {
-	return _corner;
+	return (Corner&)_corner;
 }
 
 
-Player* Settlement::player()
+Player& Settlement::player()
 {
-	return _player;
+	return (Player&)_player;
 }
 
 
 // ———————————————————————————————————————————————————— SETTERS  ———————————————————————————————————————————————————— //
 
-void Settlement::corner(Corner& corner)
-{
-	_corner = &corner;
-}
-
-
-void Settlement::corner(Corner* corner)
-{
-	_corner = corner;
-}
-
-
-void Settlement::player(Player& player)
-{
-	_player = &player;
-}
-
-
-void Settlement::player(Player* player)
-{
-	_player = player;
-}
-
-
 bool Settlement::is_blocked()
 {
 	for(uint16_t x = 0; x < Corner::Hexagons::HEXAGONS_LENGTH; x++)
 	{
-		if(_corner->hexagon(x) && _corner->hexagon(x)->robber())
+		Corner& corner = (Corner&)_corner;
+		if(corner.hexagon(x) && corner.hexagon(x)->robber())
 		{
 			return true;
 		}

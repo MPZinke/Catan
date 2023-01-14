@@ -19,17 +19,11 @@ class Settlement
 			CITY
 		};
 
-		Settlement(uint16_t id);
+		Settlement(uint16_t id, Player& player, Corner& corner);
 
 		// ———— GETTERS ———— //
-		Corner* corner();
-		Player* player();
-
-		// ———— SETTERS ———— //
-		void corner(Corner& corner);
-		void corner(Corner* corner);
-		void player(Player* player);
-		void player(Player& player);
+		Corner& corner();
+		Player& player();
 
 		bool is_blocked();
 
@@ -37,6 +31,6 @@ class Settlement
 		uint16_t _id;
 		const Type _type = Settlement::VILLAGE;
 
-		Player* _player = nullptr;
-		Corner* _corner = nullptr;
+		const Player& _player;
+		const Corner& _corner;
 };
