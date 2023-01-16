@@ -3,6 +3,16 @@
 #pragma once
 
 
+#include <nlohmann/json.hpp>
+#include <string>
+
+
+#include "Association.hpp"
+
+
+using namespace nlohmann;
+
+
 typedef uint16_t Resource;
 
 
@@ -16,3 +26,6 @@ enum ResourceType
 	SHEEP,
 	RESOURCETYPE_LENGTH
 };
+
+
+ResourceType resource_type_for_name(std::string name);

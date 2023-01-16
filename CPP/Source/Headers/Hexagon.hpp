@@ -3,7 +3,9 @@
 #pragma once
 
 
+#include <nlohmann/json.hpp>
 #include <stdint.h>
+#include <string>
 #include <vector>
 
 
@@ -11,6 +13,9 @@
 
 
 #define NUMBER_OF_HEXAGONS 19
+
+
+using namespace nlohmann;
 
 
 class Corner;
@@ -69,11 +74,13 @@ class Hexagon
 		};
 
 		Hexagon(uint16_t id, ResourceType type, uint8_t value=0);
+		Hexagon(json& hexagon_data);
 
 		// ———— GETTERS ———— //
 		// ———— GETTERS::INFO ———— //
 		uint16_t id();
 		ResourceType type();
+		uint8_t type_for_name(std::string);
 		uint8_t value();
 
 		// ———— GETTERS::BOARD ———— //
@@ -85,9 +92,14 @@ class Hexagon
 		// ———— SETTERS ———— //
 		void corner(uint16_t corner, Corner& new_corner);
 		void corner(uint16_t corner, Corner* new_corner);
+		void corner(std::string corner_label, Corner* new_corner);
 
 		void edge(uint16_t edge, Edge& new_edge);
 		void edge(uint16_t edge, Edge* new_edge);
+		void edge(std::string edge_label, Edge* new_edge);
+
+		void robber(Robber& robber);
+		void robber(Robber* robber);
 
 	private:
 		const uint16_t _id;
@@ -98,6 +110,7 @@ class Hexagon
 		Edge* _edges[6] = {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr};
 		Robber* _robber = nullptr;
 
+		// ———— BFS ———— //
 		static std::vector<Hexagon*> _bfs_queue;
 		static bool _visited_hexagons[NUMBER_OF_HEXAGONS];
 

@@ -9,10 +9,9 @@
 #include <iostream>
 
 
-#include "Game.hpp"
-#include "Board_old.hpp"
 #include "Corner.hpp"
 #include "Edge.hpp"
+#include "Game.hpp"
 #include "Hexagon.hpp"
 #include "Player.hpp"
 #include "ResourceType.hpp"
@@ -21,16 +20,7 @@
 
 int main()
 {
-	associate_terrain();
-
-	Hexagon* hexagon0 = EDGES[0].hexagon(Hexagon::Edges::BOTTOM);
-	Hexagon* hexagon1 = EDGES[0].hexagon(Edge::Hexagons::TOP);
-	std::cout << "Hexagon0: " << (hexagon0 ? "True" : "False") << std::endl;
-	std::cout << "Hexagon1: " << (hexagon1 ? "True" : "False") << std::endl;
-
-	std::cout << "HEXAGONS[9].hexagon(18): " << HEXAGONS[9].hexagon(18) << std::endl;
-	std::cout << "HEXAGONS[9].hexagon(19): " << HEXAGONS[9].hexagon(19) << std::endl;
-	std::cout << "HEXAGONS[9].hexagon(7): " << HEXAGONS[9].hexagon(7) << std::endl;
+	Game game("GameData.json");
 
 	return 0;
 }

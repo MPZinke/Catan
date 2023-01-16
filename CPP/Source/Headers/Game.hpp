@@ -15,10 +15,15 @@
 class Game
 {
 	public:
-		Game();
+		Game(std::string filename);
 
+		Corner* corner(uint16_t id);
+		Edge* edge(uint16_t id);
+		Hexagon* hexagon(uint16_t id);
 
 	private:
+		void associate_parts(json& game_data);
+
 		std::vector<Corner*> _corners;
 		std::vector<Edge*> _edges;
 		std::vector<Hexagon*> _hexagons;

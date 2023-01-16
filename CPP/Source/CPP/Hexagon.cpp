@@ -17,6 +17,7 @@
 #include "Hexagon.hpp"
 
 
+#include "Association.hpp"
 #include "Edge.hpp"
 
 
@@ -32,6 +33,13 @@ Hexagon::Hexagon(uint16_t id, ResourceType type, uint8_t value/*=0*/)
 }
 
 
+Hexagon::Hexagon(json& hexagon_data)
+: _id{hexagon_data["id"]},
+  _type{resource_type_for_name(hexagon_data["type"])},
+  _value{static_cast<uint8_t>(hexagon_data.value("value", 0))}
+{}
+
+
 // ———————————————————————————————————————————————————— GETTERS  ———————————————————————————————————————————————————— //
 // —————————————————————————————————————————————————————————————————————————————————————————————————————————————————— //
 
@@ -40,6 +48,28 @@ Hexagon::Hexagon(uint16_t id, ResourceType type, uint8_t value/*=0*/)
 uint16_t Hexagon::id()
 {
 	return _id;
+}
+
+
+uint8_t Hexagon::type_for_name(std::string name)
+{
+	Association associations[] =
+	{
+		{Corners::BOTTOM_LEFT, "Hexagon::Corners::BOTTOM_LEFT"},
+		{Corners::BOTTOM_RIGHT, "Hexagon::Corners::BOTTOM_RIGHT"},
+		{Corners::RIGHT, "Hexagon::Corners::RIGHT"},
+		{Corners::TOP_RIGHT, "Hexagon::Corners::TOP_RIGHT"},
+		{Corners::TOP_LEFT, "Hexagon::Corners::TOP_LEFT"},
+		{Corners::LEFT, "Hexagon::Corners::LEFT"},
+		{Edges::BOTTOM, "Hexagon::Edges::BOTTOM"},
+		{Edges::BOTTOM_RIGHT, "Hexagon::Edges::BOTTOM_RIGHT"},
+		{Edges::TOP_RIGHT, "Hexagon::Edges::TOP_RIGHT"},
+		{Edges::TOP, "Hexagon::Edges::TOP"},
+		{Edges::TOP_LEFT, "Hexagon::Edges::TOP_LEFT"},
+		{Edges::BOTTOM_LEFT, "Hexagon::Edges::BOTTOM_LEFT"},
+	};
+
+	return ::type_for_name(name, associations, Corners::CORNERS_LENGTH+Edges::EDGES_LENGTH);
 }
 
 
@@ -146,6 +176,12 @@ void Hexagon::corner(uint16_t corner, Corner* new_corner)
 }
 
 
+void Hexagon::corner(std::string corner_label, Corner* new_corner)
+{
+	return corner(type_for_name(corner_label), new_corner);
+}
+
+
 void Hexagon::edge(uint16_t edge, Edge& new_edge)
 {
 	if(edge >= Edges::EDGES_LENGTH)
@@ -165,6 +201,24 @@ void Hexagon::edge(uint16_t edge, Edge* new_edge)
 	}
 
 	_edges[edge] = new_edge;
+}
+
+
+void Hexagon::edge(std::string edge_label, Edge* new_edge)
+{
+	return edge(type_for_name(edge_label), new_edge);
+}
+
+
+void Hexagon::robber(Robber& robber)
+{
+	_robber = &robber;
+}
+
+
+void Hexagon::robber(Robber* robber)
+{
+	_robber = robber;
 }
 
 

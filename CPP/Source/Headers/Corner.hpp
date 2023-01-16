@@ -3,7 +3,11 @@
 #pragma once
 
 
+#include <nlohmann/json.hpp>
 #include <stdint.h>
+
+
+using namespace nlohmann;
 
 
 class Edge;
@@ -71,8 +75,13 @@ class Corner
 		};
 
 		Corner(uint16_t id);
+		Corner(json& corner_data);
 
 		// ———— GETTERS ———— //
+		// ———— GETTERS::INFO ———— //
+		uint16_t id();
+
+		// ———— GETTERS::BOARD ———— //
 		Edge* edge(uint16_t edge);
 		Hexagon* hexagon(uint16_t hexagon);
 
