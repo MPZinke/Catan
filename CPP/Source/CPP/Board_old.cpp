@@ -1,6 +1,6 @@
 
 
-#include "Board.hpp"
+#include "Board_old.hpp"
 
 
 Hexagon HEXAGONS[] = 
@@ -521,7 +521,7 @@ uint8_t CORNER_EDGES[][4] =  // {CornerID, EdgeID, Corner relative to hexagon, H
 
 	{22, 24, Corner::Edges::BOTTOM, Edge::Corners::RIGHT},
 	{22, 28, Corner::Edges::SIDE, Edge::Corners::LEFT},
-	{22, 41, Corner::Edges::TOP, Edge::Corners::RIGHT},
+	{22, 33, Corner::Edges::TOP, Edge::Corners::RIGHT},
 
 	{23, 25, Corner::Edges::BOTTOM, Edge::Corners::LEFT},
 	{23, 28, Corner::Edges::SIDE, Edge::Corners::RIGHT},
@@ -574,7 +574,7 @@ uint8_t CORNER_EDGES[][4] =  // {CornerID, EdgeID, Corner relative to hexagon, H
 	{35, 51, Corner::Edges::TOP, Edge::Corners::LEFT},
 
 	{36, 46, Corner::Edges::BOTTOM, Edge::Corners::LEFT},
-	{36, 47, Corner::Edges::TOP, Edge::Corners::LEFT},
+	{36, 54, Corner::Edges::TOP, Edge::Corners::LEFT},
 
 	{37, 47, Corner::Edges::BOTTOM, Edge::Corners::RIGHT},
 	{37, 52, Corner::Edges::SIDE, Edge::Corners::LEFT},

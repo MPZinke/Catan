@@ -25,11 +25,13 @@ class Settlement
 		Corner& corner();
 		Player& player();
 
+		// ———— GAME ———— //
 		bool is_blocked();
+		bool upgrade();
 
 	private:
 		uint16_t _id;
-		const Type _type = Settlement::VILLAGE;
+		Type _type = Settlement::VILLAGE;
 
 		const Player& _player;
 		const Corner& _corner;

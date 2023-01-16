@@ -2,14 +2,19 @@
 # Directories::Source
 
 
-Catan.o: Board.o Corner.o Edge.o Hexagon.o Resources.o Settlement.o
+Catan.o: Game.o Corner.o Edge.o Hexagon.o Resources.o Settlement.o Board_old.o
 	@$(eval CATAN_OBJ:=$(OBJECTS_DIR)/Catan.o)
 	$(CXX) $(FLAGS) $(INCLUDES) -c Catan.cpp -o $(CATAN_OBJ)
 
 
-Board.o:
-	@$(eval BOARD_OBJ:=$(OBJECTS_DIR)/Board.o)
-	$(CXX) $(FLAGS) $(INCLUDES) -c Board.cpp -o $(BOARD_OBJ)
+Game.o:
+	@$(eval GAME_OBJ:=$(OBJECTS_DIR)/Game.o)
+	$(CXX) $(FLAGS) $(INCLUDES) -I../../libraries/* -c Game.cpp -o $(GAME_OBJ)
+
+
+Board_old.o:
+	@$(eval BOARD_OLD_OBJ:=$(OBJECTS_DIR)/Board_old.o)
+	$(CXX) $(FLAGS) $(INCLUDES) -c Board_old.cpp -o $(BOARD_OLD_OBJ)
 
 
 Corner.o:

@@ -37,7 +37,7 @@ Player& Settlement::player()
 }
 
 
-// ———————————————————————————————————————————————————— SETTERS  ———————————————————————————————————————————————————— //
+// —————————————————————————————————————————————————————— GAME —————————————————————————————————————————————————————— //
 
 bool Settlement::is_blocked()
 {
@@ -51,4 +51,16 @@ bool Settlement::is_blocked()
 	}
 
 	return false;
+}
+
+
+bool Settlement::upgrade()
+{
+	if(_type != VILLAGE)
+	{
+		return false;
+	}
+
+	_type = CITY;
+	return true;
 }

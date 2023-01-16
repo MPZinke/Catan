@@ -11,9 +11,12 @@ OBJECTS_DIR=$(SOURCE_DIR)/../Objects
 CPP_DIR=$(SOURCE_DIR)/CPP
 # Directories::Headers
 HEADERS_DIR=$(SOURCE_DIR)/Headers
+# Directories::Libraries
+LIBRARIES_DIR=$(SOURCE_DIR)/Libraries
 
 
-INCLUDES:=$(addprefix -I,$(shell find $(HEADERS_DIR) -type d -print))
+INCLUDES:=$(addprefix -I,$(shell find $(HEADERS_DIR) $(LIBRARIES_DIR) -type d -print))
+# LIBRARIES:=$(addprefix -I,$(shell find $(LIBRARIES_DIR) -type d -print))
 
 # Outputs
 BINARY=Catan

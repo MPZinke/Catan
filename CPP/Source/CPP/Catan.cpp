@@ -9,7 +9,8 @@
 #include <iostream>
 
 
-#include "Board.hpp"
+#include "Game.hpp"
+#include "Board_old.hpp"
 #include "Corner.hpp"
 #include "Edge.hpp"
 #include "Hexagon.hpp"
