@@ -6,7 +6,7 @@
 #include <iostream>
 
 
-ResourceType resource_type_for_name(std::string name)
+ResourceType resource_type_for_label(std::string label)
 {
 	Association resource_associations[] =
 	{
@@ -18,5 +18,5 @@ ResourceType resource_type_for_name(std::string name)
 		{SHEEP, "SHEEP"}
 	};
 
-	return (ResourceType)type_for_name(name, resource_associations, RESOURCETYPE_LENGTH);
+	return (ResourceType)type_for_label(label, resource_associations, RESOURCETYPE_LENGTH);
 }

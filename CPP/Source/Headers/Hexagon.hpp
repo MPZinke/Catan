@@ -80,7 +80,7 @@ class Hexagon
 		// ———— GETTERS::INFO ———— //
 		uint16_t id();
 		ResourceType type();
-		uint8_t type_for_name(std::string);
+		uint8_t type_for_label(std::string label);
 		uint8_t value();
 
 		// ———— GETTERS::BOARD ———— //

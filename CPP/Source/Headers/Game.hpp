@@ -23,6 +23,9 @@ class Game
 
 	private:
 		void associate_parts(json& game_data);
+		void associate_corner_with_parts(json& game_data);
+		void associate_edge_with_parts(json& game_data);
+		void associate_hexagon_with_parts(json& game_data);
 
 		std::vector<Corner*> _corners;
 		std::vector<Edge*> _edges;

@@ -17,6 +17,9 @@
 #include <iostream>
 
 
+#include "Association.hpp"
+
+
 Edge::Edge(uint16_t id)
 : _id{id}
 {}
@@ -35,6 +38,20 @@ Edge::Edge(json& edge_data)
 uint16_t Edge::id()
 {
 	return _id;
+}
+
+
+uint8_t Edge::type_for_label(std::string label)
+{
+	Association associations[] =
+	{
+		{Corners::LEFT, "Edge::Corners::LEFT"},
+		{Corners::RIGHT, "Edge::Corners::RIGHT"},
+		{Hexagons::BOTTOM, "Edge::Hexagons::BOTTOM"},
+		{Hexagons::TOP, "Edge::Hexagons::TOP"},
+	};
+
+	return ::type_for_label(label, associations, Corners::CORNERS_LENGTH+Hexagons::HEXAGONS_LENGTH);
 }
 
 
@@ -82,6 +99,23 @@ void Edge::corner(uint16_t corner, Corner& new_corner)
 }
 
 
+void Edge::corner(uint16_t corner, Corner* new_corner)
+{
+	if(corner >= Corners::CORNERS_LENGTH)
+	{
+		exit(1);
+	}
+
+	_corners[corner] = new_corner;
+}
+
+
+void Edge::corner(std::string corner_label, Corner* new_corner)
+{
+	return corner(type_for_label(corner_label), new_corner);
+}
+
+
 void Edge::hexagon(uint16_t hexagon, Hexagon& new_hexagon)
 {
 	if(hexagon >= Hexagons::HEXAGONS_LENGTH)
@@ -90,4 +124,21 @@ void Edge::hexagon(uint16_t hexagon, Hexagon& new_hexagon)
 	}
 
 	_hexagons[hexagon] = &new_hexagon;
+}
+
+
+void Edge::hexagon(uint16_t hexagon, Hexagon* new_hexagon)
+{
+	if(hexagon >= Hexagons::HEXAGONS_LENGTH)
+	{
+		exit(1);
+	}
+
+	_hexagons[hexagon] = new_hexagon;
+}
+
+
+void Edge::hexagon(std::string hexagon_label, Hexagon* new_hexagon)
+{
+	return hexagon(type_for_label(hexagon_label), new_hexagon);
 }

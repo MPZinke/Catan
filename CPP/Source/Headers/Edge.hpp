@@ -5,6 +5,7 @@
 
 #include <nlohmann/json.hpp>
 #include <stdint.h>
+#include <string>
 
 
 using namespace nlohmann;
@@ -89,6 +90,7 @@ class Edge
 		// ———— GETTERS ———— //
 		// ———— GETTERS::INFO ———— //
 		uint16_t id();
+		uint8_t type_for_label(std::string label);
 
 		// ———— GETTERS::BOARD ———— //
 		Corner* corner(uint16_t corner);
@@ -98,9 +100,11 @@ class Edge
 		// ———— SETTERS ———— //
 		void corner(uint16_t corner, Corner& new_corner);
 		void corner(uint16_t corner, Corner* new_corner);
+		void corner(std::string corner_label, Corner* new_corner);
 
 		void hexagon(uint16_t hexagon, Hexagon& new_hexagon);
 		void hexagon(uint16_t hexagon, Hexagon* new_hexagon);
+		void hexagon(std::string hexagon, Hexagon* new_hexagon);
 
 
 	private:

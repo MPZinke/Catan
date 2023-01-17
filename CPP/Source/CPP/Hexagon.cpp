@@ -35,7 +35,7 @@ Hexagon::Hexagon(uint16_t id, ResourceType type, uint8_t value/*=0*/)
 
 Hexagon::Hexagon(json& hexagon_data)
 : _id{hexagon_data["id"]},
-  _type{resource_type_for_name(hexagon_data["type"])},
+  _type{resource_type_for_label(hexagon_data["type"])},
   _value{static_cast<uint8_t>(hexagon_data.value("value", 0))}
 {}
 
@@ -51,7 +51,7 @@ uint16_t Hexagon::id()
 }
 
 
-uint8_t Hexagon::type_for_name(std::string name)
+uint8_t Hexagon::type_for_label(std::string label)
 {
 	Association associations[] =
 	{
@@ -69,7 +69,7 @@ uint8_t Hexagon::type_for_name(std::string name)
 		{Edges::BOTTOM_LEFT, "Hexagon::Edges::BOTTOM_LEFT"},
 	};
 
-	return ::type_for_name(name, associations, Corners::CORNERS_LENGTH+Edges::EDGES_LENGTH);
+	return ::type_for_label(label, associations, Corners::CORNERS_LENGTH+Edges::EDGES_LENGTH);
 }
 
 
@@ -178,7 +178,7 @@ void Hexagon::corner(uint16_t corner, Corner* new_corner)
 
 void Hexagon::corner(std::string corner_label, Corner* new_corner)
 {
-	return corner(type_for_name(corner_label), new_corner);
+	return corner(type_for_label(corner_label), new_corner);
 }
 
 
@@ -206,7 +206,7 @@ void Hexagon::edge(uint16_t edge, Edge* new_edge)
 
 void Hexagon::edge(std::string edge_label, Edge* new_edge)
 {
-	return edge(type_for_name(edge_label), new_edge);
+	return edge(type_for_label(edge_label), new_edge);
 }
 
 

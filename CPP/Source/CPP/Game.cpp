@@ -40,19 +40,70 @@ Game::Game(std::string filename)
 		_hexagons.push_back(new Hexagon(hexagon_data));
 	}
 
+	for(json& port_data : game_data["Ports"])
+	{
+		// _ports.push_back(new Port(port_data));
+	}
+
 	associate_parts(game_data);
 }
 
 
 void Game::associate_parts(json& game_data)
 {
+	associate_corner_with_parts(game_data);
+	associate_edge_with_parts(game_data);
+	associate_hexagon_with_parts(game_data);
+}
+
+
+void Game::associate_corner_with_parts(json& game_data)
+{
+	for(json& corner_data : game_data["Corners"])
+	{
+		Corner* corner = this->corner(corner_data["id"]);
+
+		for(auto& corners_edge : corner_data["Edges"].items())
+		{
+			Edge* edge = this->edge(corners_edge.value());
+			corner->edge(corners_edge.key(), edge);
+		}
+
+		for(auto& corners_hexagon : corner_data["Hexagons"].items())
+		{
+			Hexagon* hexagon = this->hexagon(corners_hexagon.value());
+			corner->hexagon(corners_hexagon.key(), hexagon);
+		}
+	}
+}
+
+
+void Game::associate_edge_with_parts(json& game_data)
+{
+	for(json& edge_data : game_data["Edges"])
+	{
+		Edge* edge = this->edge(edge_data["id"]);
+
+		for(auto& edges_corner : edge_data["Corners"].items())
+		{
+			Corner* corner = this->corner(edges_corner.value());
+			edge->corner(edges_corner.key(), corner);
+		}
+
+		for(auto& edges_hexagon : edge_data["Hexagons"].items())
+		{
+			Hexagon* hexagon = this->hexagon(edges_hexagon.value());
+			edge->hexagon(edges_hexagon.key(), hexagon);
+		}
+	}
+}
+
+
+void Game::associate_hexagon_with_parts(json& game_data)
+{
 	for(json& hexagon_data : game_data["Hexagons"])
 	{
 		Hexagon* hexagon = this->hexagon(hexagon_data["id"]);
-		if(hexagon == nullptr)
-		{
-			continue;
-		}
 
 		for(auto& hexagons_corner : hexagon_data["Corners"].items())
 		{

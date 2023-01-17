@@ -10,8 +10,8 @@
 struct Association
 {
 	uint8_t _type;
-	std::string _name;
+	std::string _label;
 };
 
 
-uint8_t type_for_name(std::string name, Association associations[], uint16_t length);
+uint8_t type_for_label(std::string name, Association associations[], uint16_t length);

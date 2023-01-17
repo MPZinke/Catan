@@ -28,4 +28,4 @@ enum ResourceType
 };
 
 
-ResourceType resource_type_for_name(std::string name);
+ResourceType resource_type_for_label(std::string name);

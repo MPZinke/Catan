@@ -1,5 +1,8 @@
 
 
+#include <nlohmann/json.hpp>
+
+
 class Port
 {
 	public:
@@ -12,10 +15,13 @@ class Port
 			WHEAT=WHEAT,
 			SHEEP=SHEEP,
 		};
-		Port();
+
+		Port(uint16_t id);
+		Port(json& port_data);
 
 	private:
+		const uint16_t _id;
+		const Type _type;
+
 		Corner* _corner;
-
-
 };
