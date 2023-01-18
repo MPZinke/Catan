@@ -1,15 +1,15 @@
 # Directories
 # Directories::Game
-GAME_DIR=$(CPP_DIR)/Game
+GAME_DIR=$(CPP_DIR)/Board
 
 
-Catan.o: Game.o
+Catan.o: Board.o
 	@$(eval CATAN_OBJ:=$(OBJECTS_DIR)/Catan.o)
 	$(CXX) $(FLAGS) $(INCLUDES) -c Catan.cpp -o $(CATAN_OBJ)
 
 
-Game.o:
-	@$(MAKE) Game.o -C $(GAME_DIR) \
+Board.o:
+	@$(MAKE) Board.o -C $(GAME_DIR) \
 	  -e CXX="$(CXX)" \
 	  -e FLAGS="$(FLAGS)" \
 	  -e GAME_DIR="$(GAME_DIR)" \
