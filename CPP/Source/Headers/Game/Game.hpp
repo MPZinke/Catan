@@ -9,6 +9,7 @@
 #include "Player.hpp"
 #include "Port.hpp"
 #include "ResourceType.hpp"
+#include "Robber.hpp"
 #include "Settlement.hpp"
 
 
@@ -31,6 +32,8 @@ class Game
 		std::vector<Edge*> _edges;
 		std::vector<Hexagon*> _hexagons;
 		std::vector<Port*> _ports;
+
+		Robber robber;
 
 		std::vector<Player*> _players;
 		std::vector<Settlement*> _settlements;

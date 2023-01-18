@@ -13,9 +13,16 @@ CPP_DIR=$(SOURCE_DIR)/CPP
 HEADERS_DIR=$(SOURCE_DIR)/Headers
 # Directories::Libraries
 LIBRARIES_DIR=$(SOURCE_DIR)/Libraries
+# Directories::SFML
+SFML_DIR=/opt/homebrew/Cellar/sfml/2.5.1_2
+# Directories::SFML::INCLUDES
+SFML_INCLUDE_DIR=$(SFML_DIR)/include
 
 
-INCLUDES:=$(addprefix -I,$(shell find $(HEADERS_DIR) $(LIBRARIES_DIR) -type d -print))
+RECURSIVE_INCLUDES=$(shell find $(HEADERS_DIR) $(LIBRARIES_DIR) -type d -print)
+INCLUDES:=$(addprefix -I,$(RECURSIVE_INCLUDES) $(SFML_INCLUDE_DIR))
+
+LINKS=-L$(SFML_DIR)/lib -lsfml-graphics -lsfml-window -lsfml-system
 # LIBRARIES:=$(addprefix -I,$(shell find $(LIBRARIES_DIR) -type d -print))
 
 # Outputs
@@ -30,4 +37,4 @@ all:
 	  -e INCLUDES="$(INCLUDES)" \
 	  -e OBJECTS_DIR=$(OBJECTS_DIR)
 
-	$(CXX) $(FLAGS) $(OBJECTS) -o $(BINARY)
+	$(CXX) $(FLAGS) $(OBJECTS) $(LINKS) -o $(BINARY)
