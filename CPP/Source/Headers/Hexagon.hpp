@@ -80,9 +80,11 @@ class Hexagon
 		// ———— GETTERS ———— //
 		// ———— GETTERS::INFO ———— //
 		uint16_t id();
+		bool is_blocked();
 		ResourceType type();
 		uint8_t type_for_label(std::string label);
 		uint8_t value();
+
 		bool operator==(uint8_t value);
 		friend bool operator==(Hexagon& hexagon, DiceRoll& roll);
 		friend bool operator==(Hexagon* hexagon, DiceRoll& roll);

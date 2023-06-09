@@ -15,15 +15,17 @@ class Settlement
 	public:
 		enum Type
 		{
-			VILLAGE,
-			CITY
+			VILLAGE=1,
+			CITY=2
 		};
 
-		Settlement(uint16_t id, Player& player, Corner& corner);
+		Settlement(uint16_t id, Player* player, Corner* corner);
 
 		// ———— GETTERS ———— //
-		Corner& corner();
-		Player& player();
+		uint16_t id();
+		Corner* corner();
+		Player* player();
+		Type type();
 
 		// ———— GAME ———— //
 		bool is_blocked();
@@ -33,6 +35,6 @@ class Settlement
 		uint16_t _id;
 		Type _type = Settlement::VILLAGE;
 
-		const Player& _player;
-		const Corner& _corner;
+		const Player* _player;
+		const Corner* _corner;
 };

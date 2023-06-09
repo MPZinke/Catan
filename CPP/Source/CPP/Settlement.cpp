@@ -18,22 +18,34 @@
 #include "Hexagon.hpp"
 
 
-Settlement::Settlement(uint16_t id, Player& player, Corner& corner)
+Settlement::Settlement(uint16_t id, Player* player, Corner* corner)
 : _id{id}, _player{player}, _corner{corner}
 {}
 
 
 // ———————————————————————————————————————————————————— GETTERS  ———————————————————————————————————————————————————— //
 
-Corner& Settlement::corner()
+uint16_t Settlement::id()
 {
-	return (Corner&)_corner;
+	return _id;
 }
 
 
-Player& Settlement::player()
+Corner* Settlement::corner()
 {
-	return (Player&)_player;
+	return (Corner*)_corner;
+}
+
+
+Player* Settlement::player()
+{
+	return (Player*)_player;
+}
+
+
+Settlement::Type Settlement::type()
+{
+	return _type;
 }
 
 

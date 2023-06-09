@@ -86,9 +86,10 @@ class Corner
 		// ———— GETTERS::BOARD ———— //
 		Edge* edge(uint16_t edge);
 		Hexagon* hexagon(uint16_t hexagon);
+		Port* port();
+		Settlement* settlement();
 
 		// ———— SETTERS ———— //
-		void edge(uint16_t edge, Edge& new_edge);
 		void edge(uint16_t edge, Edge* new_edge);
 		void edge(std::string edge_label, Edge* new_edge);
 

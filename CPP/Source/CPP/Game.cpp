@@ -42,10 +42,17 @@ Game::Game(std::string filename)
 
 	for(json& port_data : game_data["Ports"])
 	{
-		// _ports.push_back(new Port(port_data));
+		_ports.push_back(new Port(port_data));
 	}
 
 	associate_parts(game_data);
+
+	_resource_counts[DESERT] = 0;
+	_resource_counts[WOOD] = 30;
+	_resource_counts[STONE] = 30;
+	_resource_counts[BRICK] = 30;
+	_resource_counts[WHEAT] = 30;
+	_resource_counts[SHEEP] = 30;
 }
 
 
@@ -165,6 +172,40 @@ Hexagon* Game::hexagon(uint16_t id)
 }
 
 
+bool Game::distribute_resources()
+{
+	// Add resources to players
+	//TODO: distribute resources in round robin fassion
+	bool success_flag = true;
+	for(uint16_t x = 0; x < _hexagons.size(); x++)
+	{
+		if(_hexagons[x] == _roll && !_hexagons[x]->is_blocked())
+		{
+			for(uint8_t y = 0; y < Hexagon::Corners::CORNERS_LENGTH; y++)
+			{
+				ResourceType type = _hexagons[x]->type();
+				Settlement* settlement = _hexagons[x]->corner(y)->settlement();
+
+				if(settlement != nullptr)
+				{
+					if(_resource_counts[type] >= settlement->type())
+					{
+						uint16_t resource_count = (uint16_t)settlement->type();
+						settlement->player()->increment_resource(type, resource_count);
+						_resource_counts[type] -= resource_count;
+					}
+					else
+					{
+						success_flag = false;
+					}
+				}
+			}
+		}
+	}
+	return success_flag;
+}
+
+
 void Game::roll_dice()
 {
 	_roll = DiceRoll();
@@ -174,20 +215,14 @@ void Game::roll_dice()
 		//TODO
 	}
 
-	// Add resources to players
-	std::vector<Hexagon*> rolled_hexagons;
-	for(uint16_t x = 0; x < _hexagons.size(); x++)
+	else
 	{
-		if(_hexagons[x] == _roll)
-		{
-			rolled_hexagons.push_back(_hexagons[x]);
-		}
+		distribute_resources();
 	}
+}
 
-	//TODO
-	std::cout << "Rolled: " << (int)_roll.value() << "\n";
-	for(uint16_t x = 0; x < rolled_hexagons.size(); x++)
-	{
-		std::cout << (int)rolled_hexagons[x]->type() << " " << (int)rolled_hexagons[x]->value() << "\n";
-	}
+
+bool Game::upgrade_Player_village_to_city(uint16_t Player_id, uint16_t Settlement_id)
+{
+	return true;
 }

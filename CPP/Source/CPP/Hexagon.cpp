@@ -52,6 +52,12 @@ uint16_t Hexagon::id()
 }
 
 
+bool Hexagon::is_blocked()
+{
+	return _robber != nullptr;
+}
+
+
 uint8_t Hexagon::type_for_label(std::string label)
 {
 	Association associations[] =

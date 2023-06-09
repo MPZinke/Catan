@@ -71,18 +71,19 @@ Hexagon* Corner::hexagon(uint16_t hexagon)
 }
 
 
-// ———————————————————————————————————————————————————— SETTERS  ———————————————————————————————————————————————————— //
-
-void Corner::edge(uint16_t edge, Edge& new_edge)
+Port* Corner::port()
 {
-	if(edge >= Edges::EDGES_LENGTH)
-	{
-		std::exit(1);
-	}
-
-	_edges[edge] = &new_edge;
+	return _port;
 }
 
+
+Settlement* Corner::settlement()
+{
+	return _settlement;
+}
+
+
+// ———————————————————————————————————————————————————— SETTERS  ———————————————————————————————————————————————————— //
 
 void Corner::edge(uint16_t edge, Edge* new_edge)
 {
