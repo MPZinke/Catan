@@ -18,6 +18,7 @@
 
 
 #include "Association.hpp"
+#include "DiceRoll.hpp"
 #include "Edge.hpp"
 
 
@@ -83,6 +84,25 @@ uint8_t Hexagon::value()
 {
 	return _value;
 }
+
+
+bool Hexagon::operator==(uint8_t value)
+{
+	return _value == value;
+}
+
+
+bool operator==(Hexagon& hexagon, DiceRoll& roll)
+{
+	return hexagon._value == roll._value;
+}
+
+
+bool operator==(Hexagon* hexagon, DiceRoll& roll)
+{
+	return hexagon->_value == roll._value;
+}
+
 
 
 // ————————————————————————————————————————————————— GETTERS::BOARD ————————————————————————————————————————————————— //

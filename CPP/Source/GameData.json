@@ -1405,6 +1405,7 @@
         {
             "id": 0,
             "type": "WHEAT",
+            "value": 5,
             "Corners": {
                 "Hexagon::Corners::BOTTOM_LEFT": 0,
                 "Hexagon::Corners::BOTTOM_RIGHT": 1,
@@ -1425,6 +1426,7 @@
         {
             "id": 1,
             "type": "WHEAT",
+            "value": 2,
             "Corners": {
                 "Hexagon::Corners::BOTTOM_LEFT": 2,
                 "Hexagon::Corners::BOTTOM_RIGHT": 3,
@@ -1445,6 +1447,7 @@
         {
             "id": 2,
             "type": "WHEAT",
+            "value": 6,
             "Corners": {
                 "Hexagon::Corners::BOTTOM_LEFT": 4,
                 "Hexagon::Corners::BOTTOM_RIGHT": 5,
@@ -1465,6 +1468,7 @@
         {
             "id": 3,
             "type": "WHEAT",
+            "value": 3,
             "Corners": {
                 "Hexagon::Corners::BOTTOM_LEFT": 6,
                 "Hexagon::Corners::BOTTOM_RIGHT": 7,
@@ -1485,6 +1489,7 @@
         {
             "id": 4,
             "type": "WOOD",
+            "value": 9,
             "Corners": {
                 "Hexagon::Corners::BOTTOM_LEFT": 8,
                 "Hexagon::Corners::BOTTOM_RIGHT": 9,
@@ -1505,6 +1510,7 @@
         {
             "id": 5,
             "type": "WOOD",
+            "value": 10,
             "Corners": {
                 "Hexagon::Corners::BOTTOM_LEFT": 10,
                 "Hexagon::Corners::BOTTOM_RIGHT": 11,
@@ -1525,6 +1531,7 @@
         {
             "id": 6,
             "type": "WOOD",
+            "value": 8,
             "Corners": {
                 "Hexagon::Corners::BOTTOM_LEFT": 13,
                 "Hexagon::Corners::BOTTOM_RIGHT": 14,
@@ -1545,6 +1552,7 @@
         {
             "id": 7,
             "type": "WOOD",
+            "value": 3,
             "Corners": {
                 "Hexagon::Corners::BOTTOM_LEFT": 15,
                 "Hexagon::Corners::BOTTOM_RIGHT": 16,
@@ -1565,6 +1573,7 @@
         {
             "id": 8,
             "type": "SHEEP",
+            "value": 11,
             "Corners": {
                 "Hexagon::Corners::BOTTOM_LEFT": 18,
                 "Hexagon::Corners::BOTTOM_RIGHT": 19,
@@ -1585,6 +1594,7 @@
         {
             "id": 9,
             "type": "SHEEP",
+            "value": 4,
             "Corners": {
                 "Hexagon::Corners::BOTTOM_LEFT": 20,
                 "Hexagon::Corners::BOTTOM_RIGHT": 21,
@@ -1605,6 +1615,7 @@
         {
             "id": 10,
             "type": "SHEEP",
+            "value": 8,
             "Corners": {
                 "Hexagon::Corners::BOTTOM_LEFT": 22,
                 "Hexagon::Corners::BOTTOM_RIGHT": 23,
@@ -1625,6 +1636,7 @@
         {
             "id": 11,
             "type": "SHEEP",
+            "value": 10,
             "Corners": {
                 "Hexagon::Corners::BOTTOM_LEFT": 25,
                 "Hexagon::Corners::BOTTOM_RIGHT": 26,
@@ -1645,6 +1657,7 @@
         {
             "id": 12,
             "type": "STONE",
+            "value": 5,
             "Corners": {
                 "Hexagon::Corners::BOTTOM_LEFT": 27,
                 "Hexagon::Corners::BOTTOM_RIGHT": 28,
@@ -1665,6 +1678,7 @@
         {
             "id": 13,
             "type": "STONE",
+            "value": 6,
             "Corners": {
                 "Hexagon::Corners::BOTTOM_LEFT": 30,
                 "Hexagon::Corners::BOTTOM_RIGHT": 31,
@@ -1685,6 +1699,7 @@
         {
             "id": 14,
             "type": "STONE",
+            "value": 4,
             "Corners": {
                 "Hexagon::Corners::BOTTOM_LEFT": 32,
                 "Hexagon::Corners::BOTTOM_RIGHT": 33,
@@ -1705,6 +1720,7 @@
         {
             "id": 15,
             "type": "BRICK",
+            "value": 11,
             "Corners": {
                 "Hexagon::Corners::BOTTOM_LEFT": 34,
                 "Hexagon::Corners::BOTTOM_RIGHT": 35,
@@ -1725,6 +1741,7 @@
         {
             "id": 16,
             "type": "BRICK",
+            "value": 12,
             "Corners": {
                 "Hexagon::Corners::BOTTOM_LEFT": 37,
                 "Hexagon::Corners::BOTTOM_RIGHT": 38,
@@ -1745,6 +1762,7 @@
         {
             "id": 17,
             "type": "BRICK",
+            "value": 9,
             "Corners": {
                 "Hexagon::Corners::BOTTOM_LEFT": 39,
                 "Hexagon::Corners::BOTTOM_RIGHT": 40,
@@ -1765,6 +1783,7 @@
         {
             "id": 18,
             "type": "DESERT",
+            "value": 0,
             "Corners": {
                 "Hexagon::Corners::BOTTOM_LEFT": 44,
                 "Hexagon::Corners::BOTTOM_RIGHT": 45,

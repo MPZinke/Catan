@@ -2,7 +2,7 @@
 /***********************************************************************************************************************
 *                                                                                                                      *
 *   created by: MPZinke                                                                                                *
-*   on 2023.01.02                                                                                                      *
+*   on 2023.06.08                                                                                                      *
 *                                                                                                                      *
 *   DESCRIPTION: TEMPLATE                                                                                              *
 *   BUGS:                                                                                                              *
@@ -11,23 +11,25 @@
 ***********************************************************************************************************************/
 
 
-#include <iostream>
+#pragma once
 
 
-#include "Corner.hpp"
-#include "Edge.hpp"
-#include "Game.hpp"
-#include "Hexagon.hpp"
-#include "Player.hpp"
-#include "ResourceType.hpp"
-#include "Settlement.hpp"
+#include <stdint.h>
 
 
-int main()
+class Hexagon;
+
+
+class DiceRoll
 {
-	Game game("GameData.json");
-	game.hexagon(0)->hexagon(15);
-	game.roll_dice();
+	private:
+		uint8_t _value;
 
-	return 0;
-}
+	public:
+		DiceRoll();
+
+		uint8_t value();
+		bool operator==(uint8_t value);
+		friend bool operator==(Hexagon& value, DiceRoll& roll);
+		friend bool operator==(Hexagon* value, DiceRoll& roll);
+};

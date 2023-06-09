@@ -7,7 +7,7 @@ Catan.o: Game.o
 	$(CXX) $(FLAGS) $(INCLUDES) -c Catan.cpp -o $(CATAN_OBJ)
 
 
-Game.o: Association.o Corner.o Edge.o Hexagon.o Resources.o ResourceType.o Settlement.o
+Game.o: Association.o Corner.o DiceRoll.o Edge.o Hexagon.o Resources.o ResourceType.o Settlement.o
 	@$(eval GAME_OBJ:=$(OBJECTS_DIR)/Game.o)
 	$(CXX) $(FLAGS) $(INCLUDES) -c Game.cpp -o $(GAME_OBJ)
 
@@ -20,6 +20,11 @@ Association.o:
 Corner.o:
 	@$(eval CORNER_OBJ:=$(OBJECTS_DIR)/Corner.o)
 	$(CXX) $(FLAGS) $(INCLUDES) -c Corner.cpp -o $(CORNER_OBJ)
+
+
+DiceRoll.o:
+	@$(eval DICE_ROLL_OBJ:=$(OBJECTS_DIR)/DiceRoll.o)
+	$(CXX) $(FLAGS) $(INCLUDES) -c DiceRoll.cpp -o $(DICE_ROLL_OBJ)
 
 
 Edge.o:

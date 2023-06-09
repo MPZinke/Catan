@@ -2,7 +2,7 @@
 /***********************************************************************************************************************
 *                                                                                                                      *
 *   created by: MPZinke                                                                                                *
-*   on 2023.01.02                                                                                                      *
+*   on 2023.06.08                                                                                                      *
 *                                                                                                                      *
 *   DESCRIPTION: TEMPLATE                                                                                              *
 *   BUGS:                                                                                                              *
@@ -11,23 +11,29 @@
 ***********************************************************************************************************************/
 
 
+#include "DiceRoll.hpp"
+
+
+#include <stdlib.h>
 #include <iostream>
+#include <time.h>
 
 
-#include "Corner.hpp"
-#include "Edge.hpp"
-#include "Game.hpp"
-#include "Hexagon.hpp"
-#include "Player.hpp"
-#include "ResourceType.hpp"
-#include "Settlement.hpp"
-
-
-int main()
+DiceRoll::DiceRoll()
 {
-	Game game("GameData.json");
-	game.hexagon(0)->hexagon(15);
-	game.roll_dice();
+	srand(time(NULL));
+	_value = rand() % 6 + 1;
+	_value += rand() % 6 + 1;
+}
 
-	return 0;
+
+uint8_t DiceRoll::value()
+{
+	return _value;
+}
+
+
+bool DiceRoll::operator==(uint8_t value)
+{
+	return _value == value;
 }

@@ -163,3 +163,31 @@ Hexagon* Game::hexagon(uint16_t id)
 
 	return nullptr;
 }
+
+
+void Game::roll_dice()
+{
+	_roll = DiceRoll();
+	// Place robber
+	if(_roll == 7)
+	{
+		//TODO
+	}
+
+	// Add resources to players
+	std::vector<Hexagon*> rolled_hexagons;
+	for(uint16_t x = 0; x < _hexagons.size(); x++)
+	{
+		if(_hexagons[x] == _roll)
+		{
+			rolled_hexagons.push_back(_hexagons[x]);
+		}
+	}
+
+	//TODO
+	std::cout << "Rolled: " << (int)_roll.value() << "\n";
+	for(uint16_t x = 0; x < rolled_hexagons.size(); x++)
+	{
+		std::cout << (int)rolled_hexagons[x]->type() << " " << (int)rolled_hexagons[x]->value() << "\n";
+	}
+}

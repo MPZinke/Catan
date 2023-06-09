@@ -19,6 +19,7 @@ using namespace nlohmann;
 
 
 class Corner;
+class DiceRoll;
 class Edge;
 class Robber;
 
@@ -82,6 +83,9 @@ class Hexagon
 		ResourceType type();
 		uint8_t type_for_label(std::string label);
 		uint8_t value();
+		bool operator==(uint8_t value);
+		friend bool operator==(Hexagon& hexagon, DiceRoll& roll);
+		friend bool operator==(Hexagon* hexagon, DiceRoll& roll);
 
 		// ———— GETTERS::BOARD ———— //
 		Corner* corner(uint16_t corner);
