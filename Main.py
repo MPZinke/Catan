@@ -5,7 +5,7 @@ __author__ = "MPZinke"
 ########################################################################################################################
 #                                                                                                                      #
 #   created by: MPZinke                                                                                                #
-#   on 2023.01.01                                                                                                      #
+#   on 2024.04.01                                                                                                      #
 #                                                                                                                      #
 #   DESCRIPTION:                                                                                                       #
 #   BUGS:                                                                                                              #
@@ -14,5 +14,26 @@ __author__ = "MPZinke"
 ########################################################################################################################
 
 
-from Drawing.Canvas import Canvas
-from Drawing.Hexagon import Hexagon
+import json
+from typing import Tuple
+
+
+import setup
+from board import Border
+from board import Corner
+from board import Tile
+
+
+def main():
+	borders: list[Border]
+	corners: list[Corner]
+	tiles: list[Tile]
+	borders, corners, tiles = setup.from_file("GameData.json")
+
+	for tile in tiles:
+		print(str(tile))
+		print(dict(tile))
+
+
+if(__name__ == "__main__"):
+	main()
