@@ -26,6 +26,71 @@ class Hexagon:
 
 
 class HexagonGrid:
+	r"""
+	When measuring from the center of a hexagon to a vertice as depicted in Figure 1, the following formula can be
+	 applied:
+		w = 2s, h = (√3)s
+	Figure 1.
+	  |<---- 2s ----->|  
+	      _________      _
+	     /         \     ↑
+	    /           \    |
+	   /      ___S___\  (√3)s
+	   \             /   |
+	    \           /    |
+	     \_________/     ↓
+	                     ‾
+		
+	Therefore, we determine the ratio of 
+		w : h => 2s : (√3)s
+
+	Applying this for measuring from the center of a hexagon to a side as depicted in Figure 2, the following is
+	 derived:
+		    y = .5 h     ==     2y = h
+		=>  y = .5 (√3)s
+		=> 2y = (√3)s
+		=> 2y/√3 = s
+	Using w = 2s,
+		   w = 2(2y/√3)
+		=> w = 4y/√3
+
+	Figure 2.
+	  |<--- 4y/√3 --->|  —
+	      _________      ↑
+	     /    |    \     |
+	    /     y     \    |
+	   /      |      \  2y
+	   \             /   |
+	    \           /    |
+	     \_________/     ↓
+	                     ‾
+
+	Additional important distances in the grid shown below are as follow:
+		   horizontal distance = (3/4)w
+		   vertical distance   = (1/2)h
+		=> horizontal distance = (3/4)(4y/√3)
+		   vertical distance   = (1/2)(2y)
+		=> horizontal distance = (3y/√3) => (√3)y
+		   vertical distance   = y
+
+	Figure 3.
+	      _________
+	     /         \
+	    /           \
+	   /      .      \_____     _
+	   \             /          ↑
+	    \           /           y
+	     \_________/       .    ↓
+              |<-- (√3)y ->|    ‾
+
+
+	Finally, first hexagon will start in the top left corner with its top side against the top of the area and the left
+	 corner against the left side. Numbering starts at [0, 0]. The first hexagon of the odd rows will be shifted down
+	 by `y` units and to the right by `(√3)y` units.
+
+	Links:
+	- https://www.redblobgames.com/grids/hexagons/
+	"""
 	SQUAREROOT_3 = math.sqrt(3)
 
 	def __init__(self, width: int, height: int, hexagon_size: int):
@@ -61,7 +126,7 @@ class HexagonGrid:
 		next_position_y: float = current_position_y + y_offset
 		next_boundary_y: float = next_position_y + self.hexagon_size
 
-		if(next_boundary_y <= self.height):
+		if(next_boundary_y <= self.height-1):
 			next_position_x: float = current_position_x
 			self._current_index = [self._current_index[0], self._current_index[1] + 1]
 			self._current_position = [next_position_x, next_position_y]
@@ -70,7 +135,7 @@ class HexagonGrid:
 			x_offset: float = self.SQUAREROOT_3 * self.hexagon_size
 			next_position_x: float = current_position_x + x_offset
 			next_boundary_x: float = next_position_x + (x_offset / 2)
-			if(next_boundary_x > self.width):
+			if(next_boundary_x > self.width-1):
 				raise StopIteration
 
 			next_position_y: float = self.hexagon_size if(self._current_index[0] & 0b1) else self.hexagon_size * 2
@@ -78,5 +143,3 @@ class HexagonGrid:
 			self._current_position = [next_position_x, next_position_y]
 
 		self.hexagons[-1].append(Hexagon(list(self._current_index), list(self._current_position), self.hexagon_size))
-
-		print(self.hexagons)

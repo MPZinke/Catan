@@ -1,4 +1,11 @@
 {
+	"Board": {
+		"Size": {
+			"Width": 500,
+			"Height": 500,
+			"Tile Size": 50
+		}
+	},
     "Corners": [
         {
             "id": 0,
@@ -1404,6 +1411,7 @@
     "Tiles": [
         {
             "id": 0,
+            ""
             "type": "WHEAT",
             "value": 5,
             "Corners": {

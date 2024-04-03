@@ -27,9 +27,9 @@ Tile = TypeVar("Tile")
 
 class Tile:
 	class Borders(Enum):
-		"""
-		Edges relative to hexagon
-		 Edges
+		r"""
+		Borders relative to hexagon
+		 Borders
 		  4  3  2
 		   \ | / 
 		     ⬣
@@ -45,7 +45,7 @@ class Tile:
 
 
 	class Corners(Enum):
-		"""
+		r"""
 		Corners relative to hexagon
 		   4    3
 		    \  / 

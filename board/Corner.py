@@ -27,8 +27,8 @@ Tile = TypeVar("Tile")
 
 class Corner:
 	class Borders(Enum):
-		"""
-		Edges relative to corner
+		r"""
+		Borders relative to corner
 		 TOP
 		   \__ SIDE
 		   /
@@ -45,7 +45,7 @@ class Corner:
 
 
 	class Tiles(Enum):
-		"""
+		r"""
 		Tiles relative to corners
 		          ______
 		         /      \
