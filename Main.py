@@ -30,10 +30,7 @@ def main():
 	corners: list[Corner]
 	tiles: list[Tile]
 	borders, corners, tiles = setup.from_file("GameData.json")
-
-	with open("GameData.json", "r") as file:
-		game_data: dict = json.load(file)
-	gui.draw_tiles(game_data, tiles)
+	gui.draw_tiles(tiles)
 
 	# for tile in tiles:
 	# 	print(str(tile))

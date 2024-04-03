@@ -19,28 +19,13 @@ __author__ = "MPZinke"
 
 
 import math
-from typing import Optional, Tuple
+from typing import Tuple
+
+
+from gui import Hexagon
 
 
 Coordinate = Tuple[float, float]
-
-
-class Hexagon:
-	def __init__(self, index: Tuple[int, int], position: Coordinate, size: int):
-		x, y = index
-		self.x: int = x
-		self.y: int = y
-		self.position: Coordinate = position
-		self.size: int = size
-
-
-	def __repr__(self) -> str:
-		return str(self)
-
-
-	def __str__(self) -> str:
-		return f"""<Hexagon x={self.x} y={self.y} position=[{self.position[0]}, {self.position[1]}] size={self.size}>"""
-
 
 
 class HexagonGrid:
@@ -123,24 +108,24 @@ class HexagonGrid:
 
 		self.hexagons: list[list[Hexagon]] = []
 
-		# ———— Check bounds ———— #
-
-		height_index_count: Tuple[int, int] = HexagonGrid.number_of_height_indexes(height, hexagon_size)
-		width_index_count: int = HexagonGrid.number_of_width_indexes(width, hexagon_size)
+		# ———— Create hexagons ———— #
+		height_index_count: Tuple[int, int] = HexagonGrid.number_of_indexes_for_height(height, hexagon_size)
+		width_index_count: int = HexagonGrid.number_of_indexes_for_width(width, hexagon_size)
 		for x_index in range(width_index_count):
 			self.hexagons.append([])
 			for y_index in range(height_index_count[x_index & 0b1]):  # Select the height for an even or odd column.
 				x_position: int = HexagonGrid.x_position_for_index(x_index, hexagon_size)
 				y_position: int = HexagonGrid.y_position_for_index(y_index, hexagon_size, x_index & 0b1)
-
-				current_index = [x_index, y_index]
 				current_position = [x_position, y_position]
-				self.hexagons[-1].append(Hexagon(current_index, current_position, hexagon_size))
+
+				self.hexagons[-1].append(Hexagon(current_position, hexagon_size))
 
 
 	@staticmethod
 	def x_position_for_index(x_index: int, hexagon_size: int) -> int:
 		"""
+		Determines a hexagon's center x_position give an index.
+		---
 		The distance from a corner to the center of a hexagon can be expressed by,
 			Where `d` is the distance from a corner to the center and `y` is the size of the hexagon from center to side
 			   d = (2y)/√3
@@ -163,15 +148,23 @@ class HexagonGrid:
 
 
 	@staticmethod
-	def y_position_for_index(y_index: int, hexagon_size: int, is_odd_index: bool) -> int:
-		offset = hexagon_size * is_odd_index
-		y_position = (hexagon_size * 2 * y_index) + hexagon_size + offset
+	def y_position_for_index(y_index: int, hexagon_size: int, is_odd_column_index: bool) -> int:
+		"""
+		Determines a hexagon's center y_position give an index.
+		---
+		"""
+		distance_to_top: int = hexagon_size * 2 * y_index  # The span to the current hexagon's top.
+		distance_to_center: int = distance_to_top + hexagon_size  # Adds size to get to center.
+		offset_for_column_index: int = hexagon_size * is_odd_column_index
+		y_position = distance_to_center + offset_for_column_index
 		return y_position
 
 
 	@staticmethod
-	def number_of_height_indexes(height: int, hexagon_size: int) -> Tuple[int, int]:
+	def number_of_indexes_for_height(height: int, hexagon_size: int) -> Tuple[int, int]:
 		"""
+		Determines the number of hexagon indexes for a given height and the hexagon size from center to side.
+		---
 		If the hexagon size is half the height of a hexagon then,
 			Where `h` is the height of a hexagon and `y` is the size of a hexagon from center to side
 			   h = 2y
@@ -197,10 +190,11 @@ class HexagonGrid:
 		return [even_row_indexes, odd_row_indexes]
 
 
-
 	@staticmethod
-	def number_of_width_indexes(width: int, hexagon_size: int) -> int:
+	def number_of_indexes_for_width(width: int, hexagon_size: int) -> int:
 		"""
+		Determines the number of hexagon indexes for a given width and the hexagon size from center to side.
+		---
 		For the progression in Figure 1, one can derive:
 			Where `w` is the width and `i` is the number of indexes
 			   w = 4y/√3 + (i-1)(√3)y
@@ -212,7 +206,7 @@ class HexagonGrid:
 		Figure 1.
 			||    wi    ||       w1       |       w2       |       w3       |       w4       ||
 			||----------||----------------|----------------|----------------|----------------||
-			|| width fn ||      4y/√3     | 4y/√3 + (√3)y  | 4y/√3 + 2(√3)y | 4y/√3 + 3(√3)y ||
+			|| width fn ||      4y/√3     |  4y/√3 + (√3)y | 4y/√3 + 2(√3)y | 4y/√3 + 3(√3)y ||
 
 		Notably, `w/((√3)y)` is left as a radical, so to save an extra instruction
 		"""

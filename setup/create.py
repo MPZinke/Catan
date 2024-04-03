@@ -24,6 +24,7 @@ def corners(corner_dicts: list[dict]) -> list[Corner]:
 def tiles(tile_dicts: list[dict]) -> list[Tile]:
 	tiles_list: list[Tile] = []
 	for tile_dict in tile_dicts:
-		tiles_list.append(Tile(tile_dict["id"]))
+		type = Tile.Type.ENUM_VALUES[tile_dict["type"]]
+		tiles_list.append(Tile(tile_dict["id"], tile_dict["coordinate"], type, tile_dict["value"]))
 
 	return tiles_list

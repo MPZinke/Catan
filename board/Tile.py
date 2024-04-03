@@ -14,7 +14,7 @@ __author__ = "MPZinke"
 ########################################################################################################################
 
 
-from typing import TypeVar
+from typing import Tuple, TypeVar
 
 
 from Enum import Enum
@@ -70,8 +70,11 @@ class Tile:
 		BRICK: int
 
 
-	def __init__(self, id: int):
+	def __init__(self, id: int, coordinate: Tuple[int, int], type: int, value: int):
 		self.id: int = id
+		self.coordinate: list[int, int] = coordinate.copy()
+		self.type: int = type
+		self.value: int = value
 		self.borders: list[Border] = [None, None, None, None, None, None]
 		self.corners: list[Corner] = [None, None, None, None, None, None]
 
