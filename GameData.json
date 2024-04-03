@@ -1,0 +1,1807 @@
+{
+    "Corners": [
+        {
+            "id": 0,
+            "Tiles": {
+                "Corner::Tiles::TOP": 0
+            },
+            "Borders": {
+                "Corner::Borders::SIDE": 0,
+                "Corner::Borders::TOP": 1
+            }
+        },
+        {
+            "id": 1,
+            "Tiles": {
+                "Corner::Tiles::TOP": 0
+            },
+            "Borders": {
+                "Corner::Borders::SIDE": 0,
+                "Corner::Borders::TOP": 2
+            }
+        },
+        {
+            "id": 2,
+            "Tiles": {
+                "Corner::Tiles::TOP": 1
+            },
+            "Borders": {
+                "Corner::Borders::SIDE": 3,
+                "Corner::Borders::TOP": 5
+            }
+        },
+        {
+            "id": 3,
+            "Tiles": {
+                "Corner::Tiles::SIDE": 0,
+                "Corner::Tiles::TOP": 1
+            },
+            "Borders": {
+                "Corner::Borders::BOTTOM": 1,
+                "Corner::Borders::SIDE": 3,
+                "Corner::Borders::TOP": 6
+            }
+        },
+        {
+            "id": 4,
+            "Tiles": {
+                "Corner::Tiles::SIDE": 0,
+                "Corner::Tiles::TOP": 2
+            },
+            "Borders": {
+                "Corner::Borders::BOTTOM": 2,
+                "Corner::Borders::SIDE": 4,
+                "Corner::Borders::TOP": 7
+            }
+        },
+        {
+            "id": 5,
+            "Tiles": {
+                "Corner::Tiles::TOP": 2
+            },
+            "Borders": {
+                "Corner::Borders::SIDE": 4,
+                "Corner::Borders::TOP": 8
+            }
+        },
+        {
+            "id": 6,
+            "Tiles": {
+                "Corner::Tiles::TOP": 3
+            },
+            "Borders": {
+                "Corner::Borders::SIDE": 9,
+                "Corner::Borders::TOP": 12
+            }
+        },
+        {
+            "id": 7,
+            "Tiles": {
+                "Corner::Tiles::SIDE": 1,
+                "Corner::Tiles::TOP": 3
+            },
+            "Borders": {
+                "Corner::Borders::BOTTOM": 5,
+                "Corner::Borders::SIDE": 9,
+                "Corner::Borders::TOP": 13
+            }
+        },
+        {
+            "id": 8,
+            "Tiles": {
+                "Corner::Tiles::BOTTOM": 0,
+                "Corner::Tiles::SIDE": 1,
+                "Corner::Tiles::TOP": 4
+            },
+            "Borders": {
+                "Corner::Borders::BOTTOM": 6,
+                "Corner::Borders::SIDE": 10,
+                "Corner::Borders::TOP": 14
+            }
+        },
+        {
+            "id": 9,
+            "Tiles": {
+                "Corner::Tiles::BOTTOM": 0,
+                "Corner::Tiles::SIDE": 2,
+                "Corner::Tiles::TOP": 4
+            },
+            "Borders": {
+                "Corner::Borders::BOTTOM": 7,
+                "Corner::Borders::SIDE": 10,
+                "Corner::Borders::TOP": 15
+            }
+        },
+        {
+            "id": 10,
+            "Tiles": {
+                "Corner::Tiles::SIDE": 2,
+                "Corner::Tiles::TOP": 5
+            },
+            "Borders": {
+                "Corner::Borders::BOTTOM": 8,
+                "Corner::Borders::SIDE": 11,
+                "Corner::Borders::TOP": 16
+            }
+        },
+        {
+            "id": 11,
+            "Tiles": {
+                "Corner::Tiles::TOP": 5
+            },
+            "Borders": {
+                "Corner::Borders::SIDE": 11,
+                "Corner::Borders::TOP": 17
+            }
+        },
+        {
+            "id": 12,
+            "Tiles": {
+                "Corner::Tiles::SIDE": 3
+            },
+            "Borders": {
+                "Corner::Borders::BOTTOM": 12,
+                "Corner::Borders::TOP": 20
+            }
+        },
+        {
+            "id": 13,
+            "Tiles": {
+                "Corner::Tiles::BOTTOM": 1,
+                "Corner::Tiles::SIDE": 3,
+                "Corner::Tiles::TOP": 6
+            },
+            "Borders": {
+                "Corner::Borders::BOTTOM": 13,
+                "Corner::Borders::SIDE": 18,
+                "Corner::Borders::TOP": 21
+            }
+        },
+        {
+            "id": 14,
+            "Tiles": {
+                "Corner::Tiles::BOTTOM": 1,
+                "Corner::Tiles::SIDE": 4,
+                "Corner::Tiles::TOP": 6
+            },
+            "Borders": {
+                "Corner::Borders::BOTTOM": 14,
+                "Corner::Borders::SIDE": 18,
+                "Corner::Borders::TOP": 22
+            }
+        },
+        {
+            "id": 15,
+            "Tiles": {
+                "Corner::Tiles::BOTTOM": 2,
+                "Corner::Tiles::SIDE": 4,
+                "Corner::Tiles::TOP": 7
+            },
+            "Borders": {
+                "Corner::Borders::BOTTOM": 15,
+                "Corner::Borders::SIDE": 19,
+                "Corner::Borders::TOP": 23
+            }
+        },
+        {
+            "id": 16,
+            "Tiles": {
+                "Corner::Tiles::BOTTOM": 2,
+                "Corner::Tiles::SIDE": 5,
+                "Corner::Tiles::TOP": 7
+            },
+            "Borders": {
+                "Corner::Borders::BOTTOM": 16,
+                "Corner::Borders::SIDE": 19,
+                "Corner::Borders::TOP": 24
+            }
+        },
+        {
+            "id": 17,
+            "Tiles": {
+                "Corner::Tiles::SIDE": 5
+            },
+            "Borders": {
+                "Corner::Borders::BOTTOM": 17,
+                "Corner::Borders::TOP": 25
+            }
+        },
+        {
+            "id": 18,
+            "Tiles": {
+                "Corner::Tiles::BOTTOM": 3,
+                "Corner::Tiles::TOP": 8
+            },
+            "Borders": {
+                "Corner::Borders::BOTTOM": 20,
+                "Corner::Borders::SIDE": 26,
+                "Corner::Borders::TOP": 29
+            }
+        },
+        {
+            "id": 19,
+            "Tiles": {
+                "Corner::Tiles::BOTTOM": 3,
+                "Corner::Tiles::SIDE": 6,
+                "Corner::Tiles::TOP": 8
+            },
+            "Borders": {
+                "Corner::Borders::BOTTOM": 21,
+                "Corner::Borders::SIDE": 26,
+                "Corner::Borders::TOP": 30
+            }
+        },
+        {
+            "id": 20,
+            "Tiles": {
+                "Corner::Tiles::BOTTOM": 4,
+                "Corner::Tiles::SIDE": 6,
+                "Corner::Tiles::TOP": 9
+            },
+            "Borders": {
+                "Corner::Borders::BOTTOM": 22,
+                "Corner::Borders::SIDE": 27,
+                "Corner::Borders::TOP": 31
+            }
+        },
+        {
+            "id": 21,
+            "Tiles": {
+                "Corner::Tiles::BOTTOM": 4,
+                "Corner::Tiles::SIDE": 7,
+                "Corner::Tiles::TOP": 9
+            },
+            "Borders": {
+                "Corner::Borders::BOTTOM": 23,
+                "Corner::Borders::SIDE": 27,
+                "Corner::Borders::TOP": 32
+            }
+        },
+        {
+            "id": 22,
+            "Tiles": {
+                "Corner::Tiles::BOTTOM": 5,
+                "Corner::Tiles::SIDE": 7,
+                "Corner::Tiles::TOP": 10
+            },
+            "Borders": {
+                "Corner::Borders::BOTTOM": 24,
+                "Corner::Borders::SIDE": 28,
+                "Corner::Borders::TOP": 33
+            }
+        },
+        {
+            "id": 23,
+            "Tiles": {
+                "Corner::Tiles::BOTTOM": 5,
+                "Corner::Tiles::TOP": 10
+            },
+            "Borders": {
+                "Corner::Borders::BOTTOM": 25,
+                "Corner::Borders::SIDE": 28,
+                "Corner::Borders::TOP": 34
+            }
+        },
+        {
+            "id": 24,
+            "Tiles": {
+                "Corner::Tiles::SIDE": 8
+            },
+            "Borders": {
+                "Corner::Borders::BOTTOM": 29,
+                "Corner::Borders::TOP": 37
+            }
+        },
+        {
+            "id": 25,
+            "Tiles": {
+                "Corner::Tiles::BOTTOM": 6,
+                "Corner::Tiles::SIDE": 8,
+                "Corner::Tiles::TOP": 11
+            },
+            "Borders": {
+                "Corner::Borders::BOTTOM": 30,
+                "Corner::Borders::SIDE": 35,
+                "Corner::Borders::TOP": 38
+            }
+        },
+        {
+            "id": 26,
+            "Tiles": {
+                "Corner::Tiles::BOTTOM": 6,
+                "Corner::Tiles::SIDE": 9,
+                "Corner::Tiles::TOP": 11
+            },
+            "Borders": {
+                "Corner::Borders::BOTTOM": 31,
+                "Corner::Borders::SIDE": 35,
+                "Corner::Borders::TOP": 39
+            }
+        },
+        {
+            "id": 27,
+            "Tiles": {
+                "Corner::Tiles::BOTTOM": 7,
+                "Corner::Tiles::SIDE": 9,
+                "Corner::Tiles::TOP": 12
+            },
+            "Borders": {
+                "Corner::Borders::BOTTOM": 32,
+                "Corner::Borders::SIDE": 36,
+                "Corner::Borders::TOP": 40
+            }
+        },
+        {
+            "id": 28,
+            "Tiles": {
+                "Corner::Tiles::BOTTOM": 7,
+                "Corner::Tiles::SIDE": 10,
+                "Corner::Tiles::TOP": 12
+            },
+            "Borders": {
+                "Corner::Borders::BOTTOM": 33,
+                "Corner::Borders::SIDE": 36,
+                "Corner::Borders::TOP": 41
+            }
+        },
+        {
+            "id": 29,
+            "Tiles": {
+                "Corner::Tiles::SIDE": 10
+            },
+            "Borders": {
+                "Corner::Borders::BOTTOM": 34,
+                "Corner::Borders::TOP": 42
+            }
+        },
+        {
+            "id": 30,
+            "Tiles": {
+                "Corner::Tiles::BOTTOM": 8,
+                "Corner::Tiles::TOP": 13
+            },
+            "Borders": {
+                "Corner::Borders::BOTTOM": 37,
+                "Corner::Borders::SIDE": 43,
+                "Corner::Borders::TOP": 46
+            }
+        },
+        {
+            "id": 31,
+            "Tiles": {
+                "Corner::Tiles::BOTTOM": 8,
+                "Corner::Tiles::SIDE": 11,
+                "Corner::Tiles::TOP": 13
+            },
+            "Borders": {
+                "Corner::Borders::BOTTOM": 38,
+                "Corner::Borders::SIDE": 43,
+                "Corner::Borders::TOP": 47
+            }
+        },
+        {
+            "id": 32,
+            "Tiles": {
+                "Corner::Tiles::BOTTOM": 9,
+                "Corner::Tiles::SIDE": 11,
+                "Corner::Tiles::TOP": 14
+            },
+            "Borders": {
+                "Corner::Borders::BOTTOM": 39,
+                "Corner::Borders::SIDE": 44,
+                "Corner::Borders::TOP": 48
+            }
+        },
+        {
+            "id": 33,
+            "Tiles": {
+                "Corner::Tiles::BOTTOM": 9,
+                "Corner::Tiles::SIDE": 12,
+                "Corner::Tiles::TOP": 14
+            },
+            "Borders": {
+                "Corner::Borders::BOTTOM": 40,
+                "Corner::Borders::SIDE": 44,
+                "Corner::Borders::TOP": 49
+            }
+        },
+        {
+            "id": 34,
+            "Tiles": {
+                "Corner::Tiles::BOTTOM": 10,
+                "Corner::Tiles::SIDE": 12,
+                "Corner::Tiles::TOP": 15
+            },
+            "Borders": {
+                "Corner::Borders::BOTTOM": 41,
+                "Corner::Borders::SIDE": 45,
+                "Corner::Borders::TOP": 50
+            }
+        },
+        {
+            "id": 35,
+            "Tiles": {
+                "Corner::Tiles::BOTTOM": 10,
+                "Corner::Tiles::TOP": 15
+            },
+            "Borders": {
+                "Corner::Borders::BOTTOM": 42,
+                "Corner::Borders::SIDE": 45,
+                "Corner::Borders::TOP": 51
+            }
+        },
+        {
+            "id": 36,
+            "Tiles": {
+                "Corner::Tiles::SIDE": 13
+            },
+            "Borders": {
+                "Corner::Borders::BOTTOM": 46,
+                "Corner::Borders::TOP": 54
+            }
+        },
+        {
+            "id": 37,
+            "Tiles": {
+                "Corner::Tiles::BOTTOM": 11,
+                "Corner::Tiles::SIDE": 13,
+                "Corner::Tiles::TOP": 16
+            },
+            "Borders": {
+                "Corner::Borders::BOTTOM": 47,
+                "Corner::Borders::SIDE": 52,
+                "Corner::Borders::TOP": 55
+            }
+        },
+        {
+            "id": 38,
+            "Tiles": {
+                "Corner::Tiles::BOTTOM": 11,
+                "Corner::Tiles::SIDE": 14,
+                "Corner::Tiles::TOP": 16
+            },
+            "Borders": {
+                "Corner::Borders::BOTTOM": 48,
+                "Corner::Borders::SIDE": 52,
+                "Corner::Borders::TOP": 56
+            }
+        },
+        {
+            "id": 39,
+            "Tiles": {
+                "Corner::Tiles::BOTTOM": 12,
+                "Corner::Tiles::SIDE": 14,
+                "Corner::Tiles::TOP": 17
+            },
+            "Borders": {
+                "Corner::Borders::BOTTOM": 49,
+                "Corner::Borders::SIDE": 53,
+                "Corner::Borders::TOP": 57
+            }
+        },
+        {
+            "id": 40,
+            "Tiles": {
+                "Corner::Tiles::BOTTOM": 12,
+                "Corner::Tiles::SIDE": 15,
+                "Corner::Tiles::TOP": 17
+            },
+            "Borders": {
+                "Corner::Borders::BOTTOM": 50,
+                "Corner::Borders::SIDE": 53,
+                "Corner::Borders::TOP": 58
+            }
+        },
+        {
+            "id": 41,
+            "Tiles": {
+                "Corner::Tiles::SIDE": 15
+            },
+            "Borders": {
+                "Corner::Borders::BOTTOM": 51,
+                "Corner::Borders::TOP": 59
+            }
+        },
+        {
+            "id": 42,
+            "Tiles": {
+                "Corner::Tiles::BOTTOM": 13
+            },
+            "Borders": {
+                "Corner::Borders::BOTTOM": 54,
+                "Corner::Borders::SIDE": 60
+            }
+        },
+        {
+            "id": 43,
+            "Tiles": {
+                "Corner::Tiles::BOTTOM": 13,
+                "Corner::Tiles::SIDE": 16
+            },
+            "Borders": {
+                "Corner::Borders::BOTTOM": 55,
+                "Corner::Borders::SIDE": 60,
+                "Corner::Borders::TOP": 63
+            }
+        },
+        {
+            "id": 44,
+            "Tiles": {
+                "Corner::Tiles::BOTTOM": 14,
+                "Corner::Tiles::SIDE": 16,
+                "Corner::Tiles::TOP": 18
+            },
+            "Borders": {
+                "Corner::Borders::BOTTOM": 56,
+                "Corner::Borders::SIDE": 61,
+                "Corner::Borders::TOP": 64
+            }
+        },
+        {
+            "id": 45,
+            "Tiles": {
+                "Corner::Tiles::BOTTOM": 14,
+                "Corner::Tiles::SIDE": 17,
+                "Corner::Tiles::TOP": 18
+            },
+            "Borders": {
+                "Corner::Borders::BOTTOM": 57,
+                "Corner::Borders::SIDE": 61,
+                "Corner::Borders::TOP": 65
+            }
+        },
+        {
+            "id": 46,
+            "Tiles": {
+                "Corner::Tiles::BOTTOM": 15,
+                "Corner::Tiles::SIDE": 17
+            },
+            "Borders": {
+                "Corner::Borders::BOTTOM": 58,
+                "Corner::Borders::SIDE": 62,
+                "Corner::Borders::TOP": 66
+            }
+        },
+        {
+            "id": 47,
+            "Tiles": {
+                "Corner::Tiles::BOTTOM": 15
+            },
+            "Borders": {
+                "Corner::Borders::BOTTOM": 59,
+                "Corner::Borders::SIDE": 62
+            }
+        },
+        {
+            "id": 48,
+            "Tiles": {
+                "Corner::Tiles::BOTTOM": 16
+            },
+            "Borders": {
+                "Corner::Borders::BOTTOM": 63,
+                "Corner::Borders::SIDE": 67
+            }
+        },
+        {
+            "id": 49,
+            "Tiles": {
+                "Corner::Tiles::BOTTOM": 16,
+                "Corner::Tiles::SIDE": 18
+            },
+            "Borders": {
+                "Corner::Borders::BOTTOM": 64,
+                "Corner::Borders::SIDE": 67,
+                "Corner::Borders::TOP": 69
+            }
+        },
+        {
+            "id": 50,
+            "Tiles": {
+                "Corner::Tiles::BOTTOM": 17,
+                "Corner::Tiles::SIDE": 18
+            },
+            "Borders": {
+                "Corner::Borders::BOTTOM": 65,
+                "Corner::Borders::SIDE": 68,
+                "Corner::Borders::TOP": 70
+            }
+        },
+        {
+            "id": 51,
+            "Tiles": {
+                "Corner::Tiles::BOTTOM": 17
+            },
+            "Borders": {
+                "Corner::Borders::BOTTOM": 66,
+                "Corner::Borders::SIDE": 68
+            }
+        },
+        {
+            "id": 52,
+            "Tiles": {
+                "Corner::Tiles::BOTTOM": 18
+            },
+            "Borders": {
+                "Corner::Borders::BOTTOM": 69,
+                "Corner::Borders::SIDE": 71
+            }
+        },
+        {
+            "id": 53,
+            "Tiles": {
+                "Corner::Tiles::BOTTOM": 18
+            },
+            "Borders": {
+                "Corner::Borders::BOTTOM": 70,
+                "Corner::Borders::SIDE": 71
+            }
+        }
+    ],
+    "Borders": [
+        {
+            "id": 0,
+            "Tiles": {
+                "Border::Tiles::TOP": 0
+            },
+            "Corners": {
+                "Border::Corners::LEFT": 0,
+                "Border::Corners::RIGHT": 1
+            }
+        },
+        {
+            "id": 1,
+            "Tiles": {
+                "Border::Tiles::TOP": 0
+            },
+            "Corners": {
+                "Border::Corners::RIGHT": 0,
+                "Border::Corners::LEFT": 3
+            }
+        },
+        {
+            "id": 2,
+            "Tiles": {
+                "Border::Tiles::TOP": 0
+            },
+            "Corners": {
+                "Border::Corners::LEFT": 1,
+                "Border::Corners::RIGHT": 4
+            }
+        },
+        {
+            "id": 3,
+            "Tiles": {
+                "Border::Tiles::TOP": 1
+            },
+            "Corners": {
+                "Border::Corners::LEFT": 2,
+                "Border::Corners::RIGHT": 3
+            }
+        },
+        {
+            "id": 4,
+            "Tiles": {
+                "Border::Tiles::TOP": 2
+            },
+            "Corners": {
+                "Border::Corners::LEFT": 4,
+                "Border::Corners::RIGHT": 5
+            }
+        },
+        {
+            "id": 5,
+            "Tiles": {
+                "Border::Tiles::TOP": 1
+            },
+            "Corners": {
+                "Border::Corners::RIGHT": 2,
+                "Border::Corners::LEFT": 7
+            }
+        },
+        {
+            "id": 6,
+            "Tiles": {
+                "Border::Tiles::BOTTOM": 0,
+                "Border::Tiles::TOP": 1
+            },
+            "Corners": {
+                "Border::Corners::LEFT": 3,
+                "Border::Corners::RIGHT": 8
+            }
+        },
+        {
+            "id": 7,
+            "Tiles": {
+                "Border::Tiles::BOTTOM": 0,
+                "Border::Tiles::TOP": 2
+            },
+            "Corners": {
+                "Border::Corners::RIGHT": 4,
+                "Border::Corners::LEFT": 9
+            }
+        },
+        {
+            "id": 8,
+            "Tiles": {
+                "Border::Tiles::TOP": 2
+            },
+            "Corners": {
+                "Border::Corners::LEFT": 5,
+                "Border::Corners::RIGHT": 10
+            }
+        },
+        {
+            "id": 9,
+            "Tiles": {
+                "Border::Tiles::TOP": 3
+            },
+            "Corners": {
+                "Border::Corners::LEFT": 6,
+                "Border::Corners::RIGHT": 7
+            }
+        },
+        {
+            "id": 10,
+            "Tiles": {
+                "Border::Tiles::BOTTOM": 0,
+                "Border::Tiles::TOP": 4
+            },
+            "Corners": {
+                "Border::Corners::LEFT": 8,
+                "Border::Corners::RIGHT": 9
+            }
+        },
+        {
+            "id": 11,
+            "Tiles": {
+                "Border::Tiles::TOP": 5
+            },
+            "Corners": {
+                "Border::Corners::LEFT": 10,
+                "Border::Corners::RIGHT": 11
+            }
+        },
+        {
+            "id": 12,
+            "Tiles": {
+                "Border::Tiles::TOP": 3
+            },
+            "Corners": {
+                "Border::Corners::RIGHT": 6,
+                "Border::Corners::LEFT": 12
+            }
+        },
+        {
+            "id": 13,
+            "Tiles": {
+                "Border::Tiles::BOTTOM": 1,
+                "Border::Tiles::TOP": 3
+            },
+            "Corners": {
+                "Border::Corners::LEFT": 7,
+                "Border::Corners::RIGHT": 13
+            }
+        },
+        {
+            "id": 14,
+            "Tiles": {
+                "Border::Tiles::BOTTOM": 1,
+                "Border::Tiles::TOP": 4
+            },
+            "Corners": {
+                "Border::Corners::RIGHT": 8,
+                "Border::Corners::LEFT": 14
+            }
+        },
+        {
+            "id": 15,
+            "Tiles": {
+                "Border::Tiles::BOTTOM": 2,
+                "Border::Tiles::TOP": 4
+            },
+            "Corners": {
+                "Border::Corners::LEFT": 9,
+                "Border::Corners::RIGHT": 15
+            }
+        },
+        {
+            "id": 16,
+            "Tiles": {
+                "Border::Tiles::BOTTOM": 2,
+                "Border::Tiles::TOP": 5
+            },
+            "Corners": {
+                "Border::Corners::RIGHT": 10,
+                "Border::Corners::LEFT": 16
+            }
+        },
+        {
+            "id": 17,
+            "Tiles": {
+                "Border::Tiles::TOP": 5
+            },
+            "Corners": {
+                "Border::Corners::LEFT": 11,
+                "Border::Corners::RIGHT": 17
+            }
+        },
+        {
+            "id": 18,
+            "Tiles": {
+                "Border::Tiles::BOTTOM": 1,
+                "Border::Tiles::TOP": 6
+            },
+            "Corners": {
+                "Border::Corners::LEFT": 13,
+                "Border::Corners::RIGHT": 14
+            }
+        },
+        {
+            "id": 19,
+            "Tiles": {
+                "Border::Tiles::BOTTOM": 2,
+                "Border::Tiles::TOP": 7
+            },
+            "Corners": {
+                "Border::Corners::LEFT": 15,
+                "Border::Corners::RIGHT": 16
+            }
+        },
+        {
+            "id": 20,
+            "Tiles": {
+                "Border::Tiles::BOTTOM": 3
+            },
+            "Corners": {
+                "Border::Corners::LEFT": 12,
+                "Border::Corners::RIGHT": 18
+            }
+        },
+        {
+            "id": 21,
+            "Tiles": {
+                "Border::Tiles::BOTTOM": 3,
+                "Border::Tiles::TOP": 6
+            },
+            "Corners": {
+                "Border::Corners::RIGHT": 13,
+                "Border::Corners::LEFT": 19
+            }
+        },
+        {
+            "id": 22,
+            "Tiles": {
+                "Border::Tiles::BOTTOM": 4,
+                "Border::Tiles::TOP": 6
+            },
+            "Corners": {
+                "Border::Corners::LEFT": 14,
+                "Border::Corners::RIGHT": 20
+            }
+        },
+        {
+            "id": 23,
+            "Tiles": {
+                "Border::Tiles::BOTTOM": 4,
+                "Border::Tiles::TOP": 7
+            },
+            "Corners": {
+                "Border::Corners::RIGHT": 15,
+                "Border::Corners::LEFT": 21
+            }
+        },
+        {
+            "id": 24,
+            "Tiles": {
+                "Border::Tiles::BOTTOM": 5,
+                "Border::Tiles::TOP": 7
+            },
+            "Corners": {
+                "Border::Corners::LEFT": 16,
+                "Border::Corners::RIGHT": 22
+            }
+        },
+        {
+            "id": 25,
+            "Tiles": {
+                "Border::Tiles::BOTTOM": 5
+            },
+            "Corners": {
+                "Border::Corners::RIGHT": 17,
+                "Border::Corners::LEFT": 23
+            }
+        },
+        {
+            "id": 26,
+            "Tiles": {
+                "Border::Tiles::BOTTOM": 3,
+                "Border::Tiles::TOP": 8
+            },
+            "Corners": {
+                "Border::Corners::LEFT": 18,
+                "Border::Corners::RIGHT": 19
+            }
+        },
+        {
+            "id": 27,
+            "Tiles": {
+                "Border::Tiles::BOTTOM": 4,
+                "Border::Tiles::TOP": 9
+            },
+            "Corners": {
+                "Border::Corners::LEFT": 20,
+                "Border::Corners::RIGHT": 21
+            }
+        },
+        {
+            "id": 28,
+            "Tiles": {
+                "Border::Tiles::BOTTOM": 5,
+                "Border::Tiles::TOP": 10
+            },
+            "Corners": {
+                "Border::Corners::LEFT": 22,
+                "Border::Corners::RIGHT": 23
+            }
+        },
+        {
+            "id": 29,
+            "Tiles": {
+                "Border::Tiles::TOP": 8
+            },
+            "Corners": {
+                "Border::Corners::RIGHT": 18,
+                "Border::Corners::LEFT": 24
+            }
+        },
+        {
+            "id": 30,
+            "Tiles": {
+                "Border::Tiles::BOTTOM": 6,
+                "Border::Tiles::TOP": 8
+            },
+            "Corners": {
+                "Border::Corners::LEFT": 19,
+                "Border::Corners::RIGHT": 25
+            }
+        },
+        {
+            "id": 31,
+            "Tiles": {
+                "Border::Tiles::BOTTOM": 6,
+                "Border::Tiles::TOP": 9
+            },
+            "Corners": {
+                "Border::Corners::RIGHT": 20,
+                "Border::Corners::LEFT": 26
+            }
+        },
+        {
+            "id": 32,
+            "Tiles": {
+                "Border::Tiles::BOTTOM": 7,
+                "Border::Tiles::TOP": 9
+            },
+            "Corners": {
+                "Border::Corners::LEFT": 21,
+                "Border::Corners::RIGHT": 27
+            }
+        },
+        {
+            "id": 33,
+            "Tiles": {
+                "Border::Tiles::BOTTOM": 7,
+                "Border::Tiles::TOP": 10
+            },
+            "Corners": {
+                "Border::Corners::RIGHT": 22,
+                "Border::Corners::LEFT": 28
+            }
+        },
+        {
+            "id": 34,
+            "Tiles": {
+                "Border::Tiles::TOP": 10
+            },
+            "Corners": {
+                "Border::Corners::LEFT": 23,
+                "Border::Corners::RIGHT": 29
+            }
+        },
+        {
+            "id": 35,
+            "Tiles": {
+                "Border::Tiles::BOTTOM": 6,
+                "Border::Tiles::TOP": 11
+            },
+            "Corners": {
+                "Border::Corners::LEFT": 25,
+                "Border::Corners::RIGHT": 26
+            }
+        },
+        {
+            "id": 36,
+            "Tiles": {
+                "Border::Tiles::BOTTOM": 7,
+                "Border::Tiles::TOP": 12
+            },
+            "Corners": {
+                "Border::Corners::LEFT": 27,
+                "Border::Corners::RIGHT": 28
+            }
+        },
+        {
+            "id": 37,
+            "Tiles": {
+                "Border::Tiles::BOTTOM": 8
+            },
+            "Corners": {
+                "Border::Corners::LEFT": 24,
+                "Border::Corners::RIGHT": 30
+            }
+        },
+        {
+            "id": 38,
+            "Tiles": {
+                "Border::Tiles::BOTTOM": 8,
+                "Border::Tiles::TOP": 11
+            },
+            "Corners": {
+                "Border::Corners::RIGHT": 25,
+                "Border::Corners::LEFT": 31
+            }
+        },
+        {
+            "id": 39,
+            "Tiles": {
+                "Border::Tiles::BOTTOM": 9,
+                "Border::Tiles::TOP": 11
+            },
+            "Corners": {
+                "Border::Corners::LEFT": 26,
+                "Border::Corners::RIGHT": 32
+            }
+        },
+        {
+            "id": 40,
+            "Tiles": {
+                "Border::Tiles::BOTTOM": 9,
+                "Border::Tiles::TOP": 12
+            },
+            "Corners": {
+                "Border::Corners::RIGHT": 27,
+                "Border::Corners::LEFT": 33
+            }
+        },
+        {
+            "id": 41,
+            "Tiles": {
+                "Border::Tiles::BOTTOM": 10,
+                "Border::Tiles::TOP": 12
+            },
+            "Corners": {
+                "Border::Corners::LEFT": 28,
+                "Border::Corners::RIGHT": 34
+            }
+        },
+        {
+            "id": 42,
+            "Tiles": {
+                "Border::Tiles::BOTTOM": 10
+            },
+            "Corners": {
+                "Border::Corners::RIGHT": 29,
+                "Border::Corners::LEFT": 35
+            }
+        },
+        {
+            "id": 43,
+            "Tiles": {
+                "Border::Tiles::BOTTOM": 8,
+                "Border::Tiles::TOP": 13
+            },
+            "Corners": {
+                "Border::Corners::LEFT": 30,
+                "Border::Corners::RIGHT": 31
+            }
+        },
+        {
+            "id": 44,
+            "Tiles": {
+                "Border::Tiles::BOTTOM": 9,
+                "Border::Tiles::TOP": 14
+            },
+            "Corners": {
+                "Border::Corners::LEFT": 32,
+                "Border::Corners::RIGHT": 33
+            }
+        },
+        {
+            "id": 45,
+            "Tiles": {
+                "Border::Tiles::BOTTOM": 10,
+                "Border::Tiles::TOP": 15
+            },
+            "Corners": {
+                "Border::Corners::LEFT": 34,
+                "Border::Corners::RIGHT": 35
+            }
+        },
+        {
+            "id": 46,
+            "Tiles": {
+                "Border::Tiles::TOP": 13
+            },
+            "Corners": {
+                "Border::Corners::RIGHT": 30,
+                "Border::Corners::LEFT": 36
+            }
+        },
+        {
+            "id": 47,
+            "Tiles": {
+                "Border::Tiles::BOTTOM": 11,
+                "Border::Tiles::TOP": 13
+            },
+            "Corners": {
+                "Border::Corners::LEFT": 31,
+                "Border::Corners::RIGHT": 37
+            }
+        },
+        {
+            "id": 48,
+            "Tiles": {
+                "Border::Tiles::BOTTOM": 11,
+                "Border::Tiles::TOP": 14
+            },
+            "Corners": {
+                "Border::Corners::RIGHT": 32,
+                "Border::Corners::LEFT": 38
+            }
+        },
+        {
+            "id": 49,
+            "Tiles": {
+                "Border::Tiles::BOTTOM": 12,
+                "Border::Tiles::TOP": 14
+            },
+            "Corners": {
+                "Border::Corners::LEFT": 33,
+                "Border::Corners::RIGHT": 39
+            }
+        },
+        {
+            "id": 50,
+            "Tiles": {
+                "Border::Tiles::BOTTOM": 12,
+                "Border::Tiles::TOP": 15
+            },
+            "Corners": {
+                "Border::Corners::RIGHT": 34,
+                "Border::Corners::LEFT": 40
+            }
+        },
+        {
+            "id": 51,
+            "Tiles": {
+                "Border::Tiles::TOP": 15
+            },
+            "Corners": {
+                "Border::Corners::LEFT": 35,
+                "Border::Corners::RIGHT": 41
+            }
+        },
+        {
+            "id": 52,
+            "Tiles": {
+                "Border::Tiles::BOTTOM": 11,
+                "Border::Tiles::TOP": 16
+            },
+            "Corners": {
+                "Border::Corners::LEFT": 37,
+                "Border::Corners::RIGHT": 38
+            }
+        },
+        {
+            "id": 53,
+            "Tiles": {
+                "Border::Tiles::BOTTOM": 12,
+                "Border::Tiles::TOP": 17
+            },
+            "Corners": {
+                "Border::Corners::LEFT": 39,
+                "Border::Corners::RIGHT": 40
+            }
+        },
+        {
+            "id": 54,
+            "Tiles": {
+                "Border::Tiles::BOTTOM": 13
+            },
+            "Corners": {
+                "Border::Corners::LEFT": 36,
+                "Border::Corners::RIGHT": 42
+            }
+        },
+        {
+            "id": 55,
+            "Tiles": {
+                "Border::Tiles::BOTTOM": 13,
+                "Border::Tiles::TOP": 16
+            },
+            "Corners": {
+                "Border::Corners::RIGHT": 37,
+                "Border::Corners::LEFT": 43
+            }
+        },
+        {
+            "id": 56,
+            "Tiles": {
+                "Border::Tiles::BOTTOM": 14,
+                "Border::Tiles::TOP": 16
+            },
+            "Corners": {
+                "Border::Corners::LEFT": 38,
+                "Border::Corners::RIGHT": 44
+            }
+        },
+        {
+            "id": 57,
+            "Tiles": {
+                "Border::Tiles::BOTTOM": 14,
+                "Border::Tiles::TOP": 17
+            },
+            "Corners": {
+                "Border::Corners::RIGHT": 39,
+                "Border::Corners::LEFT": 45
+            }
+        },
+        {
+            "id": 58,
+            "Tiles": {
+                "Border::Tiles::BOTTOM": 15,
+                "Border::Tiles::TOP": 17
+            },
+            "Corners": {
+                "Border::Corners::LEFT": 40,
+                "Border::Corners::RIGHT": 46
+            }
+        },
+        {
+            "id": 59,
+            "Tiles": {
+                "Border::Tiles::BOTTOM": 15
+            },
+            "Corners": {
+                "Border::Corners::RIGHT": 41,
+                "Border::Corners::LEFT": 47
+            }
+        },
+        {
+            "id": 60,
+            "Tiles": {
+                "Border::Tiles::BOTTOM": 13
+            },
+            "Corners": {
+                "Border::Corners::LEFT": 42,
+                "Border::Corners::RIGHT": 43
+            }
+        },
+        {
+            "id": 61,
+            "Tiles": {
+                "Border::Tiles::BOTTOM": 14,
+                "Border::Tiles::TOP": 18
+            },
+            "Corners": {
+                "Border::Corners::LEFT": 44,
+                "Border::Corners::RIGHT": 45
+            }
+        },
+        {
+            "id": 62,
+            "Tiles": {
+                "Border::Tiles::BOTTOM": 15
+            },
+            "Corners": {
+                "Border::Corners::LEFT": 46,
+                "Border::Corners::RIGHT": 47
+            }
+        },
+        {
+            "id": 63,
+            "Tiles": {
+                "Border::Tiles::BOTTOM": 16
+            },
+            "Corners": {
+                "Border::Corners::LEFT": 43,
+                "Border::Corners::RIGHT": 48
+            }
+        },
+        {
+            "id": 64,
+            "Tiles": {
+                "Border::Tiles::BOTTOM": 16,
+                "Border::Tiles::TOP": 18
+            },
+            "Corners": {
+                "Border::Corners::RIGHT": 44,
+                "Border::Corners::LEFT": 49
+            }
+        },
+        {
+            "id": 65,
+            "Tiles": {
+                "Border::Tiles::BOTTOM": 17,
+                "Border::Tiles::TOP": 18
+            },
+            "Corners": {
+                "Border::Corners::LEFT": 45,
+                "Border::Corners::RIGHT": 50
+            }
+        },
+        {
+            "id": 66,
+            "Tiles": {
+                "Border::Tiles::BOTTOM": 17
+            },
+            "Corners": {
+                "Border::Corners::RIGHT": 46,
+                "Border::Corners::LEFT": 51
+            }
+        },
+        {
+            "id": 67,
+            "Tiles": {
+                "Border::Tiles::BOTTOM": 16
+            },
+            "Corners": {
+                "Border::Corners::LEFT": 48,
+                "Border::Corners::RIGHT": 49
+            }
+        },
+        {
+            "id": 68,
+            "Tiles": {
+                "Border::Tiles::BOTTOM": 17
+            },
+            "Corners": {
+                "Border::Corners::LEFT": 50,
+                "Border::Corners::RIGHT": 51
+            }
+        },
+        {
+            "id": 69,
+            "Tiles": {
+                "Border::Tiles::BOTTOM": 18
+            },
+            "Corners": {
+                "Border::Corners::LEFT": 49,
+                "Border::Corners::RIGHT": 52
+            }
+        },
+        {
+            "id": 70,
+            "Tiles": {
+                "Border::Tiles::BOTTOM": 18
+            },
+            "Corners": {
+                "Border::Corners::RIGHT": 50,
+                "Border::Corners::LEFT": 53
+            }
+        },
+        {
+            "id": 71,
+            "Tiles": {
+                "Border::Tiles::BOTTOM": 18
+            },
+            "Corners": {
+                "Border::Corners::LEFT": 52,
+                "Border::Corners::RIGHT": 53
+            }
+        }
+    ],
+    "Tiles": [
+        {
+            "id": 0,
+            "type": "WHEAT",
+            "value": 5,
+            "Corners": {
+                "Tile::Corners::BOTTOM_LEFT": 0,
+                "Tile::Corners::BOTTOM_RIGHT": 1,
+                "Tile::Corners::RIGHT": 4,
+                "Tile::Corners::TOP_RIGHT": 9,
+                "Tile::Corners::TOP_LEFT": 8,
+                "Tile::Corners::LEFT": 3
+            },
+            "Borders": {
+                "Tile::Borders::BOTTOM": 0,
+                "Tile::Borders::BOTTOM_RIGHT": 2,
+                "Tile::Borders::TOP_RIGHT": 7,
+                "Tile::Borders::TOP": 10,
+                "Tile::Borders::TOP_LEFT": 6,
+                "Tile::Borders::BOTTOM_LEFT": 1
+            }
+        },
+        {
+            "id": 1,
+            "type": "WHEAT",
+            "value": 2,
+            "Corners": {
+                "Tile::Corners::BOTTOM_LEFT": 2,
+                "Tile::Corners::BOTTOM_RIGHT": 3,
+                "Tile::Corners::RIGHT": 8,
+                "Tile::Corners::TOP_RIGHT": 14,
+                "Tile::Corners::TOP_LEFT": 13,
+                "Tile::Corners::LEFT": 7
+            },
+            "Borders": {
+                "Tile::Borders::BOTTOM": 3,
+                "Tile::Borders::BOTTOM_RIGHT": 6,
+                "Tile::Borders::TOP_RIGHT": 14,
+                "Tile::Borders::TOP": 18,
+                "Tile::Borders::TOP_LEFT": 13,
+                "Tile::Borders::BOTTOM_LEFT": 5
+            }
+        },
+        {
+            "id": 2,
+            "type": "WHEAT",
+            "value": 6,
+            "Corners": {
+                "Tile::Corners::BOTTOM_LEFT": 4,
+                "Tile::Corners::BOTTOM_RIGHT": 5,
+                "Tile::Corners::RIGHT": 10,
+                "Tile::Corners::TOP_RIGHT": 16,
+                "Tile::Corners::TOP_LEFT": 15,
+                "Tile::Corners::LEFT": 9
+            },
+            "Borders": {
+                "Tile::Borders::BOTTOM": 4,
+                "Tile::Borders::BOTTOM_RIGHT": 8,
+                "Tile::Borders::TOP_RIGHT": 16,
+                "Tile::Borders::TOP": 19,
+                "Tile::Borders::TOP_LEFT": 15,
+                "Tile::Borders::BOTTOM_LEFT": 7
+            }
+        },
+        {
+            "id": 3,
+            "type": "WHEAT",
+            "value": 3,
+            "Corners": {
+                "Tile::Corners::BOTTOM_LEFT": 6,
+                "Tile::Corners::BOTTOM_RIGHT": 7,
+                "Tile::Corners::RIGHT": 13,
+                "Tile::Corners::TOP_RIGHT": 19,
+                "Tile::Corners::TOP_LEFT": 18,
+                "Tile::Corners::LEFT": 12
+            },
+            "Borders": {
+                "Tile::Borders::BOTTOM": 9,
+                "Tile::Borders::BOTTOM_RIGHT": 13,
+                "Tile::Borders::TOP_RIGHT": 21,
+                "Tile::Borders::TOP": 26,
+                "Tile::Borders::TOP_LEFT": 20,
+                "Tile::Borders::BOTTOM_LEFT": 12
+            }
+        },
+        {
+            "id": 4,
+            "type": "WOOD",
+            "value": 9,
+            "Corners": {
+                "Tile::Corners::BOTTOM_LEFT": 8,
+                "Tile::Corners::BOTTOM_RIGHT": 9,
+                "Tile::Corners::RIGHT": 15,
+                "Tile::Corners::TOP_RIGHT": 21,
+                "Tile::Corners::TOP_LEFT": 20,
+                "Tile::Corners::LEFT": 14
+            },
+            "Borders": {
+                "Tile::Borders::BOTTOM": 10,
+                "Tile::Borders::BOTTOM_RIGHT": 15,
+                "Tile::Borders::TOP_RIGHT": 23,
+                "Tile::Borders::TOP": 27,
+                "Tile::Borders::TOP_LEFT": 22,
+                "Tile::Borders::BOTTOM_LEFT": 14
+            }
+        },
+        {
+            "id": 5,
+            "type": "WOOD",
+            "value": 10,
+            "Corners": {
+                "Tile::Corners::BOTTOM_LEFT": 10,
+                "Tile::Corners::BOTTOM_RIGHT": 11,
+                "Tile::Corners::RIGHT": 17,
+                "Tile::Corners::TOP_RIGHT": 23,
+                "Tile::Corners::TOP_LEFT": 22,
+                "Tile::Corners::LEFT": 16
+            },
+            "Borders": {
+                "Tile::Borders::BOTTOM": 11,
+                "Tile::Borders::BOTTOM_RIGHT": 17,
+                "Tile::Borders::TOP_RIGHT": 25,
+                "Tile::Borders::TOP": 28,
+                "Tile::Borders::TOP_LEFT": 24,
+                "Tile::Borders::BOTTOM_LEFT": 16
+            }
+        },
+        {
+            "id": 6,
+            "type": "WOOD",
+            "value": 8,
+            "Corners": {
+                "Tile::Corners::BOTTOM_LEFT": 13,
+                "Tile::Corners::BOTTOM_RIGHT": 14,
+                "Tile::Corners::RIGHT": 20,
+                "Tile::Corners::TOP_RIGHT": 26,
+                "Tile::Corners::TOP_LEFT": 25,
+                "Tile::Corners::LEFT": 19
+            },
+            "Borders": {
+                "Tile::Borders::BOTTOM": 18,
+                "Tile::Borders::BOTTOM_RIGHT": 22,
+                "Tile::Borders::TOP_RIGHT": 31,
+                "Tile::Borders::TOP": 35,
+                "Tile::Borders::TOP_LEFT": 30,
+                "Tile::Borders::BOTTOM_LEFT": 21
+            }
+        },
+        {
+            "id": 7,
+            "type": "WOOD",
+            "value": 3,
+            "Corners": {
+                "Tile::Corners::BOTTOM_LEFT": 15,
+                "Tile::Corners::BOTTOM_RIGHT": 16,
+                "Tile::Corners::RIGHT": 22,
+                "Tile::Corners::TOP_RIGHT": 28,
+                "Tile::Corners::TOP_LEFT": 27,
+                "Tile::Corners::LEFT": 21
+            },
+            "Borders": {
+                "Tile::Borders::BOTTOM": 19,
+                "Tile::Borders::BOTTOM_RIGHT": 24,
+                "Tile::Borders::TOP_RIGHT": 33,
+                "Tile::Borders::TOP": 36,
+                "Tile::Borders::TOP_LEFT": 32,
+                "Tile::Borders::BOTTOM_LEFT": 23
+            }
+        },
+        {
+            "id": 8,
+            "type": "SHEEP",
+            "value": 11,
+            "Corners": {
+                "Tile::Corners::BOTTOM_LEFT": 18,
+                "Tile::Corners::BOTTOM_RIGHT": 19,
+                "Tile::Corners::RIGHT": 25,
+                "Tile::Corners::TOP_RIGHT": 31,
+                "Tile::Corners::TOP_LEFT": 30,
+                "Tile::Corners::LEFT": 24
+            },
+            "Borders": {
+                "Tile::Borders::BOTTOM": 26,
+                "Tile::Borders::BOTTOM_RIGHT": 30,
+                "Tile::Borders::TOP_RIGHT": 38,
+                "Tile::Borders::TOP": 43,
+                "Tile::Borders::TOP_LEFT": 37,
+                "Tile::Borders::BOTTOM_LEFT": 29
+            }
+        },
+        {
+            "id": 9,
+            "type": "SHEEP",
+            "value": 4,
+            "Corners": {
+                "Tile::Corners::BOTTOM_LEFT": 20,
+                "Tile::Corners::BOTTOM_RIGHT": 21,
+                "Tile::Corners::RIGHT": 27,
+                "Tile::Corners::TOP_RIGHT": 33,
+                "Tile::Corners::TOP_LEFT": 32,
+                "Tile::Corners::LEFT": 26
+            },
+            "Borders": {
+                "Tile::Borders::BOTTOM": 27,
+                "Tile::Borders::BOTTOM_RIGHT": 32,
+                "Tile::Borders::TOP_RIGHT": 40,
+                "Tile::Borders::TOP": 44,
+                "Tile::Borders::TOP_LEFT": 39,
+                "Tile::Borders::BOTTOM_LEFT": 31
+            }
+        },
+        {
+            "id": 10,
+            "type": "SHEEP",
+            "value": 8,
+            "Corners": {
+                "Tile::Corners::BOTTOM_LEFT": 22,
+                "Tile::Corners::BOTTOM_RIGHT": 23,
+                "Tile::Corners::RIGHT": 29,
+                "Tile::Corners::TOP_RIGHT": 35,
+                "Tile::Corners::TOP_LEFT": 34,
+                "Tile::Corners::LEFT": 28
+            },
+            "Borders": {
+                "Tile::Borders::BOTTOM": 28,
+                "Tile::Borders::BOTTOM_RIGHT": 34,
+                "Tile::Borders::TOP_RIGHT": 42,
+                "Tile::Borders::TOP": 45,
+                "Tile::Borders::TOP_LEFT": 41,
+                "Tile::Borders::BOTTOM_LEFT": 33
+            }
+        },
+        {
+            "id": 11,
+            "type": "SHEEP",
+            "value": 10,
+            "Corners": {
+                "Tile::Corners::BOTTOM_LEFT": 25,
+                "Tile::Corners::BOTTOM_RIGHT": 26,
+                "Tile::Corners::RIGHT": 32,
+                "Tile::Corners::TOP_RIGHT": 38,
+                "Tile::Corners::TOP_LEFT": 37,
+                "Tile::Corners::LEFT": 31
+            },
+            "Borders": {
+                "Tile::Borders::BOTTOM": 35,
+                "Tile::Borders::BOTTOM_RIGHT": 39,
+                "Tile::Borders::TOP_RIGHT": 48,
+                "Tile::Borders::TOP": 52,
+                "Tile::Borders::TOP_LEFT": 47,
+                "Tile::Borders::BOTTOM_LEFT": 38
+            }
+        },
+        {
+            "id": 12,
+            "type": "STONE",
+            "value": 5,
+            "Corners": {
+                "Tile::Corners::BOTTOM_LEFT": 27,
+                "Tile::Corners::BOTTOM_RIGHT": 28,
+                "Tile::Corners::RIGHT": 34,
+                "Tile::Corners::TOP_RIGHT": 40,
+                "Tile::Corners::TOP_LEFT": 39,
+                "Tile::Corners::LEFT": 33
+            },
+            "Borders": {
+                "Tile::Borders::BOTTOM": 36,
+                "Tile::Borders::BOTTOM_RIGHT": 41,
+                "Tile::Borders::TOP_RIGHT": 50,
+                "Tile::Borders::TOP": 53,
+                "Tile::Borders::TOP_LEFT": 49,
+                "Tile::Borders::BOTTOM_LEFT": 40
+            }
+        },
+        {
+            "id": 13,
+            "type": "STONE",
+            "value": 6,
+            "Corners": {
+                "Tile::Corners::BOTTOM_LEFT": 30,
+                "Tile::Corners::BOTTOM_RIGHT": 31,
+                "Tile::Corners::RIGHT": 37,
+                "Tile::Corners::TOP_RIGHT": 43,
+                "Tile::Corners::TOP_LEFT": 42,
+                "Tile::Corners::LEFT": 36
+            },
+            "Borders": {
+                "Tile::Borders::BOTTOM": 43,
+                "Tile::Borders::BOTTOM_RIGHT": 47,
+                "Tile::Borders::TOP_RIGHT": 55,
+                "Tile::Borders::TOP": 60,
+                "Tile::Borders::TOP_LEFT": 54,
+                "Tile::Borders::BOTTOM_LEFT": 46
+            }
+        },
+        {
+            "id": 14,
+            "type": "STONE",
+            "value": 4,
+            "Corners": {
+                "Tile::Corners::BOTTOM_LEFT": 32,
+                "Tile::Corners::BOTTOM_RIGHT": 33,
+                "Tile::Corners::RIGHT": 39,
+                "Tile::Corners::TOP_RIGHT": 45,
+                "Tile::Corners::TOP_LEFT": 44,
+                "Tile::Corners::LEFT": 38
+            },
+            "Borders": {
+                "Tile::Borders::BOTTOM": 44,
+                "Tile::Borders::BOTTOM_RIGHT": 49,
+                "Tile::Borders::TOP_RIGHT": 57,
+                "Tile::Borders::TOP": 61,
+                "Tile::Borders::TOP_LEFT": 56,
+                "Tile::Borders::BOTTOM_LEFT": 48
+            }
+        },
+        {
+            "id": 15,
+            "type": "BRICK",
+            "value": 11,
+            "Corners": {
+                "Tile::Corners::BOTTOM_LEFT": 34,
+                "Tile::Corners::BOTTOM_RIGHT": 35,
+                "Tile::Corners::RIGHT": 41,
+                "Tile::Corners::TOP_RIGHT": 47,
+                "Tile::Corners::TOP_LEFT": 46,
+                "Tile::Corners::LEFT": 40
+            },
+            "Borders": {
+                "Tile::Borders::BOTTOM": 45,
+                "Tile::Borders::BOTTOM_RIGHT": 51,
+                "Tile::Borders::TOP_RIGHT": 59,
+                "Tile::Borders::TOP": 62,
+                "Tile::Borders::TOP_LEFT": 58,
+                "Tile::Borders::BOTTOM_LEFT": 50
+            }
+        },
+        {
+            "id": 16,
+            "type": "BRICK",
+            "value": 12,
+            "Corners": {
+                "Tile::Corners::BOTTOM_LEFT": 37,
+                "Tile::Corners::BOTTOM_RIGHT": 38,
+                "Tile::Corners::RIGHT": 44,
+                "Tile::Corners::TOP_RIGHT": 49,
+                "Tile::Corners::TOP_LEFT": 48,
+                "Tile::Corners::LEFT": 43
+            },
+            "Borders": {
+                "Tile::Borders::BOTTOM": 52,
+                "Tile::Borders::BOTTOM_RIGHT": 56,
+                "Tile::Borders::TOP_RIGHT": 64,
+                "Tile::Borders::TOP": 67,
+                "Tile::Borders::TOP_LEFT": 63,
+                "Tile::Borders::BOTTOM_LEFT": 55
+            }
+        },
+        {
+            "id": 17,
+            "type": "BRICK",
+            "value": 9,
+            "Corners": {
+                "Tile::Corners::BOTTOM_LEFT": 39,
+                "Tile::Corners::BOTTOM_RIGHT": 40,
+                "Tile::Corners::RIGHT": 46,
+                "Tile::Corners::TOP_RIGHT": 51,
+                "Tile::Corners::TOP_LEFT": 50,
+                "Tile::Corners::LEFT": 45
+            },
+            "Borders": {
+                "Tile::Borders::BOTTOM": 53,
+                "Tile::Borders::BOTTOM_RIGHT": 58,
+                "Tile::Borders::TOP_RIGHT": 66,
+                "Tile::Borders::TOP": 68,
+                "Tile::Borders::TOP_LEFT": 65,
+                "Tile::Borders::BOTTOM_LEFT": 57
+            }
+        },
+        {
+            "id": 18,
+            "type": "DESERT",
+            "value": 0,
+            "Corners": {
+                "Tile::Corners::BOTTOM_LEFT": 44,
+                "Tile::Corners::BOTTOM_RIGHT": 45,
+                "Tile::Corners::RIGHT": 50,
+                "Tile::Corners::TOP_RIGHT": 53,
+                "Tile::Corners::TOP_LEFT": 52,
+                "Tile::Corners::LEFT": 49
+            },
+            "Borders": {
+                "Tile::Borders::BOTTOM": 61,
+                "Tile::Borders::BOTTOM_RIGHT": 65,
+                "Tile::Borders::TOP_RIGHT": 70,
+                "Tile::Borders::TOP": 71,
+                "Tile::Borders::TOP_LEFT": 69,
+                "Tile::Borders::BOTTOM_LEFT": 64
+            }
+        }
+    ],
+    "Players": [],
+    "Ports": []
+}
