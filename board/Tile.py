@@ -61,6 +61,15 @@ class Tile:
 		LEFT: int
 
 
+	class Type(Enum):
+		DESERT: int
+		WHEAT: int
+		WOOD: int
+		SHEEP: int
+		STONE: int
+		BRICK: int
+
+
 	def __init__(self, id: int):
 		self.id: int = id
 		self.borders: list[Border] = [None, None, None, None, None, None]

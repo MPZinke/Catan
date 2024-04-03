@@ -18,6 +18,7 @@ import json
 from typing import Tuple
 
 
+import gui
 import setup
 from board import Border
 from board import Corner
@@ -30,9 +31,13 @@ def main():
 	tiles: list[Tile]
 	borders, corners, tiles = setup.from_file("GameData.json")
 
-	for tile in tiles:
-		print(str(tile))
-		print(dict(tile))
+	with open("GameData.json", "r") as file:
+		game_data: dict = json.load(file)
+	gui.draw_tiles(game_data, tiles)
+
+	# for tile in tiles:
+	# 	print(str(tile))
+	# 	print(dict(tile))
 
 
 if(__name__ == "__main__"):

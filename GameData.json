@@ -1,9 +1,9 @@
 {
 	"Board": {
-		"Size": {
-			"Width": 500,
-			"Height": 500,
-			"Tile Size": 50
+		"size": {
+			"width": 501,
+			"height": 501,
+			"tile size": 50
 		}
 	},
     "Corners": [
@@ -1411,7 +1411,7 @@
     "Tiles": [
         {
             "id": 0,
-            ""
+            "coordinate": [2, 0],
             "type": "WHEAT",
             "value": 5,
             "Corners": {
@@ -1433,6 +1433,7 @@
         },
         {
             "id": 1,
+            "coordinate": [1, 0],
             "type": "WHEAT",
             "value": 2,
             "Corners": {
@@ -1454,6 +1455,7 @@
         },
         {
             "id": 2,
+            "coordinate": [3, 0],
             "type": "WHEAT",
             "value": 6,
             "Corners": {
@@ -1475,6 +1477,7 @@
         },
         {
             "id": 3,
+            "coordinate": [0, 1],
             "type": "WHEAT",
             "value": 3,
             "Corners": {
@@ -1496,6 +1499,7 @@
         },
         {
             "id": 4,
+            "coordinate": [2, 1],
             "type": "WOOD",
             "value": 9,
             "Corners": {
@@ -1517,6 +1521,7 @@
         },
         {
             "id": 5,
+            "coordinate": [4, 1],
             "type": "WOOD",
             "value": 10,
             "Corners": {
@@ -1538,6 +1543,7 @@
         },
         {
             "id": 6,
+            "coordinate": [1, 1],
             "type": "WOOD",
             "value": 8,
             "Corners": {
@@ -1559,6 +1565,7 @@
         },
         {
             "id": 7,
+            "coordinate": [3, 1],
             "type": "WOOD",
             "value": 3,
             "Corners": {
@@ -1580,6 +1587,7 @@
         },
         {
             "id": 8,
+            "coordinate": [0, 2],
             "type": "SHEEP",
             "value": 11,
             "Corners": {
@@ -1601,6 +1609,7 @@
         },
         {
             "id": 9,
+            "coordinate": [2, 2],
             "type": "SHEEP",
             "value": 4,
             "Corners": {
@@ -1622,6 +1631,7 @@
         },
         {
             "id": 10,
+            "coordinate": [4, 2],
             "type": "SHEEP",
             "value": 8,
             "Corners": {
@@ -1643,6 +1653,7 @@
         },
         {
             "id": 11,
+            "coordinate": [1, 2],
             "type": "SHEEP",
             "value": 10,
             "Corners": {
@@ -1664,6 +1675,7 @@
         },
         {
             "id": 12,
+            "coordinate": [3, 2],
             "type": "STONE",
             "value": 5,
             "Corners": {
@@ -1685,6 +1697,7 @@
         },
         {
             "id": 13,
+            "coordinate": [0, 3],
             "type": "STONE",
             "value": 6,
             "Corners": {
@@ -1706,6 +1719,7 @@
         },
         {
             "id": 14,
+            "coordinate": [2, 3],
             "type": "STONE",
             "value": 4,
             "Corners": {
@@ -1727,6 +1741,7 @@
         },
         {
             "id": 15,
+            "coordinate": [4, 3],
             "type": "BRICK",
             "value": 11,
             "Corners": {
@@ -1748,6 +1763,7 @@
         },
         {
             "id": 16,
+            "coordinate": [1, 3],
             "type": "BRICK",
             "value": 12,
             "Corners": {
@@ -1769,6 +1785,7 @@
         },
         {
             "id": 17,
+            "coordinate": [3, 3],
             "type": "BRICK",
             "value": 9,
             "Corners": {
@@ -1790,6 +1807,7 @@
         },
         {
             "id": 18,
+            "coordinate": [2, 4],
             "type": "DESERT",
             "value": 0,
             "Corners": {
