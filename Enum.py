@@ -1,3 +1,17 @@
+#!/opt/homebrew/bin/python3
+# -*- coding: utf-8 -*-
+__author__ = "MPZinke"
+
+########################################################################################################################
+#                                                                                                                      #
+#   created by: MPZinke                                                                                                #
+#   on 2024.04.04                                                                                                      #
+#                                                                                                                      #
+#   DESCRIPTION:                                                                                                       #
+#   BUGS:                                                                                                              #
+#   FUTURE:                                                                                                            #
+#                                                                                                                      #
+########################################################################################################################
 
 
 class Enum:
@@ -17,7 +31,12 @@ class Enum:
 		for enum_key, enum_value in enum.items():
 			setattr(cls, enum_key, enum_value)
 
-		# Used to get the integer value for a give enum key as a string.
-		setattr(cls, "ENUM_VALUES", enum)
 		# Used to get the enum key as a string for a given integer value.
-		setattr(cls, "ENUM_KEYS", {value: key for key, value in enum.items()})
+		cls.ENUM_KEYS = {value: key for key, value in enum.items()}
+		# Used to get the integer value for a give enum key as a string.
+		cls.ENUM_VALUES = enum
+
+		cls.length: int = len(enum)
+		cls.items: callable = enum.items
+		cls.keys: callable = enum.keys
+		cls.values: callable = enum.values

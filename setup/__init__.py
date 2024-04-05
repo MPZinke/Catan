@@ -21,24 +21,28 @@ from typing import Tuple
 from setup import associate
 from setup import create
 
-from board import Border, Corner, Tile
+from board import Road, Settlement, Tile
 
 
-def from_file(filename: str) -> Tuple[list[Border], list[Corner], list[Tile]]:
+def from_file(filename: str) -> Tuple[list[Road], list[Settlement], list[Tile]]:
 	with open(filename, "r") as file:
 		game_data = json.load(file)
 
-	borders: list[Border] = create.borders(game_data["Borders"])
-	corners: list[Corner] = create.corners(game_data["Corners"])
+	ports: list[Road] = create.ports(game_data["Ports"])
+	roads: list[Road] = create.roads(game_data["Roads"])
+	settlements: list[Settlement] = create.settlements(game_data["Settlements"])
 	tiles: list[Tile] = create.tiles(game_data["Tiles"])
 
-	associate.borders_with_corners(game_data["Borders"], borders, corners)
-	associate.borders_with_tiles(game_data["Borders"], borders, tiles)
+	associate.ports_with_settlements(game_data["Ports"], ports, settlements)
 
-	associate.corners_with_borders(game_data["Corners"], corners, borders)
-	associate.corners_with_tiles(game_data["Corners"], corners, tiles)
+	associate.roads_with_settlements(game_data["Roads"], roads, settlements)
+	associate.roads_with_tiles(game_data["Roads"], roads, tiles)
 
-	associate.tiles_with_borders(game_data["Tiles"], tiles, borders)
-	associate.tiles_with_corners(game_data["Tiles"], tiles, corners)
+	associate.settlements_with_ports(game_data["Settlements"], settlements, ports)
+	associate.settlements_with_roads(game_data["Settlements"], settlements, roads)
+	associate.settlements_with_tiles(game_data["Settlements"], settlements, tiles)
 
-	return borders, corners, tiles
+	associate.tiles_with_roads(game_data["Tiles"], tiles, roads)
+	associate.tiles_with_settlements(game_data["Tiles"], tiles, settlements)
+
+	return roads, settlements, tiles

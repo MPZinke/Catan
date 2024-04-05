@@ -20,18 +20,21 @@ from typing import Tuple
 
 import gui
 import setup
-from board import Border
-from board import Corner
+import board
+from board import Road
+from board import Settlement
 from board import Tile
+from board.Port import Port
 
 
 def main():
-	borders: list[Border]
-	corners: list[Corner]
+	roads: list[Road]
+	settlements: list[Settlement]
 	tiles: list[Tile]
-	borders, corners, tiles = setup.from_file("GameData.json")
+	roads, settlements, tiles = board.create_basic_board()
 	gui.draw_tiles(tiles)
 
+	print(Port.Type.items())
 	# for tile in tiles:
 	# 	print(str(tile))
 	# 	print(dict(tile))

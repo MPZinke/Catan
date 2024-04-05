@@ -91,8 +91,8 @@ class HexagonGrid:
 	          |<-- (√3)y ->|
 
 
-	Finally, first hexagon will start in the top left corner with its top side against the top of the area and the left
-	 corner against the left side. Numbering starts at [0, 0]. The first hexagon of the odd rows will be shifted down
+	Finally, first hexagon will start in the top left settlement with its top side against the top of the area and the left
+	 settlement against the left side. Numbering starts at [0, 0]. The first hexagon of the odd rows will be shifted down
 	 by `y` units and to the right by `(√3)y` units.
 
 	Links:
@@ -126,11 +126,11 @@ class HexagonGrid:
 		"""
 		Determines a hexagon's center x_position give an index.
 		---
-		The distance from a corner to the center of a hexagon can be expressed by,
-			Where `d` is the distance from a corner to the center and `y` is the size of the hexagon from center to side
+		The distance from a settlement to the center of a hexagon can be expressed by,
+			Where `d` is the distance from a settlement to the center and `y` is the size of the hexagon from center to side
 			   d = (2y)/√3
 		For every additional column of flat hexagons we add, the width will increase by 3/4 the width of a hexagon.
-		 Because the columns shall start with their left corner flush with the area left border, the given width of a
+		 Because the columns shall start with their left settlement flush with the area left road, the given width of a
 		 hexagon, the following is derived as,
 			Where `d` is the distance from the area left wall, `i` is the x index, and `y` is the size of the hexagon
 			 from center to side

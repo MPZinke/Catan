@@ -19,7 +19,7 @@ class Hexagon:
 	def __init__(self, position: Coordinate, size: int):
 		self.position: Coordinate = position
 		self.size: int = size  # Distance from centerpoint to a side.
-		self.radius: float = 2 * size / math.sqrt(3)  # Distance from centerpoint to a corner.
+		self.radius: float = 2 * size / math.sqrt(3)  # Distance from centerpoint to a settlement.
 
 
 	def __repr__(self) -> str:
@@ -43,19 +43,19 @@ class Hexagon:
 		yield from self._iter_values
 
 
-	def corner_position(self, corner: int) -> Tuple[int, int]:
-		match(corner):
-			case(Tile.Corners.TOP_LEFT):
+	def settlement_position(self, settlement: int) -> Tuple[int, int]:
+		match(settlement):
+			case(Tile.Settlements.TOP_LEFT):
 				return self + [-self.COS_60*self.radius, self.SIN_60*self.radius]
-			case(Tile.Corners.TOP_RIGHT):
+			case(Tile.Settlements.TOP_RIGHT):
 				return self + [self.COS_60*self.radius, self.SIN_60*self.radius]
-			case(Tile.Corners.RIGHT):
+			case(Tile.Settlements.RIGHT):
 				return self + [self.radius, 0]
-			case(Tile.Corners.BOTTOM_RIGHT):
+			case(Tile.Settlements.BOTTOM_RIGHT):
 				return self + [self.COS_60*self.radius, -self.SIN_60*self.radius]
-			case(Tile.Corners.BOTTOM_LEFT):
+			case(Tile.Settlements.BOTTOM_LEFT):
 				return self + [-self.COS_60*self.radius, -self.SIN_60*self.radius]
-			case(Tile.Corners.LEFT):
+			case(Tile.Settlements.LEFT):
 				return self + [-self.radius, 0]
 			case _:
-				raise ValueError(f"Unknown corner '{corner}'")
+				raise ValueError(f"Unknown settlement '{settlement}'")

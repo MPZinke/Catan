@@ -18,18 +18,19 @@ from typing import Tuple, TypeVar
 
 
 from Enum import Enum
+from ResourceType import ResourceType
 
 
-Border = TypeVar("Border")
-Corner = TypeVar("Corner")
+Road = TypeVar("Road")
+Settlement = TypeVar("Settlement")
 Tile = TypeVar("Tile")
 
 
 class Tile:
-	class Borders(Enum):
+	class Roads(Enum):
 		r"""
-		Borders relative to hexagon
-		 Borders
+		Roads relative to hexagon
+		 Roads
 		  4  3  2
 		   \ | / 
 		     ⬣
@@ -44,9 +45,9 @@ class Tile:
 		BOTTOM_LEFT: int
 
 
-	class Corners(Enum):
+	class Settlements(Enum):
 		r"""
-		Corners relative to hexagon
+		Settlements relative to hexagon
 		   4    3
 		    \  / 
 		 5 — ⬣ — 2
@@ -61,36 +62,36 @@ class Tile:
 		LEFT: int
 
 
-	class Type(Enum):
-		DESERT: int
-		WHEAT: int
-		WOOD: int
-		SHEEP: int
-		STONE: int
-		BRICK: int
+	Type = ResourceType
 
 
 	def __init__(self, id: int, coordinate: Tuple[int, int], type: int, value: int):
 		self.id: int = id
 		self.coordinate: list[int, int] = coordinate.copy()
+		# Abstract parts
+		self.roads: list[Road] = [None, None, None, None, None, None]
+		self.settlements: list[Settlement] = [None, None, None, None, None, None]
+		# Game parts
 		self.type: int = type
 		self.value: int = value
-		self.borders: list[Border] = [None, None, None, None, None, None]
-		self.corners: list[Corner] = [None, None, None, None, None, None]
+
+
+	def __eq__(self, right: Tile) -> bool:
+		return self.id == right.id
 
 
 	def __iter__(self) -> iter:
 		yield from {
 			"id": self.id,
-			"Borders": {
-				f"Tile::Borders::{self.Borders.ENUM_KEYS[index]}": border.id
-				for index, border in enumerate(self.borders)
-				if(border)
+			"Roads": {
+				f"Tile::Roads::{self.Roads.ENUM_KEYS[index]}": road.id
+				for index, road in enumerate(self.roads)
+				if(road)
 			},
-			"Corners": {
-				f"Tile::Corners::{self.Corners.ENUM_KEYS[index]}": corner.id
-				for index, corner in enumerate(self.corners)
-				if(corner)
+			"Settlements": {
+				f"Tile::Settlements::{self.Settlements.ENUM_KEYS[index]}": settlement.id
+				for index, settlement in enumerate(self.settlements)
+				if(settlement)
 			}
 		}.items()
 
@@ -117,19 +118,19 @@ class Tile:
 
 
 		id: str = center(self.id)
-		b_tl: str = center(self.borders[self.Borders.TOP_LEFT].id)
-		b_t_: str = center(self.borders[self.Borders.TOP].id, padder='_')
-		b_tr: str = center(self.borders[self.Borders.TOP_RIGHT].id)
-		b_br: str = center(self.borders[self.Borders.BOTTOM_RIGHT].id)
-		b_b_: str = center(self.borders[self.Borders.BOTTOM].id, padder='_')
-		b_bl: str = center(self.borders[self.Borders.BOTTOM_LEFT].id)
+		b_tl: str = center(self.roads[self.Roads.TOP_LEFT].id)
+		b_t_: str = center(self.roads[self.Roads.TOP].id, padder='_')
+		b_tr: str = center(self.roads[self.Roads.TOP_RIGHT].id)
+		b_br: str = center(self.roads[self.Roads.BOTTOM_RIGHT].id)
+		b_b_: str = center(self.roads[self.Roads.BOTTOM].id, padder='_')
+		b_bl: str = center(self.roads[self.Roads.BOTTOM_LEFT].id)
 
-		c_tl: str = f"""{self.corners[self.Corners.TOP_LEFT].id or "":>3}"""
-		c_tr: str = self.corners[self.Corners.TOP_RIGHT].id or ""
-		c_r_: str = self.corners[self.Corners.RIGHT].id or ""
-		c_br: str = self.corners[self.Corners.BOTTOM_RIGHT].id or ""
-		c_bl: str = f"""{self.corners[self.Corners.BOTTOM_LEFT].id or "":>3}"""
-		c_l_: str = f"""{self.corners[self.Corners.LEFT].id or "":>3}"""
+		c_tl: str = f"""{self.settlements[self.Settlements.TOP_LEFT].id or "":>3}"""
+		c_tr: str = self.settlements[self.Settlements.TOP_RIGHT].id or ""
+		c_r_: str = self.settlements[self.Settlements.RIGHT].id or ""
+		c_br: str = self.settlements[self.Settlements.BOTTOM_RIGHT].id or ""
+		c_bl: str = f"""{self.settlements[self.Settlements.BOTTOM_LEFT].id or "":>3}"""
+		c_l_: str = f"""{self.settlements[self.Settlements.LEFT].id or "":>3}"""
 		return (
 			r"   {a}___{b}___{c}   " "\n"
 			r"     /         \     " "\n"

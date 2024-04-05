@@ -1,24 +1,34 @@
 
 
-from board import Border
-from board import Corner
+from board import Port
+from board import Road
+from board import Settlement
 from board import Tile
 
 
-def borders(border_dicts: list[dict]) -> list[Border]:
-	borders_list: list[Border] = []
-	for border_dict in border_dicts:
-		borders_list.append(Border(border_dict["id"]))
+def ports(port_dicts: list[dict]) -> list[Port]:
+	ports_list: list[Port] = []
+	for port_dict in port_dicts:
+		type = Port.Types.ENUM_VALUES[port_dict["type"]]
+		ports_list.append(Port(port_dict["id"], type))
 
-	return borders_list
+	return ports_list
 
 
-def corners(corner_dicts: list[dict]) -> list[Corner]:
-	corners_list: list[Corner] = []
-	for corner_dict in corner_dicts:
-		corners_list.append(Corner(corner_dict["id"]))
+def roads(road_dicts: list[dict]) -> list[Road]:
+	roads_list: list[Road] = []
+	for road_dict in road_dicts:
+		roads_list.append(Road(road_dict["id"]))
 
-	return corners_list
+	return roads_list
+
+
+def settlements(settlement_dicts: list[dict]) -> list[Settlement]:
+	settlements_list: list[Settlement] = []
+	for settlement_dict in settlement_dicts:
+		settlements_list.append(Settlement(settlement_dict["id"]))
+
+	return settlements_list
 
 
 def tiles(tile_dicts: list[dict]) -> list[Tile]:

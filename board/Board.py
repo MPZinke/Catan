@@ -17,15 +17,15 @@ __author__ = "MPZinke"
 from typing import Optional, TypeVar
 
 
-from board import Border
-from board import Corner
+from board import Road
+from board import Settlement
 from board import Tile
 
 
 class Board:
-	def __init__(self, borders: Optional[list[Border]]=None, corners: Optional[list[Corner]]=None,
+	def __init__(self, roads: Optional[list[Road]]=None, settlements: Optional[list[Settlement]]=None,
 		tiles: Optional[list[Tile]]=None
 	):
-		self.borders: list[Border] = list(borders) if(borders is not None) else []
-		self.corners: list[Corner] = list(corners) if(corners is not None) else []
+		self.roads: list[Road] = list(roads) if(roads is not None) else []
+		self.settlements: list[Settlement] = list(settlements) if(settlements is not None) else []
 		self.tiles: list[Tile] = list(tiles) if(tiles is not None) else []

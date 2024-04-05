@@ -1,7 +1,8 @@
 
 
-from board import Border
-from board import Corner
+from board import Port
+from board import Road
+from board import Settlement
 from board import Tile
 
 
@@ -12,55 +13,74 @@ def find(id: int) -> callable:
 	return callback
 
 
-def borders_with_corners(border_dicts: list[dict], borders: list[Border], corners: list[Corner]):
-	for border_dict in border_dicts:
-		border = next(filter(find(border_dict["id"]), borders))
-		for corner_direction, corner_id in border_dict["Corners"].items():
-			corner = next(filter(find(corner_id), corners))
-			direction_index = getattr(Border.Corners, corner_direction.split("::")[2])
-			border.corners[direction_index] = corner
+def ports_with_settlements(port_dicts: list[dict], ports: list[Port], settlements: list[Settlement]):
+	for port_dict in port_dicts:
+		port = next(filter(find(port_dict["id"]), ports))
+		for settlement_direction, settlement_id in port_dict["Settlements"].items():
+			settlement = next(filter(find(settlement_id), settlements))
+			direction_index = Port.Settlements.ENUM_VALUES[settlement_direction.split("::")[2]]
+			port.settlements[direction_index] = settlement
 
 
-def borders_with_tiles(border_dicts: list[dict], borders: list[Border], tiles: list[Tile]):
-	for border_dict in border_dicts:
-		border = next(filter(find(border_dict["id"]), borders))
-		for tile_direction, tile_id in border_dict["Tiles"].items():
+def roads_with_settlements(road_dicts: list[dict], roads: list[Road], settlements: list[Settlement]):
+	for road_dict in road_dicts:
+		road = next(filter(find(road_dict["id"]), roads))
+		for settlement_direction, settlement_id in road_dict["Settlements"].items():
+			settlement = next(filter(find(settlement_id), settlements))
+			direction_index = Road.Settlements.ENUM_VALUES[settlement_direction.split("::")[2]]
+			road.settlements[direction_index] = settlement
+
+
+def roads_with_tiles(road_dicts: list[dict], roads: list[Road], tiles: list[Tile]):
+	for road_dict in road_dicts:
+		road = next(filter(find(road_dict["id"]), roads))
+		for tile_direction, tile_id in road_dict["Tiles"].items():
 			tile = next(filter(find(tile_id), tiles))
-			direction_index = getattr(Border.Tiles, tile_direction.split("::")[2])
-			border.tiles[direction_index] = tile
+			direction_index = Road.Tiles.ENUM_VALUES[tile_direction.split("::")[2]]
+			road.tiles[direction_index] = tile
 
 
-def corners_with_borders(corner_dicts: list[dict], corners: list[Corner], borders: list[Border]):
-	for corner_dict in corner_dicts:
-		corner = next(filter(find(corner_dict["id"]), corners))
-		for border_direction, border_id in corner_dict["Borders"].items():
-			border = next(filter(find(border_id), borders))
-			direction_index = getattr(Corner.Borders, border_direction.split("::")[2])
-			corner.borders[direction_index] = border
+def settlements_with_ports(settlement_dicts: list[dict], settlements: list[Settlement], ports: list[Road]):
+	for settlement_dict in settlement_dicts:
+		settlement = next(filter(find(settlement_dict["id"]), settlements))
+		for port_direction, port_id in settlement_dict["Ports"].items():
+			print(settlement.id, port_id)
+			port = next(filter(find(port_id), ports))
+			direction_index = Settlement.Ports.ENUM_VALUES[port_direction.split("::")[2]]
+			settlement.ports[direction_index] = port
 
 
-def corners_with_tiles(corner_dicts: list[dict], corners: list[Corner], tiles: list[Corner]):
-	for corner_dict in corner_dicts:
-		corner = next(filter(find(corner_dict["id"]), corners))
-		for tile_direction, tile_id in corner_dict["Tiles"].items():
+def settlements_with_roads(settlement_dicts: list[dict], settlements: list[Settlement], roads: list[Road]):
+	for settlement_dict in settlement_dicts:
+		settlement = next(filter(find(settlement_dict["id"]), settlements))
+		for road_direction, road_id in settlement_dict["Roads"].items():
+			road = next(filter(find(road_id), roads))
+			direction_index = Settlement.Roads.ENUM_VALUES[road_direction.split("::")[2]]
+			settlement.roads[direction_index] = road
+
+
+def settlements_with_tiles(settlement_dicts: list[dict], settlements: list[Settlement], tiles: list[Settlement]):
+	for settlement_dict in settlement_dicts:
+		settlement = next(filter(find(settlement_dict["id"]), settlements))
+		for tile_direction, tile_id in settlement_dict["Tiles"].items():
 			tile = next(filter(find(tile_id), tiles))
-			direction_index = getattr(Corner.Tiles, tile_direction.split("::")[2])
-			corner.tiles[direction_index] = tile
+			direction_index = Settlement.Tiles.ENUM_VALUES[tile_direction.split("::")[2]]
+			settlement.tiles[direction_index] = tile
 
 
-def tiles_with_borders(tile_dicts: list[dict], tiles: list[Tile], borders: list[Border]):
+def tiles_with_roads(tile_dicts: list[dict], tiles: list[Tile], roads: list[Road]):
 	for tile_dict in tile_dicts:
 		tile = next(filter(find(tile_dict["id"]), tiles))
-		for border_direction, border_id in tile_dict["Borders"].items():
-			border = next(filter(find(border_id), borders))
-			direction_index = getattr(Tile.Borders, border_direction.split("::")[2])
-			tile.borders[direction_index] = border
+		for road_direction, road_id in tile_dict["Roads"].items():
+			road = next(filter(find(road_id), roads))
+			direction_index = Tile.Roads.ENUM_VALUES[road_direction.split("::")[2]]
+			tile.roads[direction_index] = road
 
 
-def tiles_with_corners(tile_dicts: list[dict], tiles: list[Border], corners: list[Corner]):
+def tiles_with_settlements(tile_dicts: list[dict], tiles: list[Road], settlements: list[Settlement]):
 	for tile_dict in tile_dicts:
 		tile = next(filter(find(tile_dict["id"]), tiles))
-		for corner_direction, corner_id in tile_dict["Corners"].items():
-			corner = next(filter(find(corner_id), corners))
-			direction_index = getattr(Tile.Corners, corner_direction.split("::")[2])
-			tile.corners[direction_index] = corner
+		for settlement_direction, settlement_id in tile_dict["Settlements"].items():
+			settlement = next(filter(find(settlement_id), settlements))
+			direction_index = Tile.Settlements.ENUM_VALUES[settlement_direction.split("::")[2]]
+			tile.settlements[direction_index] = settlement
