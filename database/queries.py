@@ -5,7 +5,7 @@ __author__ = "MPZinke"
 ########################################################################################################################
 #                                                                                                                      #
 #   created by: MPZinke                                                                                                #
-#   on 2024.04.02                                                                                                      #
+#   on 2024.04.05                                                                                                      #
 #                                                                                                                      #
 #   DESCRIPTION:                                                                                                       #
 #   BUGS:                                                                                                              #
@@ -14,11 +14,20 @@ __author__ = "MPZinke"
 ########################################################################################################################
 
 
+import psycopg2
+from typing import Optional
 
 
-from board.Board import Board
-from board.Port import Port
-from board.Road import Road
-from board.Settlement import Settlement
-from board.Tile import Tile
-import setup
+from database.connect import connect
+
+
+@connect
+def new_game(cursor, boards_id: Optional[int]) -> int:
+	print(type(cursor))
+	query = """
+		INSERT INTO "Games" ("Boards.id") VALUES (%s)
+		RETURNING "id";
+	"""
+
+	cursor.execute(query, (boards_id,))
+	return cursor.fetchone()["id"]

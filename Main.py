@@ -14,18 +14,13 @@ __author__ = "MPZinke"
 ########################################################################################################################
 
 
-import json
-from typing import Tuple
-
-
 import gui
-from board import create_basic_board
-from board import Port, Road, Settlement, Tile
+from board import Board
 import setup
 
 
 def main():
-	board = create_basic_board()
+	board: Board = setup.random_basic_board()
 	gui.draw_tiles(board.tiles)
 
 
