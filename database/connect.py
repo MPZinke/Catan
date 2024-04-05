@@ -22,7 +22,7 @@ def connect(function: callable) -> callable:
 		DB_host: str = os.getenv("CATAN_DB_HOST")
 		DB_password: str = os.getenv("CATAN_DB_PASSWORD")
 
-		connection_string = f"host={DB_host} dbname=Recipes user={DB_user} password={DB_password}"
+		connection_string = f"host={DB_host} dbname=Catan user={DB_user} password={DB_password}"
 		with psycopg2.connect(connection_string) as connection:
 			connection.autocommit = True  # Automatically commit changes to DB
 			with connection.cursor(cursor_factory=psycopg2.extras.RealDictCursor) as cursor:
