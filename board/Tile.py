@@ -62,7 +62,7 @@ class Tile:
 		LEFT: int
 
 
-	Type = ResourceType
+	Types = ResourceType
 
 
 	def __init__(self, id: int, coordinate: Tuple[int, int], type: int, value: int):

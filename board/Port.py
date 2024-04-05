@@ -3,7 +3,7 @@
 from typing import TypeVar
 
 
-from board import Tile
+from board.Tile import Tile
 from ResourceType import ResourceType
 
 

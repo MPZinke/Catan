@@ -44,7 +44,6 @@ def settlements_with_ports(settlement_dicts: list[dict], settlements: list[Settl
 	for settlement_dict in settlement_dicts:
 		settlement = next(filter(find(settlement_dict["id"]), settlements))
 		for port_direction, port_id in settlement_dict["Ports"].items():
-			print(settlement.id, port_id)
 			port = next(filter(find(port_id), ports))
 			direction_index = Settlement.Ports.ENUM_VALUES[port_direction.split("::")[2]]
 			settlement.ports[direction_index] = port

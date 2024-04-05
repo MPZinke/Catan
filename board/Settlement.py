@@ -81,8 +81,9 @@ class Settlement:
 		   _______/____\
 		      4   
 		"""
-		LEFT: int
-		RIGHT: int
+		TOP: int
+		BOTTOM: int
+		SIDE: int
 
 
 	class Roads(Enum):
@@ -140,17 +141,17 @@ class Settlement:
 		SIDE: int
 
 
-	class Type(Enum):
+	class Types(Enum):
 		UNENHABITED: int
 		VILLAGE: int
 		CITY: int
 
 
-	def __init__(self, id: int, type: int=Type.UNENHABITED):
+	def __init__(self, id: int, type: int=Types.UNENHABITED):
 		self.id: int = id
 
 		# Board parts
-		self.ports: list[Port] = [None, None]
+		self.ports: list[Port] = [None, None, None]
 		self.roads: list[Road] = [None, None, None]
 		self.tiles: list[Tile] = [None, None, None]
 

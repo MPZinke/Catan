@@ -24,12 +24,12 @@ from gui.HexagonGrid import HexagonGrid
 
 
 COLORS = {
-	Tile.Type.DESERT: (189, 160, 106),
-	Tile.Type.WHEAT: (246, 215, 99),
-	Tile.Type.WOOD: (74, 111, 62),
-	Tile.Type.SHEEP: (154, 185, 86),
-	Tile.Type.STONE: (163, 150, 140),
-	Tile.Type.BRICK: (139, 83, 48)
+	Tile.Types.DESERT: (189, 160, 106),
+	Tile.Types.WHEAT: (246, 215, 99),
+	Tile.Types.WOOD: (74, 111, 62),
+	Tile.Types.SHEEP: (154, 185, 86),
+	Tile.Types.STONE: (163, 150, 140),
+	Tile.Types.BRICK: (139, 83, 48)
 }
 
 

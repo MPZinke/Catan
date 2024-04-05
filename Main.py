@@ -19,25 +19,14 @@ from typing import Tuple
 
 
 import gui
+from board import create_basic_board
+from board import Port, Road, Settlement, Tile
 import setup
-import board
-from board import Road
-from board import Settlement
-from board import Tile
-from board.Port import Port
 
 
 def main():
-	roads: list[Road]
-	settlements: list[Settlement]
-	tiles: list[Tile]
-	roads, settlements, tiles = board.create_basic_board()
-	gui.draw_tiles(tiles)
-
-	print(Port.Type.items())
-	# for tile in tiles:
-	# 	print(str(tile))
-	# 	print(dict(tile))
+	board = create_basic_board()
+	gui.draw_tiles(board.tiles)
 
 
 if(__name__ == "__main__"):
