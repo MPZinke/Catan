@@ -23,23 +23,42 @@ def random_key_from_dictionary_for_available_items(dictionary: Dict[int, int]) -
 
 
 def new_game(board_id: int) -> Game:
-	resource_types: list[dict] = types.get_resource_types()
-	settlement_types: list[dict] = types.get_settlement_types()
 
-	tile_resources: list[dict] = counts.get_tile_resources(board_id)
-	tile_values: list[dict] = counts.get_tile_values(board_id)
 
-	port_dicts: list[dict] = boards.get_ports(board_id)
-	road_dicts: list[dict] = boards.get_roads(board_id)
-	settlement_dicts: list[dict] = boards.get_settlements(board_id)
-	tile_dicts: list[dict] = boards.get_tiles(board_id)
 	ports_settlements: list[dict] = boards.get_ports_settlements(board_id)
 	roads_settlements: list[dict] = boards.get_roads_settlements(board_id)
 	roads_tiles: list[dict] = boards.get_roads_tiles(board_id)
 	settlements_tiles: list[dict] = boards.get_settlements_tiles(board_id)
 
 
-# def create_ports(port_dicts: list[dict]) -> list[Ports]:
-# 	ports: list[Port] = []
-# 	for port_dict in port_dicts:
-# 		Port(port_dict)
+def get_types(board_id: int) -> Tuple[list[dict], list[dict]]:
+	resource_types: list[dict] = types.get_resource_types()
+	settlement_types: list[dict] = types.get_settlement_types()
+
+
+
+def get_counts(board_id: int) -> Tuple[list[dict], list[dict]]:
+	dice_value_counts: list[dict] = counts.get_dice_value_counts(board_id)
+	ports_resource_types_counts: list[dict] = counts.get_ports_resource_types_counts(board_id)
+	tiles_resource_types_counts: list[dict] = counts.get_tiles_resource_types_counts(board_id)
+
+	return dice_value_counts, ports_resource_types_counts, tiles_resource_types_counts
+
+
+
+def get_boads_values(board_id: int, dice_value_counts: int, ports_resource_types_counts: list[dict],
+	tiles_resource_types_counts: list[dict]
+) -> Board:
+	port_dicts: list[dict] = boards.get_ports(board_id)
+	road_dicts: list[dict] = boards.get_roads(board_id)
+	settlement_dicts: list[dict] = boards.get_settlements(board_id)
+	tile_dicts: list[dict] = boards.get_tiles(board_id)
+
+
+
+
+
+def create_ports(port_dicts: list[dict], ) -> list[Ports]:
+	ports: list[Port] = []
+	for port_dict in port_dicts:
+		Port(port_dict)

@@ -1,6 +1,7 @@
 
 
 DROP TABLE IF EXISTS "ResourceTypes" CASCADE;
+DROP TABLE IF EXISTS "SettlementTypes" CASCADE;
 DROP TABLE IF EXISTS "Corner's Edges" CASCADE;
 DROP TABLE IF EXISTS "Corner's Sides" CASCADE;
 DROP TABLE IF EXISTS "Edge's Corners" CASCADE;
@@ -16,10 +17,12 @@ DROP TABLE IF EXISTS "PortsSettlements" CASCADE;
 DROP TABLE IF EXISTS "RoadsSettlements" CASCADE;
 DROP TABLE IF EXISTS "RoadsTiles" CASCADE;
 DROP TABLE IF EXISTS "SettlementsTiles" CASCADE;
+DROP TABLE IF EXISTS "DiceValuesCounts" CASCADE;
+DROP TABLE IF EXISTS "TilesResourceTypesCounts" CASCADE;
+DROP TABLE IF EXISTS "PortsResourceTypesCounts" CASCADE;
 DROP TABLE IF EXISTS "Games" CASCADE;
 DROP TABLE IF EXISTS "GamesPorts" CASCADE;
 DROP TABLE IF EXISTS "GamesRoads" CASCADE;
-DROP TABLE IF EXISTS "SettlementTypes" CASCADE;
 DROP TABLE IF EXISTS "GamesSettlements" CASCADE;
 DROP TABLE IF EXISTS "GamesTiles" CASCADE;
 DROP TABLE IF EXISTS "GamesPortsGamesSettlements" CASCADE;
@@ -199,26 +202,36 @@ CREATE TABLE "SettlementsTiles"
 );
 
 
--- —————————————————————————————————————————————————————— GAME —————————————————————————————————————————————————————— --
+-- ————————————————————————————————————————————————————— COUNTS ————————————————————————————————————————————————————— --
 -- —————————————————————————————————————————————————————————————————————————————————————————————————————————————————— --
-
-CREATE TABLE "ResourceTypesCounts"
-(
-	"id" SERIAL NOT NULL PRIMARY KEY,
-	"Boards.id" INT NOT NULL,
-	"count" INT NOT NULL,  -- The number of tiles with the resource type.
-	"ResourceTypes.id" INT NOT NULL,
-	FOREIGN KEY ("ResourceTypes.id") REFERENCES "ResourceTypes"("id")
-);
-
 
 CREATE TABLE "DiceValuesCounts"
 (
 	"id" SERIAL NOT NULL PRIMARY KEY,
 	"Boards.id" INT NOT NULL,
 	"count" INT NOT NULL CHECK(0 <= "count"),  -- The number of tiles with the value.
-	"value" INT NOT NULL CHECK(0 <= "value" <= 12),  -- Corresponds to the dice roll value.
+	"value" INT NOT NULL CHECK(0 <= "value" AND "value" <= 12),  -- Corresponds to the dice roll value.
 	FOREIGN KEY ("Boards.id") REFERENCES "Boards"("id")
+);
+
+
+CREATE TABLE "PortsResourceTypesCounts"
+(
+	"id" SERIAL NOT NULL PRIMARY KEY,
+	"Boards.id" INT NOT NULL,
+	"count" INT NOT NULL,  -- The number of tiles with the resource type.
+	"ResourceTypes.id" INT DEFAULT NULL,
+	FOREIGN KEY ("ResourceTypes.id") REFERENCES "ResourceTypes"("id")
+);
+
+
+CREATE TABLE "TilesResourceTypesCounts"
+(
+	"id" SERIAL NOT NULL PRIMARY KEY,
+	"Boards.id" INT NOT NULL,
+	"count" INT NOT NULL,  -- The number of tiles with the resource type.
+	"ResourceTypes.id" INT NOT NULL,
+	FOREIGN KEY ("ResourceTypes.id") REFERENCES "ResourceTypes"("id")
 );
 
 

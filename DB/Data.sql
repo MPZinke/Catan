@@ -1,5 +1,12 @@
 
 
+INSERT INTO "ResourceTypes" ("label") VALUES
+('DESERT'),
+('WHEAT'),
+('WOOD'),
+('SHEEP'),
+('STONE'),
+('BRICK');
 
 
 INSERT INTO "Corner's Edges" ("label") VALUES  -- The edges of a corne.

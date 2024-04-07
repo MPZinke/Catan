@@ -612,3 +612,63 @@ JOIN "Corner's Sides" ON T."Corner's Sides.label" = "Corner's Sides"."label";
 
 
 
+INSERT INTO "DiceValuesCounts" ("Boards.id", "count", "value" )
+SELECT "Boards"."id", T."count", T."value"
+FROM
+(
+	VALUES
+	('Board 1', 1, 2),
+	('Board 1', 2, 3),
+	('Board 1', 2, 4),
+	('Board 1', 2, 5),
+	('Board 1', 2, 6),
+	('Board 1', 1, 7),
+	('Board 1', 2, 8),
+	('Board 1', 2, 9),
+	('Board 1', 2, 10),
+	('Board 1', 2, 11),
+	('Board 1', 1, 12)
+) AS T ("Boards.name", "count", "value")
+JOIN "Boards" ON T."Boards.name" = "Boards"."name";
+
+
+INSERT INTO "TilesResourceTypesCounts" ("Boards.id", "count", "ResourceTypes.id")
+SELECT "Boards"."id", T."count", "ResourceTypes"."id"
+FROM 
+(
+	VALUES
+	('Board 1', 1, 'DESERT'),
+	('Board 1', 4, 'WHEAT'),
+	('Board 1', 4, 'WOOD'),
+	('Board 1', 4, 'SHEEP'),
+	('Board 1', 3, 'STONE'),
+	('Board 1', 3, 'BRICK')
+) AS T ("Boards.name", "count", "ResourceTypes.label")
+JOIN "Boards" ON T."Boards.name" = "Boards"."name"
+JOIN "ResourceTypes" ON T."ResourceTypes.label" = "ResourceTypes"."label";
+
+
+INSERT INTO "PortsResourceTypesCounts" ("Boards.id", "count", "ResourceTypes.id")
+SELECT "Boards"."id", T."count", "ResourceTypes"."id"
+FROM 
+(
+	VALUES
+	('Board 1', 0, 'DESERT'),
+	('Board 1', 1, 'WHEAT'),
+	('Board 1', 1, 'WOOD'),
+	('Board 1', 1, 'SHEEP'),
+	('Board 1', 1, 'STONE'),
+	('Board 1', 1, 'BRICK')
+) AS T ("Boards.name", "count", "ResourceTypes.label")
+JOIN "Boards" ON T."Boards.name" = "Boards"."name"
+JOIN "ResourceTypes" ON T."ResourceTypes.label" = "ResourceTypes"."label";
+
+
+INSERT INTO "PortsResourceTypesCounts" ("Boards.id", "count", "ResourceTypes.id")
+SELECT "Boards"."id", T."count", NULL
+FROM 
+(
+	VALUES
+	('Board 1', 4)
+) AS T ("Boards.name", "count")
+JOIN "Boards" ON T."Boards.name" = "Boards"."name";

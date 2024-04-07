@@ -8,10 +8,22 @@ from database.connect import connect
 
 
 @connect
-def get_tile_resources(cursor: psycopg2.extras.RealDictCursor, board_id: int) -> list[dict]:
+def get_dice_value_counts(cursor: psycopg2.extras.RealDictCursor, board_id: int) -> list[dict]:
 	query = """
 		SELECT *
-		FROM "ResourceTypesCounts"
+		FROM "DiceValuesCounts"
+		WHERE "Boards.id" = %s;
+	"""
+
+	cursor.execute(query, (board_id))
+	return list(cursor)
+
+
+@connect
+def get_ports_resource_types_counts(cursor: psycopg2.extras.RealDictCursor, board_id: int) -> list[dict]:
+	query = """
+		SELECT *
+		FROM "PortsResourceTypesCounts"
 		JOIN "ResourceTypes" ON "TilesResources"."ResourceTypes.id" = "ResourceTypes"."id"
 		WHERE "Boards.id" = %s;
 	"""
@@ -21,10 +33,11 @@ def get_tile_resources(cursor: psycopg2.extras.RealDictCursor, board_id: int) ->
 
 
 @connect
-def get_tile_values(cursor: psycopg2.extras.RealDictCursor, board_id: int) -> list[dict]:
+def get_tiles_resource_types_counts(cursor: psycopg2.extras.RealDictCursor, board_id: int) -> list[dict]:
 	query = """
 		SELECT *
-		FROM "TilesValues"
+		FROM "TilesResourceTypesCounts"
+		JOIN "ResourceTypes" ON "TilesResources"."ResourceTypes.id" = "ResourceTypes"."id"
 		WHERE "Boards.id" = %s;
 	"""
 
