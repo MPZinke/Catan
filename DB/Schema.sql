@@ -8,24 +8,24 @@ DROP TABLE IF EXISTS "Edge's Sides" CASCADE;
 DROP TABLE IF EXISTS "Side's Corners" CASCADE;
 DROP TABLE IF EXISTS "Side's Edges" CASCADE;
 DROP TABLE IF EXISTS "Boards" CASCADE;
-DROP TABLE IF EXISTS "BoardsPorts" CASCADE;
-DROP TABLE IF EXISTS "BoardsRoads" CASCADE;
-DROP TABLE IF EXISTS "BoardsSettlements" CASCADE;
-DROP TABLE IF EXISTS "BoardsTiles" CASCADE;
-DROP TABLE IF EXISTS "BoardsPortsSettlements" CASCADE;
-DROP TABLE IF EXISTS "BoardsRoadsSettlements" CASCADE;
-DROP TABLE IF EXISTS "BoardsRoadsTiles" CASCADE;
-DROP TABLE IF EXISTS "BoardsSettlementsTiles" CASCADE;
-DROP TABLE IF EXISTS "Games" CASCADE;
 DROP TABLE IF EXISTS "Ports" CASCADE;
 DROP TABLE IF EXISTS "Roads" CASCADE;
-DROP TABLE IF EXISTS "SettlementTypes" CASCADE;
 DROP TABLE IF EXISTS "Settlements" CASCADE;
 DROP TABLE IF EXISTS "Tiles" CASCADE;
 DROP TABLE IF EXISTS "PortsSettlements" CASCADE;
 DROP TABLE IF EXISTS "RoadsSettlements" CASCADE;
 DROP TABLE IF EXISTS "RoadsTiles" CASCADE;
 DROP TABLE IF EXISTS "SettlementsTiles" CASCADE;
+DROP TABLE IF EXISTS "Games" CASCADE;
+DROP TABLE IF EXISTS "GamesPorts" CASCADE;
+DROP TABLE IF EXISTS "GamesRoads" CASCADE;
+DROP TABLE IF EXISTS "SettlementTypes" CASCADE;
+DROP TABLE IF EXISTS "GamesSettlements" CASCADE;
+DROP TABLE IF EXISTS "GamesTiles" CASCADE;
+DROP TABLE IF EXISTS "GamesPortsGamesSettlements" CASCADE;
+DROP TABLE IF EXISTS "GamesRoadsGamesSettlements" CASCADE;
+DROP TABLE IF EXISTS "GamesRoadsGamesTiles" CASCADE;
+DROP TABLE IF EXISTS "GamesSettlementsGamesTiles" CASCADE;
 
 
 
@@ -33,6 +33,14 @@ CREATE TABLE "ResourceTypes"
 (
 	"id" SERIAL NOT NULL PRIMARY KEY,
 	"label" VARCHAR(16) NOT NULL UNIQUE
+);
+
+
+CREATE TABLE "SettlementTypes"
+(
+	"id" SERIAL NOT NULL PRIMARY KEY,
+	"label" VARCHAR(16) NOT NULL UNIQUE,
+	"multiplier" INT NOT NULL DEFAULT 0 CHECK("multiplier" < 3)
 );
 
 
@@ -91,7 +99,7 @@ CREATE TABLE "Boards"
 );
 
 
-CREATE TABLE "BoardsPorts"
+CREATE TABLE "Ports"
 (
 	"id" SERIAL NOT NULL PRIMARY KEY,
 	"Boards.id" INT NOT NULL,
@@ -99,7 +107,7 @@ CREATE TABLE "BoardsPorts"
 );
 
 
-CREATE TABLE "BoardsRoads"
+CREATE TABLE "Roads"
 (
 	"id" SERIAL NOT NULL PRIMARY KEY,
 	"Boards.id" INT NOT NULL,
@@ -107,7 +115,7 @@ CREATE TABLE "BoardsRoads"
 );
 
 
-CREATE TABLE "BoardsSettlements"
+CREATE TABLE "Settlements"
 (
 	"id" SERIAL NOT NULL PRIMARY KEY,
 	"Boards.id" INT NOT NULL,
@@ -115,78 +123,102 @@ CREATE TABLE "BoardsSettlements"
 );
 
 
-CREATE TABLE "BoardsTiles"
+CREATE TABLE "Tiles"
 (
 	"id" SERIAL NOT NULL PRIMARY KEY,
 	"Boards.id" INT NOT NULL,
-	"coordinate" INT[2] NOT NULL
+	"coordinate" INT[2] NOT NULL,
+	FOREIGN KEY ("Boards.id") REFERENCES "Boards"("id")
 );
 
 
 -- ——————————————————————————————————————————————— BOARDS ASSOCIATION ——————————————————————————————————————————————— --
 -- —————————————————————————————————————————————————————————————————————————————————————————————————————————————————— --
 
-CREATE TABLE "BoardsPortsSettlements"
+CREATE TABLE "PortsSettlements"
 (
 	"id" SERIAL NOT NULL PRIMARY KEY,
 	"Boards.id" INT NOT NULL,
 	"Corner's Sides.id" INT NOT NULL,
 	"Side's Corners.id" INT NOT NULL,
-	"BoardsSettlements.id" INT NOT NULL,
-	"BoardsPorts.id" INT NOT NULL,
+	"Settlements.id" INT NOT NULL,
+	"Ports.id" INT NOT NULL,
 	FOREIGN KEY ("Boards.id") REFERENCES "Boards"("id"),
 	FOREIGN KEY ("Corner's Sides.id") REFERENCES "Corner's Sides"("id"),
 	FOREIGN KEY ("Side's Corners.id") REFERENCES "Side's Corners"("id"),
-	FOREIGN KEY ("BoardsSettlements.id") REFERENCES "BoardsSettlements"("id"),
-	FOREIGN KEY ("BoardsPorts.id") REFERENCES "BoardsPorts"("id")
+	FOREIGN KEY ("Settlements.id") REFERENCES "Settlements"("id"),
+	FOREIGN KEY ("Ports.id") REFERENCES "Ports"("id")
 );
 
 
-CREATE TABLE "BoardsRoadsSettlements"
+CREATE TABLE "RoadsSettlements"
 (
 	"id" SERIAL NOT NULL PRIMARY KEY,
 	"Boards.id" INT NOT NULL,
 	"Corner's Edges.id" INT NOT NULL,
 	"Edge's Corners.id" INT NOT NULL,
-	"BoardsRoads.id" INT NOT NULL,
-	"BoardsSettlements.id" INT NOT NULL,
+	"Roads.id" INT NOT NULL,
+	"Settlements.id" INT NOT NULL,
 	FOREIGN KEY ("Boards.id") REFERENCES "Boards"("id"),
 	FOREIGN KEY ("Corner's Edges.id") REFERENCES "Corner's Edges"("id"),
 	FOREIGN KEY ("Edge's Corners.id") REFERENCES "Edge's Corners"("id"),
-	FOREIGN KEY ("BoardsRoads.id") REFERENCES "BoardsRoads"("id"),
-	FOREIGN KEY ("BoardsSettlements.id") REFERENCES "BoardsSettlements"("id")
+	FOREIGN KEY ("Roads.id") REFERENCES "Roads"("id"),
+	FOREIGN KEY ("Settlements.id") REFERENCES "Settlements"("id")
 );
 
 
-CREATE TABLE "BoardsRoadsTiles"
+CREATE TABLE "RoadsTiles"
 (
 	"id" SERIAL NOT NULL PRIMARY KEY,
 	"Boards.id" INT NOT NULL,
 	"Edge's Sides.id" INT NOT NULL,
 	"Side's Edges.id" INT NOT NULL,
-	"BoardsRoads.id" INT NOT NULL,
-	"BoardsTiles.id" INT NOT NULL,
+	"Roads.id" INT NOT NULL,
+	"Tiles.id" INT NOT NULL,
 	FOREIGN KEY ("Boards.id") REFERENCES "Boards"("id"),
 	FOREIGN KEY ("Edge's Sides.id") REFERENCES "Edge's Sides"("id"),
 	FOREIGN KEY ("Side's Edges.id") REFERENCES "Side's Edges"("id"),
-	FOREIGN KEY ("BoardsRoads.id") REFERENCES "BoardsRoads"("id"),
-	FOREIGN KEY ("BoardsTiles.id") REFERENCES "BoardsTiles"("id")
+	FOREIGN KEY ("Roads.id") REFERENCES "Roads"("id"),
+	FOREIGN KEY ("Tiles.id") REFERENCES "Tiles"("id")
 );
 
 
-CREATE TABLE "BoardsSettlementsTiles"
+CREATE TABLE "SettlementsTiles"
 (
 	"id" SERIAL NOT NULL PRIMARY KEY,
 	"Corner's Sides.id" INT NOT NULL,
 	"Side's Corners.id" INT NOT NULL,
 	"Boards.id" INT NOT NULL,
-	"BoardsSettlements.id" INT NOT NULL,
-	"BoardsTiles.id" INT NOT NULL,
+	"Settlements.id" INT NOT NULL,
+	"Tiles.id" INT NOT NULL,
 	FOREIGN KEY ("Corner's Sides.id") REFERENCES "Corner's Sides"("id"),
 	FOREIGN KEY ("Side's Corners.id") REFERENCES "Side's Corners"("id"),
 	FOREIGN KEY ("Boards.id") REFERENCES "Boards"("id"),
-	FOREIGN KEY ("BoardsSettlements.id") REFERENCES "BoardsSettlements"("id"),
-	FOREIGN KEY ("BoardsTiles.id") REFERENCES "BoardsTiles"("id")
+	FOREIGN KEY ("Settlements.id") REFERENCES "Settlements"("id"),
+	FOREIGN KEY ("Tiles.id") REFERENCES "Tiles"("id")
+);
+
+
+-- —————————————————————————————————————————————————————— GAME —————————————————————————————————————————————————————— --
+-- —————————————————————————————————————————————————————————————————————————————————————————————————————————————————— --
+
+CREATE TABLE "ResourceTypesCounts"
+(
+	"id" SERIAL NOT NULL PRIMARY KEY,
+	"Boards.id" INT NOT NULL,
+	"count" INT NOT NULL,  -- The number of tiles with the resource type.
+	"ResourceTypes.id" INT NOT NULL,
+	FOREIGN KEY ("ResourceTypes.id") REFERENCES "ResourceTypes"("id")
+);
+
+
+CREATE TABLE "DiceValuesCounts"
+(
+	"id" SERIAL NOT NULL PRIMARY KEY,
+	"Boards.id" INT NOT NULL,
+	"count" INT NOT NULL CHECK(0 <= "count"),  -- The number of tiles with the value.
+	"value" INT NOT NULL CHECK(0 <= "value" <= 12),  -- Corresponds to the dice roll value.
+	FOREIGN KEY ("Boards.id") REFERENCES "Boards"("id")
 );
 
 
@@ -204,115 +236,123 @@ CREATE TABLE "Games"
 
 -- ————————————————————————————————————————————————————— PORTS —————————————————————————————————————————————————————  --
 
-CREATE TABLE "Ports"
+CREATE TABLE "GamesPorts"
 (
 	"id" SERIAL NOT NULL PRIMARY KEY,
+	"Ports.id" INT NOT NULL,
 	"Games.id" INT NOT NULL,
-	"ResourceTypes.id" INT NOT NULL
+	"ResourceTypes.id" INT NOT NULL,
+
+	FOREIGN KEY ("Ports.id") REFERENCES "Ports"("id"),
+	FOREIGN KEY ("Games.id") REFERENCES "Games"("id"),
+	FOREIGN KEY ("ResourceTypes.id") REFERENCES "ResourceTypes"("id")
 );
 
 -- ————————————————————————————————————————————————————— ROADS —————————————————————————————————————————————————————  --
 
-CREATE TABLE "Roads"
+CREATE TABLE "GamesRoads"
 (
 	"id" SERIAL NOT NULL PRIMARY KEY,
-	"Games.id" INT NOT NULL  -- ,
+	"Roads.id" INT NOT NULL,
+	"Games.id" INT NOT NULL,
 	-- "Players.id" INT NOT NULL
+	FOREIGN KEY ("Roads.id") REFERENCES "Roads"("id"),
+	FOREIGN KEY ("Games.id") REFERENCES "Games"("id")
 );
 
 -- —————————————————————————————————————————————————— SETTLEMENTS ——————————————————————————————————————————————————  --
 
-CREATE TABLE "SettlementTypes"
+CREATE TABLE "GamesSettlements"
 (
 	"id" SERIAL NOT NULL PRIMARY KEY,
-	"label" VARCHAR(16) NOT NULL UNIQUE,
-	"multiplier" INT NOT NULL DEFAULT 0 CHECK("multiplier" < 3)
-);
-
-
-CREATE TABLE "Settlements"
-(
-	"id" SERIAL NOT NULL PRIMARY KEY,
+	"Settlements.id" INT NOT NULL,
 	"Games.id" INT NOT NULL,
 	-- "Players.id" INT NOT NULL,
-	"SettlementsTypes.id" INT NOT NULL
+	"SettlementTypes.id" INT NOT NULL,
+	FOREIGN KEY ("Settlements.id") REFERENCES "Settlements"("id"),
+	FOREIGN KEY ("Games.id") REFERENCES "Games"("id"),
+	FOREIGN KEY ("SettlementTypes.id") REFERENCES "SettlementTypes"("id")
 );
 
 
 -- ————————————————————————————————————————————————————— TILES —————————————————————————————————————————————————————  --
 
-CREATE TABLE "Tiles"
+CREATE TABLE "GamesTiles"
 (
 	"id" SERIAL NOT NULL PRIMARY KEY,
+	"Tiles.id" INT NOT NULL,
 	"Games.id" INT NOT NULL,
 	"coordinate" INT[2] NOT NULL,
 	"value" INT NOT NULL CHECK("value" <= 12 AND 0 <= "value"),
-	"ResourceTypes.id" INT NOT NULL
+	"ResourceTypes.id" INT NOT NULL,
+	FOREIGN KEY ("Tiles.id") REFERENCES "Tiles"("id"),
+	FOREIGN KEY ("Games.id") REFERENCES "Games"("id"),
+	FOREIGN KEY ("ResourceTypes.id") REFERENCES "ResourceTypes"("id")
 );
 
 
 -- ———————————————————————————————————————————————— GAME ASSOCIATION ———————————————————————————————————————————————— --
 -- —————————————————————————————————————————————————————————————————————————————————————————————————————————————————— --
 
-CREATE TABLE "PortsSettlements"
+CREATE TABLE "GamesPortsGamesSettlements"
 (
 	"id" SERIAL NOT NULL PRIMARY KEY,
 	"Games.id" INT NOT NULL,
 	"Corner's Sides.id" INT NOT NULL,
 	"Side's Corners.id" INT NOT NULL,
-	"Settlements.id" INT NOT NULL,
-	"Ports.id" INT NOT NULL,
+	"GamesSettlements.id" INT NOT NULL,
+	"GamesPorts.id" INT NOT NULL,
 	FOREIGN KEY ("Games.id") REFERENCES "Games"("id"),
 	FOREIGN KEY ("Corner's Sides.id") REFERENCES "Corner's Sides"("id"),
 	FOREIGN KEY ("Side's Corners.id") REFERENCES "Side's Corners"("id"),
-	FOREIGN KEY ("Settlements.id") REFERENCES "Settlements"("id"),
-	FOREIGN KEY ("Ports.id") REFERENCES "Ports"("id")
+	FOREIGN KEY ("GamesSettlements.id") REFERENCES "GamesSettlements"("id"),
+	FOREIGN KEY ("GamesPorts.id") REFERENCES "GamesPorts"("id")
 );
 
 
-CREATE TABLE "RoadsSettlements"
+CREATE TABLE "GamesRoadsGamesSettlements"
 (
 	"id" SERIAL NOT NULL PRIMARY KEY,
 	"Games.id" INT NOT NULL,
 	"Corner's Edges.id" INT NOT NULL,
 	"Edge's Corners.id" INT NOT NULL,
-	"Roads.id" INT NOT NULL,
-	"Settlements.id" INT NOT NULL,
+	"GamesRoads.id" INT NOT NULL,
+	"GamesSettlements.id" INT NOT NULL,
 	FOREIGN KEY ("Games.id") REFERENCES "Games"("id"),
 	FOREIGN KEY ("Corner's Edges.id") REFERENCES "Corner's Edges"("id"),
 	FOREIGN KEY ("Edge's Corners.id") REFERENCES "Edge's Corners"("id"),
-	FOREIGN KEY ("Roads.id") REFERENCES "Roads"("id"),
-	FOREIGN KEY ("Settlements.id") REFERENCES "Settlements"("id")
+	FOREIGN KEY ("GamesRoads.id") REFERENCES "GamesRoads"("id"),
+	FOREIGN KEY ("GamesSettlements.id") REFERENCES "GamesSettlements"("id")
 );
 
 
-CREATE TABLE "RoadsTiles"
+CREATE TABLE "GamesRoadsGamesTiles"
 (
 	"id" SERIAL NOT NULL PRIMARY KEY,
 	"Games.id" INT NOT NULL,
 	"Edge's Sides.id" INT NOT NULL,
 	"Side's Edges.id" INT NOT NULL,
-	"Roads.id" INT NOT NULL,
-	"Tiles.id" INT NOT NULL,
+	"GamesRoads.id" INT NOT NULL,
+	"GamesTiles.id" INT NOT NULL,
 	FOREIGN KEY ("Games.id") REFERENCES "Games"("id"),
 	FOREIGN KEY ("Edge's Sides.id") REFERENCES "Edge's Sides"("id"),
 	FOREIGN KEY ("Side's Edges.id") REFERENCES "Side's Edges"("id"),
-	FOREIGN KEY ("Roads.id") REFERENCES "Roads"("id"),
-	FOREIGN KEY ("Tiles.id") REFERENCES "Tiles"("id")
+	FOREIGN KEY ("GamesRoads.id") REFERENCES "GamesRoads"("id"),
+	FOREIGN KEY ("GamesTiles.id") REFERENCES "GamesTiles"("id")
 );
 
 
-CREATE TABLE "SettlementsTiles"
+CREATE TABLE "GamesSettlementsGamesTiles"
 (
 	"id" SERIAL NOT NULL PRIMARY KEY,
 	"Corner's Sides.id" INT NOT NULL,
 	"Side's Corners.id" INT NOT NULL,
 	"Games.id" INT NOT NULL,
-	"Settlements.id" INT NOT NULL,
-	"Tiles.id" INT NOT NULL,
+	"GamesSettlements.id" INT NOT NULL,
+	"GamesTiles.id" INT NOT NULL,
 	FOREIGN KEY ("Corner's Sides.id") REFERENCES "Corner's Sides"("id"),
 	FOREIGN KEY ("Side's Corners.id") REFERENCES "Side's Corners"("id"),
 	FOREIGN KEY ("Games.id") REFERENCES "Games"("id"),
-	FOREIGN KEY ("Settlements.id") REFERENCES "Settlements"("id"),
-	FOREIGN KEY ("Tiles.id") REFERENCES "Tiles"("id")
+	FOREIGN KEY ("GamesSettlements.id") REFERENCES "GamesSettlements"("id"),
+	FOREIGN KEY ("GamesTiles.id") REFERENCES "GamesTiles"("id")
 );
