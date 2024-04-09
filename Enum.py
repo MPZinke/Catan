@@ -14,29 +14,17 @@ __author__ = "MPZinke"
 ########################################################################################################################
 
 
-class Enum:
-	def __init_subclass__(cls):
-		"""
-		Produces an enum class by producing an integer value for the provided SUGAR keys/attributes.
-		EG. `FIRST`, `SECOND`, & `THIRD` are all keys with values of `0`, `1`, `2` respectively
-		```
-			class Order(Enum):
-				FIRST: int
-				SECOND: int
-				THIRD: int
-		```
-		"""
-		enumerations: dict = cls.__annotations__
-		enum = dict(zip(enumerations, range(len(enumerations))))
-		for enum_key, enum_value in enum.items():
-			setattr(cls, enum_key, enum_value)
+def Enum(name: str, **kwargs: dict) -> object:
+	enum = kwargs.copy()
 
-		# Used to get the enum key as a string for a given integer value.
-		cls.ENUM_KEYS = {value: key for key, value in enum.items()}
-		# Used to get the integer value for a give enum key as a string.
-		cls.ENUM_VALUES = enum
-
-		cls.length: int = len(enum)
-		cls.items: callable = enum.items
-		cls.keys: callable = enum.keys
-		cls.values: callable = enum.values
+	return type(f"Enum::{name}", tuple(),
+		{
+			**kwargs,
+			"length": len(enum),
+			"items": enum.items,
+			"keys": enum.keys,
+			"values": enum.values,
+			"ENUM_KEYS": {value: key for key, value in enum.items()},
+			"ENUM_VALUES": enum
+		}
+	)

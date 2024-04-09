@@ -18,6 +18,7 @@ from typing import Optional, TypeVar
 
 
 from Enum import Enum
+from database.queries import directions
 
 
 Player = TypeVar("Player")
@@ -27,70 +28,65 @@ Tile = TypeVar("Tile")
 
 
 class Road:
-	class Settlements(Enum):
-		r"""
-		Given Figure 1 for the tile and its settlements,
-		      1_________2   
-		      /.........\   
-		     /...........\  
-		   6/.............\3
-		    \............./ 
-		     \.........../  
-		      \_________/   
-		      5         4   
+	Settlements = Enum("Road::Settlements", **{type["label"]: type["id"]-1 for type in directions.get_edge_corners()})
+	r"""
+	Given Figure 1 for the tile and its settlements,
+	      1_________2   
+	      /.........\   
+	     /...........\  
+	   6/.............\3
+	    \............./ 
+	     \.........../  
+	      \_________/   
+	      5         4   
 
-		For the line 1–2 settlement 1 is left and 2 right, while for line 4–5, 4 is right and 5 is left.
-		    1_________2           \.........../  
-		    /.........\            \_________/   
-		   /...........\           5         4   
+	For the line 1–2 settlement 1 is left and 2 right, while for line 4–5, 4 is right and 5 is left.
+	    1_________2           \.........../  
+	    /.........\            \_________/   
+	   /...........\           5         4   
 
-		For the line 1–6 settlement 1 is right and 6 left, while for line 3–4, 3 is right and 4 is left.
-		      1_____          .......\3
-		      /.....          ......./ 
-		     /......          ....../  
-		   6/.......          _____/   
-		    \.......               4   
+	For the line 1–6 settlement 1 is right and 6 left, while for line 3–4, 3 is right and 4 is left.
+	      1_____          .......\3
+	      /.....          ......./ 
+	     /......          ....../  
+	   6/.......          _____/   
+	    \.......               4   
 
-		For the line 2–3 settlement 2 is left and 3 right, while for line 5–6, 5 is right and 6 is left.
-		   _____2             6/.......
-		   .....\              \.......
-		   ......\              \......
-		   .......\3             \_____
-		   ......./              5     
-		"""
-		LEFT: int
-		RIGHT: int
+	For the line 2–3 settlement 2 is left and 3 right, while for line 5–6, 5 is right and 6 is left.
+	   _____2             6/.......
+	   .....\              \.......
+	   ......\              \......
+	   .......\3             \_____
+	   ......./              5     
+	"""
 
+	Tiles = Enum("Road::Tiles", **{type["label"]: type["id"]-1 for type in directions.get_edge_sides()})
+	r"""
+	Below are depictions of tiles relative to roads.
 
-	class Tiles(Enum):
-		r"""
-		Below are depictions of tiles relative to settlements.
+	   \.....TOP...../
+	    \.........../
+	     \_________/ 
+	     /~~~~~~~~~\ 
+	    /~~BOTTOM~~~\
+	   /~~~~~~~~~~~~~\ 
 
-		   \.....TOP...../
-		    \.........../
-		     \_________/ 
-		     /~~~~~~~~~\ 
-		    /~~BOTTOM~~~\
-		   /~~~~~~~~~~~~~\ 
+	   ......\
+	   .......\______
+	   ..TOP../~~~~~~
+	   ....../~~~~~~~
+	   _____/~~BOTTOM
+	        \~~~~~~~~
+	         \~~~~~~~
 
-		   ......\
-		   .......\______
-		   ..TOP../~~~~~~
-		   ....../~~~~~~~
-		   _____/~~BOTTOM
-		        \~~~~~~~~
-		         \~~~~~~~
-
-		          /......
-		   ______/.......
-		   ~~~~~~\..TOP..
-		   ~~~~~~~\......
-		   BOTTOM~~\_____
-		   ~~~~~~~~/     
-		   ~~~~~~~/
-		"""
-		TOP: int
-		BOTTOM: int
+	          /......
+	   ______/.......
+	   ~~~~~~\..TOP..
+	   ~~~~~~~\......
+	   BOTTOM~~\_____
+	   ~~~~~~~~/     
+	   ~~~~~~~/
+	"""
 
 
 	def __init__(self, id: int):
@@ -103,6 +99,9 @@ class Road:
 
 
 	def __eq__(self, right: Settlement) -> bool:
+		if(right is None):
+			return False
+
 		return self.id == right.id
 
 

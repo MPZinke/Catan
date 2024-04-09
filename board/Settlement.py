@@ -18,6 +18,7 @@ from typing import Optional, TypeVar
 
 
 from Enum import Enum
+from database.queries import directions, types
 
 
 Road = TypeVar("Road")
@@ -29,122 +30,107 @@ Port = TypeVar("Port")
 
 
 class Settlement:
-	class Ports(Enum):
-		r"""
-		Given Figure 1 for the tile and its settlements,
+	Ports = Enum("Settlement::Ports", **{type["label"]: type["id"]-1 for type in directions.get_corner_sides()})
+	r"""
+	Given Figure 1 for the tile and its settlements,
 
-		Figure 1.
-		     1_________2   
-		     /.........\   
-		    /...........\  
-		  6/.............\3
-		   \ ........... / 
-		    \ ......... /  
-		     \_________/   
-		     5         4
-
-
-		Figure 2's shows left ports for settlements 1, 5, & 6.
-
-		Figure 2.
-		  P______1______
-		   \    /.......
-		    \  /........
-		    6\/.........
-		     /\.........
-		    /  \........
-		   /____\_______
-		  P     5   
+	Figure 1.
+	     1_________2   
+	     /.........\   
+	    /...........\  
+	  6/.............\3
+	   \ ........... / 
+	    \ ......... /  
+	     \_________/   
+	     5         4
 
 
-		Figure 3 & 4 show left ports for 2 & 4 and right ports for 1 & 5.
+	Figure 2's shows left ports for settlements 1, 5, & 6.
 
-		Figure 3.          Figure 4.
-		        P             \.........../
-		       / \             \........./
-		      /   \            5\‾‾‾‾‾‾‾/4
-		     /     \             \     /
-		   1/_______\2            \   /
-		   /.........\             \ /
-		  /...........\             P
-		                      
-
-		Figure 5 shows right ports for 2, 3, & 4.
-
-		Figure 5.
-		   ______2______
-		   .......\    /
-		   ........\  /
-		   .........\/3
-		   ........./\
-		   ......../  \
-		   _______/____\
-		      4   
-		"""
-		TOP: int
-		BOTTOM: int
-		SIDE: int
+	Figure 2.
+	  P______1______
+	   \    /.......
+	    \  /........
+	    6\/.........
+	     /\.........
+	    /  \........
+	   /____\_______
+	  P     5   
 
 
-	class Roads(Enum):
-		r"""
-		Below are depictions of roads relative to settlements with the following labeling:
-		- 1: TOP
-		- 2: SIDE
-		- 3: BOTTOM
-		  _____/.............\
-		  ~~~~~\............./
-		  ~~~~~~1.........../
-		  ~~~~~~~\___2_____/
-		  ~~~~~~~/°°°°°°°°°\
-		  ~~~~~~3°°°°°°°°°°°\
-		  _____/°°°°°°°°°°°°°\
-		       \°°°°°°°°°°°°°/
+	Figure 3 & 4 show left ports for 2 & 4 and right ports for 1 & 5.
 
-		  /.............\_____
-		  \............./~~~~~
-		   \...........1~~~~~~
-		    \_____2___/~~~~~~~
-		    /°°°°°°°°°\~~~~~~~
-		   /°°°°°°°°°°°3~~~~~~
-		  /°°°°°°°°°°°°°\_____
-		  \°°°°°°°°°°°°°/
-		"""
-		TOP: int
-		BOTTOM: int
-		SIDE: int
+	Figure 3.          Figure 4.
+	        P             \.........../
+	       / \             \........./
+	      /   \            5\‾‾‾‾‾‾‾/4
+	     /     \             \     /
+	   1/_______\2            \   /
+	   /.........\             \ /
+	  /...........\             P
+	                      
 
+	Figure 5 shows right ports for 2, 3, & 4.
 
-	class Tiles(Enum):
-		r"""
-		Below are depictions of tiles relative to settlements.
-		  _____/.............\
-		  ~~~~~\.....TOP...../
-		  ~~~~~~\.........../
-		  ~SIDE~~\_________/
-		  ~~~~~~~/°°°°°°°°°\
-		  ~~~~~~/°°BOTTOM°°°\
-		  _____/°°°°°°°°°°°°°\
-		       \°°°°°°°°°°°°°/
+	Figure 5.
+	   ______2______
+	   .......\    /
+	   ........\  /
+	   .........\/3
+	   ........./\
+	   ......../  \
+	   _______/____\
+	      4   
+	"""
 
-		  /.............\_____
-		  \.....TOP...../~~~~~
-		   \.........../~~~~~~
-		    \_________/~SIDE~~
-		    /°°°°°°°°°\~~~~~~~
-		   /°°BOTTOM°°°\~~~~~~
-		  /°°°°°°°°°°°°°\_____
-		  \°°°°°°°°°°°°°/
-		"""
-		TOP: int
-		BOTTOM: int
-		SIDE: int
+	Roads = Enum("Settlement::Roads", **{type["label"]: type["id"]-1 for type in directions.get_corner_edges()})
+	r"""
+	Below are depictions of roads relative to settlements with the following labeling:
+	- 1: TOP
+	- 2: SIDE
+	- 3: BOTTOM
+	  _____/.............\
+	  ~~~~~\............./
+	  ~~~~~~1.........../
+	  ~~~~~~~\___2_____/
+	  ~~~~~~~/°°°°°°°°°\
+	  ~~~~~~3°°°°°°°°°°°\
+	  _____/°°°°°°°°°°°°°\
+	       \°°°°°°°°°°°°°/
 
+	  /.............\_____
+	  \............./~~~~~
+	   \...........1~~~~~~
+	    \_____2___/~~~~~~~
+	    /°°°°°°°°°\~~~~~~~
+	   /°°°°°°°°°°°3~~~~~~
+	  /°°°°°°°°°°°°°\_____
+	  \°°°°°°°°°°°°°/
+	"""
 
-	class Types(Enum):
-		UNENHABITED: int
-		VILLAGE: int
-		CITY: int
+	Tiles = Enum("Settlement::Tiles", **{type["label"]: type["id"]-1 for type in directions.get_corner_sides()})
+	r"""
+	Below are depictions of tiles relative to settlements.
+	  _____/.............\
+	  ~~~~~\.....TOP...../
+	  ~~~~~~\.........../
+	  ~SIDE~~\_________/
+	  ~~~~~~~/°°°°°°°°°\
+	  ~~~~~~/°°BOTTOM°°°\
+	  _____/°°°°°°°°°°°°°\
+	       \°°°°°°°°°°°°°/
+
+	  /.............\_____
+	  \.....TOP...../~~~~~
+	   \.........../~~~~~~
+	    \_________/~SIDE~~
+	    /°°°°°°°°°\~~~~~~~
+	   /°°BOTTOM°°°\~~~~~~
+	  /°°°°°°°°°°°°°\_____
+	  \°°°°°°°°°°°°°/
+	"""
+
+	Types = Enum("Settlement::Types", **{type["label"]: type["id"]-1 for type in types.get_settlement_types()})
 
 
 	def __init__(self, id: int, type: int=Types.UNENHABITED):
@@ -231,9 +217,9 @@ class Settlement:
 			r"        {b}     " "\n"
 			r"        /       " "\n"
 			r"{c}---{d}    {e}" "\n"
-			r"       \        " "\n"
-			r"       {f}      " "\n"
-			r" {g}     \      " "\n"
+			r"        \       " "\n"
+			r"        {f}     " "\n"
+			r" {g}      \     " "\n"
 		).format(a=t_t, b=r_t, c=r_s, d=_id, e=t_s, f=r_b, g=t_b)
 		# if(
 		# 	(tile_bottom and tile_bottom.roads[Tile.Roads.TOP_LEFT].id == self.id)

@@ -1,12 +1,7 @@
 
 
+from database.queries import types
 from Enum import Enum
 
 
-class ResourceType(Enum):
-	DESERT: int
-	WHEAT: int
-	WOOD: int
-	SHEEP: int
-	STONE: int
-	BRICK: int
+ResourceType = Enum("ResourceType", **{type["label"]: type["id"]-1 for type in types.get_resource_types()})

@@ -31,7 +31,7 @@ def road_settlements(data: dict):
 		"""SELECT "Boards"."id", "Corner's Edges"."id", "Edge's Corners"."id", T."Roads.id", T."Settlements.id"\n"""
 		"""FROM \n"""
 		"""(\n"""
-		"""	VALUES\n"""
+		"""	VALUES"""
 	)
 
 	for x, road in enumerate(road_settlement_associations):
@@ -74,7 +74,7 @@ def road_tiles(data: dict):
 		"""SELECT "Boards"."id", "Side's Edges"."id", "Edge's Sides"."id", T."Roads.id", T."Tiles.id"\n"""
 		"""FROM \n"""
 		"""(\n"""
-		"""	VALUES\n"""
+		"""	VALUES"""
 	)
 	for x, road in enumerate(road_tile_associations):
 		end = ",\n" if(x < len(road_tile_associations) - 1) else "\n"
@@ -116,7 +116,7 @@ def settlement_ports(data: dict):
 		"""SELECT "Boards"."id", "Side's Corners"."id", "Corner's Sides"."id", T."Settlements.id", T."Ports.id"\n"""
 		"""FROM \n"""
 		"""(\n"""
-		"""	VALUES\n"""
+		"""	VALUES"""
 	)
 
 	for x, settlement in enumerate(settlement_port_associations):
@@ -159,7 +159,7 @@ def settlement_tiles(data: dict):
 		"""SELECT "Boards"."id", "Side's Corners"."id", "Corner's Sides"."id", T."Settlements.id", T."Tiles.id"\n"""
 		"""FROM \n"""
 		"""(\n"""
-		"""	VALUES\n"""
+		"""	VALUES"""
 	)
 	for x, settlement in enumerate(settlement_tile_associations):
 		end = ",\n" if(x < len(settlement_tile_associations) - 1) else "\n"
@@ -174,12 +174,12 @@ def settlement_tiles(data: dict):
 
 
 def main():
-	with open("ConvertedData.json") as file:
+	with open("Data/BasicLayout.json") as file:
 		data = json.load(file)
 
-	road_settlements(data)
-	road_tiles(data)
-	settlement_ports(data)
+	# road_settlements(data)
+	# road_tiles(data)
+	# settlement_ports(data)
 	settlement_tiles(data)
 
 

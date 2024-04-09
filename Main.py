@@ -25,13 +25,13 @@ def main():
 	roads_strings = list(map(str, roads))
 	settlements_strings = list(map(str, settlements))
 	tiles_strings = list(map(str, tiles))
-
-	print(
-		"\n".join(ports_strings),
-		"\n".join(roads_strings),
-		"\n".join(settlements_strings),
-		"\n".join(tiles_strings)
-	)
+	print(tiles[0].settlements[tiles[0].Settlements.TOP_LEFT])
+	# print(
+	# 	"\n".join(ports_strings),
+	# 	"\n".join(roads_strings),
+	# 	"\n".join(settlements_strings),
+	# 	"\n".join(tiles_strings)
+	# )
 
 	gui.draw_tiles(tiles)
 

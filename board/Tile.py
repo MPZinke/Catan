@@ -17,6 +17,7 @@ __author__ = "MPZinke"
 from typing import Tuple, TypeVar
 
 
+from database.queries import directions, types
 from Enum import Enum
 from ResourceType import ResourceType
 
@@ -27,39 +28,27 @@ Tile = TypeVar("Tile")
 
 
 class Tile:
-	class Roads(Enum):
-		r"""
-		Roads relative to hexagon
-		 Roads
-		  4  3  2
-		   \ | / 
-		     ⬣
-		   / | \
-		  5  0  1
-		"""
-		TOP: int
-		TOP_RIGHT: int
-		BOTTOM_RIGHT: int
-		BOTTOM: int
-		BOTTOM_LEFT: int
-		TOP_LEFT: int
+	Roads = Enum("Tile::Roads", **{type["label"]: type["id"]-1 for type in directions.get_side_edges()})
+	r"""
+	Roads relative to hexagon
+	 Roads
+	  4  3  2
+	   \ | / 
+	     ⬣
+	   / | \
+	  5  0  1
+	"""
 
 
-	class Settlements(Enum):
-		r"""
-		Settlements relative to hexagon
-		   4    3
-		    \  / 
-		 5 — ⬣ — 2
-		    /  \
-		   0    1
-		"""
-		TOP_LEFT: int
-		TOP_RIGHT: int
-		RIGHT: int
-		BOTTOM_RIGHT: int
-		BOTTOM_LEFT: int
-		LEFT: int
+	Settlements = Enum("Tile::Settlements", **{type["label"]: type["id"]-1 for type in directions.get_side_corners()})
+	r"""
+	Settlements relative to hexagon
+	   4    3
+	    \  / 
+	 5 — ⬣ — 2
+	    /  \
+	   0    1
+	"""
 
 
 	Types = ResourceType
@@ -77,6 +66,9 @@ class Tile:
 
 
 	def __eq__(self, right: Tile) -> bool:
+		if(right is None):
+			return False
+
 		return self.id == right.id
 
 
@@ -141,3 +133,5 @@ class Tile:
 			r"     \___{k}___/     " "\n"
 			r"   {l}         {m}   " "\n"
 		).format(a=s_tl, b=r_t_, c=s_tr, d=r_tl, e=r_tr, f=s_l_, g=id, h=s_r_, i=r_bl, j=r_br, k=r_b_, l=s_bl, m=s_br)
+
+print(Tile.Settlements.items())

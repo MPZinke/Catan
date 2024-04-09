@@ -66,15 +66,15 @@ class Hexagon:
 	def settlement_position(self, settlement: int) -> Tuple[int, int]:
 		match(settlement):
 			case(Tile.Settlements.TOP_LEFT):
-				return self + [-self.COS_60*self.radius, self.SIN_60*self.radius]
+				return self + [-self.COS_60*self.radius, -self.SIN_60*self.radius]
 			case(Tile.Settlements.TOP_RIGHT):
-				return self + [self.COS_60*self.radius, self.SIN_60*self.radius]
+				return self + [self.COS_60*self.radius, -self.SIN_60*self.radius]
 			case(Tile.Settlements.RIGHT):
 				return self + [self.radius, 0]
 			case(Tile.Settlements.BOTTOM_RIGHT):
-				return self + [self.COS_60*self.radius, -self.SIN_60*self.radius]
+				return self + [self.COS_60*self.radius, self.SIN_60*self.radius]
 			case(Tile.Settlements.BOTTOM_LEFT):
-				return self + [-self.COS_60*self.radius, -self.SIN_60*self.radius]
+				return self + [-self.COS_60*self.radius, self.SIN_60*self.radius]
 			case(Tile.Settlements.LEFT):
 				return self + [-self.radius, 0]
 			case _:

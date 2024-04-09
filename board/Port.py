@@ -3,7 +3,8 @@
 from typing import TypeVar
 
 
-from board.Tile import Tile
+from database.queries import directions
+from Enum import Enum
 from ResourceType import ResourceType
 
 
@@ -11,13 +12,8 @@ Port = TypeVar("Port")
 
 
 class Port:
-	Settlements = Tile.Settlements
-	Types = type("ResourceType", ResourceType.__bases__,
-		{
-			**ResourceType.__dict__,
-			"__annotations__": {**ResourceType.__annotations__, "ANY": int}
-		}
-	)
+	Settlements = Enum("Port::Settlements", **{type["label"]: type["id"]-1 for type in directions.get_side_corners()})
+	Types = ResourceType
 
 	def __init__(self, id: str, type: int):
 		self.id: int = id
