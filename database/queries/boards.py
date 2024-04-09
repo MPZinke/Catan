@@ -27,7 +27,7 @@ def get_ports(cursor: psycopg2.extras.RealDictCursor, boards_id: str) -> list[di
 	"""
 
 	cursor.execute(query, (boards_id,))
-	return list(cursor)
+	return list(map(dict, cursor))
 
 
 @connect
@@ -39,7 +39,7 @@ def get_roads(cursor: psycopg2.extras.RealDictCursor, boards_id: str) -> list[di
 	"""
 
 	cursor.execute(query, (boards_id,))
-	return list(cursor)
+	return list(map(dict, cursor))
 
 
 @connect
@@ -51,7 +51,7 @@ def get_settlements(cursor: psycopg2.extras.RealDictCursor, boards_id: str) -> l
 	"""
 
 	cursor.execute(query, (boards_id,))
-	return list(cursor)
+	return list(map(dict, cursor))
 
 
 @connect
@@ -63,7 +63,7 @@ def get_tiles(cursor: psycopg2.extras.RealDictCursor, boards_id: str) -> list[di
 	"""
 
 	cursor.execute(query, (boards_id,))
-	return list(cursor)
+	return list(map(dict, cursor))
 
 
 @connect
@@ -77,7 +77,7 @@ def get_ports_settlements(cursor: psycopg2.extras.RealDictCursor, boards_id: str
 	"""
 
 	cursor.execute(query, (boards_id,))
-	return list(cursor)
+	return list(map(dict, cursor))
 
 
 @connect
@@ -91,7 +91,7 @@ def get_roads_settlements(cursor: psycopg2.extras.RealDictCursor, boards_id: str
 	"""
 
 	cursor.execute(query, (boards_id,))
-	return list(cursor)
+	return list(map(dict, cursor))
 
 
 @connect
@@ -105,7 +105,7 @@ def get_roads_tiles(cursor: psycopg2.extras.RealDictCursor, boards_id: str) -> l
 	"""
 
 	cursor.execute(query, (boards_id,))
-	return list(cursor)
+	return list(map(dict, cursor))
 
 
 @connect
@@ -119,4 +119,4 @@ def get_settlements_tiles(cursor: psycopg2.extras.RealDictCursor, boards_id: str
 	"""
 
 	cursor.execute(query, (boards_id,))
-	return list(cursor)
+	return list(map(dict, cursor))

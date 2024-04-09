@@ -110,8 +110,8 @@ class Settlement:
 		  /°°°°°°°°°°°°°\_____
 		  \°°°°°°°°°°°°°/
 		"""
-		BOTTOM: int
 		TOP: int
+		BOTTOM: int
 		SIDE: int
 
 
@@ -136,8 +136,8 @@ class Settlement:
 		  /°°°°°°°°°°°°°\_____
 		  \°°°°°°°°°°°°°/
 		"""
-		BOTTOM: int
 		TOP: int
+		BOTTOM: int
 		SIDE: int
 
 
@@ -177,3 +177,84 @@ class Settlement:
 				if(tile)
 			}
 		}.items()
+
+
+	def __str__(self) -> str:
+		from board import Tile
+
+		def center(value: int, space_length: int=3, padder: str=' ') -> str:
+			value_string: str = str(value)
+			value_length: int = len(value_string)
+
+			if(value_length >= space_length):
+				return value_string
+
+			else:
+				length_difference: int = space_length - value_length
+				side_padding_length: int = length_difference // 2
+				additional_padding: int = length_difference - (side_padding_length * 2)
+
+				side_padding: str = padder * side_padding_length
+				return f"""{side_padding}{value_string}{padder * additional_padding}{side_padding}"""
+
+		road_bottom = self.roads[self.Roads.BOTTOM]
+		road_side = self.roads[self.Roads.SIDE]
+		road_top = self.roads[self.Roads.TOP]
+		tile_bottom = self.tiles[self.Tiles.BOTTOM]
+		tile_side = self.tiles[self.Tiles.SIDE]
+		tile_top = self.tiles[self.Tiles.TOP]
+
+		_id = self.id
+		r_b = center(road_bottom.id if(road_bottom) else "-")
+		r_s = center(road_side.id if(road_side) else "-")
+		r_t = center(road_top.id if(road_top) else "-")
+		t_b = center(tile_bottom.id if(tile_bottom) else "-")
+		t_s = center(tile_side.id if(tile_side) else "-")
+		t_t = center(tile_top.id if(tile_top) else "-")
+
+		if(
+			(tile_bottom and tile_bottom.settlements[Tile.Settlements.TOP_LEFT].id == self.id)
+			or (tile_top and tile_top.settlements[Tile.Settlements.BOTTOM_LEFT].id == self.id)
+			or (tile_side and tile_side.settlements[Tile.Settlements.LEFT].id == self.id)
+		):
+			return (
+				r"    \      {a}  " "\n"
+				r"    {b}         " "\n"
+				r"      \         " "\n"
+				r"{c}    {d}---{e}" "\n"
+				r"      /         " "\n"
+				r"    {f}         " "\n"
+				r"    /      {g}  " "\n"
+			).format(a=t_t, b=r_t, c=t_s, d=_id, e=r_s, f=r_b, g=t_b)
+		return (
+			r" {a}      /     " "\n"
+			r"        {b}     " "\n"
+			r"        /       " "\n"
+			r"{c}---{d}    {e}" "\n"
+			r"       \        " "\n"
+			r"       {f}      " "\n"
+			r" {g}     \      " "\n"
+		).format(a=t_t, b=r_t, c=r_s, d=_id, e=t_s, f=r_b, g=t_b)
+		# if(
+		# 	(tile_bottom and tile_bottom.roads[Tile.Roads.TOP_LEFT].id == self.id)
+		# 	or (tile_top and tile_top.roads[Tile.Roads.BOTTOM_RIGHT].id == self.id)
+		# ):
+		# 	return (
+		# 		r"      \{a}   " "\n"
+		# 		r"{b}   /      " "\n"
+		# 		r"     {c}     " "\n"
+		# 		r"____/     {d}" "\n"
+		# 		r" {e}\        " "\n"
+		# 	).format(a=s_r, b=t_t, c=_id, d=t_b, e=s_l)
+		# return (
+		# 	r" \    {a}    / " "\n"
+		# 	r"  \         /  " "\n"
+		# 	r"{b}---{c}---{d}" "\n"
+		# 	r"  /         \  " "\n"
+		# 	r" /    {e}    \ " "\n"
+		# ).format(a=t_t, b=s_l, c=_id, d=s_r, e=t_b)
+
+
+	def __repr__(self) -> str:
+		return str(self)
+

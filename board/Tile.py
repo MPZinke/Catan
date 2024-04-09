@@ -37,12 +37,12 @@ class Tile:
 		   / | \
 		  5  0  1
 		"""
-		BOTTOM: int
-		BOTTOM_RIGHT: int
-		TOP_RIGHT: int
 		TOP: int
-		TOP_LEFT: int
+		TOP_RIGHT: int
+		BOTTOM_RIGHT: int
+		BOTTOM: int
 		BOTTOM_LEFT: int
+		TOP_LEFT: int
 
 
 	class Settlements(Enum):
@@ -54,11 +54,11 @@ class Tile:
 		    /  \
 		   0    1
 		"""
-		BOTTOM_LEFT: int
-		BOTTOM_RIGHT: int
-		RIGHT: int
-		TOP_RIGHT: int
 		TOP_LEFT: int
+		TOP_RIGHT: int
+		RIGHT: int
+		BOTTOM_RIGHT: int
+		BOTTOM_LEFT: int
 		LEFT: int
 
 
@@ -118,19 +118,19 @@ class Tile:
 
 
 		id: str = center(self.id)
-		b_tl: str = center(self.roads[self.Roads.TOP_LEFT].id)
-		b_t_: str = center(self.roads[self.Roads.TOP].id, padder='_')
-		b_tr: str = center(self.roads[self.Roads.TOP_RIGHT].id)
-		b_br: str = center(self.roads[self.Roads.BOTTOM_RIGHT].id)
-		b_b_: str = center(self.roads[self.Roads.BOTTOM].id, padder='_')
-		b_bl: str = center(self.roads[self.Roads.BOTTOM_LEFT].id)
+		r_tl: str = center(self.roads[self.Roads.TOP_LEFT].id)
+		r_t_: str = center(self.roads[self.Roads.TOP].id, padder='_')
+		r_tr: str = center(self.roads[self.Roads.TOP_RIGHT].id)
+		r_br: str = center(self.roads[self.Roads.BOTTOM_RIGHT].id)
+		r_b_: str = center(self.roads[self.Roads.BOTTOM].id, padder='_')
+		r_bl: str = center(self.roads[self.Roads.BOTTOM_LEFT].id)
 
-		c_tl: str = f"""{self.settlements[self.Settlements.TOP_LEFT].id or "":>3}"""
-		c_tr: str = self.settlements[self.Settlements.TOP_RIGHT].id or ""
-		c_r_: str = self.settlements[self.Settlements.RIGHT].id or ""
-		c_br: str = self.settlements[self.Settlements.BOTTOM_RIGHT].id or ""
-		c_bl: str = f"""{self.settlements[self.Settlements.BOTTOM_LEFT].id or "":>3}"""
-		c_l_: str = f"""{self.settlements[self.Settlements.LEFT].id or "":>3}"""
+		s_tl: str = f"""{self.settlements[self.Settlements.TOP_LEFT].id or "-":>3}"""
+		s_tr: str = self.settlements[self.Settlements.TOP_RIGHT].id or "-"
+		s_r_: str = self.settlements[self.Settlements.RIGHT].id or "-"
+		s_br: str = self.settlements[self.Settlements.BOTTOM_RIGHT].id or "-"
+		s_bl: str = f"""{self.settlements[self.Settlements.BOTTOM_LEFT].id or "-":>3}"""
+		s_l_: str = f"""{self.settlements[self.Settlements.LEFT].id or "-":>3}"""
 		return (
 			r"   {a}___{b}___{c}   " "\n"
 			r"     /         \     " "\n"
@@ -139,5 +139,5 @@ class Tile:
 			r"   \             /   " "\n"
 			r"   {i}         {j}   " "\n"
 			r"     \___{k}___/     " "\n"
-			r"   {l}         {m}"
-		).format(a=c_tl, b=b_t_, c=c_tr, d=b_tl, e=b_tr, f=c_l_, g=id, h=c_r_, i=b_bl, j=b_br, k=b_b_, l=c_bl, m=c_br)
+			r"   {l}         {m}   " "\n"
+		).format(a=s_tl, b=r_t_, c=s_tr, d=r_tl, e=r_tr, f=s_l_, g=id, h=s_r_, i=r_bl, j=r_br, k=r_b_, l=s_bl, m=s_br)

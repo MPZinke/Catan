@@ -49,7 +49,8 @@ def draw_tiles(tiles: list[Tile]):
 			outline=(255, 255, 255)
 		)
 		# FROM: https://pillow.readthedocs.io/en/stable/reference/ImageDraw.html#PIL.ImageDraw.ImageDraw.text
-		draw.text((position[0], position[1]), str(tile.value), fill=(220))
+		draw.text((position[0], position[1]-10), str(tile.id), fill=(220))
+		draw.text((position[0], position[1]+10), str(tile.value), fill=(220))
 
 		for direction in Tile.Settlements.values():
 			settlement = tile.settlements[direction]
@@ -57,5 +58,10 @@ def draw_tiles(tiles: list[Tile]):
 			# FROM: https://pillow.readthedocs.io/en/stable/reference/ImageDraw.html#PIL.ImageDraw.ImageDraw.ellipse
 			draw.ellipse((position[0]+40, position[1]+40, position[0]+60, position[1]+60), fill=(200,200,200))
 			draw.text((position[0]+45, position[1]+45), str(settlement.id), fill=220)
+
+		for direction in Tile.Roads.values():
+			road = tile.roads[direction]
+			position = hexagon.road_position(direction)
+			draw.text((position[0]+45, position[1]+45), str(road.id), fill=220)
 
 	image.save("Board.jpg")

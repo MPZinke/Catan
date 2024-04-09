@@ -15,8 +15,8 @@ def get_dice_value_counts(cursor: psycopg2.extras.RealDictCursor, board_id: int)
 		WHERE "Boards.id" = %s;
 	"""
 
-	cursor.execute(query, (board_id))
-	return list(cursor)
+	cursor.execute(query, (board_id,))
+	return list(map(dict, cursor))
 
 
 @connect
@@ -24,12 +24,12 @@ def get_ports_resource_types_counts(cursor: psycopg2.extras.RealDictCursor, boar
 	query = """
 		SELECT *
 		FROM "PortsResourceTypesCounts"
-		JOIN "ResourceTypes" ON "TilesResources"."ResourceTypes.id" = "ResourceTypes"."id"
+		LEFT JOIN "ResourceTypes" ON "PortsResourceTypesCounts"."ResourceTypes.id" = "ResourceTypes"."id"
 		WHERE "Boards.id" = %s;
 	"""
 
-	cursor.execute(query, (board_id))
-	return list(cursor)
+	cursor.execute(query, (board_id,))
+	return list(map(dict, cursor))
 
 
 @connect
@@ -37,9 +37,9 @@ def get_tiles_resource_types_counts(cursor: psycopg2.extras.RealDictCursor, boar
 	query = """
 		SELECT *
 		FROM "TilesResourceTypesCounts"
-		JOIN "ResourceTypes" ON "TilesResources"."ResourceTypes.id" = "ResourceTypes"."id"
+		LEFT JOIN "ResourceTypes" ON "TilesResourceTypesCounts"."ResourceTypes.id" = "ResourceTypes"."id"
 		WHERE "Boards.id" = %s;
 	"""
 
-	cursor.execute(query, (board_id))
-	return list(cursor)
+	cursor.execute(query, (board_id,))
+	return list(map(dict, cursor))

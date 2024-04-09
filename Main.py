@@ -15,13 +15,25 @@ __author__ = "MPZinke"
 
 
 import gui
-from board import Board
-import setup
+from game.new import new_game
 
 
 def main():
-	board: Board = setup.random_basic_board()
-	gui.draw_tiles(board.tiles)
+	board_id = 1
+	ports, roads, settlements, tiles = new_game(board_id)
+	ports_strings = list(map(str, ports))
+	roads_strings = list(map(str, roads))
+	settlements_strings = list(map(str, settlements))
+	tiles_strings = list(map(str, tiles))
+
+	print(
+		"\n".join(ports_strings),
+		"\n".join(roads_strings),
+		"\n".join(settlements_strings),
+		"\n".join(tiles_strings)
+	)
+
+	gui.draw_tiles(tiles)
 
 
 if(__name__ == "__main__"):

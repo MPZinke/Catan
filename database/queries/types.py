@@ -15,7 +15,7 @@ def get_resource_types(cursor: psycopg2.extras.RealDictCursor) -> list[dict]:
 	"""
 
 	cursor.execute(query)
-	return list(cursor)
+	return list(map(dict, cursor))
 
 
 @connect
@@ -26,4 +26,4 @@ def get_settlement_types(cursor: psycopg2.extras.RealDictCursor) -> list[dict]:
 	"""
 
 	cursor.execute(query)
-	return list(cursor)
+	return list(map(dict, cursor))

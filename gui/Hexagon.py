@@ -13,7 +13,9 @@ Coordinate = Tuple[float, float]
 class Hexagon:
 	SQUAREROOT_3 = math.sqrt(3)
 	RADIAN = math.pi / 180.0
+	COS_30 = math.cos(RADIAN * 30)
 	COS_60 = math.cos(RADIAN * 60)
+	SIN_30 = math.sin(RADIAN * 30)
 	SIN_60 = math.sin(RADIAN * 60)
 
 	def __init__(self, position: Coordinate, size: int):
@@ -41,6 +43,24 @@ class Hexagon:
 
 	def __next__(self) -> int|float:
 		yield from self._iter_values
+
+
+	def road_position(self, road: int) -> Tuple[int, int]:
+		match(road):
+			case(Tile.Roads.TOP):
+				return self + [0, -self.size]
+			case(Tile.Roads.TOP_RIGHT):
+				return self + [self.COS_30*self.size, -self.SIN_30*self.size]
+			case(Tile.Roads.BOTTOM_RIGHT):
+				return self + [self.COS_30*self.size, self.SIN_30*self.size]
+			case(Tile.Roads.BOTTOM):
+				return self + [0, self.size]
+			case(Tile.Roads.BOTTOM_LEFT):
+				return self + [-self.COS_30*self.size, self.SIN_30*self.size]
+			case(Tile.Roads.TOP_LEFT):
+				return self + [-self.COS_30*self.size, -self.SIN_30*self.size]
+			case _:
+				raise ValueError(f"Unknown road '{road}'")
 
 
 	def settlement_position(self, settlement: int) -> Tuple[int, int]:
