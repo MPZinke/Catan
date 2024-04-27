@@ -25,10 +25,6 @@ DROP TABLE IF EXISTS "GamesPorts" CASCADE;
 DROP TABLE IF EXISTS "GamesRoads" CASCADE;
 DROP TABLE IF EXISTS "GamesSettlements" CASCADE;
 DROP TABLE IF EXISTS "GamesTiles" CASCADE;
-DROP TABLE IF EXISTS "GamesPortsGamesSettlements" CASCADE;
-DROP TABLE IF EXISTS "GamesRoadsGamesSettlements" CASCADE;
-DROP TABLE IF EXISTS "GamesRoadsGamesTiles" CASCADE;
-DROP TABLE IF EXISTS "GamesSettlementsGamesTiles" CASCADE;
 
 
 
@@ -199,6 +195,18 @@ CREATE TABLE "SettlementsTiles"
 	FOREIGN KEY ("Boards.id") REFERENCES "Boards"("id"),
 	FOREIGN KEY ("Settlements.id") REFERENCES "Settlements"("id"),
 	FOREIGN KEY ("Tiles.id") REFERENCES "Tiles"("id")
+);
+
+
+-- ————————————————————————————————————————————————————— COUNTS ————————————————————————————————————————————————————— --
+-- —————————————————————————————————————————————————————————————————————————————————————————————————————————————————— --
+
+CREATE TABLE "Players"
+(
+	"id" SERIAL NOT NULL PRIMARY KEY,
+	"Games.id" INT NOT NULL,
+	"name" VARCHAR(64) NOT NULL,
+	"Settlements.ids" INT[9] DEFAULT ARRAY[NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL]::INT[9]
 );
 
 

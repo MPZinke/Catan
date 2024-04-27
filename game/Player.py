@@ -23,9 +23,10 @@ class Player:
 	def __init__(self, id: int):
 		self.id: int = id
 
+		self.development_cards = []
 		self.resources = []  # TODO
-		self.roads: list[Road] = []
-		self.settlements: list[Settlement] = []
+		self.roads: Roads = []
+		self.settlements: Settlements = []
 
 
 	def __eq__(self, right: Player) -> bool:
