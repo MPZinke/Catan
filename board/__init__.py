@@ -21,4 +21,3 @@ from board.Port import Port, Ports
 from board.Road import Road, Roads
 from board.Settlement import Settlement, Settlements
 from board.Tile import Tile, Tiles
-import setup

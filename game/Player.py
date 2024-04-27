@@ -3,16 +3,27 @@
 from typing import TypeVar
 
 
+from database.queries.types import get_resource_types
+from Enum import Enum
+
+
 Player = TypeVar("Player")
+Players = list[Player]
 Port = TypeVar("Port")
+Ports = list[Port]
 Road = TypeVar("Road")
+Roads = list[Road]
 Settlement = TypeVar("Settlement")
+Settlements = list[Settlement]
 
 
 class Player:
+	ResourcesTypes = Enum("Player::ResourceType", **{type["label"]: type["id"]-1 for type in get_resource_types()})
+
 	def __init__(self, id: int):
 		self.id: int = id
 
+		self.resources = []  # TODO
 		self.roads: list[Road] = []
 		self.settlements: list[Settlement] = []
 

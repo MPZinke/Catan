@@ -19,7 +19,6 @@ from typing import Optional, Tuple, TypeVar
 
 from database.queries import directions, types
 from Enum import Enum
-from ResourceType import ResourceType
 
 
 Road = TypeVar("Road")
@@ -54,7 +53,7 @@ class Tile:
 	"""
 
 
-	Types = ResourceType
+	ResourceTypes = Enum("Tile::ResourceTypes", **{type["label"]: type["id"]-1 for type in types.get_resource_types()})
 
 
 	def __init__(self, id: int, coordinate: Tuple[int, int], type: int, value: int):

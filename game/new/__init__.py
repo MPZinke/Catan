@@ -19,7 +19,7 @@ from random import randint
 
 
 import database.queries as db
-from board import Port, Ports, Road, Roads, Settlement, Settlements, Tile, Tiles
+from board import Board, Port, Ports, Road, Roads, Settlement, Settlements, Tile, Tiles
 from game import associate, parts
 from game.new import create
 
@@ -66,12 +66,8 @@ def new_game(board_id: int) -> Game:
 	associate.roads_and_settlements(board_id, game_road_dicts, roads, game_settlement_dicts, settlements)
 	associate.roads_and_tiles(board_id, game_road_dicts, roads, game_tile_dicts, tiles)
 	associate.settlements_and_tiles(board_id, game_settlement_dicts, settlements, game_tile_dicts, tiles)
-	print(list(map(str, ports)))
-	print(list(map(str, roads)))
-	print(list(map(str, settlements)))
-	print(list(map(str, tiles)))
 
-	return ports, roads, settlements, tiles
+	return Board(ports, roads, settlements, tiles)
 
 
 def assign_port_dicts_random_resources(board_id: int, port_dicts: DictList) -> None:

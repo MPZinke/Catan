@@ -3,9 +3,8 @@
 from typing import Optional, TypeVar
 
 
-from database.queries import directions
+from database.queries import directions, types
 from Enum import Enum
-from ResourceType import ResourceType
 
 
 Port = TypeVar("Port")
@@ -16,7 +15,7 @@ Settlements = list[Optional[Settlement]]
 
 class Port:
 	Settlements = Enum("Port::Settlements", **{type["label"]: type["id"]-1 for type in directions.get_side_corners()})
-	Types = ResourceType
+	ResourceTypes = Enum("Tile::ResourceTypes", **{type["label"]: type["id"]-1 for type in types.get_resource_types()})
 
 	def __init__(self, id: str, type: int):
 		self.id: int = id
