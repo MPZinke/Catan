@@ -12,3 +12,9 @@ __author__ = "MPZinke"
 #   FUTURE:                                                                                                            #
 #                                                                                                                      #
 ########################################################################################################################
+
+import database.queries.boards
+import database.queries.counts
+import database.queries.directions
+import database.queries.games
+import database.queries.types

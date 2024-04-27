@@ -254,12 +254,16 @@ CREATE TABLE "GamesPorts"
 	"id" SERIAL NOT NULL PRIMARY KEY,
 	"Ports.id" INT NOT NULL,
 	"Games.id" INT NOT NULL,
-	"ResourceTypes.id" INT NOT NULL,
+	"ResourceTypes.id" INT,
 
 	FOREIGN KEY ("Ports.id") REFERENCES "Ports"("id"),
 	FOREIGN KEY ("Games.id") REFERENCES "Games"("id"),
 	FOREIGN KEY ("ResourceTypes.id") REFERENCES "ResourceTypes"("id")
 );
+
+
+CREATE UNIQUE INDEX "GamesPortsUniqueIndex"
+ON "GamesPorts" ("Ports.id", "Games.id");
 
 -- ————————————————————————————————————————————————————— ROADS —————————————————————————————————————————————————————  --
 
@@ -272,6 +276,10 @@ CREATE TABLE "GamesRoads"
 	FOREIGN KEY ("Roads.id") REFERENCES "Roads"("id"),
 	FOREIGN KEY ("Games.id") REFERENCES "Games"("id")
 );
+
+
+CREATE UNIQUE INDEX "GamesRoadsUniqueIndex"
+ON "GamesRoads" ("Roads.id", "Games.id");
 
 -- —————————————————————————————————————————————————— SETTLEMENTS ——————————————————————————————————————————————————  --
 
@@ -288,6 +296,10 @@ CREATE TABLE "GamesSettlements"
 );
 
 
+CREATE UNIQUE INDEX "GamesSettlementsUniqueIndex"
+ON "GamesSettlements" ("Settlements.id", "Games.id");
+
+
 -- ————————————————————————————————————————————————————— TILES —————————————————————————————————————————————————————  --
 
 CREATE TABLE "GamesTiles"
@@ -295,13 +307,16 @@ CREATE TABLE "GamesTiles"
 	"id" SERIAL NOT NULL PRIMARY KEY,
 	"Tiles.id" INT NOT NULL,
 	"Games.id" INT NOT NULL,
-	"coordinate" INT[2] NOT NULL,
 	"value" INT NOT NULL CHECK("value" <= 12 AND 0 <= "value"),
 	"ResourceTypes.id" INT NOT NULL,
 	FOREIGN KEY ("Tiles.id") REFERENCES "Tiles"("id"),
 	FOREIGN KEY ("Games.id") REFERENCES "Games"("id"),
 	FOREIGN KEY ("ResourceTypes.id") REFERENCES "ResourceTypes"("id")
 );
+
+
+CREATE UNIQUE INDEX "GamesTilesUniqueIndex"
+ON "GamesTiles" ("Tiles.id", "Games.id");
 
 
 -- ———————————————————————————————————————————————— GAME ASSOCIATION ———————————————————————————————————————————————— --
@@ -369,3 +384,19 @@ CREATE TABLE "GamesSettlementsGamesTiles"
 	FOREIGN KEY ("GamesSettlements.id") REFERENCES "GamesSettlements"("id"),
 	FOREIGN KEY ("GamesTiles.id") REFERENCES "GamesTiles"("id")
 );
+
+
+-- FROM: https://stackoverflow.com/a/42784814
+CREATE OR REPLACE FUNCTION DefaultSettlementType()
+RETURNS TRIGGER 
+AS $$ BEGIN
+IF new."SettlementTypes.id" IS NULL THEN
+  new."SettlementTypes.id" = (SELECT "id" FROM "SettlementTypes" WHERE "label" = 'UNENHABITED');
+END IF;
+RETURN NEW;
+END; 
+$$ language plpgsql; 
+
+CREATE TRIGGER DefaultSettlementType
+BEFORE INSERT ON "GamesSettlements"
+FOR EACH ROW EXECUTE PROCEDURE DefaultSettlementType();
