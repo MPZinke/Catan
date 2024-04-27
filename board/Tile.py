@@ -14,7 +14,7 @@ __author__ = "MPZinke"
 ########################################################################################################################
 
 
-from typing import Tuple, TypeVar
+from typing import Optional, Tuple, TypeVar
 
 
 from database.queries import directions, types
@@ -23,8 +23,11 @@ from ResourceType import ResourceType
 
 
 Road = TypeVar("Road")
+Roads = list[Optional[Road]]
 Settlement = TypeVar("Settlement")
+Settlements = list[Optional[Settlement]]
 Tile = TypeVar("Tile")
+Tiles = list[Optional[Tile]]
 
 
 class Tile:
@@ -58,8 +61,8 @@ class Tile:
 		self.id: int = id
 		self.coordinate: list[int, int] = coordinate.copy()
 		# Abstract parts
-		self.roads: list[Road] = [None, None, None, None, None, None]
-		self.settlements: list[Settlement] = [None, None, None, None, None, None]
+		self.roads: Roads = [None for _ in range(self.Roads.length)]
+		self.settlements: Settlements = [None for _ in range(self.Settlements.length)]
 		# Game parts
 		self.type: int = type
 		self.value: int = value

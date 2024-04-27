@@ -17,8 +17,8 @@ __author__ = "MPZinke"
 
 
 from board.Board import Board
-from board.Port import Port
-from board.Road import Road
-from board.Settlement import Settlement
-from board.Tile import Tile
+from board.Port import Port, Ports
+from board.Road import Road, Roads
+from board.Settlement import Settlement, Settlements
+from board.Tile import Tile, Tiles
 import setup

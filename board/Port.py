@@ -1,6 +1,6 @@
 
 
-from typing import TypeVar
+from typing import Optional, TypeVar
 
 
 from database.queries import directions
@@ -9,6 +9,9 @@ from ResourceType import ResourceType
 
 
 Port = TypeVar("Port")
+Ports = list[Port]
+Settlement = TypeVar("Settlement")
+Settlements = list[Optional[Settlement]]
 
 
 class Port:
@@ -19,7 +22,7 @@ class Port:
 		self.id: int = id
 		self.type: int = type
 
-		self.settlements: list = [None for _ in range(self.Settlements.length)]
+		self.settlements: Settlements = [None for _ in range(self.Settlements.length)]
 
 
 	def __eq__(self, right: Port) -> bool:

@@ -23,8 +23,11 @@ from database.queries import directions
 
 Player = TypeVar("Player")
 Road = TypeVar("Road")
+Roads = list[Optional[Road]]
 Settlement = TypeVar("Settlement")
+Settlements = list[Optional[Settlement]]
 Tile = TypeVar("Tile")
+Tiles = list[Optional[Tile]]
 
 
 class Road:
@@ -92,8 +95,8 @@ class Road:
 	def __init__(self, id: int):
 		self.id: int = id
 		# Board parts
-		self.settlements: list[Settlement] = [None, None]
-		self.tiles: list[Tile] = [None, None]
+		self.settlements: Settlements = [None for _ in range(self.Settlements.length)]
+		self.tiles: Tiles = [None for _ in range(self.Tiles.length)]
 		# Game state
 		self.player: Optional[Player] = None  # The player who owns the road if any.
 

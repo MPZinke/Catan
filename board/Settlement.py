@@ -21,12 +21,16 @@ from Enum import Enum
 from database.queries import directions, types
 
 
+Port = TypeVar("Port")
+Ports = list[Optional[Port]]
 Road = TypeVar("Road")
+Roads = list[Optional[Road]]
 Settlement = TypeVar("Settlement")
+Settlements = list[Optional[Settlement]]
 Tile = TypeVar("Tile")
+Tiles = list[Optional[Tile]]
 
 Player = TypeVar("Player")
-Port = TypeVar("Port")
 
 
 class Settlement:
@@ -137,9 +141,9 @@ class Settlement:
 		self.id: int = id
 
 		# Board parts
-		self.ports: list[Port] = [None, None, None]
-		self.roads: list[Road] = [None, None, None]
-		self.tiles: list[Tile] = [None, None, None]
+		self.ports: Port = [None for _ in range(self.Ports.length)]
+		self.roads: Road = [None for _ in range(self.Roads.length)]
+		self.tiles: Tile = [None for _ in range(self.Tiles.length)]
 
 		# Game state
 		self.player: Optional[Player] = None
@@ -221,26 +225,7 @@ class Settlement:
 			r"        {f}     " "\n"
 			r" {g}      \     " "\n"
 		).format(a=t_t, b=r_t, c=r_s, d=_id, e=t_s, f=r_b, g=t_b)
-		# if(
-		# 	(tile_bottom and tile_bottom.roads[Tile.Roads.TOP_LEFT].id == self.id)
-		# 	or (tile_top and tile_top.roads[Tile.Roads.BOTTOM_RIGHT].id == self.id)
-		# ):
-		# 	return (
-		# 		r"      \{a}   " "\n"
-		# 		r"{b}   /      " "\n"
-		# 		r"     {c}     " "\n"
-		# 		r"____/     {d}" "\n"
-		# 		r" {e}\        " "\n"
-		# 	).format(a=s_r, b=t_t, c=_id, d=t_b, e=s_l)
-		# return (
-		# 	r" \    {a}    / " "\n"
-		# 	r"  \         /  " "\n"
-		# 	r"{b}---{c}---{d}" "\n"
-		# 	r"  /         \  " "\n"
-		# 	r" /    {e}    \ " "\n"
-		# ).format(a=t_t, b=s_l, c=_id, d=s_r, e=t_b)
 
 
 	def __repr__(self) -> str:
 		return str(self)
-
