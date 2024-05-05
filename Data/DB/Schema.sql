@@ -18,14 +18,22 @@ DROP TABLE IF EXISTS "RoadsSettlements" CASCADE;
 DROP TABLE IF EXISTS "RoadsTiles" CASCADE;
 DROP TABLE IF EXISTS "SettlementsTiles" CASCADE;
 DROP TABLE IF EXISTS "DiceValuesCounts" CASCADE;
-DROP TABLE IF EXISTS "TilesResourceTypesCounts" CASCADE;
 DROP TABLE IF EXISTS "PortsResourceTypesCounts" CASCADE;
+DROP TABLE IF EXISTS "TilesResourceTypesCounts" CASCADE;
 DROP TABLE IF EXISTS "Games" CASCADE;
 DROP TABLE IF EXISTS "GamesPorts" CASCADE;
 DROP TABLE IF EXISTS "GamesRoads" CASCADE;
 DROP TABLE IF EXISTS "GamesSettlements" CASCADE;
 DROP TABLE IF EXISTS "GamesTiles" CASCADE;
-
+DROP TABLE IF EXISTS "GamesPortsGamesSettlements" CASCADE;
+DROP TABLE IF EXISTS "GamesRoadsGamesSettlements" CASCADE;
+DROP TABLE IF EXISTS "GamesRoadsGamesTiles" CASCADE;
+DROP TABLE IF EXISTS "GamesSettlementsGamesTiles" CASCADE;
+DROP TABLE IF EXISTS "Players" CASCADE;
+DROP TABLE IF EXISTS "PlayersResources" CASCADE;
+DROP TABLE IF EXISTS "GamesRobbers" CASCADE;
+DROP TABLE IF EXISTS "GamesBiggestArmies" CASCADE;
+DROP TABLE IF EXISTS "GamesLongestRoads" CASCADE;
 
 
 CREATE TABLE "ResourceTypes"
@@ -197,19 +205,6 @@ CREATE TABLE "SettlementsTiles"
 	FOREIGN KEY ("Tiles.id") REFERENCES "Tiles"("id")
 );
 
-
--- ————————————————————————————————————————————————————— COUNTS ————————————————————————————————————————————————————— --
--- —————————————————————————————————————————————————————————————————————————————————————————————————————————————————— --
-
-CREATE TABLE "Players"
-(
-	"id" SERIAL NOT NULL PRIMARY KEY,
-	"Games.id" INT NOT NULL,
-	"name" VARCHAR(64) NOT NULL,
-	"Settlements.ids" INT[9] DEFAULT ARRAY[NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL]::INT[9]
-);
-
-
 -- ————————————————————————————————————————————————————— COUNTS ————————————————————————————————————————————————————— --
 -- —————————————————————————————————————————————————————————————————————————————————————————————————————————————————— --
 
@@ -280,7 +275,7 @@ CREATE TABLE "GamesRoads"
 	"id" SERIAL NOT NULL PRIMARY KEY,
 	"Roads.id" INT NOT NULL,
 	"Games.id" INT NOT NULL,
-	-- "Players.id" INT NOT NULL
+	"Players.id" INT DEFAULT NULL,
 	FOREIGN KEY ("Roads.id") REFERENCES "Roads"("id"),
 	FOREIGN KEY ("Games.id") REFERENCES "Games"("id")
 );
@@ -289,6 +284,7 @@ CREATE TABLE "GamesRoads"
 CREATE UNIQUE INDEX "GamesRoadsUniqueIndex"
 ON "GamesRoads" ("Roads.id", "Games.id");
 
+
 -- —————————————————————————————————————————————————— SETTLEMENTS ——————————————————————————————————————————————————  --
 
 CREATE TABLE "GamesSettlements"
@@ -296,7 +292,7 @@ CREATE TABLE "GamesSettlements"
 	"id" SERIAL NOT NULL PRIMARY KEY,
 	"Settlements.id" INT NOT NULL,
 	"Games.id" INT NOT NULL,
-	-- "Players.id" INT NOT NULL,
+	"Players.id" INT DEFAULT NULL,
 	"SettlementTypes.id" INT NOT NULL,
 	FOREIGN KEY ("Settlements.id") REFERENCES "Settlements"("id"),
 	FOREIGN KEY ("Games.id") REFERENCES "Games"("id"),
@@ -394,17 +390,121 @@ CREATE TABLE "GamesSettlementsGamesTiles"
 );
 
 
+-- ———————————————————————————————————————————————————— PLAYERS  ———————————————————————————————————————————————————— --
+-- —————————————————————————————————————————————————————————————————————————————————————————————————————————————————— --
+
+CREATE TABLE "Players"
+(
+	"id" SERIAL NOT NULL PRIMARY KEY,
+	"Games.id" INT NOT NULL,
+	"name" VARCHAR(64) NOT NULL,
+	"GamesRoads.ids" INT[15] DEFAULT ARRAY[NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL]::INT[15],
+	"GamesSettlements.ids" INT[9] DEFAULT ARRAY[NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL]::INT[9],
+	FOREIGN KEY ("Games.id") REFERENCES "Games"("id")
+);
+
+
+CREATE TABLE "PlayersResources"
+(
+	"id" SERIAL NOT NULL PRIMARY KEY,
+	"count" INT NOT NULL DEFAULT 0,
+	"Games.id" INT NOT NULL,
+	"Players.id" INT NOT NULL,
+	"ResourceTypes.id" INT NOT NULL,
+	FOREIGN KEY ("Games.id") REFERENCES "Games"("id"),
+	FOREIGN KEY ("Players.id") REFERENCES "Players"("id"),
+	FOREIGN KEY ("ResourceTypes.id") REFERENCES "ResourceTypes"("id")
+);
+
+
+CREATE TABLE "GamesRobbers"
+(
+	"id" SERIAL NOT NULL PRIMARY KEY,
+	"is_friendly" BOOL NOT NULL DEFAULT TRUE,
+	"Games.id" INT NOT NULL,
+	"GamesTiles.id" INT NOT NULL,
+	FOREIGN KEY ("Games.id") REFERENCES "Games"("id"),
+	FOREIGN KEY ("GamesTiles.id") REFERENCES "GamesTiles"("id")
+);
+
+
+CREATE TABLE "GamesBiggestArmies"
+(
+	"id" SERIAL NOT NULL PRIMARY KEY,
+	"Games.id" INT NOT NULL,
+	"Players.id" INT DEFAULT NULL,
+	FOREIGN KEY ("Games.id") REFERENCES "Games"("id"),
+	FOREIGN KEY ("Players.id") REFERENCES "Players"("id")
+);
+
+
+CREATE TABLE "GamesLongestRoads"
+(
+	"id" SERIAL NOT NULL PRIMARY KEY,
+	"Games.id" INT NOT NULL,
+	"Players.id" INT DEFAULT NULL,
+	FOREIGN KEY ("Games.id") REFERENCES "Games"("id"),
+	FOREIGN KEY ("Players.id") REFERENCES "Players"("id")
+);
+
+
+
+ALTER TABLE "GamesRoads" ADD CONSTRAINT "GamesRoads.Players.id" FOREIGN KEY ("Players.id") REFERENCES "Players"("id");
+ALTER TABLE "GamesSettlements" ADD CONSTRAINT "GamesSettlements.Players.id" FOREIGN KEY ("Players.id") REFERENCES "Players"("id");
+
+
 -- FROM: https://stackoverflow.com/a/42784814
 CREATE OR REPLACE FUNCTION DefaultSettlementType()
 RETURNS TRIGGER 
 AS $$ BEGIN
-IF new."SettlementTypes.id" IS NULL THEN
-  new."SettlementTypes.id" = (SELECT "id" FROM "SettlementTypes" WHERE "label" = 'UNENHABITED');
-END IF;
-RETURN NEW;
+	IF NEW."SettlementTypes.id" IS NULL THEN
+		NEW."SettlementTypes.id" = (SELECT "id" FROM "SettlementTypes" WHERE "label" = 'UNENHABITED');
+	END IF;
+
+	RETURN NEW;
 END; 
 $$ language plpgsql; 
 
 CREATE TRIGGER DefaultSettlementType
 BEFORE INSERT ON "GamesSettlements"
 FOR EACH ROW EXECUTE PROCEDURE DefaultSettlementType();
+
+
+-- FROM: https://stackoverflow.com/a/42784814
+CREATE OR REPLACE FUNCTION DefaultPlayersResources()
+RETURNS TRIGGER 
+AS $$ BEGIN
+	INSERT INTO "PlayersResources" ("Players.id", "Games.id", "ResourceTypes.id")
+	SELECT NEW."id", NEW."Games.id", "ResourceTypes"."id"
+	FROM "ResourceTypes";
+END; 
+$$ language plpgsql; 
+
+CREATE TRIGGER DefaultPlayersResources
+AFTER INSERT ON "Players"
+FOR EACH ROW EXECUTE PROCEDURE DefaultPlayersResources();
+
+
+-- FROM: https://stackoverflow.com/a/42784814
+CREATE OR REPLACE FUNCTION OnNewGame()
+RETURNS TRIGGER 
+AS $$ BEGIN
+	INSERT INTO "GamesRobbers" ("Games.id", "is_friendly", "GamesTiles.id")
+	SELECT NEW."id", TRUE, "GamesTiles"."id"
+	FROM "GamesTiles"
+	JOIN "ResourceTypes" ON "GamesTiles"."ResourceTypes.id" = "ResourceTypes"."id"
+	WHERE "ResourceTypes"."label" = 'DESERT';
+
+	INSERT INTO "GamesBiggestArmies" ("Games.id")
+	VALUES (NEW."id");
+
+	INSERT INTO "GamesLongestRoads" ("Games.id")
+	VALUES (NEW."id");
+
+	RETURN NEW;
+END; 
+$$ language plpgsql; 
+
+CREATE TRIGGER OnNewGame
+AFTER INSERT ON "Games"
+FOR EACH ROW EXECUTE PROCEDURE OnNewGame();
