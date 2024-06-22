@@ -5,7 +5,7 @@ __author__ = "MPZinke"
 ########################################################################################################################
 #                                                                                                                      #
 #   created by: MPZinke                                                                                                #
-#   on 2024.04.02                                                                                                      #
+#   on 2024.05.12                                                                                                      #
 #                                                                                                                      #
 #   DESCRIPTION:                                                                                                       #
 #   BUGS:                                                                                                              #
@@ -14,11 +14,14 @@ __author__ = "MPZinke"
 ########################################################################################################################
 
 
+from database.queries.games.get import get_ports
+from database.queries.games.get import get_roads
+from database.queries.games.get import get_settlements
+from database.queries.games.get import get_tiles
 
-
-from board.Board import Board
-from board.Port import Port, Ports
-from board.Road import Road, Roads
-from board.Robber import Robber
-from board.Settlement import Settlement, Settlements
-from board.Tile import Tile, Tiles
+from database.queries.games.new import new_game
+from database.queries.games.new import new_port
+from database.queries.games.new import new_road
+from database.queries.games.new import new_robber
+from database.queries.games.new import new_settlement
+from database.queries.games.new import new_tile

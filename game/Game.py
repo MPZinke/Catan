@@ -1,7 +1,7 @@
 
 
-from board import Board
-from game import Player
+from board import Board, 
+from game import Player, Players
 
 
 class Game:
@@ -9,3 +9,4 @@ class Game:
 		self.id: int = id
 		self.board: Board = board
 		self.players: list[Players] = players
+		self.resources: list[int] = []

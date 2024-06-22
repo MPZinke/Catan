@@ -40,6 +40,12 @@ def game_roads(game_id: int, road_dicts: list[dict]) -> list[dict]:
 
 	return game_road_dicts
 
+
+def game_robber(game_id: int, game_tile_id: int) -> dict:
+	robber_dict: dict = db.games.new_robber(game_id, game_tile_id)
+	return robber_dict
+
+
 def game_settlements(game_id: int, settlement_dicts: list[dict]) -> list[dict]:
 	game_settlement_dicts = []
 

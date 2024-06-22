@@ -41,6 +41,7 @@ def random_key_from_dictionary_for_available_items(dictionary: Dict[Any, int]) -
 
 
 def new_game(board_id: int) -> Game:
+	# Get board layout.
 	port_dicts: DictList = db.boards.get_ports(board_id)
 	road_dicts: DictList = db.boards.get_roads(board_id)
 	settlement_dicts: DictList = db.boards.get_settlements(board_id)
@@ -49,6 +50,7 @@ def new_game(board_id: int) -> Game:
 	assign_port_dicts_random_resources(board_id, port_dicts)
 	assign_tile_dicts_random_resources_and_dice_values(board_id, tile_dicts)
 
+	# Create game-board instances.
 	game_dict: dict = create.game(board_id)
 	game_id = game_dict["id"]
 
@@ -57,17 +59,23 @@ def new_game(board_id: int) -> Game:
 	game_settlement_dicts: DictList = create.game_settlements(game_id, settlement_dicts)
 	game_tile_dicts: DictList = create.game_tiles(game_id, tile_dicts)
 
+	# Create objects.
 	ports: Ports = parts.ports(game_port_dicts)
 	roads: Roads = parts.roads(game_road_dicts)
 	settlements: Settlements = parts.settlements(game_settlement_dicts)
 	tiles: Tiles = parts.tiles(game_tile_dicts)
 
+	# Associate objects.
 	associate.ports_and_settlements(board_id, game_port_dicts, ports, game_settlement_dicts, settlements)
 	associate.roads_and_settlements(board_id, game_road_dicts, roads, game_settlement_dicts, settlements)
 	associate.roads_and_tiles(board_id, game_road_dicts, roads, game_tile_dicts, tiles)
 	associate.settlements_and_tiles(board_id, game_settlement_dicts, settlements, game_tile_dicts, tiles)
 
-	return Board(ports, roads, settlements, tiles)
+	robber_tile = list(filter(lambda t: t.type == Tile.ResourceTypes.DESERT, tiles))[0]
+	robber_dict: dict = create.game_robber(game_id, robber_tile.id)
+	robber = parts.robber(robber_dict, robber_tile)
+
+	return Board(ports, roads, robber, settlements, tiles)
 
 
 def assign_port_dicts_random_resources(board_id: int, port_dicts: DictList) -> None:

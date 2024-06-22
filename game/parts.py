@@ -15,7 +15,7 @@ __author__ = "MPZinke"
 
 
 
-from board import Port, Road, Settlement, Tile
+from board import Port, Road, Robber, Settlement, Tile
 
 
 def ports(port_dicts: list[dict]) -> list[Port]:
@@ -49,3 +49,8 @@ def tiles(tile_dicts: list[dict]) -> list[Tile]:
 		tiles.append(Tile(tile_dict["id"], tile_dict["coordinate"], tile_dict["ResourceTypes.id"]-1, tile_dict["value"]))
 
 	return tiles
+
+
+def robber(robber_dict: dict, tile: Tile) -> Robber:
+	robber = Robber(robber_dict["Games.id"], robber_dict["is_friendly"], tile)
+	return robber
