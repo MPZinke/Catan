@@ -18,6 +18,18 @@ def new_board(cursor: psycopg2.extras.RealDictCursor, name: str) -> int:
 
 
 @connect
+def get_board(cursor: psycopg2.extras.RealDictCursor, boards_id: str) -> dict:
+	query = """
+		SELECT *
+		FROM "Boards"
+		WHERE "Boards.id" = %s;
+	"""
+
+	cursor.execute(query, (boards_id,))
+	return dict(cursor.fetchone())
+
+
+@connect
 def get_ports(cursor: psycopg2.extras.RealDictCursor, boards_id: str) -> list[dict]:
 	query = """
 		SELECT *

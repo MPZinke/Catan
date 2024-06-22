@@ -21,7 +21,7 @@ from database.connect import connect
 
 
 @connect
-def get_ports(cursor: psycopg2.extras.RealDictCursor, game_id: int) -> dict:
+def get_ports(cursor: psycopg2.extras.RealDictCursor, game_id: int) -> list[dict]:
 	query = """
 		SELECT *
 		FROM "GamesPorts"
@@ -34,7 +34,7 @@ def get_ports(cursor: psycopg2.extras.RealDictCursor, game_id: int) -> dict:
 
 
 @connect
-def get_roads(cursor: psycopg2.extras.RealDictCursor, game_id: int) -> dict:
+def get_roads(cursor: psycopg2.extras.RealDictCursor, game_id: int) -> list[dict]:
 	query = """
 		SELECT *
 		FROM "GamesRoads"
@@ -47,7 +47,7 @@ def get_roads(cursor: psycopg2.extras.RealDictCursor, game_id: int) -> dict:
 
 
 @connect
-def get_settlements(cursor: psycopg2.extras.RealDictCursor, game_id: int) -> dict:
+def get_settlements(cursor: psycopg2.extras.RealDictCursor, game_id: int) -> list[dict]:
 	query = """
 		SELECT *
 		FROM "GamesSettlements"
@@ -60,7 +60,7 @@ def get_settlements(cursor: psycopg2.extras.RealDictCursor, game_id: int) -> dic
 
 
 @connect
-def get_tiles(cursor: psycopg2.extras.RealDictCursor, game_id: int) -> dict:
+def get_tiles(cursor: psycopg2.extras.RealDictCursor, game_id: int) -> list[dict]:
 	query = """
 		SELECT *
 		FROM "GamesTiles"

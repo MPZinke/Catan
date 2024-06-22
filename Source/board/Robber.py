@@ -5,7 +5,7 @@ __author__ = "MPZinke"
 ########################################################################################################################
 #                                                                                                                      #
 #   created by: MPZinke                                                                                                #
-#   on 2024.04.27                                                                                                      #
+#   on 2024.05.12                                                                                                      #
 #                                                                                                                      #
 #   DESCRIPTION:                                                                                                       #
 #   BUGS:                                                                                                              #
@@ -14,4 +14,14 @@ __author__ = "MPZinke"
 ########################################################################################################################
 
 
-from game.Player import Player, Players
+from typing import Optional
+
+
+from board import Tile
+
+
+class Robber:
+	def __init__(self, id: int, is_friendly: bool):
+		id: int = id
+		is_friendly: bool = is_friendly
+		tile: Optional[Tile] = None

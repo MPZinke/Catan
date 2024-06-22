@@ -14,55 +14,54 @@ __author__ = "MPZinke"
 ########################################################################################################################
 
 
-import database.queries as db
+
+from board import Board, Port, Ports, Road, Roads, Robber, Settlement, Settlements, Tile, Tiles
+from game import GameData
 
 
-def game(board_id: int) -> dict:
-	game_dict: dict = db.games.new_game(board_id)
-	return game_dict
-
-
-def game_ports(game_id: int, port_dicts: list[dict]) -> list[dict]:
-	game_port_dicts = []
-
+def ports(port_dicts: list[dict]) -> Ports:
+	ports_list: list[Port] = []
 	for port_dict in port_dicts:
-		game_port_dict = db.games.new_port(game_id, port_dict["id"], port_dict["ResourceTypes.id"])
-		game_port_dicts.append(game_port_dict)
+		resource_id = port_dict["ResourceTypes.id"]-1 if(port_dict["ResourceTypes.id"] is not None) else None
+		ports_list.append(Port(port_dict["id"], resource_id))
 
-	return game_port_dicts
+	return ports_list
 
-def game_roads(game_id: int, road_dicts: list[dict]) -> list[dict]:
-	game_road_dicts = []
 
+def roads(road_dicts: list[dict]) -> Roads:
+	roads: list[Road] = []
 	for road_dict in road_dicts:
-		game_road_dict = db.games.new_road(game_id, road_dict["id"])
-		game_road_dicts.append(game_road_dict)
+		roads.append(Road(road_dict["id"]))
 
-	return game_road_dicts
-
-
-def game_robber(game_id: int, game_tile_id: int) -> dict:
-	robber_dict: dict = db.games.new_robber(game_id, game_tile_id)
-	return robber_dict
+	return roads
 
 
-def game_settlements(game_id: int, settlement_dicts: list[dict]) -> list[dict]:
-	game_settlement_dicts = []
+def robber(robber_dict: dict) -> Robber:
+	robber = Robber(robber_dict["Games.id"], robber_dict["is_friendly"])
+	return robber
 
+
+def settlements(settlement_dicts: list[dict]) -> Settlements:
+	settlements: list[Settlement] = []
 	for settlement_dict in settlement_dicts:
-		game_settlement_dict = db.games.new_settlement(game_id, settlement_dict["id"])
-		game_settlement_dicts.append(game_settlement_dict)
+		settlements.append(Settlement(settlement_dict["id"]))
 
-	return game_settlement_dicts
+	return settlements
 
-def game_tiles(game_id: int, tile_dicts: list[dict]) -> list[dict]:
-	game_tile_dicts = []
 
+def tiles(tile_dicts: list[dict]) -> Tiles:
+	tiles: list[Tile] = []
 	for tile_dict in tile_dicts:
-		game_tile_dict = db.games.new_tile(game_id, tile_dict["id"], tile_dict["ResourceTypes.id"],
-			tile_dict["value"]
-		)
-		game_tile_dicts.append(game_tile_dict)
+		tiles.append(Tile(tile_dict["id"], tile_dict["coordinate"], tile_dict["ResourceTypes.id"]-1, tile_dict["value"]))
 
-	return game_tile_dicts
+	return tiles
 
+
+def instantiate_parts(game_data: GameData) -> Board:
+	ports: Ports = ports(game_data.ports)
+	roads: Roads = roads(game_data.roads)
+	robber: Robber = robber(game_data.robber)
+	settlements: Settlements = settlements(game_data.settlements)
+	tiles: Tiles = tiles(game_data.tiles)
+
+	return Board(ports, roads, robber, settlements, tiles)
