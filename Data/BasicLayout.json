@@ -1,948 +1,948 @@
 {
     "Board": {
-        "Ports": [
+        "TemplatesPorts": [
             {
                 "id": 0,
-                "Settlements": {
+                "TemplatesSettlements": {
                     "Port::Settlements::BOTTOM_LEFT": 2,
                     "Port::Settlements::BOTTOM_RIGHT": 3
                 }
             },
             {
                 "id": 1,
-                "Settlements": {
+                "TemplatesSettlements": {
                     "Port::Settlements::BOTTOM_LEFT": 4,
                     "Port::Settlements::BOTTOM_RIGHT": 5
                 }
             },
             {
                 "id": 2,
-                "Settlements": {
+                "TemplatesSettlements": {
                     "Port::Settlements::BOTTOM_RIGHT": 12,
                     "Port::Settlements::RIGHT": 6
                 }
             },
             {
                 "id": 3,
-                "Settlements": {
+                "TemplatesSettlements": {
                     "Port::Settlements::LEFT": 11,
                     "Port::Settlements::BOTTOM_LEFT": 17
                 }
             },
             {
                 "id": 4,
-                "Settlements": {
+                "TemplatesSettlements": {
                     "Port::Settlements::TOP_RIGHT": 24,
                     "Port::Settlements::RIGHT": 30
                 }
             },
             {
                 "id": 5,
-                "Settlements": {
+                "TemplatesSettlements": {
                     "Port::Settlements::LEFT": 29,
                     "Port::Settlements::BOTTOM_LEFT": 35
                 }
             },
             {
                 "id": 6,
-                "Settlements": {
+                "TemplatesSettlements": {
                     "Port::Settlements::TOP_RIGHT": 43,
                     "Port::Settlements::RIGHT": 48
                 }
             },
             {
                 "id": 7,
-                "Settlements": {
+                "TemplatesSettlements": {
                     "Port::Settlements::TOP_LEFT": 46,
                     "Port::Settlements::LEFT": 51
                 }
             },
             {
                 "id": 8,
-                "Settlements": {
+                "TemplatesSettlements": {
                     "Port::Settlements::TOP_LEFT": 52,
                     "Port::Settlements::TOP_RIGHT": 53
                 }
             }
         ],
-        "Roads": [
+        "TemplatesRoads": [
             {
                 "id": 0,
-                "Settlements": {
+                "TemplatesSettlements": {
                     "Road::Settlements::LEFT": 0,
                     "Road::Settlements::RIGHT": 1
                 },
-                "Tiles": {
+                "TemplatesTiles": {
                     "Road::Tiles::BOTTOM": 0
                 }
             },
             {
                 "id": 1,
-                "Settlements": {
+                "TemplatesSettlements": {
                     "Road::Settlements::RIGHT": 0,
                     "Road::Settlements::LEFT": 3
                 },
-                "Tiles": {
+                "TemplatesTiles": {
                     "Road::Tiles::BOTTOM": 0
                 }
             },
             {
                 "id": 2,
-                "Settlements": {
+                "TemplatesSettlements": {
                     "Road::Settlements::LEFT": 1,
                     "Road::Settlements::RIGHT": 4
                 },
-                "Tiles": {
+                "TemplatesTiles": {
                     "Road::Tiles::BOTTOM": 0
                 }
             },
             {
                 "id": 3,
-                "Settlements": {
+                "TemplatesSettlements": {
                     "Road::Settlements::LEFT": 2,
                     "Road::Settlements::RIGHT": 3
                 },
-                "Tiles": {
+                "TemplatesTiles": {
                     "Road::Tiles::BOTTOM": 1
                 }
             },
             {
                 "id": 4,
-                "Settlements": {
+                "TemplatesSettlements": {
                     "Road::Settlements::LEFT": 4,
                     "Road::Settlements::RIGHT": 5
                 },
-                "Tiles": {
+                "TemplatesTiles": {
                     "Road::Tiles::BOTTOM": 2
                 }
             },
             {
                 "id": 5,
-                "Settlements": {
+                "TemplatesSettlements": {
                     "Road::Settlements::RIGHT": 2,
                     "Road::Settlements::LEFT": 7
                 },
-                "Tiles": {
+                "TemplatesTiles": {
                     "Road::Tiles::BOTTOM": 1
                 }
             },
             {
                 "id": 6,
-                "Settlements": {
+                "TemplatesSettlements": {
                     "Road::Settlements::LEFT": 3,
                     "Road::Settlements::RIGHT": 8
                 },
-                "Tiles": {
+                "TemplatesTiles": {
                     "Road::Tiles::TOP": 0,
                     "Road::Tiles::BOTTOM": 1
                 }
             },
             {
                 "id": 7,
-                "Settlements": {
+                "TemplatesSettlements": {
                     "Road::Settlements::RIGHT": 4,
                     "Road::Settlements::LEFT": 9
                 },
-                "Tiles": {
+                "TemplatesTiles": {
                     "Road::Tiles::TOP": 0,
                     "Road::Tiles::BOTTOM": 2
                 }
             },
             {
                 "id": 8,
-                "Settlements": {
+                "TemplatesSettlements": {
                     "Road::Settlements::LEFT": 5,
                     "Road::Settlements::RIGHT": 10
                 },
-                "Tiles": {
+                "TemplatesTiles": {
                     "Road::Tiles::BOTTOM": 2
                 }
             },
             {
                 "id": 9,
-                "Settlements": {
+                "TemplatesSettlements": {
                     "Road::Settlements::LEFT": 6,
                     "Road::Settlements::RIGHT": 7
                 },
-                "Tiles": {
+                "TemplatesTiles": {
                     "Road::Tiles::BOTTOM": 3
                 }
             },
             {
                 "id": 10,
-                "Settlements": {
+                "TemplatesSettlements": {
                     "Road::Settlements::LEFT": 8,
                     "Road::Settlements::RIGHT": 9
                 },
-                "Tiles": {
+                "TemplatesTiles": {
                     "Road::Tiles::TOP": 0,
                     "Road::Tiles::BOTTOM": 4
                 }
             },
             {
                 "id": 11,
-                "Settlements": {
+                "TemplatesSettlements": {
                     "Road::Settlements::LEFT": 10,
                     "Road::Settlements::RIGHT": 11
                 },
-                "Tiles": {
+                "TemplatesTiles": {
                     "Road::Tiles::BOTTOM": 5
                 }
             },
             {
                 "id": 12,
-                "Settlements": {
+                "TemplatesSettlements": {
                     "Road::Settlements::RIGHT": 6,
                     "Road::Settlements::LEFT": 12
                 },
-                "Tiles": {
+                "TemplatesTiles": {
                     "Road::Tiles::BOTTOM": 3
                 }
             },
             {
                 "id": 13,
-                "Settlements": {
+                "TemplatesSettlements": {
                     "Road::Settlements::LEFT": 7,
                     "Road::Settlements::RIGHT": 13
                 },
-                "Tiles": {
+                "TemplatesTiles": {
                     "Road::Tiles::TOP": 1,
                     "Road::Tiles::BOTTOM": 3
                 }
             },
             {
                 "id": 14,
-                "Settlements": {
+                "TemplatesSettlements": {
                     "Road::Settlements::RIGHT": 8,
                     "Road::Settlements::LEFT": 14
                 },
-                "Tiles": {
+                "TemplatesTiles": {
                     "Road::Tiles::TOP": 1,
                     "Road::Tiles::BOTTOM": 4
                 }
             },
             {
                 "id": 15,
-                "Settlements": {
+                "TemplatesSettlements": {
                     "Road::Settlements::LEFT": 9,
                     "Road::Settlements::RIGHT": 15
                 },
-                "Tiles": {
+                "TemplatesTiles": {
                     "Road::Tiles::TOP": 2,
                     "Road::Tiles::BOTTOM": 4
                 }
             },
             {
                 "id": 16,
-                "Settlements": {
+                "TemplatesSettlements": {
                     "Road::Settlements::RIGHT": 10,
                     "Road::Settlements::LEFT": 16
                 },
-                "Tiles": {
+                "TemplatesTiles": {
                     "Road::Tiles::TOP": 2,
                     "Road::Tiles::BOTTOM": 5
                 }
             },
             {
                 "id": 17,
-                "Settlements": {
+                "TemplatesSettlements": {
                     "Road::Settlements::LEFT": 11,
                     "Road::Settlements::RIGHT": 17
                 },
-                "Tiles": {
+                "TemplatesTiles": {
                     "Road::Tiles::BOTTOM": 5
                 }
             },
             {
                 "id": 18,
-                "Settlements": {
+                "TemplatesSettlements": {
                     "Road::Settlements::LEFT": 13,
                     "Road::Settlements::RIGHT": 14
                 },
-                "Tiles": {
+                "TemplatesTiles": {
                     "Road::Tiles::TOP": 1,
                     "Road::Tiles::BOTTOM": 6
                 }
             },
             {
                 "id": 19,
-                "Settlements": {
+                "TemplatesSettlements": {
                     "Road::Settlements::LEFT": 15,
                     "Road::Settlements::RIGHT": 16
                 },
-                "Tiles": {
+                "TemplatesTiles": {
                     "Road::Tiles::TOP": 2,
                     "Road::Tiles::BOTTOM": 7
                 }
             },
             {
                 "id": 20,
-                "Settlements": {
+                "TemplatesSettlements": {
                     "Road::Settlements::LEFT": 12,
                     "Road::Settlements::RIGHT": 18
                 },
-                "Tiles": {
+                "TemplatesTiles": {
                     "Road::Tiles::TOP": 3
                 }
             },
             {
                 "id": 21,
-                "Settlements": {
+                "TemplatesSettlements": {
                     "Road::Settlements::RIGHT": 13,
                     "Road::Settlements::LEFT": 19
                 },
-                "Tiles": {
+                "TemplatesTiles": {
                     "Road::Tiles::TOP": 3,
                     "Road::Tiles::BOTTOM": 6
                 }
             },
             {
                 "id": 22,
-                "Settlements": {
+                "TemplatesSettlements": {
                     "Road::Settlements::LEFT": 14,
                     "Road::Settlements::RIGHT": 20
                 },
-                "Tiles": {
+                "TemplatesTiles": {
                     "Road::Tiles::TOP": 4,
                     "Road::Tiles::BOTTOM": 6
                 }
             },
             {
                 "id": 23,
-                "Settlements": {
+                "TemplatesSettlements": {
                     "Road::Settlements::RIGHT": 15,
                     "Road::Settlements::LEFT": 21
                 },
-                "Tiles": {
+                "TemplatesTiles": {
                     "Road::Tiles::TOP": 4,
                     "Road::Tiles::BOTTOM": 7
                 }
             },
             {
                 "id": 24,
-                "Settlements": {
+                "TemplatesSettlements": {
                     "Road::Settlements::LEFT": 16,
                     "Road::Settlements::RIGHT": 22
                 },
-                "Tiles": {
+                "TemplatesTiles": {
                     "Road::Tiles::TOP": 5,
                     "Road::Tiles::BOTTOM": 7
                 }
             },
             {
                 "id": 25,
-                "Settlements": {
+                "TemplatesSettlements": {
                     "Road::Settlements::RIGHT": 17,
                     "Road::Settlements::LEFT": 23
                 },
-                "Tiles": {
+                "TemplatesTiles": {
                     "Road::Tiles::TOP": 5
                 }
             },
             {
                 "id": 26,
-                "Settlements": {
+                "TemplatesSettlements": {
                     "Road::Settlements::LEFT": 18,
                     "Road::Settlements::RIGHT": 19
                 },
-                "Tiles": {
+                "TemplatesTiles": {
                     "Road::Tiles::TOP": 3,
                     "Road::Tiles::BOTTOM": 8
                 }
             },
             {
                 "id": 27,
-                "Settlements": {
+                "TemplatesSettlements": {
                     "Road::Settlements::LEFT": 20,
                     "Road::Settlements::RIGHT": 21
                 },
-                "Tiles": {
+                "TemplatesTiles": {
                     "Road::Tiles::TOP": 4,
                     "Road::Tiles::BOTTOM": 9
                 }
             },
             {
                 "id": 28,
-                "Settlements": {
+                "TemplatesSettlements": {
                     "Road::Settlements::LEFT": 22,
                     "Road::Settlements::RIGHT": 23
                 },
-                "Tiles": {
+                "TemplatesTiles": {
                     "Road::Tiles::TOP": 5,
                     "Road::Tiles::BOTTOM": 10
                 }
             },
             {
                 "id": 29,
-                "Settlements": {
+                "TemplatesSettlements": {
                     "Road::Settlements::RIGHT": 18,
                     "Road::Settlements::LEFT": 24
                 },
-                "Tiles": {
+                "TemplatesTiles": {
                     "Road::Tiles::BOTTOM": 8
                 }
             },
             {
                 "id": 30,
-                "Settlements": {
+                "TemplatesSettlements": {
                     "Road::Settlements::LEFT": 19,
                     "Road::Settlements::RIGHT": 25
                 },
-                "Tiles": {
+                "TemplatesTiles": {
                     "Road::Tiles::TOP": 6,
                     "Road::Tiles::BOTTOM": 8
                 }
             },
             {
                 "id": 31,
-                "Settlements": {
+                "TemplatesSettlements": {
                     "Road::Settlements::RIGHT": 20,
                     "Road::Settlements::LEFT": 26
                 },
-                "Tiles": {
+                "TemplatesTiles": {
                     "Road::Tiles::TOP": 6,
                     "Road::Tiles::BOTTOM": 9
                 }
             },
             {
                 "id": 32,
-                "Settlements": {
+                "TemplatesSettlements": {
                     "Road::Settlements::LEFT": 21,
                     "Road::Settlements::RIGHT": 27
                 },
-                "Tiles": {
+                "TemplatesTiles": {
                     "Road::Tiles::TOP": 7,
                     "Road::Tiles::BOTTOM": 9
                 }
             },
             {
                 "id": 33,
-                "Settlements": {
+                "TemplatesSettlements": {
                     "Road::Settlements::RIGHT": 22,
                     "Road::Settlements::LEFT": 28
                 },
-                "Tiles": {
+                "TemplatesTiles": {
                     "Road::Tiles::TOP": 7,
                     "Road::Tiles::BOTTOM": 10
                 }
             },
             {
                 "id": 34,
-                "Settlements": {
+                "TemplatesSettlements": {
                     "Road::Settlements::LEFT": 23,
                     "Road::Settlements::RIGHT": 29
                 },
-                "Tiles": {
+                "TemplatesTiles": {
                     "Road::Tiles::BOTTOM": 10
                 }
             },
             {
                 "id": 35,
-                "Settlements": {
+                "TemplatesSettlements": {
                     "Road::Settlements::LEFT": 25,
                     "Road::Settlements::RIGHT": 26
                 },
-                "Tiles": {
+                "TemplatesTiles": {
                     "Road::Tiles::TOP": 6,
                     "Road::Tiles::BOTTOM": 11
                 }
             },
             {
                 "id": 36,
-                "Settlements": {
+                "TemplatesSettlements": {
                     "Road::Settlements::LEFT": 27,
                     "Road::Settlements::RIGHT": 28
                 },
-                "Tiles": {
+                "TemplatesTiles": {
                     "Road::Tiles::TOP": 7,
                     "Road::Tiles::BOTTOM": 12
                 }
             },
             {
                 "id": 37,
-                "Settlements": {
+                "TemplatesSettlements": {
                     "Road::Settlements::LEFT": 24,
                     "Road::Settlements::RIGHT": 30
                 },
-                "Tiles": {
+                "TemplatesTiles": {
                     "Road::Tiles::TOP": 8
                 }
             },
             {
                 "id": 38,
-                "Settlements": {
+                "TemplatesSettlements": {
                     "Road::Settlements::RIGHT": 25,
                     "Road::Settlements::LEFT": 31
                 },
-                "Tiles": {
+                "TemplatesTiles": {
                     "Road::Tiles::TOP": 8,
                     "Road::Tiles::BOTTOM": 11
                 }
             },
             {
                 "id": 39,
-                "Settlements": {
+                "TemplatesSettlements": {
                     "Road::Settlements::LEFT": 26,
                     "Road::Settlements::RIGHT": 32
                 },
-                "Tiles": {
+                "TemplatesTiles": {
                     "Road::Tiles::TOP": 9,
                     "Road::Tiles::BOTTOM": 11
                 }
             },
             {
                 "id": 40,
-                "Settlements": {
+                "TemplatesSettlements": {
                     "Road::Settlements::RIGHT": 27,
                     "Road::Settlements::LEFT": 33
                 },
-                "Tiles": {
+                "TemplatesTiles": {
                     "Road::Tiles::TOP": 9,
                     "Road::Tiles::BOTTOM": 12
                 }
             },
             {
                 "id": 41,
-                "Settlements": {
+                "TemplatesSettlements": {
                     "Road::Settlements::LEFT": 28,
                     "Road::Settlements::RIGHT": 34
                 },
-                "Tiles": {
+                "TemplatesTiles": {
                     "Road::Tiles::TOP": 10,
                     "Road::Tiles::BOTTOM": 12
                 }
             },
             {
                 "id": 42,
-                "Settlements": {
+                "TemplatesSettlements": {
                     "Road::Settlements::RIGHT": 29,
                     "Road::Settlements::LEFT": 35
                 },
-                "Tiles": {
+                "TemplatesTiles": {
                     "Road::Tiles::TOP": 10
                 }
             },
             {
                 "id": 43,
-                "Settlements": {
+                "TemplatesSettlements": {
                     "Road::Settlements::LEFT": 30,
                     "Road::Settlements::RIGHT": 31
                 },
-                "Tiles": {
+                "TemplatesTiles": {
                     "Road::Tiles::TOP": 8,
                     "Road::Tiles::BOTTOM": 13
                 }
             },
             {
                 "id": 44,
-                "Settlements": {
+                "TemplatesSettlements": {
                     "Road::Settlements::LEFT": 32,
                     "Road::Settlements::RIGHT": 33
                 },
-                "Tiles": {
+                "TemplatesTiles": {
                     "Road::Tiles::TOP": 9,
                     "Road::Tiles::BOTTOM": 14
                 }
             },
             {
                 "id": 45,
-                "Settlements": {
+                "TemplatesSettlements": {
                     "Road::Settlements::LEFT": 34,
                     "Road::Settlements::RIGHT": 35
                 },
-                "Tiles": {
+                "TemplatesTiles": {
                     "Road::Tiles::TOP": 10,
                     "Road::Tiles::BOTTOM": 15
                 }
             },
             {
                 "id": 46,
-                "Settlements": {
+                "TemplatesSettlements": {
                     "Road::Settlements::RIGHT": 30,
                     "Road::Settlements::LEFT": 36
                 },
-                "Tiles": {
+                "TemplatesTiles": {
                     "Road::Tiles::BOTTOM": 13
                 }
             },
             {
                 "id": 47,
-                "Settlements": {
+                "TemplatesSettlements": {
                     "Road::Settlements::LEFT": 31,
                     "Road::Settlements::RIGHT": 37
                 },
-                "Tiles": {
+                "TemplatesTiles": {
                     "Road::Tiles::TOP": 11,
                     "Road::Tiles::BOTTOM": 13
                 }
             },
             {
                 "id": 48,
-                "Settlements": {
+                "TemplatesSettlements": {
                     "Road::Settlements::RIGHT": 32,
                     "Road::Settlements::LEFT": 38
                 },
-                "Tiles": {
+                "TemplatesTiles": {
                     "Road::Tiles::TOP": 11,
                     "Road::Tiles::BOTTOM": 14
                 }
             },
             {
                 "id": 49,
-                "Settlements": {
+                "TemplatesSettlements": {
                     "Road::Settlements::LEFT": 33,
                     "Road::Settlements::RIGHT": 39
                 },
-                "Tiles": {
+                "TemplatesTiles": {
                     "Road::Tiles::TOP": 12,
                     "Road::Tiles::BOTTOM": 14
                 }
             },
             {
                 "id": 50,
-                "Settlements": {
+                "TemplatesSettlements": {
                     "Road::Settlements::RIGHT": 34,
                     "Road::Settlements::LEFT": 40
                 },
-                "Tiles": {
+                "TemplatesTiles": {
                     "Road::Tiles::TOP": 12,
                     "Road::Tiles::BOTTOM": 15
                 }
             },
             {
                 "id": 51,
-                "Settlements": {
+                "TemplatesSettlements": {
                     "Road::Settlements::LEFT": 35,
                     "Road::Settlements::RIGHT": 41
                 },
-                "Tiles": {
+                "TemplatesTiles": {
                     "Road::Tiles::BOTTOM": 15
                 }
             },
             {
                 "id": 52,
-                "Settlements": {
+                "TemplatesSettlements": {
                     "Road::Settlements::LEFT": 37,
                     "Road::Settlements::RIGHT": 38
                 },
-                "Tiles": {
+                "TemplatesTiles": {
                     "Road::Tiles::TOP": 11,
                     "Road::Tiles::BOTTOM": 16
                 }
             },
             {
                 "id": 53,
-                "Settlements": {
+                "TemplatesSettlements": {
                     "Road::Settlements::LEFT": 39,
                     "Road::Settlements::RIGHT": 40
                 },
-                "Tiles": {
+                "TemplatesTiles": {
                     "Road::Tiles::TOP": 12,
                     "Road::Tiles::BOTTOM": 17
                 }
             },
             {
                 "id": 54,
-                "Settlements": {
+                "TemplatesSettlements": {
                     "Road::Settlements::LEFT": 36,
                     "Road::Settlements::RIGHT": 42
                 },
-                "Tiles": {
+                "TemplatesTiles": {
                     "Road::Tiles::TOP": 13
                 }
             },
             {
                 "id": 55,
-                "Settlements": {
+                "TemplatesSettlements": {
                     "Road::Settlements::RIGHT": 37,
                     "Road::Settlements::LEFT": 43
                 },
-                "Tiles": {
+                "TemplatesTiles": {
                     "Road::Tiles::TOP": 13,
                     "Road::Tiles::BOTTOM": 16
                 }
             },
             {
                 "id": 56,
-                "Settlements": {
+                "TemplatesSettlements": {
                     "Road::Settlements::LEFT": 38,
                     "Road::Settlements::RIGHT": 44
                 },
-                "Tiles": {
+                "TemplatesTiles": {
                     "Road::Tiles::TOP": 14,
                     "Road::Tiles::BOTTOM": 16
                 }
             },
             {
                 "id": 57,
-                "Settlements": {
+                "TemplatesSettlements": {
                     "Road::Settlements::RIGHT": 39,
                     "Road::Settlements::LEFT": 45
                 },
-                "Tiles": {
+                "TemplatesTiles": {
                     "Road::Tiles::TOP": 14,
                     "Road::Tiles::BOTTOM": 17
                 }
             },
             {
                 "id": 58,
-                "Settlements": {
+                "TemplatesSettlements": {
                     "Road::Settlements::LEFT": 40,
                     "Road::Settlements::RIGHT": 46
                 },
-                "Tiles": {
+                "TemplatesTiles": {
                     "Road::Tiles::TOP": 15,
                     "Road::Tiles::BOTTOM": 17
                 }
             },
             {
                 "id": 59,
-                "Settlements": {
+                "TemplatesSettlements": {
                     "Road::Settlements::RIGHT": 41,
                     "Road::Settlements::LEFT": 47
                 },
-                "Tiles": {
+                "TemplatesTiles": {
                     "Road::Tiles::TOP": 15
                 }
             },
             {
                 "id": 60,
-                "Settlements": {
+                "TemplatesSettlements": {
                     "Road::Settlements::LEFT": 42,
                     "Road::Settlements::RIGHT": 43
                 },
-                "Tiles": {
+                "TemplatesTiles": {
                     "Road::Tiles::TOP": 13
                 }
             },
             {
                 "id": 61,
-                "Settlements": {
+                "TemplatesSettlements": {
                     "Road::Settlements::LEFT": 44,
                     "Road::Settlements::RIGHT": 45
                 },
-                "Tiles": {
+                "TemplatesTiles": {
                     "Road::Tiles::TOP": 14,
                     "Road::Tiles::BOTTOM": 18
                 }
             },
             {
                 "id": 62,
-                "Settlements": {
+                "TemplatesSettlements": {
                     "Road::Settlements::LEFT": 46,
                     "Road::Settlements::RIGHT": 47
                 },
-                "Tiles": {
+                "TemplatesTiles": {
                     "Road::Tiles::TOP": 15
                 }
             },
             {
                 "id": 63,
-                "Settlements": {
+                "TemplatesSettlements": {
                     "Road::Settlements::LEFT": 43,
                     "Road::Settlements::RIGHT": 48
                 },
-                "Tiles": {
+                "TemplatesTiles": {
                     "Road::Tiles::TOP": 16
                 }
             },
             {
                 "id": 64,
-                "Settlements": {
+                "TemplatesSettlements": {
                     "Road::Settlements::RIGHT": 44,
                     "Road::Settlements::LEFT": 49
                 },
-                "Tiles": {
+                "TemplatesTiles": {
                     "Road::Tiles::TOP": 16,
                     "Road::Tiles::BOTTOM": 18
                 }
             },
             {
                 "id": 65,
-                "Settlements": {
+                "TemplatesSettlements": {
                     "Road::Settlements::LEFT": 45,
                     "Road::Settlements::RIGHT": 50
                 },
-                "Tiles": {
+                "TemplatesTiles": {
                     "Road::Tiles::TOP": 17,
                     "Road::Tiles::BOTTOM": 18
                 }
             },
             {
                 "id": 66,
-                "Settlements": {
+                "TemplatesSettlements": {
                     "Road::Settlements::RIGHT": 46,
                     "Road::Settlements::LEFT": 51
                 },
-                "Tiles": {
+                "TemplatesTiles": {
                     "Road::Tiles::TOP": 17
                 }
             },
             {
                 "id": 67,
-                "Settlements": {
+                "TemplatesSettlements": {
                     "Road::Settlements::LEFT": 48,
                     "Road::Settlements::RIGHT": 49
                 },
-                "Tiles": {
+                "TemplatesTiles": {
                     "Road::Tiles::TOP": 16
                 }
             },
             {
                 "id": 68,
-                "Settlements": {
+                "TemplatesSettlements": {
                     "Road::Settlements::LEFT": 50,
                     "Road::Settlements::RIGHT": 51
                 },
-                "Tiles": {
+                "TemplatesTiles": {
                     "Road::Tiles::TOP": 17
                 }
             },
             {
                 "id": 69,
-                "Settlements": {
+                "TemplatesSettlements": {
                     "Road::Settlements::LEFT": 49,
                     "Road::Settlements::RIGHT": 52
                 },
-                "Tiles": {
+                "TemplatesTiles": {
                     "Road::Tiles::TOP": 18
                 }
             },
             {
                 "id": 70,
-                "Settlements": {
+                "TemplatesSettlements": {
                     "Road::Settlements::RIGHT": 50,
                     "Road::Settlements::LEFT": 53
                 },
-                "Tiles": {
+                "TemplatesTiles": {
                     "Road::Tiles::TOP": 18
                 }
             },
             {
                 "id": 71,
-                "Settlements": {
+                "TemplatesSettlements": {
                     "Road::Settlements::LEFT": 52,
                     "Road::Settlements::RIGHT": 53
                 },
-                "Tiles": {
+                "TemplatesTiles": {
                     "Road::Tiles::TOP": 18
                 }
             }
         ],
-        "Settlements": [
+        "TemplatesSettlements": [
             {
                 "id": 0,
-                "Ports": {},
-                "Roads": {
+                "TemplatesPorts": {},
+                "TemplatesRoads": {
                     "Settlement::Roads::SIDE": 0,
                     "Settlement::Roads::BOTTOM": 1
                 },
-                "Tiles": {
+                "TemplatesTiles": {
                     "Settlement::Tiles::BOTTOM": 0
                 }
             },
             {
                 "id": 1,
-                "Ports": {},
-                "Roads": {
+                "TemplatesPorts": {},
+                "TemplatesRoads": {
                     "Settlement::Roads::SIDE": 0,
                     "Settlement::Roads::BOTTOM": 2
                 },
-                "Tiles": {
+                "TemplatesTiles": {
                     "Settlement::Tiles::BOTTOM": 0
                 }
             },
             {
                 "id": 2,
-                "Ports": {
+                "TemplatesPorts": {
                     "Settlement::Ports::TOP": 0
                 },
-                "Roads": {
+                "TemplatesRoads": {
                     "Settlement::Roads::SIDE": 3,
                     "Settlement::Roads::BOTTOM": 5
                 },
-                "Tiles": {
+                "TemplatesTiles": {
                     "Settlement::Tiles::BOTTOM": 1
                 }
             },
             {
                 "id": 3,
-                "Ports": {
+                "TemplatesPorts": {
                     "Settlement::Ports::TOP": 0
                 },
-                "Roads": {
+                "TemplatesRoads": {
                     "Settlement::Roads::TOP": 1,
                     "Settlement::Roads::SIDE": 3,
                     "Settlement::Roads::BOTTOM": 6
                 },
-                "Tiles": {
+                "TemplatesTiles": {
                     "Settlement::Tiles::SIDE": 0,
                     "Settlement::Tiles::BOTTOM": 1
                 }
             },
             {
                 "id": 4,
-                "Ports": {
+                "TemplatesPorts": {
                     "Settlement::Ports::TOP": 1
                 },
-                "Roads": {
+                "TemplatesRoads": {
                     "Settlement::Roads::TOP": 2,
                     "Settlement::Roads::SIDE": 4,
                     "Settlement::Roads::BOTTOM": 7
                 },
-                "Tiles": {
+                "TemplatesTiles": {
                     "Settlement::Tiles::SIDE": 0,
                     "Settlement::Tiles::BOTTOM": 2
                 }
             },
             {
                 "id": 5,
-                "Ports": {
+                "TemplatesPorts": {
                     "Settlement::Ports::TOP": 1
                 },
-                "Roads": {
+                "TemplatesRoads": {
                     "Settlement::Roads::SIDE": 4,
                     "Settlement::Roads::BOTTOM": 8
                 },
-                "Tiles": {
+                "TemplatesTiles": {
                     "Settlement::Tiles::BOTTOM": 2
                 }
             },
             {
                 "id": 6,
-                "Ports": {
+                "TemplatesPorts": {
                     "Settlement::Ports::SIDE": 2
                 },
-                "Roads": {
+                "TemplatesRoads": {
                     "Settlement::Roads::SIDE": 9,
                     "Settlement::Roads::BOTTOM": 12
                 },
-                "Tiles": {
+                "TemplatesTiles": {
                     "Settlement::Tiles::BOTTOM": 3
                 }
             },
             {
                 "id": 7,
-                "Ports": {},
-                "Roads": {
+                "TemplatesPorts": {},
+                "TemplatesRoads": {
                     "Settlement::Roads::TOP": 5,
                     "Settlement::Roads::SIDE": 9,
                     "Settlement::Roads::BOTTOM": 13
                 },
-                "Tiles": {
+                "TemplatesTiles": {
                     "Settlement::Tiles::SIDE": 1,
                     "Settlement::Tiles::BOTTOM": 3
                 }
             },
             {
                 "id": 8,
-                "Ports": {},
-                "Roads": {
+                "TemplatesPorts": {},
+                "TemplatesRoads": {
                     "Settlement::Roads::TOP": 6,
                     "Settlement::Roads::SIDE": 10,
                     "Settlement::Roads::BOTTOM": 14
                 },
-                "Tiles": {
+                "TemplatesTiles": {
                     "Settlement::Tiles::TOP": 0,
                     "Settlement::Tiles::SIDE": 1,
                     "Settlement::Tiles::BOTTOM": 4
@@ -950,13 +950,13 @@
             },
             {
                 "id": 9,
-                "Ports": {},
-                "Roads": {
+                "TemplatesPorts": {},
+                "TemplatesRoads": {
                     "Settlement::Roads::TOP": 7,
                     "Settlement::Roads::SIDE": 10,
                     "Settlement::Roads::BOTTOM": 15
                 },
-                "Tiles": {
+                "TemplatesTiles": {
                     "Settlement::Tiles::TOP": 0,
                     "Settlement::Tiles::SIDE": 2,
                     "Settlement::Tiles::BOTTOM": 4
@@ -964,52 +964,52 @@
             },
             {
                 "id": 10,
-                "Ports": {},
-                "Roads": {
+                "TemplatesPorts": {},
+                "TemplatesRoads": {
                     "Settlement::Roads::TOP": 8,
                     "Settlement::Roads::SIDE": 11,
                     "Settlement::Roads::BOTTOM": 16
                 },
-                "Tiles": {
+                "TemplatesTiles": {
                     "Settlement::Tiles::SIDE": 2,
                     "Settlement::Tiles::BOTTOM": 5
                 }
             },
             {
                 "id": 11,
-                "Ports": {
+                "TemplatesPorts": {
                     "Settlement::Ports::SIDE": 3
                 },
-                "Roads": {
+                "TemplatesRoads": {
                     "Settlement::Roads::SIDE": 11,
                     "Settlement::Roads::BOTTOM": 17
                 },
-                "Tiles": {
+                "TemplatesTiles": {
                     "Settlement::Tiles::BOTTOM": 5
                 }
             },
             {
                 "id": 12,
-                "Ports": {
+                "TemplatesPorts": {
                     "Settlement::Ports::TOP": 2
                 },
-                "Roads": {
+                "TemplatesRoads": {
                     "Settlement::Roads::TOP": 12,
                     "Settlement::Roads::BOTTOM": 20
                 },
-                "Tiles": {
+                "TemplatesTiles": {
                     "Settlement::Tiles::SIDE": 3
                 }
             },
             {
                 "id": 13,
-                "Ports": {},
-                "Roads": {
+                "TemplatesPorts": {},
+                "TemplatesRoads": {
                     "Settlement::Roads::TOP": 13,
                     "Settlement::Roads::SIDE": 18,
                     "Settlement::Roads::BOTTOM": 21
                 },
-                "Tiles": {
+                "TemplatesTiles": {
                     "Settlement::Tiles::TOP": 1,
                     "Settlement::Tiles::SIDE": 3,
                     "Settlement::Tiles::BOTTOM": 6
@@ -1017,13 +1017,13 @@
             },
             {
                 "id": 14,
-                "Ports": {},
-                "Roads": {
+                "TemplatesPorts": {},
+                "TemplatesRoads": {
                     "Settlement::Roads::TOP": 14,
                     "Settlement::Roads::SIDE": 18,
                     "Settlement::Roads::BOTTOM": 22
                 },
-                "Tiles": {
+                "TemplatesTiles": {
                     "Settlement::Tiles::TOP": 1,
                     "Settlement::Tiles::SIDE": 4,
                     "Settlement::Tiles::BOTTOM": 6
@@ -1031,13 +1031,13 @@
             },
             {
                 "id": 15,
-                "Ports": {},
-                "Roads": {
+                "TemplatesPorts": {},
+                "TemplatesRoads": {
                     "Settlement::Roads::TOP": 15,
                     "Settlement::Roads::SIDE": 19,
                     "Settlement::Roads::BOTTOM": 23
                 },
-                "Tiles": {
+                "TemplatesTiles": {
                     "Settlement::Tiles::TOP": 2,
                     "Settlement::Tiles::SIDE": 4,
                     "Settlement::Tiles::BOTTOM": 7
@@ -1045,13 +1045,13 @@
             },
             {
                 "id": 16,
-                "Ports": {},
-                "Roads": {
+                "TemplatesPorts": {},
+                "TemplatesRoads": {
                     "Settlement::Roads::TOP": 16,
                     "Settlement::Roads::SIDE": 19,
                     "Settlement::Roads::BOTTOM": 24
                 },
-                "Tiles": {
+                "TemplatesTiles": {
                     "Settlement::Tiles::TOP": 2,
                     "Settlement::Tiles::SIDE": 5,
                     "Settlement::Tiles::BOTTOM": 7
@@ -1059,39 +1059,39 @@
             },
             {
                 "id": 17,
-                "Ports": {
+                "TemplatesPorts": {
                     "Settlement::Ports::TOP": 3
                 },
-                "Roads": {
+                "TemplatesRoads": {
                     "Settlement::Roads::TOP": 17,
                     "Settlement::Roads::BOTTOM": 25
                 },
-                "Tiles": {
+                "TemplatesTiles": {
                     "Settlement::Tiles::SIDE": 5
                 }
             },
             {
                 "id": 18,
-                "Ports": {},
-                "Roads": {
+                "TemplatesPorts": {},
+                "TemplatesRoads": {
                     "Settlement::Roads::TOP": 20,
                     "Settlement::Roads::SIDE": 26,
                     "Settlement::Roads::BOTTOM": 29
                 },
-                "Tiles": {
+                "TemplatesTiles": {
                     "Settlement::Tiles::TOP": 3,
                     "Settlement::Tiles::BOTTOM": 8
                 }
             },
             {
                 "id": 19,
-                "Ports": {},
-                "Roads": {
+                "TemplatesPorts": {},
+                "TemplatesRoads": {
                     "Settlement::Roads::TOP": 21,
                     "Settlement::Roads::SIDE": 26,
                     "Settlement::Roads::BOTTOM": 30
                 },
-                "Tiles": {
+                "TemplatesTiles": {
                     "Settlement::Tiles::TOP": 3,
                     "Settlement::Tiles::SIDE": 6,
                     "Settlement::Tiles::BOTTOM": 8
@@ -1099,13 +1099,13 @@
             },
             {
                 "id": 20,
-                "Ports": {},
-                "Roads": {
+                "TemplatesPorts": {},
+                "TemplatesRoads": {
                     "Settlement::Roads::TOP": 22,
                     "Settlement::Roads::SIDE": 27,
                     "Settlement::Roads::BOTTOM": 31
                 },
-                "Tiles": {
+                "TemplatesTiles": {
                     "Settlement::Tiles::TOP": 4,
                     "Settlement::Tiles::SIDE": 6,
                     "Settlement::Tiles::BOTTOM": 9
@@ -1113,13 +1113,13 @@
             },
             {
                 "id": 21,
-                "Ports": {},
-                "Roads": {
+                "TemplatesPorts": {},
+                "TemplatesRoads": {
                     "Settlement::Roads::TOP": 23,
                     "Settlement::Roads::SIDE": 27,
                     "Settlement::Roads::BOTTOM": 32
                 },
-                "Tiles": {
+                "TemplatesTiles": {
                     "Settlement::Tiles::TOP": 4,
                     "Settlement::Tiles::SIDE": 7,
                     "Settlement::Tiles::BOTTOM": 9
@@ -1127,13 +1127,13 @@
             },
             {
                 "id": 22,
-                "Ports": {},
-                "Roads": {
+                "TemplatesPorts": {},
+                "TemplatesRoads": {
                     "Settlement::Roads::TOP": 24,
                     "Settlement::Roads::SIDE": 28,
                     "Settlement::Roads::BOTTOM": 33
                 },
-                "Tiles": {
+                "TemplatesTiles": {
                     "Settlement::Tiles::TOP": 5,
                     "Settlement::Tiles::SIDE": 7,
                     "Settlement::Tiles::BOTTOM": 10
@@ -1141,39 +1141,39 @@
             },
             {
                 "id": 23,
-                "Ports": {},
-                "Roads": {
+                "TemplatesPorts": {},
+                "TemplatesRoads": {
                     "Settlement::Roads::TOP": 25,
                     "Settlement::Roads::SIDE": 28,
                     "Settlement::Roads::BOTTOM": 34
                 },
-                "Tiles": {
+                "TemplatesTiles": {
                     "Settlement::Tiles::TOP": 5,
                     "Settlement::Tiles::BOTTOM": 10
                 }
             },
             {
                 "id": 24,
-                "Ports": {
+                "TemplatesPorts": {
                     "Settlement::Ports::BOTTOM": 4
                 },
-                "Roads": {
+                "TemplatesRoads": {
                     "Settlement::Roads::TOP": 29,
                     "Settlement::Roads::BOTTOM": 37
                 },
-                "Tiles": {
+                "TemplatesTiles": {
                     "Settlement::Tiles::SIDE": 8
                 }
             },
             {
                 "id": 25,
-                "Ports": {},
-                "Roads": {
+                "TemplatesPorts": {},
+                "TemplatesRoads": {
                     "Settlement::Roads::TOP": 30,
                     "Settlement::Roads::SIDE": 35,
                     "Settlement::Roads::BOTTOM": 38
                 },
-                "Tiles": {
+                "TemplatesTiles": {
                     "Settlement::Tiles::TOP": 6,
                     "Settlement::Tiles::SIDE": 8,
                     "Settlement::Tiles::BOTTOM": 11
@@ -1181,13 +1181,13 @@
             },
             {
                 "id": 26,
-                "Ports": {},
-                "Roads": {
+                "TemplatesPorts": {},
+                "TemplatesRoads": {
                     "Settlement::Roads::TOP": 31,
                     "Settlement::Roads::SIDE": 35,
                     "Settlement::Roads::BOTTOM": 39
                 },
-                "Tiles": {
+                "TemplatesTiles": {
                     "Settlement::Tiles::TOP": 6,
                     "Settlement::Tiles::SIDE": 9,
                     "Settlement::Tiles::BOTTOM": 11
@@ -1195,13 +1195,13 @@
             },
             {
                 "id": 27,
-                "Ports": {},
-                "Roads": {
+                "TemplatesPorts": {},
+                "TemplatesRoads": {
                     "Settlement::Roads::TOP": 32,
                     "Settlement::Roads::SIDE": 36,
                     "Settlement::Roads::BOTTOM": 40
                 },
-                "Tiles": {
+                "TemplatesTiles": {
                     "Settlement::Tiles::TOP": 7,
                     "Settlement::Tiles::SIDE": 9,
                     "Settlement::Tiles::BOTTOM": 12
@@ -1209,13 +1209,13 @@
             },
             {
                 "id": 28,
-                "Ports": {},
-                "Roads": {
+                "TemplatesPorts": {},
+                "TemplatesRoads": {
                     "Settlement::Roads::TOP": 33,
                     "Settlement::Roads::SIDE": 36,
                     "Settlement::Roads::BOTTOM": 41
                 },
-                "Tiles": {
+                "TemplatesTiles": {
                     "Settlement::Tiles::TOP": 7,
                     "Settlement::Tiles::SIDE": 10,
                     "Settlement::Tiles::BOTTOM": 12
@@ -1223,41 +1223,41 @@
             },
             {
                 "id": 29,
-                "Ports": {
+                "TemplatesPorts": {
                     "Settlement::Ports::BOTTOM": 5
                 },
-                "Roads": {
+                "TemplatesRoads": {
                     "Settlement::Roads::TOP": 34,
                     "Settlement::Roads::BOTTOM": 42
                 },
-                "Tiles": {
+                "TemplatesTiles": {
                     "Settlement::Tiles::SIDE": 10
                 }
             },
             {
                 "id": 30,
-                "Ports": {
+                "TemplatesPorts": {
                     "Settlement::Ports::SIDE": 4
                 },
-                "Roads": {
+                "TemplatesRoads": {
                     "Settlement::Roads::TOP": 37,
                     "Settlement::Roads::SIDE": 43,
                     "Settlement::Roads::BOTTOM": 46
                 },
-                "Tiles": {
+                "TemplatesTiles": {
                     "Settlement::Tiles::TOP": 8,
                     "Settlement::Tiles::BOTTOM": 13
                 }
             },
             {
                 "id": 31,
-                "Ports": {},
-                "Roads": {
+                "TemplatesPorts": {},
+                "TemplatesRoads": {
                     "Settlement::Roads::TOP": 38,
                     "Settlement::Roads::SIDE": 43,
                     "Settlement::Roads::BOTTOM": 47
                 },
-                "Tiles": {
+                "TemplatesTiles": {
                     "Settlement::Tiles::TOP": 8,
                     "Settlement::Tiles::SIDE": 11,
                     "Settlement::Tiles::BOTTOM": 13
@@ -1265,13 +1265,13 @@
             },
             {
                 "id": 32,
-                "Ports": {},
-                "Roads": {
+                "TemplatesPorts": {},
+                "TemplatesRoads": {
                     "Settlement::Roads::TOP": 39,
                     "Settlement::Roads::SIDE": 44,
                     "Settlement::Roads::BOTTOM": 48
                 },
-                "Tiles": {
+                "TemplatesTiles": {
                     "Settlement::Tiles::TOP": 9,
                     "Settlement::Tiles::SIDE": 11,
                     "Settlement::Tiles::BOTTOM": 14
@@ -1279,13 +1279,13 @@
             },
             {
                 "id": 33,
-                "Ports": {},
-                "Roads": {
+                "TemplatesPorts": {},
+                "TemplatesRoads": {
                     "Settlement::Roads::TOP": 40,
                     "Settlement::Roads::SIDE": 44,
                     "Settlement::Roads::BOTTOM": 49
                 },
-                "Tiles": {
+                "TemplatesTiles": {
                     "Settlement::Tiles::TOP": 9,
                     "Settlement::Tiles::SIDE": 12,
                     "Settlement::Tiles::BOTTOM": 14
@@ -1293,13 +1293,13 @@
             },
             {
                 "id": 34,
-                "Ports": {},
-                "Roads": {
+                "TemplatesPorts": {},
+                "TemplatesRoads": {
                     "Settlement::Roads::TOP": 41,
                     "Settlement::Roads::SIDE": 45,
                     "Settlement::Roads::BOTTOM": 50
                 },
-                "Tiles": {
+                "TemplatesTiles": {
                     "Settlement::Tiles::TOP": 10,
                     "Settlement::Tiles::SIDE": 12,
                     "Settlement::Tiles::BOTTOM": 15
@@ -1307,39 +1307,39 @@
             },
             {
                 "id": 35,
-                "Ports": {
+                "TemplatesPorts": {
                     "Settlement::Ports::SIDE": 5
                 },
-                "Roads": {
+                "TemplatesRoads": {
                     "Settlement::Roads::TOP": 42,
                     "Settlement::Roads::SIDE": 45,
                     "Settlement::Roads::BOTTOM": 51
                 },
-                "Tiles": {
+                "TemplatesTiles": {
                     "Settlement::Tiles::TOP": 10,
                     "Settlement::Tiles::BOTTOM": 15
                 }
             },
             {
                 "id": 36,
-                "Ports": {},
-                "Roads": {
+                "TemplatesPorts": {},
+                "TemplatesRoads": {
                     "Settlement::Roads::TOP": 46,
                     "Settlement::Roads::BOTTOM": 54
                 },
-                "Tiles": {
+                "TemplatesTiles": {
                     "Settlement::Tiles::SIDE": 13
                 }
             },
             {
                 "id": 37,
-                "Ports": {},
-                "Roads": {
+                "TemplatesPorts": {},
+                "TemplatesRoads": {
                     "Settlement::Roads::TOP": 47,
                     "Settlement::Roads::SIDE": 52,
                     "Settlement::Roads::BOTTOM": 55
                 },
-                "Tiles": {
+                "TemplatesTiles": {
                     "Settlement::Tiles::TOP": 11,
                     "Settlement::Tiles::SIDE": 13,
                     "Settlement::Tiles::BOTTOM": 16
@@ -1347,13 +1347,13 @@
             },
             {
                 "id": 38,
-                "Ports": {},
-                "Roads": {
+                "TemplatesPorts": {},
+                "TemplatesRoads": {
                     "Settlement::Roads::TOP": 48,
                     "Settlement::Roads::SIDE": 52,
                     "Settlement::Roads::BOTTOM": 56
                 },
-                "Tiles": {
+                "TemplatesTiles": {
                     "Settlement::Tiles::TOP": 11,
                     "Settlement::Tiles::SIDE": 14,
                     "Settlement::Tiles::BOTTOM": 16
@@ -1361,13 +1361,13 @@
             },
             {
                 "id": 39,
-                "Ports": {},
-                "Roads": {
+                "TemplatesPorts": {},
+                "TemplatesRoads": {
                     "Settlement::Roads::TOP": 49,
                     "Settlement::Roads::SIDE": 53,
                     "Settlement::Roads::BOTTOM": 57
                 },
-                "Tiles": {
+                "TemplatesTiles": {
                     "Settlement::Tiles::TOP": 12,
                     "Settlement::Tiles::SIDE": 14,
                     "Settlement::Tiles::BOTTOM": 17
@@ -1375,13 +1375,13 @@
             },
             {
                 "id": 40,
-                "Ports": {},
-                "Roads": {
+                "TemplatesPorts": {},
+                "TemplatesRoads": {
                     "Settlement::Roads::TOP": 50,
                     "Settlement::Roads::SIDE": 53,
                     "Settlement::Roads::BOTTOM": 58
                 },
-                "Tiles": {
+                "TemplatesTiles": {
                     "Settlement::Tiles::TOP": 12,
                     "Settlement::Tiles::SIDE": 15,
                     "Settlement::Tiles::BOTTOM": 17
@@ -1389,50 +1389,50 @@
             },
             {
                 "id": 41,
-                "Ports": {},
-                "Roads": {
+                "TemplatesPorts": {},
+                "TemplatesRoads": {
                     "Settlement::Roads::TOP": 51,
                     "Settlement::Roads::BOTTOM": 59
                 },
-                "Tiles": {
+                "TemplatesTiles": {
                     "Settlement::Tiles::SIDE": 15
                 }
             },
             {
                 "id": 42,
-                "Ports": {},
-                "Roads": {
+                "TemplatesPorts": {},
+                "TemplatesRoads": {
                     "Settlement::Roads::TOP": 54,
                     "Settlement::Roads::SIDE": 60
                 },
-                "Tiles": {
+                "TemplatesTiles": {
                     "Settlement::Tiles::TOP": 13
                 }
             },
             {
                 "id": 43,
-                "Ports": {
+                "TemplatesPorts": {
                     "Settlement::Ports::BOTTOM": 6
                 },
-                "Roads": {
+                "TemplatesRoads": {
                     "Settlement::Roads::TOP": 55,
                     "Settlement::Roads::SIDE": 60,
                     "Settlement::Roads::BOTTOM": 63
                 },
-                "Tiles": {
+                "TemplatesTiles": {
                     "Settlement::Tiles::TOP": 13,
                     "Settlement::Tiles::SIDE": 16
                 }
             },
             {
                 "id": 44,
-                "Ports": {},
-                "Roads": {
+                "TemplatesPorts": {},
+                "TemplatesRoads": {
                     "Settlement::Roads::TOP": 56,
                     "Settlement::Roads::SIDE": 61,
                     "Settlement::Roads::BOTTOM": 64
                 },
-                "Tiles": {
+                "TemplatesTiles": {
                     "Settlement::Tiles::TOP": 14,
                     "Settlement::Tiles::SIDE": 16,
                     "Settlement::Tiles::BOTTOM": 18
@@ -1440,13 +1440,13 @@
             },
             {
                 "id": 45,
-                "Ports": {},
-                "Roads": {
+                "TemplatesPorts": {},
+                "TemplatesRoads": {
                     "Settlement::Roads::TOP": 57,
                     "Settlement::Roads::SIDE": 61,
                     "Settlement::Roads::BOTTOM": 65
                 },
-                "Tiles": {
+                "TemplatesTiles": {
                     "Settlement::Tiles::TOP": 14,
                     "Settlement::Tiles::SIDE": 17,
                     "Settlement::Tiles::BOTTOM": 18
@@ -1454,117 +1454,117 @@
             },
             {
                 "id": 46,
-                "Ports": {
+                "TemplatesPorts": {
                     "Settlement::Ports::BOTTOM": 7
                 },
-                "Roads": {
+                "TemplatesRoads": {
                     "Settlement::Roads::TOP": 58,
                     "Settlement::Roads::SIDE": 62,
                     "Settlement::Roads::BOTTOM": 66
                 },
-                "Tiles": {
+                "TemplatesTiles": {
                     "Settlement::Tiles::TOP": 15,
                     "Settlement::Tiles::SIDE": 17
                 }
             },
             {
                 "id": 47,
-                "Ports": {},
-                "Roads": {
+                "TemplatesPorts": {},
+                "TemplatesRoads": {
                     "Settlement::Roads::TOP": 59,
                     "Settlement::Roads::SIDE": 62
                 },
-                "Tiles": {
+                "TemplatesTiles": {
                     "Settlement::Tiles::TOP": 15
                 }
             },
             {
                 "id": 48,
-                "Ports": {
+                "TemplatesPorts": {
                     "Settlement::Ports::SIDE": 6
                 },
-                "Roads": {
+                "TemplatesRoads": {
                     "Settlement::Roads::TOP": 63,
                     "Settlement::Roads::SIDE": 67
                 },
-                "Tiles": {
+                "TemplatesTiles": {
                     "Settlement::Tiles::TOP": 16
                 }
             },
             {
                 "id": 49,
-                "Ports": {},
-                "Roads": {
+                "TemplatesPorts": {},
+                "TemplatesRoads": {
                     "Settlement::Roads::TOP": 64,
                     "Settlement::Roads::SIDE": 67,
                     "Settlement::Roads::BOTTOM": 69
                 },
-                "Tiles": {
+                "TemplatesTiles": {
                     "Settlement::Tiles::TOP": 16,
                     "Settlement::Tiles::SIDE": 18
                 }
             },
             {
                 "id": 50,
-                "Ports": {},
-                "Roads": {
+                "TemplatesPorts": {},
+                "TemplatesRoads": {
                     "Settlement::Roads::TOP": 65,
                     "Settlement::Roads::SIDE": 68,
                     "Settlement::Roads::BOTTOM": 70
                 },
-                "Tiles": {
+                "TemplatesTiles": {
                     "Settlement::Tiles::TOP": 17,
                     "Settlement::Tiles::SIDE": 18
                 }
             },
             {
                 "id": 51,
-                "Ports": {
+                "TemplatesPorts": {
                     "Settlement::Ports::SIDE": 7
                 },
-                "Roads": {
+                "TemplatesRoads": {
                     "Settlement::Roads::TOP": 66,
                     "Settlement::Roads::SIDE": 68
                 },
-                "Tiles": {
+                "TemplatesTiles": {
                     "Settlement::Tiles::TOP": 17
                 }
             },
             {
                 "id": 52,
-                "Ports": {
+                "TemplatesPorts": {
                     "Settlement::Ports::BOTTOM": 8
                 },
-                "Roads": {
+                "TemplatesRoads": {
                     "Settlement::Roads::TOP": 69,
                     "Settlement::Roads::SIDE": 71
                 },
-                "Tiles": {
+                "TemplatesTiles": {
                     "Settlement::Tiles::TOP": 18
                 }
             },
             {
                 "id": 53,
-                "Ports": {
+                "TemplatesPorts": {
                     "Settlement::Ports::BOTTOM": 8
                 },
-                "Roads": {
+                "TemplatesRoads": {
                     "Settlement::Roads::TOP": 70,
                     "Settlement::Roads::SIDE": 71
                 },
-                "Tiles": {
+                "TemplatesTiles": {
                     "Settlement::Tiles::TOP": 18
                 }
             }
         ],
-        "Tiles": [
+        "TemplatesTiles": [
             {
                 "id": 0,
                 "coordinate": [
                     2,
                     0
                 ],
-                "Roads": {
+                "TemplatesRoads": {
                     "Tile::Roads::TOP": 0,
                     "Tile::Roads::TOP_RIGHT": 2,
                     "Tile::Roads::BOTTOM_RIGHT": 7,
@@ -1572,7 +1572,7 @@
                     "Tile::Roads::BOTTOM_LEFT": 6,
                     "Tile::Roads::TOP_LEFT": 1
                 },
-                "Settlements": {
+                "TemplatesSettlements": {
                     "Tile::Settlements::TOP_LEFT": 0,
                     "Tile::Settlements::TOP_RIGHT": 1,
                     "Tile::Settlements::RIGHT": 4,
@@ -1587,7 +1587,7 @@
                     1,
                     0
                 ],
-                "Roads": {
+                "TemplatesRoads": {
                     "Tile::Roads::TOP": 3,
                     "Tile::Roads::TOP_RIGHT": 6,
                     "Tile::Roads::BOTTOM_RIGHT": 14,
@@ -1595,7 +1595,7 @@
                     "Tile::Roads::BOTTOM_LEFT": 13,
                     "Tile::Roads::TOP_LEFT": 5
                 },
-                "Settlements": {
+                "TemplatesSettlements": {
                     "Tile::Settlements::TOP_LEFT": 2,
                     "Tile::Settlements::TOP_RIGHT": 3,
                     "Tile::Settlements::RIGHT": 8,
@@ -1610,7 +1610,7 @@
                     3,
                     0
                 ],
-                "Roads": {
+                "TemplatesRoads": {
                     "Tile::Roads::TOP": 4,
                     "Tile::Roads::TOP_RIGHT": 8,
                     "Tile::Roads::BOTTOM_RIGHT": 16,
@@ -1618,7 +1618,7 @@
                     "Tile::Roads::BOTTOM_LEFT": 15,
                     "Tile::Roads::TOP_LEFT": 7
                 },
-                "Settlements": {
+                "TemplatesSettlements": {
                     "Tile::Settlements::TOP_LEFT": 4,
                     "Tile::Settlements::TOP_RIGHT": 5,
                     "Tile::Settlements::RIGHT": 10,
@@ -1633,7 +1633,7 @@
                     0,
                     1
                 ],
-                "Roads": {
+                "TemplatesRoads": {
                     "Tile::Roads::TOP": 9,
                     "Tile::Roads::TOP_RIGHT": 13,
                     "Tile::Roads::BOTTOM_RIGHT": 21,
@@ -1641,7 +1641,7 @@
                     "Tile::Roads::BOTTOM_LEFT": 20,
                     "Tile::Roads::TOP_LEFT": 12
                 },
-                "Settlements": {
+                "TemplatesSettlements": {
                     "Tile::Settlements::TOP_LEFT": 6,
                     "Tile::Settlements::TOP_RIGHT": 7,
                     "Tile::Settlements::RIGHT": 13,
@@ -1656,7 +1656,7 @@
                     2,
                     1
                 ],
-                "Roads": {
+                "TemplatesRoads": {
                     "Tile::Roads::TOP": 10,
                     "Tile::Roads::TOP_RIGHT": 15,
                     "Tile::Roads::BOTTOM_RIGHT": 23,
@@ -1664,7 +1664,7 @@
                     "Tile::Roads::BOTTOM_LEFT": 22,
                     "Tile::Roads::TOP_LEFT": 14
                 },
-                "Settlements": {
+                "TemplatesSettlements": {
                     "Tile::Settlements::TOP_LEFT": 8,
                     "Tile::Settlements::TOP_RIGHT": 9,
                     "Tile::Settlements::RIGHT": 15,
@@ -1679,7 +1679,7 @@
                     4,
                     1
                 ],
-                "Roads": {
+                "TemplatesRoads": {
                     "Tile::Roads::TOP": 11,
                     "Tile::Roads::TOP_RIGHT": 17,
                     "Tile::Roads::BOTTOM_RIGHT": 25,
@@ -1687,7 +1687,7 @@
                     "Tile::Roads::BOTTOM_LEFT": 24,
                     "Tile::Roads::TOP_LEFT": 16
                 },
-                "Settlements": {
+                "TemplatesSettlements": {
                     "Tile::Settlements::TOP_LEFT": 10,
                     "Tile::Settlements::TOP_RIGHT": 11,
                     "Tile::Settlements::RIGHT": 17,
@@ -1702,7 +1702,7 @@
                     1,
                     1
                 ],
-                "Roads": {
+                "TemplatesRoads": {
                     "Tile::Roads::TOP": 18,
                     "Tile::Roads::TOP_RIGHT": 22,
                     "Tile::Roads::BOTTOM_RIGHT": 31,
@@ -1710,7 +1710,7 @@
                     "Tile::Roads::BOTTOM_LEFT": 30,
                     "Tile::Roads::TOP_LEFT": 21
                 },
-                "Settlements": {
+                "TemplatesSettlements": {
                     "Tile::Settlements::TOP_LEFT": 13,
                     "Tile::Settlements::TOP_RIGHT": 14,
                     "Tile::Settlements::RIGHT": 20,
@@ -1725,7 +1725,7 @@
                     3,
                     1
                 ],
-                "Roads": {
+                "TemplatesRoads": {
                     "Tile::Roads::TOP": 19,
                     "Tile::Roads::TOP_RIGHT": 24,
                     "Tile::Roads::BOTTOM_RIGHT": 33,
@@ -1733,7 +1733,7 @@
                     "Tile::Roads::BOTTOM_LEFT": 32,
                     "Tile::Roads::TOP_LEFT": 23
                 },
-                "Settlements": {
+                "TemplatesSettlements": {
                     "Tile::Settlements::TOP_LEFT": 15,
                     "Tile::Settlements::TOP_RIGHT": 16,
                     "Tile::Settlements::RIGHT": 22,
@@ -1748,7 +1748,7 @@
                     0,
                     2
                 ],
-                "Roads": {
+                "TemplatesRoads": {
                     "Tile::Roads::TOP": 26,
                     "Tile::Roads::TOP_RIGHT": 30,
                     "Tile::Roads::BOTTOM_RIGHT": 38,
@@ -1756,7 +1756,7 @@
                     "Tile::Roads::BOTTOM_LEFT": 37,
                     "Tile::Roads::TOP_LEFT": 29
                 },
-                "Settlements": {
+                "TemplatesSettlements": {
                     "Tile::Settlements::TOP_LEFT": 18,
                     "Tile::Settlements::TOP_RIGHT": 19,
                     "Tile::Settlements::RIGHT": 25,
@@ -1771,7 +1771,7 @@
                     2,
                     2
                 ],
-                "Roads": {
+                "TemplatesRoads": {
                     "Tile::Roads::TOP": 27,
                     "Tile::Roads::TOP_RIGHT": 32,
                     "Tile::Roads::BOTTOM_RIGHT": 40,
@@ -1779,7 +1779,7 @@
                     "Tile::Roads::BOTTOM_LEFT": 39,
                     "Tile::Roads::TOP_LEFT": 31
                 },
-                "Settlements": {
+                "TemplatesSettlements": {
                     "Tile::Settlements::TOP_LEFT": 20,
                     "Tile::Settlements::TOP_RIGHT": 21,
                     "Tile::Settlements::RIGHT": 27,
@@ -1794,7 +1794,7 @@
                     4,
                     2
                 ],
-                "Roads": {
+                "TemplatesRoads": {
                     "Tile::Roads::TOP": 28,
                     "Tile::Roads::TOP_RIGHT": 34,
                     "Tile::Roads::BOTTOM_RIGHT": 42,
@@ -1802,7 +1802,7 @@
                     "Tile::Roads::BOTTOM_LEFT": 41,
                     "Tile::Roads::TOP_LEFT": 33
                 },
-                "Settlements": {
+                "TemplatesSettlements": {
                     "Tile::Settlements::TOP_LEFT": 22,
                     "Tile::Settlements::TOP_RIGHT": 23,
                     "Tile::Settlements::RIGHT": 29,
@@ -1817,7 +1817,7 @@
                     1,
                     2
                 ],
-                "Roads": {
+                "TemplatesRoads": {
                     "Tile::Roads::TOP": 35,
                     "Tile::Roads::TOP_RIGHT": 39,
                     "Tile::Roads::BOTTOM_RIGHT": 48,
@@ -1825,7 +1825,7 @@
                     "Tile::Roads::BOTTOM_LEFT": 47,
                     "Tile::Roads::TOP_LEFT": 38
                 },
-                "Settlements": {
+                "TemplatesSettlements": {
                     "Tile::Settlements::TOP_LEFT": 25,
                     "Tile::Settlements::TOP_RIGHT": 26,
                     "Tile::Settlements::RIGHT": 32,
@@ -1840,7 +1840,7 @@
                     3,
                     2
                 ],
-                "Roads": {
+                "TemplatesRoads": {
                     "Tile::Roads::TOP": 36,
                     "Tile::Roads::TOP_RIGHT": 41,
                     "Tile::Roads::BOTTOM_RIGHT": 50,
@@ -1848,7 +1848,7 @@
                     "Tile::Roads::BOTTOM_LEFT": 49,
                     "Tile::Roads::TOP_LEFT": 40
                 },
-                "Settlements": {
+                "TemplatesSettlements": {
                     "Tile::Settlements::TOP_LEFT": 27,
                     "Tile::Settlements::TOP_RIGHT": 28,
                     "Tile::Settlements::RIGHT": 34,
@@ -1863,7 +1863,7 @@
                     0,
                     3
                 ],
-                "Roads": {
+                "TemplatesRoads": {
                     "Tile::Roads::TOP": 43,
                     "Tile::Roads::TOP_RIGHT": 47,
                     "Tile::Roads::BOTTOM_RIGHT": 55,
@@ -1871,7 +1871,7 @@
                     "Tile::Roads::BOTTOM_LEFT": 54,
                     "Tile::Roads::TOP_LEFT": 46
                 },
-                "Settlements": {
+                "TemplatesSettlements": {
                     "Tile::Settlements::TOP_LEFT": 30,
                     "Tile::Settlements::TOP_RIGHT": 31,
                     "Tile::Settlements::RIGHT": 37,
@@ -1886,7 +1886,7 @@
                     2,
                     3
                 ],
-                "Roads": {
+                "TemplatesRoads": {
                     "Tile::Roads::TOP": 44,
                     "Tile::Roads::TOP_RIGHT": 49,
                     "Tile::Roads::BOTTOM_RIGHT": 57,
@@ -1894,7 +1894,7 @@
                     "Tile::Roads::BOTTOM_LEFT": 56,
                     "Tile::Roads::TOP_LEFT": 48
                 },
-                "Settlements": {
+                "TemplatesSettlements": {
                     "Tile::Settlements::TOP_LEFT": 32,
                     "Tile::Settlements::TOP_RIGHT": 33,
                     "Tile::Settlements::RIGHT": 39,
@@ -1909,7 +1909,7 @@
                     4,
                     3
                 ],
-                "Roads": {
+                "TemplatesRoads": {
                     "Tile::Roads::TOP": 45,
                     "Tile::Roads::TOP_RIGHT": 51,
                     "Tile::Roads::BOTTOM_RIGHT": 59,
@@ -1917,7 +1917,7 @@
                     "Tile::Roads::BOTTOM_LEFT": 58,
                     "Tile::Roads::TOP_LEFT": 50
                 },
-                "Settlements": {
+                "TemplatesSettlements": {
                     "Tile::Settlements::TOP_LEFT": 34,
                     "Tile::Settlements::TOP_RIGHT": 35,
                     "Tile::Settlements::RIGHT": 41,
@@ -1932,7 +1932,7 @@
                     1,
                     3
                 ],
-                "Roads": {
+                "TemplatesRoads": {
                     "Tile::Roads::TOP": 52,
                     "Tile::Roads::TOP_RIGHT": 56,
                     "Tile::Roads::BOTTOM_RIGHT": 64,
@@ -1940,7 +1940,7 @@
                     "Tile::Roads::BOTTOM_LEFT": 63,
                     "Tile::Roads::TOP_LEFT": 55
                 },
-                "Settlements": {
+                "TemplatesSettlements": {
                     "Tile::Settlements::TOP_LEFT": 37,
                     "Tile::Settlements::TOP_RIGHT": 38,
                     "Tile::Settlements::RIGHT": 44,
@@ -1955,7 +1955,7 @@
                     3,
                     3
                 ],
-                "Roads": {
+                "TemplatesRoads": {
                     "Tile::Roads::TOP": 53,
                     "Tile::Roads::TOP_RIGHT": 58,
                     "Tile::Roads::BOTTOM_RIGHT": 66,
@@ -1963,7 +1963,7 @@
                     "Tile::Roads::BOTTOM_LEFT": 65,
                     "Tile::Roads::TOP_LEFT": 57
                 },
-                "Settlements": {
+                "TemplatesSettlements": {
                     "Tile::Settlements::TOP_LEFT": 39,
                     "Tile::Settlements::TOP_RIGHT": 40,
                     "Tile::Settlements::RIGHT": 46,
@@ -1978,7 +1978,7 @@
                     2,
                     4
                 ],
-                "Roads": {
+                "TemplatesRoads": {
                     "Tile::Roads::TOP": 61,
                     "Tile::Roads::TOP_RIGHT": 65,
                     "Tile::Roads::BOTTOM_RIGHT": 70,
@@ -1986,7 +1986,7 @@
                     "Tile::Roads::BOTTOM_LEFT": 69,
                     "Tile::Roads::TOP_LEFT": 64
                 },
-                "Settlements": {
+                "TemplatesSettlements": {
                     "Tile::Settlements::TOP_LEFT": 44,
                     "Tile::Settlements::TOP_RIGHT": 45,
                     "Tile::Settlements::RIGHT": 50,

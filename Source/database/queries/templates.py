@@ -7,9 +7,9 @@ from database.connect import connect
 
 
 @connect
-def new_board(cursor: psycopg2.extras.RealDictCursor, name: str) -> int:
+def new_template(cursor: psycopg2.extras.RealDictCursor, name: str) -> int:
 	query = """
-		INSERT INTO "Boards" ("name") VALUES (%s)
+		INSERT INTO "Templates" ("name") VALUES (%s)
 		RETURNING "id";
 	"""
 
@@ -18,11 +18,11 @@ def new_board(cursor: psycopg2.extras.RealDictCursor, name: str) -> int:
 
 
 @connect
-def get_board(cursor: psycopg2.extras.RealDictCursor, boards_id: str) -> dict:
+def get_template(cursor: psycopg2.extras.RealDictCursor, boards_id: str) -> dict:
 	query = """
 		SELECT *
-		FROM "Boards"
-		WHERE "Boards.id" = %s;
+		FROM "Templates"
+		WHERE "id" = %s;
 	"""
 
 	cursor.execute(query, (boards_id,))
@@ -33,8 +33,8 @@ def get_board(cursor: psycopg2.extras.RealDictCursor, boards_id: str) -> dict:
 def get_ports(cursor: psycopg2.extras.RealDictCursor, boards_id: str) -> list[dict]:
 	query = """
 		SELECT *
-		FROM "Ports"
-		WHERE "Boards.id" = %s;
+		FROM "TemplatesPorts"
+		WHERE "Templates.id" = %s;
 	"""
 
 	cursor.execute(query, (boards_id,))
@@ -45,8 +45,8 @@ def get_ports(cursor: psycopg2.extras.RealDictCursor, boards_id: str) -> list[di
 def get_roads(cursor: psycopg2.extras.RealDictCursor, boards_id: str) -> list[dict]:
 	query = """
 		SELECT *
-		FROM "Roads"
-		WHERE "Boards.id" = %s;
+		FROM "TemplatesRoads"
+		WHERE "Templates.id" = %s;
 	"""
 
 	cursor.execute(query, (boards_id,))
@@ -57,8 +57,8 @@ def get_roads(cursor: psycopg2.extras.RealDictCursor, boards_id: str) -> list[di
 def get_settlements(cursor: psycopg2.extras.RealDictCursor, boards_id: str) -> list[dict]:
 	query = """
 		SELECT *
-		FROM "Settlements"
-		WHERE "Boards.id" = %s;
+		FROM "TemplatesSettlements"
+		WHERE "Templates.id" = %s;
 	"""
 
 	cursor.execute(query, (boards_id,))
@@ -69,8 +69,8 @@ def get_settlements(cursor: psycopg2.extras.RealDictCursor, boards_id: str) -> l
 def get_tiles(cursor: psycopg2.extras.RealDictCursor, boards_id: str) -> list[dict]:
 	query = """
 		SELECT *
-		FROM "Tiles"
-		WHERE "Boards.id" = %s;
+		FROM "TemplatesTiles"
+		WHERE "Templates.id" = %s;
 	"""
 
 	cursor.execute(query, (boards_id,))
@@ -81,10 +81,10 @@ def get_tiles(cursor: psycopg2.extras.RealDictCursor, boards_id: str) -> list[di
 def get_ports_settlements(cursor: psycopg2.extras.RealDictCursor, boards_id: str) -> list[dict]:
 	query = """
 		SELECT *
-		FROM "PortsSettlements"
-		JOIN "Corner's Sides" ON "PortsSettlements"."Corner's Sides.id" = "Corner's Sides"."id"
-		JOIN "Side's Corners" ON "PortsSettlements"."Side's Corners.id" = "Side's Corners"."id"
-		WHERE "Boards.id" = %s;
+		FROM "TemplatesPortsSettlements"
+		JOIN "Corner's Sides" ON "TemplatesPortsSettlements"."Corner's Sides.id" = "Corner's Sides"."id"
+		JOIN "Side's Corners" ON "TemplatesPortsSettlements"."Side's Corners.id" = "Side's Corners"."id"
+		WHERE "Templates.id" = %s;
 	"""
 
 	cursor.execute(query, (boards_id,))
@@ -95,10 +95,10 @@ def get_ports_settlements(cursor: psycopg2.extras.RealDictCursor, boards_id: str
 def get_roads_settlements(cursor: psycopg2.extras.RealDictCursor, boards_id: str) -> list[dict]:
 	query = """
 		SELECT *
-		FROM "RoadsSettlements"
-		JOIN "Corner's Edges" ON "RoadsSettlements"."Corner's Edges.id" = "Corner's Edges"."id"
-		JOIN "Edge's Corners" ON "RoadsSettlements"."Edge's Corners.id" = "Edge's Corners"."id"
-		WHERE "Boards.id" = %s;
+		FROM "TemplatesRoadsSettlements"
+		JOIN "Corner's Edges" ON "TemplatesRoadsSettlements"."Corner's Edges.id" = "Corner's Edges"."id"
+		JOIN "Edge's Corners" ON "TemplatesRoadsSettlements"."Edge's Corners.id" = "Edge's Corners"."id"
+		WHERE "Templates.id" = %s;
 	"""
 
 	cursor.execute(query, (boards_id,))
@@ -109,10 +109,10 @@ def get_roads_settlements(cursor: psycopg2.extras.RealDictCursor, boards_id: str
 def get_roads_tiles(cursor: psycopg2.extras.RealDictCursor, boards_id: str) -> list[dict]:
 	query = """
 		SELECT *
-		FROM "RoadsTiles"
-		JOIN "Edge's Sides" ON "RoadsTiles"."Edge's Sides.id" = "Edge's Sides"."id"
-		JOIN "Side's Edges" ON "RoadsTiles"."Side's Edges.id" = "Side's Edges"."id"
-		WHERE "Boards.id" = %s;
+		FROM "TemplatesRoadsTiles"
+		JOIN "Edge's Sides" ON "TemplatesRoadsTiles"."Edge's Sides.id" = "Edge's Sides"."id"
+		JOIN "Side's Edges" ON "TemplatesRoadsTiles"."Side's Edges.id" = "Side's Edges"."id"
+		WHERE "Templates.id" = %s;
 	"""
 
 	cursor.execute(query, (boards_id,))
@@ -123,10 +123,10 @@ def get_roads_tiles(cursor: psycopg2.extras.RealDictCursor, boards_id: str) -> l
 def get_settlements_tiles(cursor: psycopg2.extras.RealDictCursor, boards_id: str) -> list[dict]:
 	query = """
 		SELECT *
-		FROM "SettlementsTiles"
-		JOIN "Corner's Sides" ON "SettlementsTiles"."Corner's Sides.id" = "Corner's Sides"."id"
-		JOIN "Side's Corners" ON "SettlementsTiles"."Side's Corners.id" = "Side's Corners"."id"
-		WHERE "Boards.id" = %s;
+		FROM "TemplatesSettlementsTiles"
+		JOIN "Corner's Sides" ON "TemplatesSettlementsTiles"."Corner's Sides.id" = "Corner's Sides"."id"
+		JOIN "Side's Corners" ON "TemplatesSettlementsTiles"."Side's Corners.id" = "Side's Corners"."id"
+		WHERE "Templates.id" = %s;
 	"""
 
 	cursor.execute(query, (boards_id,))

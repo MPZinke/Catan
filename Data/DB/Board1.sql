@@ -1,10 +1,10 @@
 
 
-INSERT INTO "Boards" ("name") VALUES
+INSERT INTO "Templates" ("name") VALUES
 ('Board 1');
 
 
-INSERT INTO "Ports" ("Boards.id") VALUES
+INSERT INTO "TemplatesPorts" ("Templates.id") VALUES
 (1),  -- 1
 (1),  -- 2
 (1),  -- 3
@@ -16,7 +16,7 @@ INSERT INTO "Ports" ("Boards.id") VALUES
 (1);  -- 9
 
 
-INSERT INTO "Roads" ("Boards.id") VALUES
+INSERT INTO "TemplatesRoads" ("Templates.id") VALUES
 (1),  -- 1
 (1),  -- 2
 (1),  -- 3
@@ -91,7 +91,7 @@ INSERT INTO "Roads" ("Boards.id") VALUES
 (1);  -- 72
 
 
-INSERT INTO "Settlements" ("Boards.id") VALUES
+INSERT INTO "TemplatesSettlements" ("Templates.id") VALUES
 (1),  -- 1
 (1),  -- 2
 (1),  -- 3
@@ -148,7 +148,7 @@ INSERT INTO "Settlements" ("Boards.id") VALUES
 (1);  -- 54
 
 
-INSERT INTO "Tiles" ("Boards.id", "coordinate") VALUES
+INSERT INTO "TemplatesTiles" ("Templates.id", "coordinate") VALUES
 (1, ARRAY[2,0]::INT[2]),  -- 1
 (1, ARRAY[1,0]::INT[2]),  -- 2
 (1, ARRAY[3,0]::INT[2]),  -- 3
@@ -170,10 +170,10 @@ INSERT INTO "Tiles" ("Boards.id", "coordinate") VALUES
 (1, ARRAY[2,4]::INT[2]);  -- 19
 
 
-INSERT INTO "PortsSettlements" (
-	"Boards.id", "Side's Corners.id", "Corner's Sides.id", "Settlements.id", "Ports.id"
+INSERT INTO "TemplatesPortsSettlements" (
+	"Templates.id", "Side's Corners.id", "Corner's Sides.id", "TemplatesSettlements.id", "TemplatesPorts.id"
 )
-SELECT "Boards"."id", "Side's Corners"."id", "Corner's Sides"."id", T."Settlements.id", T."Ports.id"
+SELECT "Templates"."id", "Side's Corners"."id", "Corner's Sides"."id", T."TemplatesSettlements.id", T."TemplatesPorts.id"
 FROM 
 (
 	VALUES
@@ -195,15 +195,15 @@ FROM
 	('Board 1', 'LEFT', 'SIDE', 52, 8),
 	('Board 1', 'TOP_LEFT', 'BOTTOM', 53, 9),
 	('Board 1', 'TOP_RIGHT', 'BOTTOM', 54, 9)
-) AS T ("Boards.name", "Side's Corners.label", "Corner's Sides.label", "Settlements.id", "Ports.id")
-JOIN "Boards" ON T."Boards.name" = "Boards"."name"
+) AS T ("Boards.name", "Side's Corners.label", "Corner's Sides.label", "TemplatesSettlements.id", "TemplatesPorts.id")
+JOIN "Templates" ON T."Boards.name" = "Templates"."name"
 JOIN "Side's Corners" ON T."Side's Corners.label" = "Side's Corners"."label"
 JOIN "Corner's Sides" ON T."Corner's Sides.label" = "Corner's Sides"."label";
 
-INSERT INTO "RoadsSettlements" (
-	"Boards.id", "Corner's Edges.id", "Edge's Corners.id", "Roads.id", "Settlements.id"
+INSERT INTO "TemplatesRoadsSettlements" (
+	"Templates.id", "Corner's Edges.id", "Edge's Corners.id", "TemplatesRoads.id", "TemplatesSettlements.id"
 )
-SELECT "Boards"."id", "Corner's Edges"."id", "Edge's Corners"."id", T."Roads.id", T."Settlements.id"
+SELECT "Templates"."id", "Corner's Edges"."id", "Edge's Corners"."id", T."TemplatesRoads.id", T."TemplatesSettlements.id"
 FROM 
 (
 	VALUES
@@ -351,16 +351,16 @@ FROM
 	('Board 1', 'TOP', 'LEFT', 71, 54),
 	('Board 1', 'SIDE', 'LEFT', 72, 53),
 	('Board 1', 'SIDE', 'RIGHT', 72, 54)
-) AS T ("Boards.name", "Corner's Edges.label", "Edge's Corners.label", "Roads.id", "Settlements.id")
-JOIN "Boards" ON T."Boards.name" = "Boards"."name"
+) AS T ("Boards.name", "Corner's Edges.label", "Edge's Corners.label", "TemplatesRoads.id", "TemplatesSettlements.id")
+JOIN "Templates" ON T."Boards.name" = "Templates"."name"
 JOIN "Corner's Edges" ON T."Corner's Edges.label" = "Corner's Edges"."label"
 JOIN "Edge's Corners" ON T."Edge's Corners.label" = "Edge's Corners"."label";
 
 
-INSERT INTO "RoadsTiles" (
-	"Boards.id", "Side's Edges.id", "Edge's Sides.id", "Roads.id", "Tiles.id"
+INSERT INTO "TemplatesRoadsTiles" (
+	"Templates.id", "Side's Edges.id", "Edge's Sides.id", "TemplatesRoads.id", "TemplatesTiles.id"
 )
-SELECT "Boards"."id", "Side's Edges"."id", "Edge's Sides"."id", T."Roads.id", T."Tiles.id"
+SELECT "Templates"."id", "Side's Edges"."id", "Edge's Sides"."id", T."TemplatesRoads.id", T."TemplatesTiles.id"
 FROM 
 (
 	VALUES
@@ -478,16 +478,16 @@ FROM
 	('Board 1', 'BOTTOM_LEFT', 'TOP', 70, 19),
 	('Board 1', 'BOTTOM_RIGHT', 'TOP', 71, 19),
 	('Board 1', 'BOTTOM', 'TOP', 72, 19)
-) AS T ("Boards.name", "Side's Edges.label", "Edge's Sides.label", "Roads.id", "Tiles.id")
-JOIN "Boards" ON T."Boards.name" = "Boards"."name"
+) AS T ("Boards.name", "Side's Edges.label", "Edge's Sides.label", "TemplatesRoads.id", "TemplatesTiles.id")
+JOIN "Templates" ON T."Boards.name" = "Templates"."name"
 JOIN "Side's Edges" ON T."Side's Edges.label" = "Side's Edges"."label"
 JOIN "Edge's Sides" ON T."Edge's Sides.label" = "Edge's Sides"."label";
 
 
-INSERT INTO "SettlementsTiles" (
-	"Boards.id", "Side's Corners.id", "Corner's Sides.id", "Settlements.id", "Tiles.id"
+INSERT INTO "TemplatesSettlementsTiles" (
+	"Templates.id", "Side's Corners.id", "Corner's Sides.id", "TemplatesSettlements.id", "TemplatesTiles.id"
 )
-SELECT "Boards"."id", "Side's Corners"."id", "Corner's Sides"."id", T."Settlements.id", T."Tiles.id"
+SELECT "Templates"."id", "Side's Corners"."id", "Corner's Sides"."id", T."TemplatesSettlements.id", T."TemplatesTiles.id"
 FROM 
 (
 	VALUES
@@ -605,15 +605,15 @@ FROM
 	('Board 1', 'BOTTOM_RIGHT', 'TOP', 52, 18),
 	('Board 1', 'BOTTOM_LEFT', 'TOP', 53, 19),
 	('Board 1', 'BOTTOM_RIGHT', 'TOP', 54, 19)
-) AS T ("Boards.name", "Side's Corners.label", "Corner's Sides.label", "Settlements.id", "Tiles.id")
-JOIN "Boards" ON T."Boards.name" = "Boards"."name"
+) AS T ("Boards.name", "Side's Corners.label", "Corner's Sides.label", "TemplatesSettlements.id", "TemplatesTiles.id")
+JOIN "Templates" ON T."Boards.name" = "Templates"."name"
 JOIN "Side's Corners" ON T."Side's Corners.label" = "Side's Corners"."label"
 JOIN "Corner's Sides" ON T."Corner's Sides.label" = "Corner's Sides"."label";
 
 
 
-INSERT INTO "DiceValuesCounts" ("Boards.id", "count", "value" )
-SELECT "Boards"."id", T."count", T."value"
+INSERT INTO "DiceValuesCounts" ("Templates.id", "count", "value" )
+SELECT "Templates"."id", T."count", T."value"
 FROM
 (
 	VALUES
@@ -629,11 +629,11 @@ FROM
 	('Board 1', 2, 11),
 	('Board 1', 1, 12)
 ) AS T ("Boards.name", "count", "value")
-JOIN "Boards" ON T."Boards.name" = "Boards"."name";
+JOIN "Templates" ON T."Boards.name" = "Templates"."name";
 
 
-INSERT INTO "TilesResourceTypesCounts" ("Boards.id", "count", "ResourceTypes.id")
-SELECT "Boards"."id", T."count", "ResourceTypes"."id"
+INSERT INTO "TilesResourceTypesCounts" ("Templates.id", "count", "ResourceTypes.id")
+SELECT "Templates"."id", T."count", "ResourceTypes"."id"
 FROM 
 (
 	VALUES
@@ -644,12 +644,12 @@ FROM
 	('Board 1', 3, 'STONE'),
 	('Board 1', 3, 'BRICK')
 ) AS T ("Boards.name", "count", "ResourceTypes.label")
-JOIN "Boards" ON T."Boards.name" = "Boards"."name"
+JOIN "Templates" ON T."Boards.name" = "Templates"."name"
 JOIN "ResourceTypes" ON T."ResourceTypes.label" = "ResourceTypes"."label";
 
 
-INSERT INTO "PortsResourceTypesCounts" ("Boards.id", "count", "ResourceTypes.id")
-SELECT "Boards"."id", T."count", "ResourceTypes"."id"
+INSERT INTO "PortsResourceTypesCounts" ("Templates.id", "count", "ResourceTypes.id")
+SELECT "Templates"."id", T."count", "ResourceTypes"."id"
 FROM 
 (
 	VALUES
@@ -660,15 +660,15 @@ FROM
 	('Board 1', 1, 'STONE'),
 	('Board 1', 1, 'BRICK')
 ) AS T ("Boards.name", "count", "ResourceTypes.label")
-JOIN "Boards" ON T."Boards.name" = "Boards"."name"
+JOIN "Templates" ON T."Boards.name" = "Templates"."name"
 JOIN "ResourceTypes" ON T."ResourceTypes.label" = "ResourceTypes"."label";
 
 
-INSERT INTO "PortsResourceTypesCounts" ("Boards.id", "count", "ResourceTypes.id")
-SELECT "Boards"."id", T."count", NULL
+INSERT INTO "PortsResourceTypesCounts" ("Templates.id", "count", "ResourceTypes.id")
+SELECT "Templates"."id", T."count", NULL
 FROM 
 (
 	VALUES
 	('Board 1', 4)
 ) AS T ("Boards.name", "count")
-JOIN "Boards" ON T."Boards.name" = "Boards"."name";
+JOIN "Templates" ON T."Boards.name" = "Templates"."name";

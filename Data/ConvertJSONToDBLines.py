@@ -5,8 +5,8 @@ import json
 
 def road_settlements(data: dict):
 	road_settlement_associations = []
-	for road in data["Board"]["Roads"]:
-		for settlement_direction, settlement_id in road["Settlements"].items():
+	for road in data["Board"]["TemplatesRoads"]:
+		for settlement_direction, settlement_id in road["TemplatesSettlements"].items():
 			association = {
 				"board": "Board 1",
 				"Road": road["id"] + 1,
@@ -16,19 +16,19 @@ def road_settlements(data: dict):
 
 			road_settlement_associations.append(association)
 
-			for settlement in data["Board"]["Settlements"]:
+			for settlement in data["Board"]["TemplatesSettlements"]:
 				if(settlement["id"] != settlement_id):
 					continue
 
-				for road_direction, road_id in settlement["Roads"].items():
+				for road_direction, road_id in settlement["TemplatesRoads"].items():
 					if(road_id == road["id"]):
 						association["Corner's Edge"] = road_direction.split("::")[2]
 
 	print(
-		"""INSERT INTO "RoadsSettlements" (\n"""
-		"""	"Boards.id", "Corner's Edges.id", "Edge's Corners.id", "Roads.id", "Settlements.id"\n"""
+		"""INSERT INTO "TemplatesRoadsSettlements" (\n"""
+		"""	"Templates.id", "Corner's Edges.id", "Edge's Corners.id", "TemplatesRoads.id", "TemplatesSettlements.id"\n"""
 		""")\n"""
-		"""SELECT "Boards"."id", "Corner's Edges"."id", "Edge's Corners"."id", T."Roads.id", T."Settlements.id"\n"""
+		"""SELECT "Templates"."id", "Corner's Edges"."id", "Edge's Corners"."id", T."TemplatesRoads.id", T."TemplatesSettlements.id"\n"""
 		"""FROM \n"""
 		"""(\n"""
 		"""	VALUES"""
@@ -39,8 +39,8 @@ def road_settlements(data: dict):
 		print(f"""\t('Board 1', '{road["Corner's Edge"]}', '{road["Edge's Corner"]}', {road["Road"]}, {road["Settlement"]})""", end=end)
 
 	print(
-		""") AS T ("Boards.name", "Corner's Edges.label", "Edge's Corners.label", "Roads.id", "Settlements.id")\n"""
-		"""JOIN "Boards" ON T."Boards.name" = "Boards"."name"\n"""
+		""") AS T ("Boards.name", "Corner's Edges.label", "Edge's Corners.label", "TemplatesRoads.id", "TemplatesSettlements.id")\n"""
+		"""JOIN "Templates" ON T."Boards.name" = "Templates"."name"\n"""
 		"""JOIN "Corner's Edges" ON T."Corner's Edges.label" = "Corner's Edges"."label"\n"""
 		"""JOIN "Edge's Corners" ON T."Edge's Corners.label" = "Edge's Corners"."label";\n"""
 	)
@@ -48,8 +48,8 @@ def road_settlements(data: dict):
 
 def road_tiles(data: dict):
 	road_tile_associations = []
-	for road in data["Board"]["Roads"]:
-		for tile_direction, tile_id in road["Tiles"].items():
+	for road in data["Board"]["TemplatesRoads"]:
+		for tile_direction, tile_id in road["TemplatesTiles"].items():
 			association = {
 				"board": "Board 1",
 				"Road": road["id"] + 1,
@@ -59,19 +59,19 @@ def road_tiles(data: dict):
 
 			road_tile_associations.append(association)
 
-			for tile in data["Board"]["Tiles"]:
+			for tile in data["Board"]["TemplatesTiles"]:
 				if(tile["id"] != tile_id):
 					continue
 
-				for road_direction, road_id in tile["Roads"].items():
+				for road_direction, road_id in tile["TemplatesRoads"].items():
 					if(road_id == road["id"]):
 						association["Side's Edge"] = road_direction.split("::")[2]
 
 	print(
-		"""INSERT INTO "RoadsTiles" (\n"""
-		"""	"Boards.id", "Side's Edges.id", "Edge's Sides.id", "Roads.id", "Tiles.id"\n"""
+		"""INSERT INTO "TemplatesRoadsTiles" (\n"""
+		"""	"Templates.id", "Side's Edges.id", "Edge's Sides.id", "TemplatesRoads.id", "TemplatesTiles.id"\n"""
 		""")\n"""
-		"""SELECT "Boards"."id", "Side's Edges"."id", "Edge's Sides"."id", T."Roads.id", T."Tiles.id"\n"""
+		"""SELECT "Templates"."id", "Side's Edges"."id", "Edge's Sides"."id", T."TemplatesRoads.id", T."TemplatesTiles.id"\n"""
 		"""FROM \n"""
 		"""(\n"""
 		"""	VALUES"""
@@ -81,8 +81,8 @@ def road_tiles(data: dict):
 		print(f"""\t('Board 1', '{road["Side's Edge"]}', '{road["Edge's Side"]}', {road["Road"]}, {road["Tile"]})""", end=end)
 
 	print(
-		""") AS T ("Boards.name", "Side's Edges.label", "Edge's Sides.label", "Roads.id", "Tiles.id")\n"""
-		"""JOIN "Boards" ON T."Boards.name" = "Boards"."name"\n"""
+		""") AS T ("Boards.name", "Side's Edges.label", "Edge's Sides.label", "TemplatesRoads.id", "TemplatesTiles.id")\n"""
+		"""JOIN "Templates" ON T."Boards.name" = "Templates"."name"\n"""
 		"""JOIN "Side's Edges" ON T."Side's Edges.label" = "Side's Edges"."label"\n"""
 		"""JOIN "Edge's Sides" ON T."Edge's Sides.label" = "Edge's Sides"."label";\n"""
 	)
@@ -90,8 +90,8 @@ def road_tiles(data: dict):
 
 def settlement_ports(data: dict):
 	settlement_port_associations = []
-	for settlement in data["Board"]["Settlements"]:
-		for port_direction, port_id in settlement["Ports"].items():
+	for settlement in data["Board"]["TemplatesSettlements"]:
+		for port_direction, port_id in settlement["TemplatesPorts"].items():
 			association = {
 				"board": "Board 1",
 				"Settlement": settlement["id"] + 1,
@@ -101,19 +101,19 @@ def settlement_ports(data: dict):
 
 			settlement_port_associations.append(association)
 
-			for port in data["Board"]["Ports"]:
+			for port in data["Board"]["TemplatesPorts"]:
 				if(port["id"] != port_id):
 					continue
 
-				for settlement_direction, settlement_id in port["Settlements"].items():
+				for settlement_direction, settlement_id in port["TemplatesSettlements"].items():
 					if(settlement_id == settlement["id"]):
 						association["Side's Corner"] = settlement_direction.split("::")[2]
 
 	print(
-		"""INSERT INTO "PortsSettlements" (\n"""
-		"""	"Boards.id", "Side's Corners.id", "Corner's Sides.id", "Settlements.id", "Ports.id"\n"""
+		"""INSERT INTO "TemplatesPortsSettlements" (\n"""
+		"""	"Templates.id", "Side's Corners.id", "Corner's Sides.id", "TemplatesSettlements.id", "TemplatesPorts.id"\n"""
 		""")\n"""
-		"""SELECT "Boards"."id", "Side's Corners"."id", "Corner's Sides"."id", T."Settlements.id", T."Ports.id"\n"""
+		"""SELECT "Templates"."id", "Side's Corners"."id", "Corner's Sides"."id", T."TemplatesSettlements.id", T."TemplatesPorts.id"\n"""
 		"""FROM \n"""
 		"""(\n"""
 		"""	VALUES"""
@@ -124,8 +124,8 @@ def settlement_ports(data: dict):
 		print(f"""\t('Board 1', '{settlement["Side's Corner"]}', '{settlement["Corner's Side"]}', {settlement["Settlement"]}, {settlement["Port"]})""", end=end)
 
 	print(
-		""") AS T ("Boards.name", "Side's Corners.label", "Corner's Sides.label", "Settlements.id", "Ports.id")\n"""
-		"""JOIN "Boards" ON T."Boards.name" = "Boards"."name"\n"""
+		""") AS T ("Boards.name", "Side's Corners.label", "Corner's Sides.label", "TemplatesSettlements.id", "TemplatesPorts.id")\n"""
+		"""JOIN "Templates" ON T."Boards.name" = "Templates"."name"\n"""
 		"""JOIN "Side's Corners" ON T."Side's Corners.label" = "Side's Corners"."label"\n"""
 		"""JOIN "Corner's Sides" ON T."Corner's Sides.label" = "Corner's Sides"."label";\n"""
 	)
@@ -133,8 +133,8 @@ def settlement_ports(data: dict):
 
 def settlement_tiles(data: dict):
 	settlement_tile_associations = []
-	for settlement in data["Board"]["Settlements"]:
-		for tile_direction, tile_id in settlement["Tiles"].items():
+	for settlement in data["Board"]["TemplatesSettlements"]:
+		for tile_direction, tile_id in settlement["TemplatesTiles"].items():
 			association = {
 				"board": "Board 1",
 				"Settlement": settlement["id"] + 1,
@@ -144,19 +144,19 @@ def settlement_tiles(data: dict):
 
 			settlement_tile_associations.append(association)
 
-			for tile in data["Board"]["Tiles"]:
+			for tile in data["Board"]["TemplatesTiles"]:
 				if(tile["id"] != tile_id):
 					continue
 
-				for settlement_direction, settlement_id in tile["Settlements"].items():
+				for settlement_direction, settlement_id in tile["TemplatesSettlements"].items():
 					if(settlement_id == settlement["id"]):
 						association["Side's Corner"] = settlement_direction.split("::")[2]
 
 	print(
-		"""INSERT INTO "SettlementsTiles" (\n"""
-		"""	"Boards.id", "Side's Corners.id", "Corner's Sides.id", "Settlements.id", "Tiles.id"\n"""
+		"""INSERT INTO "TemplatesSettlementsTiles" (\n"""
+		"""	"Templates.id", "Side's Corners.id", "Corner's Sides.id", "TemplatesSettlements.id", "TemplatesTiles.id"\n"""
 		""")\n"""
-		"""SELECT "Boards"."id", "Side's Corners"."id", "Corner's Sides"."id", T."Settlements.id", T."Tiles.id"\n"""
+		"""SELECT "Templates"."id", "Side's Corners"."id", "Corner's Sides"."id", T."TemplatesSettlements.id", T."TemplatesTiles.id"\n"""
 		"""FROM \n"""
 		"""(\n"""
 		"""	VALUES"""
@@ -166,8 +166,8 @@ def settlement_tiles(data: dict):
 		print(f"""\t('Board 1', '{settlement["Side's Corner"]}', '{settlement["Corner's Side"]}', {settlement["Settlement"]}, {settlement["Tile"]})""", end=end)
 
 	print(
-		""") AS T ("Boards.name", "Side's Corners.label", "Corner's Sides.label", "Settlements.id", "Tiles.id")\n"""
-		"""JOIN "Boards" ON T."Boards.name" = "Boards"."name"\n"""
+		""") AS T ("Boards.name", "Side's Corners.label", "Corner's Sides.label", "TemplatesSettlements.id", "TemplatesTiles.id")\n"""
+		"""JOIN "Templates" ON T."Boards.name" = "Templates"."name"\n"""
 		"""JOIN "Side's Corners" ON T."Side's Corners.label" = "Side's Corners"."label"\n"""
 		"""JOIN "Corner's Sides" ON T."Corner's Sides.label" = "Corner's Sides"."label";\n"""
 	)

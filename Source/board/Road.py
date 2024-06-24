@@ -111,12 +111,12 @@ class Road:
 	def __iter__(self) -> iter:
 		yield from {
 			"id": self.id,
-			"Settlements": {
+			"TemplatesSettlements": {
 				f"Tile::Settlements::{self.Settlements.ENUM_KEYS[index]}": settlement.id
 				for index, settlement in enumerate(self.settlements)
 				if(settlement)
 			},
-			"Tiles": {
+			"TemplatesTiles": {
 				f"Settlement::Tiles::{self.Tiles.ENUM_KEYS[index]}": tile.id
 				for index, tile in enumerate(self.tiles)
 				if(tile)

@@ -17,7 +17,7 @@ __author__ = "MPZinke"
 
 
 from board.Board import Board
-from board.BoardData import BoardData, DictList
+from board.BoardTemplateData import BoardTemplateData, DictList
 from board.Port import Port, Ports
 from board.Road import Road, Roads
 from board.Robber import Robber

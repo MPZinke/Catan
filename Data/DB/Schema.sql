@@ -8,15 +8,15 @@ DROP TABLE IF EXISTS "Edge's Corners" CASCADE;
 DROP TABLE IF EXISTS "Edge's Sides" CASCADE;
 DROP TABLE IF EXISTS "Side's Corners" CASCADE;
 DROP TABLE IF EXISTS "Side's Edges" CASCADE;
-DROP TABLE IF EXISTS "Boards" CASCADE;
-DROP TABLE IF EXISTS "Ports" CASCADE;
-DROP TABLE IF EXISTS "Roads" CASCADE;
-DROP TABLE IF EXISTS "Settlements" CASCADE;
-DROP TABLE IF EXISTS "Tiles" CASCADE;
-DROP TABLE IF EXISTS "PortsSettlements" CASCADE;
-DROP TABLE IF EXISTS "RoadsSettlements" CASCADE;
-DROP TABLE IF EXISTS "RoadsTiles" CASCADE;
-DROP TABLE IF EXISTS "SettlementsTiles" CASCADE;
+DROP TABLE IF EXISTS "Templates" CASCADE;
+DROP TABLE IF EXISTS "TemplatesPorts" CASCADE;
+DROP TABLE IF EXISTS "TemplatesRoads" CASCADE;
+DROP TABLE IF EXISTS "TemplatesSettlements" CASCADE;
+DROP TABLE IF EXISTS "TemplatesTiles" CASCADE;
+DROP TABLE IF EXISTS "TemplatesPortsSettlements" CASCADE;
+DROP TABLE IF EXISTS "TemplatesRoadsSettlements" CASCADE;
+DROP TABLE IF EXISTS "TemplatesRoadsTiles" CASCADE;
+DROP TABLE IF EXISTS "TemplatesSettlementsTiles" CASCADE;
 DROP TABLE IF EXISTS "DiceValuesCounts" CASCADE;
 DROP TABLE IF EXISTS "PortsResourceTypesCounts" CASCADE;
 DROP TABLE IF EXISTS "TilesResourceTypesCounts" CASCADE;
@@ -99,110 +99,115 @@ CREATE TABLE "Side's Edges"  -- The edges of a side.
 -- —————————————————————————————————————————————————————————————————————————————————————————————————————————————————— --
 
 -- A template used to create a Game from.
-CREATE TABLE "Boards"
+CREATE TABLE "Templates"
 (
 	"id" SERIAL NOT NULL PRIMARY KEY,
 	"name" VARCHAR(32) NOT NULL UNIQUE
 );
 
 
-CREATE TABLE "Ports"
+CREATE TABLE "TemplatesPorts"
 (
 	"id" SERIAL NOT NULL PRIMARY KEY,
-	"Boards.id" INT NOT NULL,
-	FOREIGN KEY ("Boards.id") REFERENCES "Boards"("id")
+	"Templates.id" INT NOT NULL,
+	"ResourceTypes.id" INT DEFAULT NULL,  -- The default resource type of the port.
+	FOREIGN KEY ("Templates.id") REFERENCES "Templates"("id"),
+	FOREIGN KEY ("ResourceTypes.id") REFERENCES "ResourceTypes"("id")
 );
 
 
-CREATE TABLE "Roads"
+CREATE TABLE "TemplatesRoads"
 (
 	"id" SERIAL NOT NULL PRIMARY KEY,
-	"Boards.id" INT NOT NULL,
-	FOREIGN KEY ("Boards.id") REFERENCES "Boards"("id")
+	"Templates.id" INT NOT NULL,
+	FOREIGN KEY ("Templates.id") REFERENCES "Templates"("id")
 );
 
 
-CREATE TABLE "Settlements"
+CREATE TABLE "TemplatesSettlements"
 (
 	"id" SERIAL NOT NULL PRIMARY KEY,
-	"Boards.id" INT NOT NULL,
-	FOREIGN KEY ("Boards.id") REFERENCES "Boards"("id")
+	"Templates.id" INT NOT NULL,
+	FOREIGN KEY ("Templates.id") REFERENCES "Templates"("id")
 );
 
 
-CREATE TABLE "Tiles"
+CREATE TABLE "TemplatesTiles"
 (
 	"id" SERIAL NOT NULL PRIMARY KEY,
-	"Boards.id" INT NOT NULL,
+	"Templates.id" INT NOT NULL,
 	"coordinate" INT[2] NOT NULL,
-	FOREIGN KEY ("Boards.id") REFERENCES "Boards"("id")
+	"count" INT DEFAULT NULL,  -- The default number of tiles with the resource type.
+	"ResourceTypes.id" INT DEFAULT NULL,  -- The default resource type of the tile.
+	FOREIGN KEY ("Templates.id") REFERENCES "Templates"("id"),
+	FOREIGN KEY ("ResourceTypes.id") REFERENCES "ResourceTypes"("id")
 );
 
 
 -- ——————————————————————————————————————————————— BOARDS ASSOCIATION ——————————————————————————————————————————————— --
 -- —————————————————————————————————————————————————————————————————————————————————————————————————————————————————— --
 
-CREATE TABLE "PortsSettlements"
+CREATE TABLE "TemplatesPortsSettlements"
 (
 	"id" SERIAL NOT NULL PRIMARY KEY,
-	"Boards.id" INT NOT NULL,
+	"Templates.id" INT NOT NULL,
 	"Corner's Sides.id" INT NOT NULL,
 	"Side's Corners.id" INT NOT NULL,
-	"Settlements.id" INT NOT NULL,
-	"Ports.id" INT NOT NULL,
-	FOREIGN KEY ("Boards.id") REFERENCES "Boards"("id"),
+	"TemplatesSettlements.id" INT NOT NULL,
+	"TemplatesPorts.id" INT NOT NULL,
+	FOREIGN KEY ("Templates.id") REFERENCES "Templates"("id"),
 	FOREIGN KEY ("Corner's Sides.id") REFERENCES "Corner's Sides"("id"),
 	FOREIGN KEY ("Side's Corners.id") REFERENCES "Side's Corners"("id"),
-	FOREIGN KEY ("Settlements.id") REFERENCES "Settlements"("id"),
-	FOREIGN KEY ("Ports.id") REFERENCES "Ports"("id")
+	FOREIGN KEY ("TemplatesSettlements.id") REFERENCES "TemplatesSettlements"("id"),
+	FOREIGN KEY ("TemplatesPorts.id") REFERENCES "TemplatesPorts"("id")
 );
 
 
-CREATE TABLE "RoadsSettlements"
+CREATE TABLE "TemplatesRoadsSettlements"
 (
 	"id" SERIAL NOT NULL PRIMARY KEY,
-	"Boards.id" INT NOT NULL,
+	"Templates.id" INT NOT NULL,
 	"Corner's Edges.id" INT NOT NULL,
 	"Edge's Corners.id" INT NOT NULL,
-	"Roads.id" INT NOT NULL,
-	"Settlements.id" INT NOT NULL,
-	FOREIGN KEY ("Boards.id") REFERENCES "Boards"("id"),
+	"TemplatesRoads.id" INT NOT NULL,
+	"TemplatesSettlements.id" INT NOT NULL,
+	FOREIGN KEY ("Templates.id") REFERENCES "Templates"("id"),
 	FOREIGN KEY ("Corner's Edges.id") REFERENCES "Corner's Edges"("id"),
 	FOREIGN KEY ("Edge's Corners.id") REFERENCES "Edge's Corners"("id"),
-	FOREIGN KEY ("Roads.id") REFERENCES "Roads"("id"),
-	FOREIGN KEY ("Settlements.id") REFERENCES "Settlements"("id")
+	FOREIGN KEY ("TemplatesRoads.id") REFERENCES "TemplatesRoads"("id"),
+	FOREIGN KEY ("TemplatesSettlements.id") REFERENCES "TemplatesSettlements"("id")
 );
 
 
-CREATE TABLE "RoadsTiles"
+CREATE TABLE "TemplatesRoadsTiles"
 (
 	"id" SERIAL NOT NULL PRIMARY KEY,
-	"Boards.id" INT NOT NULL,
+	"Templates.id" INT NOT NULL,
 	"Edge's Sides.id" INT NOT NULL,
 	"Side's Edges.id" INT NOT NULL,
-	"Roads.id" INT NOT NULL,
-	"Tiles.id" INT NOT NULL,
-	FOREIGN KEY ("Boards.id") REFERENCES "Boards"("id"),
+	"TemplatesRoads.id" INT NOT NULL,
+	"TemplatesTiles.id" INT NOT NULL,
+	FOREIGN KEY ("Templates.id") REFERENCES "Templates"("id"),
 	FOREIGN KEY ("Edge's Sides.id") REFERENCES "Edge's Sides"("id"),
 	FOREIGN KEY ("Side's Edges.id") REFERENCES "Side's Edges"("id"),
-	FOREIGN KEY ("Roads.id") REFERENCES "Roads"("id"),
-	FOREIGN KEY ("Tiles.id") REFERENCES "Tiles"("id")
+	FOREIGN KEY ("TemplatesRoads.id") REFERENCES "TemplatesRoads"("id"),
+	FOREIGN KEY ("TemplatesTiles.id") REFERENCES "TemplatesTiles"("id")
 );
 
 
-CREATE TABLE "SettlementsTiles"
+CREATE TABLE "TemplatesSettlementsTiles"
 (
 	"id" SERIAL NOT NULL PRIMARY KEY,
 	"Corner's Sides.id" INT NOT NULL,
 	"Side's Corners.id" INT NOT NULL,
-	"Boards.id" INT NOT NULL,
-	"Settlements.id" INT NOT NULL,
-	"Tiles.id" INT NOT NULL,
+	"Templates.id" INT NOT NULL,
+	"TemplatesSettlements.id" INT NOT NULL,
+	"TemplatesTiles.id" INT NOT NULL,
 	FOREIGN KEY ("Corner's Sides.id") REFERENCES "Corner's Sides"("id"),
 	FOREIGN KEY ("Side's Corners.id") REFERENCES "Side's Corners"("id"),
-	FOREIGN KEY ("Boards.id") REFERENCES "Boards"("id"),
-	FOREIGN KEY ("Settlements.id") REFERENCES "Settlements"("id"),
-	FOREIGN KEY ("Tiles.id") REFERENCES "Tiles"("id")
+	FOREIGN KEY ("Templates.id") REFERENCES "Templates"("id"),
+	FOREIGN KEY ("TemplatesSettlements.id") REFERENCES "TemplatesSettlements"("id"),
+	FOREIGN KEY ("TemplatesTiles.id") REFERENCES "TemplatesTiles"("id")
 );
 
 -- ————————————————————————————————————————————————————— COUNTS ————————————————————————————————————————————————————— --
@@ -211,17 +216,17 @@ CREATE TABLE "SettlementsTiles"
 CREATE TABLE "DiceValuesCounts"
 (
 	"id" SERIAL NOT NULL PRIMARY KEY,
-	"Boards.id" INT NOT NULL,
+	"Templates.id" INT NOT NULL,
 	"count" INT NOT NULL CHECK(0 <= "count"),  -- The number of tiles with the value.
 	"value" INT NOT NULL CHECK(0 <= "value" AND "value" <= 12),  -- Corresponds to the dice roll value.
-	FOREIGN KEY ("Boards.id") REFERENCES "Boards"("id")
+	FOREIGN KEY ("Templates.id") REFERENCES "Templates"("id")
 );
 
 
 CREATE TABLE "PortsResourceTypesCounts"
 (
 	"id" SERIAL NOT NULL PRIMARY KEY,
-	"Boards.id" INT NOT NULL,
+	"Templates.id" INT NOT NULL,
 	"count" INT NOT NULL,  -- The number of tiles with the resource type.
 	"ResourceTypes.id" INT DEFAULT NULL,
 	FOREIGN KEY ("ResourceTypes.id") REFERENCES "ResourceTypes"("id")
@@ -231,7 +236,7 @@ CREATE TABLE "PortsResourceTypesCounts"
 CREATE TABLE "TilesResourceTypesCounts"
 (
 	"id" SERIAL NOT NULL PRIMARY KEY,
-	"Boards.id" INT NOT NULL,
+	"Templates.id" INT NOT NULL,
 	"count" INT NOT NULL,  -- The number of tiles with the resource type.
 	"ResourceTypes.id" INT NOT NULL,
 	FOREIGN KEY ("ResourceTypes.id") REFERENCES "ResourceTypes"("id")
@@ -246,7 +251,7 @@ CREATE TABLE "Games"
 	"id" SERIAL NOT NULL PRIMARY KEY,
 	"started" TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
 	"finished" TIMESTAMP DEFAULT NULL,
-	"Boards.id" INT DEFAULT NULL
+	"Templates.id" INT DEFAULT NULL
 );
 
 
@@ -255,34 +260,34 @@ CREATE TABLE "Games"
 CREATE TABLE "GamesPorts"
 (
 	"id" SERIAL NOT NULL PRIMARY KEY,
-	"Ports.id" INT NOT NULL,
+	"TemplatesPorts.id" INT NOT NULL,
 	"Games.id" INT NOT NULL,
 	"ResourceTypes.id" INT,
-
-	FOREIGN KEY ("Ports.id") REFERENCES "Ports"("id"),
+	FOREIGN KEY ("TemplatesPorts.id") REFERENCES "TemplatesPorts"("id"),
 	FOREIGN KEY ("Games.id") REFERENCES "Games"("id"),
 	FOREIGN KEY ("ResourceTypes.id") REFERENCES "ResourceTypes"("id")
 );
 
 
 CREATE UNIQUE INDEX "GamesPortsUniqueIndex"
-ON "GamesPorts" ("Ports.id", "Games.id");
+ON "GamesPorts" ("TemplatesPorts.id", "Games.id");
+
 
 -- ————————————————————————————————————————————————————— ROADS —————————————————————————————————————————————————————  --
 
 CREATE TABLE "GamesRoads"
 (
 	"id" SERIAL NOT NULL PRIMARY KEY,
-	"Roads.id" INT NOT NULL,
+	"TemplatesRoads.id" INT NOT NULL,
 	"Games.id" INT NOT NULL,
 	"Players.id" INT DEFAULT NULL,
-	FOREIGN KEY ("Roads.id") REFERENCES "Roads"("id"),
+	FOREIGN KEY ("TemplatesRoads.id") REFERENCES "TemplatesRoads"("id"),
 	FOREIGN KEY ("Games.id") REFERENCES "Games"("id")
 );
 
 
 CREATE UNIQUE INDEX "GamesRoadsUniqueIndex"
-ON "GamesRoads" ("Roads.id", "Games.id");
+ON "GamesRoads" ("TemplatesRoads.id", "Games.id");
 
 
 -- —————————————————————————————————————————————————— SETTLEMENTS ——————————————————————————————————————————————————  --
@@ -290,18 +295,18 @@ ON "GamesRoads" ("Roads.id", "Games.id");
 CREATE TABLE "GamesSettlements"
 (
 	"id" SERIAL NOT NULL PRIMARY KEY,
-	"Settlements.id" INT NOT NULL,
+	"TemplatesSettlements.id" INT NOT NULL,
 	"Games.id" INT NOT NULL,
 	"Players.id" INT DEFAULT NULL,
 	"SettlementTypes.id" INT NOT NULL,
-	FOREIGN KEY ("Settlements.id") REFERENCES "Settlements"("id"),
+	FOREIGN KEY ("TemplatesSettlements.id") REFERENCES "TemplatesSettlements"("id"),
 	FOREIGN KEY ("Games.id") REFERENCES "Games"("id"),
 	FOREIGN KEY ("SettlementTypes.id") REFERENCES "SettlementTypes"("id")
 );
 
 
 CREATE UNIQUE INDEX "GamesSettlementsUniqueIndex"
-ON "GamesSettlements" ("Settlements.id", "Games.id");
+ON "GamesSettlements" ("TemplatesSettlements.id", "Games.id");
 
 
 -- ————————————————————————————————————————————————————— TILES —————————————————————————————————————————————————————  --
@@ -309,18 +314,18 @@ ON "GamesSettlements" ("Settlements.id", "Games.id");
 CREATE TABLE "GamesTiles"
 (
 	"id" SERIAL NOT NULL PRIMARY KEY,
-	"Tiles.id" INT NOT NULL,
+	"TemplatesTiles.id" INT NOT NULL,
 	"Games.id" INT NOT NULL,
 	"value" INT NOT NULL CHECK("value" <= 12 AND 0 <= "value"),
 	"ResourceTypes.id" INT NOT NULL,
-	FOREIGN KEY ("Tiles.id") REFERENCES "Tiles"("id"),
+	FOREIGN KEY ("TemplatesTiles.id") REFERENCES "TemplatesTiles"("id"),
 	FOREIGN KEY ("Games.id") REFERENCES "Games"("id"),
 	FOREIGN KEY ("ResourceTypes.id") REFERENCES "ResourceTypes"("id")
 );
 
 
 CREATE UNIQUE INDEX "GamesTilesUniqueIndex"
-ON "GamesTiles" ("Tiles.id", "Games.id");
+ON "GamesTiles" ("TemplatesTiles.id", "Games.id");
 
 
 -- ———————————————————————————————————————————————— GAME ASSOCIATION ———————————————————————————————————————————————— --
@@ -454,6 +459,29 @@ ALTER TABLE "GamesSettlements" ADD CONSTRAINT "GamesSettlements.Players.id" FORE
 
 
 -- FROM: https://stackoverflow.com/a/42784814
+CREATE OR REPLACE FUNCTION DefaultRobberType()
+RETURNS TRIGGER 
+AS $$ BEGIN
+	IF NEW."GamesTiles.id" IS NULL THEN
+		NEW."GamesTiles.id" = (
+			SELECT "GamesTiles"."id"
+			FROM "GamesTiles"
+			JOIN "ResourceTypes" ON "GamesTiles"."ResourceTypes.id" = "ResourceTypes"."id"
+			WHERE "GamesTiles"."Games.id" = NEW."Games.id"
+			  AND "ResourceTypes"."label" = 'DESERT'
+		);
+	END IF;
+
+	RETURN NEW;
+END; 
+$$ language plpgsql; 
+
+CREATE TRIGGER DefaultRobberType
+BEFORE INSERT ON "GamesRobbers"
+FOR EACH ROW EXECUTE PROCEDURE DefaultRobberType();
+
+
+-- FROM: https://stackoverflow.com/a/42784814
 CREATE OR REPLACE FUNCTION DefaultSettlementType()
 RETURNS TRIGGER 
 AS $$ BEGIN
@@ -489,12 +517,6 @@ FOR EACH ROW EXECUTE PROCEDURE DefaultPlayersResources();
 CREATE OR REPLACE FUNCTION OnNewGame()
 RETURNS TRIGGER 
 AS $$ BEGIN
-	INSERT INTO "GamesRobbers" ("Games.id", "is_friendly", "GamesTiles.id")
-	SELECT NEW."id", TRUE, "GamesTiles"."id"
-	FROM "GamesTiles"
-	JOIN "ResourceTypes" ON "GamesTiles"."ResourceTypes.id" = "ResourceTypes"."id"
-	WHERE "ResourceTypes"."label" = 'DESERT';
-
 	INSERT INTO "GamesBiggestArmies" ("Games.id")
 	VALUES (NEW."id");
 

@@ -4,7 +4,7 @@ from typing import Any, Dict
 from random import randint
 
 
-from board import BoardData
+from board import BoardTemplateData
 from database import queries as db
 
 
@@ -15,7 +15,7 @@ ResourceTypeID = int
 
 class ResourceAndValueMapping:
 	def __init__(self, port_resources_dict: Dict[BoardPartID, ResourceTypeID],
-		tile_dice_values_dict: Dict[BoardPartID, int], tile_resources_dict: Dict[BoardPartID, int]
+		tile_dice_values_dict: Dict[BoardPartID, int], tile_resources_dict: Dict[BoardPartID, ResourceTypeID]
 	):
 		self.port_resources_dict: Dict[BoardPartID, ResourceTypeID] = port_resources_dict
 		self.tile_dice_values_dict: Dict[BoardPartID, int] = tile_dice_values_dict
@@ -34,12 +34,12 @@ def random_key_from_dictionary_for_available_items(dictionary: Dict[Any, int]) -
 	raise IndexError("There are not available items in the provided dictionary.")
 
 
-def resources_and_values(board_data: BoardData) -> RandomResourceAndValueMapping:
+def resources_and_values(board_data: BoardTemplateData) -> ResourceAndValueMapping:
 	port_random_resources_dict: Dict[BoardPartID, ResourceTypeID] = port_dicts_resources(board_data.id, board_data.ports)
 	tile_random_dice_values_dict: Dict[BoardPartID, int] = tile_dicts_dice_values(board_data.id,board_data.tiles)
 	tile_random_resources_dict: Dict[BoardPartID, ResourceTypeID] = tile_dicts_resources(board_data.id, board_data.tiles)
 
-	return RandomResourceAndValueMapping(port_random_resources_dict, tile_random_dice_values_dict,
+	return ResourceAndValueMapping(port_random_resources_dict, tile_random_dice_values_dict,
 		tile_random_resources_dict
 	)
 

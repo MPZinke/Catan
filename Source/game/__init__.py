@@ -16,4 +16,4 @@ __author__ = "MPZinke"
 
 from game.Player import Player, Players
 from game.Game import Game
-from game.GameData import GameData
+from game.BoardData import BoardData

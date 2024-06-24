@@ -13,7 +13,7 @@ __author__ = "MPZinke"
 #                                                                                                                      #
 ########################################################################################################################
 
-import database.queries.boards
+import database.queries.templates
 import database.queries.counts
 import database.queries.directions
 import database.queries.games

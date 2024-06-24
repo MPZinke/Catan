@@ -14,9 +14,23 @@ __author__ = "MPZinke"
 ########################################################################################################################
 
 
-
+from board import associate
 from board import Board, Port, Ports, Road, Roads, Robber, Settlement, Settlements, Tile, Tiles
-from game import GameData
+from game import BoardData
+
+
+def board(board_data: BoardData) -> Board:
+	port_objects: Ports = ports(board_data.ports)
+	road_objects: Roads = roads(board_data.roads)
+	robber_object: Robber = robber(board_data.robber)
+	settlement_objects: Settlements = settlements(board_data.settlements)
+	tile_objects: Tiles = tiles(board_data.tiles)
+
+	board = Board(port_objects, road_objects, robber_object, settlement_objects, tile_objects)
+
+	associate.board_parts(board_data, board)
+
+	return board
 
 
 def ports(port_dicts: list[dict]) -> Ports:
@@ -55,13 +69,3 @@ def tiles(tile_dicts: list[dict]) -> Tiles:
 		tiles.append(Tile(tile_dict["id"], tile_dict["coordinate"], tile_dict["ResourceTypes.id"]-1, tile_dict["value"]))
 
 	return tiles
-
-
-def instantiate_parts(game_data: GameData) -> Board:
-	ports: Ports = ports(game_data.ports)
-	roads: Roads = roads(game_data.roads)
-	robber: Robber = robber(game_data.robber)
-	settlements: Settlements = settlements(game_data.settlements)
-	tiles: Tiles = tiles(game_data.tiles)
-
-	return Board(ports, roads, robber, settlements, tiles)

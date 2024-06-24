@@ -24,7 +24,7 @@ from database.connect import connect
 @connect
 def new_game(cursor: psycopg2.extras.RealDictCursor, board_id: int) -> dict:
 	query = """
-		INSERT INTO "Games" ("Boards.id") VALUES (%s)
+		INSERT INTO "Games" ("Templates.id") VALUES (%s)
 		RETURNING *;
 	"""
 
@@ -35,7 +35,7 @@ def new_game(cursor: psycopg2.extras.RealDictCursor, board_id: int) -> dict:
 @connect
 def new_port(cursor: psycopg2.extras.RealDictCursor, game_id: int, port_id: int, resource_type: int) -> dict:
 	query = """
-		INSERT INTO "GamesPorts" ("Games.id", "Ports.id", "ResourceTypes.id") VALUES (%s, %s, %s)
+		INSERT INTO "GamesPorts" ("Games.id", "TemplatesPorts.id", "ResourceTypes.id") VALUES (%s, %s, %s)
 		RETURNING *;
 	"""
 
@@ -46,7 +46,7 @@ def new_port(cursor: psycopg2.extras.RealDictCursor, game_id: int, port_id: int,
 @connect
 def new_road(cursor: psycopg2.extras.RealDictCursor, game_id: int, road_id: int) -> dict:
 	query = """
-		INSERT INTO "GamesRoads" ("Games.id", "Roads.id") VALUES (%s, %s)
+		INSERT INTO "GamesRoads" ("Games.id", "TemplatesRoads.id") VALUES (%s, %s)
 		RETURNING *;
 	"""
 
@@ -59,7 +59,7 @@ def new_settlement(cursor: psycopg2.extras.RealDictCursor, game_id: int, settlem
 	settlement_type_id: Optional[int]=None
 ) -> dict:
 	query = """
-		INSERT INTO "GamesSettlements" ("Games.id", "Settlements.id", "SettlementTypes.id") VALUES (%s, %s, %s)
+		INSERT INTO "GamesSettlements" ("Games.id", "TemplatesSettlements.id", "SettlementTypes.id") VALUES (%s, %s, %s)
 		RETURNING *;
 	"""
 
@@ -71,20 +71,22 @@ def new_settlement(cursor: psycopg2.extras.RealDictCursor, game_id: int, settlem
 def new_tile(cursor: psycopg2.extras.RealDictCursor, game_id: int, tile_id: int, resource_type: int, value: int) -> int:
 	query = """
 		WITH "InsertedGameTile" AS (
-			INSERT INTO "GamesTiles" ("Games.id", "Tiles.id", "ResourceTypes.id", "value")
+			INSERT INTO "GamesTiles" ("Games.id", "TemplatesTiles.id", "ResourceTypes.id", "value")
 			VALUES (%s, %s, %s, %s)
 			RETURNING *
 		)
-		SELECT * FROM "InsertedGameTile"
-		JOIN "Tiles" ON "InsertedGameTile"."Tiles.id" = "Tiles"."id";
+		SELECT "InsertedGameTile".*, "TemplatesTiles"."coordinate" FROM "InsertedGameTile"
+		JOIN "TemplatesTiles" ON "InsertedGameTile"."TemplatesTiles.id" = "TemplatesTiles"."id";
 	"""
 
+	print(resource_type)
 	cursor.execute(query, (game_id, tile_id, resource_type, value))
 	return dict(cursor.fetchone())
 
 
 @connect
-def new_robber(cursor: psycopg2.extras.RealDictCursor, game_id: int, game_tile_id: int, is_friendly: bool=False
+def new_robber(cursor: psycopg2.extras.RealDictCursor, game_id: int, game_tile_id: Optional[int]=None,
+	is_friendly: bool=False
 ) -> dict:
 	query = """
 		INSERT INTO "GamesRobbers" ("Games.id", "is_friendly", "GamesTiles.id") VALUES (%s, %s, %s)

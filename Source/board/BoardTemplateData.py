@@ -3,7 +3,7 @@
 DictList = list[dict]
 
 
-class BoardData:
+class BoardTemplateData:
 	def __init__(self, id: int, name: str, ports: DictList, roads: DictList, settlements: DictList,
 		tiles: DictList
 	):
