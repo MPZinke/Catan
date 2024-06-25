@@ -18,7 +18,7 @@ import math
 from PIL import Image, ImageDraw
 
 
-from board import Tile
+from game.board import Tile
 from gui.Hexagon import Hexagon
 from gui.HexagonGrid import HexagonGrid
 

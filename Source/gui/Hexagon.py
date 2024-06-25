@@ -4,7 +4,7 @@ import math
 from typing import Tuple
 
 
-from board import Tile
+from game.board import Tile
 
 
 Coordinate = Tuple[float, float]

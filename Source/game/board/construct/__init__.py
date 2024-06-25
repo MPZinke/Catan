@@ -14,9 +14,9 @@ __author__ = "MPZinke"
 ########################################################################################################################
 
 
-from board import associate
-from board import Board, Port, Ports, Road, Roads, Robber, Settlement, Settlements, Tile, Tiles
-from board.construct.BoardData import BoardData
+from game.board import associate
+from game.board import Board, Port, Ports, Road, Roads, Robber, Settlement, Settlements, Tile, Tiles
+from game.board.construct.BoardData import BoardData
 
 
 def construct_board(board_data: BoardData) -> Board:
@@ -66,6 +66,8 @@ def construct_settlements(settlement_dicts: list[dict]) -> Settlements:
 def construct_tiles(tile_dicts: list[dict]) -> Tiles:
 	tiles: list[Tile] = []
 	for tile_dict in tile_dicts:
-		tiles.append(Tile(tile_dict["id"], tile_dict["coordinate"], tile_dict["ResourceTypes.id"]-1, tile_dict["value"]))
+		tiles.append(
+			Tile(tile_dict["id"], tile_dict["coordinate"], tile_dict["ResourceTypes.id"]-1, tile_dict["value"])
+		)
 
 	return tiles

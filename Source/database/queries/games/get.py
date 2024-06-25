@@ -21,6 +21,18 @@ from database.connect import connect
 
 
 @connect
+def get_game(cursor: psycopg2.extras.RealDictCursor, game_id: int) -> dict:
+	query = """
+		SELECT *
+		FROM "Games"
+		WHERE "Games.id" = %s
+	"""
+
+	cursor.execute(query, (game_id,))
+	return dict(cursor.fetchone())
+
+
+@connect
 def get_ports(cursor: psycopg2.extras.RealDictCursor, game_id: int) -> list[dict]:
 	query = """
 		SELECT *

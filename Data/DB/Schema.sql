@@ -17,9 +17,9 @@ DROP TABLE IF EXISTS "TemplatesPortsSettlements" CASCADE;
 DROP TABLE IF EXISTS "TemplatesRoadsSettlements" CASCADE;
 DROP TABLE IF EXISTS "TemplatesRoadsTiles" CASCADE;
 DROP TABLE IF EXISTS "TemplatesSettlementsTiles" CASCADE;
-DROP TABLE IF EXISTS "DiceValuesCounts" CASCADE;
-DROP TABLE IF EXISTS "PortsResourceTypesCounts" CASCADE;
-DROP TABLE IF EXISTS "TilesResourceTypesCounts" CASCADE;
+DROP TABLE IF EXISTS "TemplatesDiceValuesCounts" CASCADE;
+DROP TABLE IF EXISTS "TemplatesPortsResourceTypesCounts" CASCADE;
+DROP TABLE IF EXISTS "TemplatesTilesResourceTypesCounts" CASCADE;
 DROP TABLE IF EXISTS "Games" CASCADE;
 DROP TABLE IF EXISTS "GamesPorts" CASCADE;
 DROP TABLE IF EXISTS "GamesRoads" CASCADE;
@@ -213,7 +213,7 @@ CREATE TABLE "TemplatesSettlementsTiles"
 -- ————————————————————————————————————————————————————— COUNTS ————————————————————————————————————————————————————— --
 -- —————————————————————————————————————————————————————————————————————————————————————————————————————————————————— --
 
-CREATE TABLE "DiceValuesCounts"
+CREATE TABLE "TemplatesDiceValuesCounts"
 (
 	"id" SERIAL NOT NULL PRIMARY KEY,
 	"Templates.id" INT NOT NULL,
@@ -223,7 +223,7 @@ CREATE TABLE "DiceValuesCounts"
 );
 
 
-CREATE TABLE "PortsResourceTypesCounts"
+CREATE TABLE "TemplatesPortsResourceTypesCounts"
 (
 	"id" SERIAL NOT NULL PRIMARY KEY,
 	"Templates.id" INT NOT NULL,
@@ -233,7 +233,7 @@ CREATE TABLE "PortsResourceTypesCounts"
 );
 
 
-CREATE TABLE "TilesResourceTypesCounts"
+CREATE TABLE "TemplatesTilesResourceTypesCounts"
 (
 	"id" SERIAL NOT NULL PRIMARY KEY,
 	"Templates.id" INT NOT NULL,
@@ -337,13 +337,13 @@ CREATE TABLE "GamesPortsGamesSettlements"
 	"Games.id" INT NOT NULL,
 	"Corner's Sides.id" INT NOT NULL,
 	"Side's Corners.id" INT NOT NULL,
-	"GamesSettlements.id" INT NOT NULL,
 	"GamesPorts.id" INT NOT NULL,
+	"GamesSettlements.id" INT NOT NULL,
 	FOREIGN KEY ("Games.id") REFERENCES "Games"("id"),
 	FOREIGN KEY ("Corner's Sides.id") REFERENCES "Corner's Sides"("id"),
 	FOREIGN KEY ("Side's Corners.id") REFERENCES "Side's Corners"("id"),
-	FOREIGN KEY ("GamesSettlements.id") REFERENCES "GamesSettlements"("id"),
-	FOREIGN KEY ("GamesPorts.id") REFERENCES "GamesPorts"("id")
+	FOREIGN KEY ("GamesPorts.id") REFERENCES "GamesPorts"("id"),
+	FOREIGN KEY ("GamesSettlements.id") REFERENCES "GamesSettlements"("id")
 );
 
 
@@ -382,9 +382,9 @@ CREATE TABLE "GamesRoadsGamesTiles"
 CREATE TABLE "GamesSettlementsGamesTiles"
 (
 	"id" SERIAL NOT NULL PRIMARY KEY,
+	"Games.id" INT NOT NULL,
 	"Corner's Sides.id" INT NOT NULL,
 	"Side's Corners.id" INT NOT NULL,
-	"Games.id" INT NOT NULL,
 	"GamesSettlements.id" INT NOT NULL,
 	"GamesTiles.id" INT NOT NULL,
 	FOREIGN KEY ("Corner's Sides.id") REFERENCES "Corner's Sides"("id"),

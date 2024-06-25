@@ -5,7 +5,7 @@ __author__ = "MPZinke"
 ########################################################################################################################
 #                                                                                                                      #
 #   created by: MPZinke                                                                                                #
-#   on 2024.04.02                                                                                                      #
+#   on 2024.05.12                                                                                                      #
 #                                                                                                                      #
 #   DESCRIPTION:                                                                                                       #
 #   BUGS:                                                                                                              #
@@ -14,11 +14,14 @@ __author__ = "MPZinke"
 ########################################################################################################################
 
 
+from typing import Optional
 
 
-from board.Board import Board
-from board.Port import Port, Ports
-from board.Road import Road, Roads
-from board.Robber import Robber
-from board.Settlement import Settlement, Settlements
-from board.Tile import Tile, Tiles
+from game.board import Tile
+
+
+class Robber:
+	def __init__(self, id: int, is_friendly: bool):
+		id: int = id
+		is_friendly: bool = is_friendly
+		tile: Optional[Tile] = None

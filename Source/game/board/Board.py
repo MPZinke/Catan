@@ -5,7 +5,7 @@ __author__ = "MPZinke"
 ########################################################################################################################
 #                                                                                                                      #
 #   created by: MPZinke                                                                                                #
-#   on 2024.05.12                                                                                                      #
+#   on 2024.04.01                                                                                                      #
 #                                                                                                                      #
 #   DESCRIPTION:                                                                                                       #
 #   BUGS:                                                                                                              #
@@ -14,19 +14,22 @@ __author__ = "MPZinke"
 ########################################################################################################################
 
 
-from database.queries.games.get import get_game
-from database.queries.games.get import get_ports
-from database.queries.games.get import get_roads
-from database.queries.games.get import get_settlements
-from database.queries.games.get import get_tiles
+from typing import Optional
 
-from database.queries.games.new import new_game
-from database.queries.games.new import new_port
-from database.queries.games.new import new_road
-from database.queries.games.new import new_robber
-from database.queries.games.new import new_settlement
-from database.queries.games.new import new_tile
-from database.queries.games.new import new_ports_settlements
-from database.queries.games.new import new_roads_settlements
-from database.queries.games.new import new_roads_tiles
-from database.queries.games.new import new_settlements_tiles
+
+from game.board import Port
+from game.board import Road
+from game.board import Robber
+from game.board import Settlement
+from game.board import Tile
+
+
+class Board:
+	def __init__(self, ports: Optional[list[Port]], roads: Optional[list[Road]]=None, robber: Optional[Robber]=None,
+		settlements: Optional[list[Settlement]]=None, tiles: Optional[list[Tile]]=None
+	):
+		self.ports: list[Port] = list(ports) if(ports is not None) else []
+		self.robber: Robber = robber
+		self.roads: list[Road] = list(roads) if(roads is not None) else []
+		self.settlements: list[Settlement] = list(settlements) if(settlements is not None) else []
+		self.tiles: list[Tile] = list(tiles) if(tiles is not None) else []

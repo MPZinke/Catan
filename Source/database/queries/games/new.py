@@ -22,13 +22,13 @@ from database.connect import connect
 
 
 @connect
-def new_game(cursor: psycopg2.extras.RealDictCursor, board_id: int) -> dict:
+def new_game(cursor: psycopg2.extras.RealDictCursor, template_id: int) -> dict:
 	query = """
 		INSERT INTO "Games" ("Templates.id") VALUES (%s)
 		RETURNING *;
 	"""
 
-	cursor.execute(query, (board_id,))
+	cursor.execute(query, (template_id,))
 	return dict(cursor.fetchone())
 
 
@@ -51,6 +51,19 @@ def new_road(cursor: psycopg2.extras.RealDictCursor, game_id: int, road_id: int)
 	"""
 
 	cursor.execute(query, (game_id, road_id))
+	return dict(cursor.fetchone())
+
+
+@connect
+def new_robber(cursor: psycopg2.extras.RealDictCursor, game_id: int, game_tile_id: Optional[int]=None,
+	is_friendly: bool=False
+) -> dict:
+	query = """
+		INSERT INTO "GamesRobbers" ("Games.id", "is_friendly", "GamesTiles.id") VALUES (%s, %s, %s)
+		RETURNING *;
+	"""
+
+	cursor.execute(query, (game_id, is_friendly, game_tile_id))
 	return dict(cursor.fetchone())
 
 
@@ -85,13 +98,60 @@ def new_tile(cursor: psycopg2.extras.RealDictCursor, game_id: int, tile_id: int,
 
 
 @connect
-def new_robber(cursor: psycopg2.extras.RealDictCursor, game_id: int, game_tile_id: Optional[int]=None,
-	is_friendly: bool=False
+def new_ports_settlements(cursor: psycopg2.extras.RealDictCursor, game_id: int, ports_id: int, settlements_id: int,
+	corners_sides_id: int, sides_corners_id: int
 ) -> dict:
 	query = """
-		INSERT INTO "GamesRobbers" ("Games.id", "is_friendly", "GamesTiles.id") VALUES (%s, %s, %s)
+		INSERT INTO "GamesPortsGamesSettlements" 
+		("Games.id", "GamesPorts.id", "GamesSettlements.id", "Corner's Sides.id", "Side's Corners.id")
+		VALUES (%s, %s, %s, %s, %s)
 		RETURNING *;
 	"""
 
-	cursor.execute(query, (game_id, is_friendly, game_tile_id))
+	cursor.execute(query, (game_id, ports_id, settlements_id, corners_sides_id, sides_corners_id))
+	return dict(cursor.fetchone())
+
+
+@connect
+def new_roads_settlements(cursor: psycopg2.extras.RealDictCursor, game_id: int, roads_id: int, settlements_id: int,
+	corners_edges_id: int, edges_corners_id: int
+) -> dict:
+	query = """
+		INSERT INTO "GamesRoadsGamesSettlements" 
+		("Games.id", "GamesRoads.id", "GamesSettlements.id", "Corner's Edges.id", "Edge's Corners.id")
+		VALUES (%s, %s, %s, %s, %s)
+		RETURNING *;
+	"""
+
+	cursor.execute(query, (game_id, roads_id, settlements_id, corners_edges_id, edges_corners_id))
+	return dict(cursor.fetchone())
+
+
+@connect
+def new_roads_tiles(cursor: psycopg2.extras.RealDictCursor, game_id: int, roads_id: int, tiles_id: int,
+	edges_sides_id: int, sides_edges_id: int
+) -> dict:
+	query = """
+		INSERT INTO "GamesRoadsGamesTiles" 
+		("Games.id", "GamesRoads.id", "GamesTiles.id", "Edge's Sides.id", "Side's Edges.id")
+		VALUES (%s, %s, %s, %s, %s)
+		RETURNING *;
+	"""
+
+	cursor.execute(query, (game_id, roads_id, tiles_id, edges_sides_id, sides_edges_id))
+	return dict(cursor.fetchone())
+
+
+@connect
+def new_settlements_tiles(cursor: psycopg2.extras.RealDictCursor, game_id: int, settlements_id: int, tiles_id: int,
+	corners_sides_id: int, sides_corners_id: int
+) -> dict:
+	query = """
+		INSERT INTO "GamesSettlementsGamesTiles" 
+		("Games.id", "GamesSettlements.id", "GamesTiles.id", "Corner's Sides.id", "Side's Corners.id")
+		VALUES (%s, %s, %s, %s, %s)
+		RETURNING *;
+	"""
+
+	cursor.execute(query, (game_id, settlements_id, tiles_id, corners_sides_id, sides_corners_id))
 	return dict(cursor.fetchone())

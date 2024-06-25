@@ -20,7 +20,8 @@ from game.new import new_game
 
 def main():
 	board_id = 1
-	board = new_game(board_id)
+	game = new_game(board_id)
+	board = game.board
 	ports, roads, settlements, tiles = board.ports, board.roads, board.settlements, board.tiles
 	ports_strings = list(map(str, ports))
 	roads_strings = list(map(str, roads))

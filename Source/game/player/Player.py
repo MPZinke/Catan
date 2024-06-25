@@ -20,8 +20,9 @@ Settlements = list[Settlement]
 class Player:
 	ResourcesTypes = Enum("Player::ResourceType", **{type["label"]: type["id"]-1 for type in get_resource_types()})
 
-	def __init__(self, id: int):
+	def __init__(self, id: int, name: str):
 		self.id: int = id
+		self.name: str = name
 
 		self.development_cards = []
 		self.resources = []  # TODO

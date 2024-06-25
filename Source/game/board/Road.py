@@ -125,7 +125,7 @@ class Road:
 
 
 	def __str__(self) -> str:
-		from board import Tile
+		from game.board import Tile
 
 		def center(value: int, space_length: int=3, padder: str=' ') -> str:
 			value_string: str = str(value)

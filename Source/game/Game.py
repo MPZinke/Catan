@@ -4,8 +4,8 @@ from datetime import datetime
 from typing import Optional
 
 
-from board import Board
-from game import Player, Players
+from game.player.Player import Player, Players  # TODO
+from game.board import Board
 
 
 class Game:

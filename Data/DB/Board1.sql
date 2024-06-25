@@ -612,7 +612,7 @@ JOIN "Corner's Sides" ON T."Corner's Sides.label" = "Corner's Sides"."label";
 
 
 
-INSERT INTO "DiceValuesCounts" ("Templates.id", "count", "value" )
+INSERT INTO "TemplatesDiceValuesCounts" ("Templates.id", "count", "value" )
 SELECT "Templates"."id", T."count", T."value"
 FROM
 (
@@ -632,7 +632,7 @@ FROM
 JOIN "Templates" ON T."Boards.name" = "Templates"."name";
 
 
-INSERT INTO "TilesResourceTypesCounts" ("Templates.id", "count", "ResourceTypes.id")
+INSERT INTO "TemplatesTilesResourceTypesCounts" ("Templates.id", "count", "ResourceTypes.id")
 SELECT "Templates"."id", T."count", "ResourceTypes"."id"
 FROM 
 (
@@ -648,7 +648,7 @@ JOIN "Templates" ON T."Boards.name" = "Templates"."name"
 JOIN "ResourceTypes" ON T."ResourceTypes.label" = "ResourceTypes"."label";
 
 
-INSERT INTO "PortsResourceTypesCounts" ("Templates.id", "count", "ResourceTypes.id")
+INSERT INTO "TemplatesPortsResourceTypesCounts" ("Templates.id", "count", "ResourceTypes.id")
 SELECT "Templates"."id", T."count", "ResourceTypes"."id"
 FROM 
 (
@@ -664,7 +664,7 @@ JOIN "Templates" ON T."Boards.name" = "Templates"."name"
 JOIN "ResourceTypes" ON T."ResourceTypes.label" = "ResourceTypes"."label";
 
 
-INSERT INTO "PortsResourceTypesCounts" ("Templates.id", "count", "ResourceTypes.id")
+INSERT INTO "TemplatesPortsResourceTypesCounts" ("Templates.id", "count", "ResourceTypes.id")
 SELECT "Templates"."id", T."count", NULL
 FROM 
 (
