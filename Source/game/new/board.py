@@ -15,14 +15,11 @@ __author__ = "MPZinke"
 
 
 import database.queries as db
-from board import Board, BoardTemplateData, DictList, Tile
+from board import Board, Tile
+from board.template_data import TemplateData, DictList
 from game import BoardData
 from game.new.random import ResourceAndValueMapping
 
-
-def game(board_id: int) -> dict:
-	game_dict: dict = db.games.new_game(board_id)  # pylint: disable=no-value-for-parameter
-	return game_dict
 
 
 def game_ports(game_id: int, port_dicts: DictList, port_resources_dict: dict) -> DictList:
@@ -76,33 +73,33 @@ def game_tiles(game_id: int, tile_dicts: DictList, tile_dice_values_dict: dict, 
 	return game_tile_dicts
 
 
-def game_ports_roads_robber_settlements_tiles(board_template_data: BoardTemplateData,
+def new_board(template_data: TemplateData,
 	random_resource_and_value_mapping: ResourceAndValueMapping
 ) -> BoardData:
 	# Create game-board instances.
-	game_dict: dict = game(board_template_data.id)
+	game_dict: dict = game(template_data.id)
 	game_id = game_dict["id"]
 
-	port_dicts: DictList = game_ports(game_id, board_template_data.ports,
+	port_dicts: DictList = game_ports(game_id, template_data.ports,
 		random_resource_and_value_mapping.port_resources_dict
 	)
-	road_dicts: DictList = game_roads(game_id, board_template_data.roads)
-	settlement_dicts: DictList = game_settlements(game_id, board_template_data.settlements)
-	tile_dicts: DictList = game_tiles(game_id, board_template_data.tiles,
+	road_dicts: DictList = game_roads(game_id, template_data.roads)
+	settlement_dicts: DictList = game_settlements(game_id, template_data.settlements)
+	tile_dicts: DictList = game_tiles(game_id, template_data.tiles,
 		random_resource_and_value_mapping.tile_dice_values_dict,
 		random_resource_and_value_mapping.tile_resources_dict
 	)
 
-	ports_settlements: DictList = db.templates.get_ports_settlements(board_template_data.id)  # pylint: disable=no-value-for-parameter
-	roads_settlements: DictList = db.templates.get_roads_settlements(board_template_data.id)  # pylint: disable=no-value-for-parameter
-	roads_tiles: DictList = db.templates.get_roads_tiles(board_template_data.id)  # pylint: disable=no-value-for-parameter
-	settlements_tiles: DictList = db.templates.get_settlements_tiles(board_template_data.id)  # pylint: disable=no-value-for-parameter
+	ports_settlements: DictList = db.templates.get_ports_settlements(template_data.id)  # pylint: disable=no-value-for-parameter
+	roads_settlements: DictList = db.templates.get_roads_settlements(template_data.id)  # pylint: disable=no-value-for-parameter
+	roads_tiles: DictList = db.templates.get_roads_tiles(template_data.id)  # pylint: disable=no-value-for-parameter
+	settlements_tiles: DictList = db.templates.get_settlements_tiles(template_data.id)  # pylint: disable=no-value-for-parameter
 
 	robber_dict: dict = game_robber(game_id)
 
 	return BoardData(
 		id=game_dict["id"],
-		board_id=board_template_data.id,
+		board_id=template_data.id,
 		ports=port_dicts,
 		ports_settlements=ports_settlements,
 		roads=road_dicts,
