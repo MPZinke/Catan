@@ -5,7 +5,7 @@ __author__ = "MPZinke"
 ########################################################################################################################
 #                                                                                                                      #
 #   created by: MPZinke                                                                                                #
-#   on 2024.05.12                                                                                                      #
+#   on 2024.06.25                                                                                                      #
 #                                                                                                                      #
 #   DESCRIPTION:                                                                                                       #
 #   BUGS:                                                                                                              #
@@ -19,17 +19,6 @@ from typing import Optional
 
 
 from database.connect import connect
-
-
-@connect
-def new_game(cursor: psycopg2.extras.RealDictCursor, template_id: int) -> dict:
-	query = """
-		INSERT INTO "Games" ("Templates.id") VALUES (%s)
-		RETURNING *;
-	"""
-
-	cursor.execute(query, (template_id,))
-	return dict(cursor.fetchone())
 
 
 @connect

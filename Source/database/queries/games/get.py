@@ -82,3 +82,51 @@ def get_tiles(cursor: psycopg2.extras.RealDictCursor, game_id: int) -> list[dict
 
 	cursor.execute(query, (game_id,))
 	return list(map(dict, cursor))
+
+
+@connect
+def get_ports_settlements(cursor: psycopg2.extras.RealDictCursor, game_id: int) -> dict:
+	query = """
+		SELECT *
+		FROM "GamesPortsGamesSettlements" 
+		WHERE "Games.id" = %s;
+	"""
+
+	cursor.execute(query, (game_id,))
+	return dict(cursor.fetchone())
+
+
+@connect
+def get_roads_settlements(cursor: psycopg2.extras.RealDictCursor, game_id: int) -> dict:
+	query = """
+		SELECT *
+		FROM "GamesRoadsGamesSettlements" 
+		WHERE "Games.id" = %s;
+	"""
+
+	cursor.execute(query, (game_id,))
+	return dict(cursor.fetchone())
+
+
+@connect
+def get_roads_tiles(cursor: psycopg2.extras.RealDictCursor, game_id: int) -> dict:
+	query = """
+		SELECT *
+		FROM "GamesRoadsGamesTiles" 
+		WHERE "Games.id" = %s;
+	"""
+
+	cursor.execute(query, (game_id,))
+	return dict(cursor.fetchone())
+
+
+@connect
+def get_settlements_tiles(cursor: psycopg2.extras.RealDictCursor, game_id: int) -> dict:
+	query = """
+		SELECT *
+		FROM "GamesSettlementsGamesTiles" 
+		WHERE "Games.id" = %s;
+	"""
+
+	cursor.execute(query, (game_id,))
+	return dict(cursor.fetchone())
