@@ -46,8 +46,8 @@ def random_resources_and_values(template_data: TemplateData) -> ResourceAndValue
 	)
 
 
-def port_dicts_resources(board_id: int, port_dicts: DictList) -> BoardResourceMapping:
-	ports_resource_types_counts_list: DictList = db.counts.get_ports_resource_types_counts(board_id)  # pylint: disable=no-value-for-parameter
+def port_dicts_resources(template_id: int, port_dicts: DictList) -> BoardResourceMapping:
+	ports_resource_types_counts_list: DictList = db.counts.get_ports_resource_types_counts(template_id)  # pylint: disable=no-value-for-parameter
 	ports_resource_types_counts = {dictionary["ResourceTypes.id"]: dictionary["count"]
 		for dictionary in ports_resource_types_counts_list
 	}
@@ -61,8 +61,8 @@ def port_dicts_resources(board_id: int, port_dicts: DictList) -> BoardResourceMa
 	return port_id_resource_type_id_mappings
 
 
-def tile_dicts_dice_values(board_id: int, tile_dicts: DictList) -> BoardResourceMapping:
-	dice_value_counts_list: DictList = db.counts.get_dice_value_counts(board_id)  # pylint: disable=no-value-for-parameter
+def tile_dicts_dice_values(template_id: int, tile_dicts: DictList) -> BoardResourceMapping:
+	dice_value_counts_list: DictList = db.counts.get_dice_value_counts(template_id)  # pylint: disable=no-value-for-parameter
 	dice_value_counts = {dictionary["value"]: dictionary["count"] for dictionary in dice_value_counts_list}
 
 	tile_id_value_mappings: BoardValueMapping = {}
@@ -75,8 +75,8 @@ def tile_dicts_dice_values(board_id: int, tile_dicts: DictList) -> BoardResource
 	return tile_id_value_mappings
 
 
-def tile_dicts_resources(board_id: int, tile_dicts: DictList) -> BoardResourceMapping:
-	tiles_resource_types_counts_list: DictList = db.counts.get_tiles_resource_types_counts(board_id)  # pylint: disable=no-value-for-parameter
+def tile_dicts_resources(template_id: int, tile_dicts: DictList) -> BoardResourceMapping:
+	tiles_resource_types_counts_list: DictList = db.counts.get_tiles_resource_types_counts(template_id)  # pylint: disable=no-value-for-parameter
 	tiles_resource_types_counts = {dictionary["ResourceTypes.id"]: dictionary["count"]
 		for dictionary in tiles_resource_types_counts_list
 	}

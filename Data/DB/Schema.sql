@@ -111,6 +111,7 @@ CREATE TABLE "TemplatesPorts"
 	"id" SERIAL NOT NULL PRIMARY KEY,
 	"Templates.id" INT NOT NULL,
 	"ResourceTypes.id" INT DEFAULT NULL,  -- The default resource type of the port.
+	"TemplatesSettlements.ids" INT[6] DEFAULT ARRAY[NULL, NULL, NULL, NULL, NULL, NULL]::INT[6],
 	FOREIGN KEY ("Templates.id") REFERENCES "Templates"("id"),
 	FOREIGN KEY ("ResourceTypes.id") REFERENCES "ResourceTypes"("id")
 );
@@ -120,6 +121,8 @@ CREATE TABLE "TemplatesRoads"
 (
 	"id" SERIAL NOT NULL PRIMARY KEY,
 	"Templates.id" INT NOT NULL,
+	"TemplatesSettlements.ids" INT[2] DEFAULT ARRAY[NULL, NULL]::INT[2],
+	"TemplatesTiles.ids" INT[2] DEFAULT ARRAY[NULL, NULL]::INT[2],
 	FOREIGN KEY ("Templates.id") REFERENCES "Templates"("id")
 );
 
@@ -128,6 +131,9 @@ CREATE TABLE "TemplatesSettlements"
 (
 	"id" SERIAL NOT NULL PRIMARY KEY,
 	"Templates.id" INT NOT NULL,
+	"TemplatesPorts.ids" INT[3] DEFAULT ARRAY[NULL, NULL]::INT[3],
+	"TemplatesRoads.ids" INT[3] DEFAULT ARRAY[NULL, NULL, NULL]::INT[3],
+	"TemplatesTiles.ids" INT[3] DEFAULT ARRAY[NULL, NULL, NULL]::INT[3],
 	FOREIGN KEY ("Templates.id") REFERENCES "Templates"("id")
 );
 
@@ -139,76 +145,12 @@ CREATE TABLE "TemplatesTiles"
 	"coordinate" INT[2] NOT NULL,
 	"count" INT DEFAULT NULL,  -- The default number of tiles with the resource type.
 	"ResourceTypes.id" INT DEFAULT NULL,  -- The default resource type of the tile.
+	"TemplatesRoads.ids" INT[6] DEFAULT ARRAY[NULL, NULL, NULL, NULL, NULL, NULL]::INT[6],
+	"TemplatesSettlements.ids" INT[6] DEFAULT ARRAY[NULL, NULL, NULL, NULL, NULL, NULL]::INT[6],
 	FOREIGN KEY ("Templates.id") REFERENCES "Templates"("id"),
 	FOREIGN KEY ("ResourceTypes.id") REFERENCES "ResourceTypes"("id")
 );
 
-
--- ——————————————————————————————————————————————— BOARDS ASSOCIATION ——————————————————————————————————————————————— --
--- —————————————————————————————————————————————————————————————————————————————————————————————————————————————————— --
-
-CREATE TABLE "TemplatesPortsSettlements"
-(
-	"id" SERIAL NOT NULL PRIMARY KEY,
-	"Templates.id" INT NOT NULL,
-	"Corner's Sides.id" INT NOT NULL,
-	"Side's Corners.id" INT NOT NULL,
-	"TemplatesSettlements.id" INT NOT NULL,
-	"TemplatesPorts.id" INT NOT NULL,
-	FOREIGN KEY ("Templates.id") REFERENCES "Templates"("id"),
-	FOREIGN KEY ("Corner's Sides.id") REFERENCES "Corner's Sides"("id"),
-	FOREIGN KEY ("Side's Corners.id") REFERENCES "Side's Corners"("id"),
-	FOREIGN KEY ("TemplatesSettlements.id") REFERENCES "TemplatesSettlements"("id"),
-	FOREIGN KEY ("TemplatesPorts.id") REFERENCES "TemplatesPorts"("id")
-);
-
-
-CREATE TABLE "TemplatesRoadsSettlements"
-(
-	"id" SERIAL NOT NULL PRIMARY KEY,
-	"Templates.id" INT NOT NULL,
-	"Corner's Edges.id" INT NOT NULL,
-	"Edge's Corners.id" INT NOT NULL,
-	"TemplatesRoads.id" INT NOT NULL,
-	"TemplatesSettlements.id" INT NOT NULL,
-	FOREIGN KEY ("Templates.id") REFERENCES "Templates"("id"),
-	FOREIGN KEY ("Corner's Edges.id") REFERENCES "Corner's Edges"("id"),
-	FOREIGN KEY ("Edge's Corners.id") REFERENCES "Edge's Corners"("id"),
-	FOREIGN KEY ("TemplatesRoads.id") REFERENCES "TemplatesRoads"("id"),
-	FOREIGN KEY ("TemplatesSettlements.id") REFERENCES "TemplatesSettlements"("id")
-);
-
-
-CREATE TABLE "TemplatesRoadsTiles"
-(
-	"id" SERIAL NOT NULL PRIMARY KEY,
-	"Templates.id" INT NOT NULL,
-	"Edge's Sides.id" INT NOT NULL,
-	"Side's Edges.id" INT NOT NULL,
-	"TemplatesRoads.id" INT NOT NULL,
-	"TemplatesTiles.id" INT NOT NULL,
-	FOREIGN KEY ("Templates.id") REFERENCES "Templates"("id"),
-	FOREIGN KEY ("Edge's Sides.id") REFERENCES "Edge's Sides"("id"),
-	FOREIGN KEY ("Side's Edges.id") REFERENCES "Side's Edges"("id"),
-	FOREIGN KEY ("TemplatesRoads.id") REFERENCES "TemplatesRoads"("id"),
-	FOREIGN KEY ("TemplatesTiles.id") REFERENCES "TemplatesTiles"("id")
-);
-
-
-CREATE TABLE "TemplatesSettlementsTiles"
-(
-	"id" SERIAL NOT NULL PRIMARY KEY,
-	"Corner's Sides.id" INT NOT NULL,
-	"Side's Corners.id" INT NOT NULL,
-	"Templates.id" INT NOT NULL,
-	"TemplatesSettlements.id" INT NOT NULL,
-	"TemplatesTiles.id" INT NOT NULL,
-	FOREIGN KEY ("Corner's Sides.id") REFERENCES "Corner's Sides"("id"),
-	FOREIGN KEY ("Side's Corners.id") REFERENCES "Side's Corners"("id"),
-	FOREIGN KEY ("Templates.id") REFERENCES "Templates"("id"),
-	FOREIGN KEY ("TemplatesSettlements.id") REFERENCES "TemplatesSettlements"("id"),
-	FOREIGN KEY ("TemplatesTiles.id") REFERENCES "TemplatesTiles"("id")
-);
 
 -- ————————————————————————————————————————————————————— COUNTS ————————————————————————————————————————————————————— --
 -- —————————————————————————————————————————————————————————————————————————————————————————————————————————————————— --
@@ -263,6 +205,7 @@ CREATE TABLE "GamesPorts"
 	"TemplatesPorts.id" INT NOT NULL,
 	"Games.id" INT NOT NULL,
 	"ResourceTypes.id" INT,
+	"GamesSettlements.ids" INT[6] DEFAULT ARRAY[NULL, NULL, NULL, NULL, NULL, NULL]::INT[6],
 	FOREIGN KEY ("TemplatesPorts.id") REFERENCES "TemplatesPorts"("id"),
 	FOREIGN KEY ("Games.id") REFERENCES "Games"("id"),
 	FOREIGN KEY ("ResourceTypes.id") REFERENCES "ResourceTypes"("id")
@@ -281,6 +224,8 @@ CREATE TABLE "GamesRoads"
 	"TemplatesRoads.id" INT NOT NULL,
 	"Games.id" INT NOT NULL,
 	"Players.id" INT DEFAULT NULL,
+	"GamesSettlements.ids" INT[2] DEFAULT ARRAY[NULL, NULL]::INT[2],
+	"GamesTiles.ids" INT[2] DEFAULT ARRAY[NULL, NULL]::INT[2],
 	FOREIGN KEY ("TemplatesRoads.id") REFERENCES "TemplatesRoads"("id"),
 	FOREIGN KEY ("Games.id") REFERENCES "Games"("id")
 );
@@ -297,6 +242,9 @@ CREATE TABLE "GamesSettlements"
 	"id" SERIAL NOT NULL PRIMARY KEY,
 	"TemplatesSettlements.id" INT NOT NULL,
 	"Games.id" INT NOT NULL,
+	"GamesPorts.ids" INT[3] DEFAULT ARRAY[NULL, NULL, NULL]::INT[3],
+	"GamesRoads.ids" INT[3] DEFAULT ARRAY[NULL, NULL, NULL]::INT[3],
+	"GamesTiles.ids" INT[3] DEFAULT ARRAY[NULL, NULL, NULL]::INT[3],
 	"Players.id" INT DEFAULT NULL,
 	"SettlementTypes.id" INT NOT NULL,
 	FOREIGN KEY ("TemplatesSettlements.id") REFERENCES "TemplatesSettlements"("id"),
@@ -316,6 +264,9 @@ CREATE TABLE "GamesTiles"
 	"id" SERIAL NOT NULL PRIMARY KEY,
 	"TemplatesTiles.id" INT NOT NULL,
 	"Games.id" INT NOT NULL,
+	"coordinate" INT[2] NOT NULL,
+	"GamesRoads.ids" INT[6] DEFAULT ARRAY[NULL, NULL, NULL, NULL, NULL, NULL]::INT[6],
+	"GamesSettlements.ids" INT[6] DEFAULT ARRAY[NULL, NULL, NULL, NULL, NULL, NULL]::INT[6],
 	"value" INT NOT NULL CHECK("value" <= 12 AND 0 <= "value"),
 	"ResourceTypes.id" INT NOT NULL,
 	FOREIGN KEY ("TemplatesTiles.id") REFERENCES "TemplatesTiles"("id"),
@@ -326,73 +277,6 @@ CREATE TABLE "GamesTiles"
 
 CREATE UNIQUE INDEX "GamesTilesUniqueIndex"
 ON "GamesTiles" ("TemplatesTiles.id", "Games.id");
-
-
--- ———————————————————————————————————————————————— GAME ASSOCIATION ———————————————————————————————————————————————— --
--- —————————————————————————————————————————————————————————————————————————————————————————————————————————————————— --
-
-CREATE TABLE "GamesPortsGamesSettlements"
-(
-	"id" SERIAL NOT NULL PRIMARY KEY,
-	"Games.id" INT NOT NULL,
-	"Corner's Sides.id" INT NOT NULL,
-	"Side's Corners.id" INT NOT NULL,
-	"GamesPorts.id" INT NOT NULL,
-	"GamesSettlements.id" INT NOT NULL,
-	FOREIGN KEY ("Games.id") REFERENCES "Games"("id"),
-	FOREIGN KEY ("Corner's Sides.id") REFERENCES "Corner's Sides"("id"),
-	FOREIGN KEY ("Side's Corners.id") REFERENCES "Side's Corners"("id"),
-	FOREIGN KEY ("GamesPorts.id") REFERENCES "GamesPorts"("id"),
-	FOREIGN KEY ("GamesSettlements.id") REFERENCES "GamesSettlements"("id")
-);
-
-
-CREATE TABLE "GamesRoadsGamesSettlements"
-(
-	"id" SERIAL NOT NULL PRIMARY KEY,
-	"Games.id" INT NOT NULL,
-	"Corner's Edges.id" INT NOT NULL,
-	"Edge's Corners.id" INT NOT NULL,
-	"GamesRoads.id" INT NOT NULL,
-	"GamesSettlements.id" INT NOT NULL,
-	FOREIGN KEY ("Games.id") REFERENCES "Games"("id"),
-	FOREIGN KEY ("Corner's Edges.id") REFERENCES "Corner's Edges"("id"),
-	FOREIGN KEY ("Edge's Corners.id") REFERENCES "Edge's Corners"("id"),
-	FOREIGN KEY ("GamesRoads.id") REFERENCES "GamesRoads"("id"),
-	FOREIGN KEY ("GamesSettlements.id") REFERENCES "GamesSettlements"("id")
-);
-
-
-CREATE TABLE "GamesRoadsGamesTiles"
-(
-	"id" SERIAL NOT NULL PRIMARY KEY,
-	"Games.id" INT NOT NULL,
-	"Edge's Sides.id" INT NOT NULL,
-	"Side's Edges.id" INT NOT NULL,
-	"GamesRoads.id" INT NOT NULL,
-	"GamesTiles.id" INT NOT NULL,
-	FOREIGN KEY ("Games.id") REFERENCES "Games"("id"),
-	FOREIGN KEY ("Edge's Sides.id") REFERENCES "Edge's Sides"("id"),
-	FOREIGN KEY ("Side's Edges.id") REFERENCES "Side's Edges"("id"),
-	FOREIGN KEY ("GamesRoads.id") REFERENCES "GamesRoads"("id"),
-	FOREIGN KEY ("GamesTiles.id") REFERENCES "GamesTiles"("id")
-);
-
-
-CREATE TABLE "GamesSettlementsGamesTiles"
-(
-	"id" SERIAL NOT NULL PRIMARY KEY,
-	"Games.id" INT NOT NULL,
-	"Corner's Sides.id" INT NOT NULL,
-	"Side's Corners.id" INT NOT NULL,
-	"GamesSettlements.id" INT NOT NULL,
-	"GamesTiles.id" INT NOT NULL,
-	FOREIGN KEY ("Corner's Sides.id") REFERENCES "Corner's Sides"("id"),
-	FOREIGN KEY ("Side's Corners.id") REFERENCES "Side's Corners"("id"),
-	FOREIGN KEY ("Games.id") REFERENCES "Games"("id"),
-	FOREIGN KEY ("GamesSettlements.id") REFERENCES "GamesSettlements"("id"),
-	FOREIGN KEY ("GamesTiles.id") REFERENCES "GamesTiles"("id")
-);
 
 
 -- ———————————————————————————————————————————————————— PLAYERS  ———————————————————————————————————————————————————— --

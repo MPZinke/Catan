@@ -33,6 +33,26 @@ def new_port(cursor: psycopg2.extras.RealDictCursor, game_id: int, port_id: int,
 
 
 @connect
+def new_ports(cursor: psycopg2.extras.RealDictCursor, game_id: int, resource_types: dict) -> dict:
+	query = """
+		INSERT INTO "GamesPorts" ("Games.id", "TemplatesPorts.id", "ResourceTypes.id")
+		SELECT %s, "TemplatesPorts"."id", "ResourceTypes"."id"
+		FROM "TemplatesPorts"
+		JOIN UNNEST(
+			%s,
+			%s
+		) AS "ResourceTypes" ("TemplatesPorts.id", "id") ON "TemplatesPorts"."id" = "ResourceTypes"."TemplatesPorts.id"
+		RETURNING *;
+	"""
+
+	resource_type_template_tile_ids = list(resource_types.keys())
+	resource_type_ids = list(resource_types.values())
+
+	cursor.execute(query, (game_id, resource_type_template_tile_ids, resource_type_ids))
+	return list(map(dict, cursor))
+
+
+@connect
 def new_road(cursor: psycopg2.extras.RealDictCursor, game_id: int, road_id: int) -> dict:
 	query = """
 		INSERT INTO "GamesRoads" ("Games.id", "TemplatesRoads.id") VALUES (%s, %s)
@@ -41,6 +61,19 @@ def new_road(cursor: psycopg2.extras.RealDictCursor, game_id: int, road_id: int)
 
 	cursor.execute(query, (game_id, road_id))
 	return dict(cursor.fetchone())
+
+
+@connect
+def new_roads(cursor: psycopg2.extras.RealDictCursor, game_id: int) -> dict:
+	query = """
+		INSERT INTO "GamesRoads" ("Games.id", "TemplatesRoads.id")
+		SELECT %s, "TemplatesRoads"."id"
+		FROM "TemplatesRoads"
+		RETURNING *;
+	"""
+
+	cursor.execute(query, (game_id,))
+	return list(map(dict, cursor))
 
 
 @connect
@@ -70,77 +103,53 @@ def new_settlement(cursor: psycopg2.extras.RealDictCursor, game_id: int, settlem
 
 
 @connect
-def new_tile(cursor: psycopg2.extras.RealDictCursor, game_id: int, tile_id: int, resource_type: int, value: int) -> int:
+def new_settlements(cursor: psycopg2.extras.RealDictCursor, game_id: int) -> dict:
 	query = """
-		WITH "InsertedGameTile" AS (
-			INSERT INTO "GamesTiles" ("Games.id", "TemplatesTiles.id", "ResourceTypes.id", "value")
-			VALUES (%s, %s, %s, %s)
-			RETURNING *
-		)
-		SELECT "InsertedGameTile".*, "TemplatesTiles"."coordinate" FROM "InsertedGameTile"
-		JOIN "TemplatesTiles" ON "InsertedGameTile"."TemplatesTiles.id" = "TemplatesTiles"."id";
+		INSERT INTO "GamesSettlements" ("Games.id", "TemplatesSettlements.id")
+		SELECT %s, "TemplatesSettlements"."id"
+		FROM "TemplatesSettlements"
+		RETURNING *;
 	"""
 
-	print(resource_type)
+	cursor.execute(query, (game_id,))
+	return list(map(dict, cursor))
+
+
+@connect
+def new_tile(cursor: psycopg2.extras.RealDictCursor, game_id: int, tile_id: int, resource_type: int, value: int) -> int:
+	query = """
+		INSERT INTO "GamesTiles" ("Games.id", "TemplatesTiles.id", "ResourceTypes.id", "value")
+		VALUES (%s, %s, %s, %s)
+		RETURNING *;
+	"""
+
 	cursor.execute(query, (game_id, tile_id, resource_type, value))
 	return dict(cursor.fetchone())
 
 
 @connect
-def new_ports_settlements(cursor: psycopg2.extras.RealDictCursor, game_id: int, ports_id: int, settlements_id: int,
-	corners_sides_id: int, sides_corners_id: int
-) -> dict:
+def new_tiles(cursor: psycopg2.extras.RealDictCursor, game_id: int, resource_types: dict, values: dict) -> int:
 	query = """
-		INSERT INTO "GamesPortsGamesSettlements" 
-		("Games.id", "GamesPorts.id", "GamesSettlements.id", "Corner's Sides.id", "Side's Corners.id")
-		VALUES (%s, %s, %s, %s, %s)
+		INSERT INTO "GamesTiles" ("Games.id", "TemplatesTiles.id", "coordinate", "ResourceTypes.id", "value")
+		SELECT %s, "TemplatesTiles"."id", "TemplatesTiles"."coordinate", "ResourceTypes"."id", "DiceValues"."value"
+		FROM "TemplatesTiles"
+		JOIN UNNEST(
+			%s,
+			%s
+		) AS "ResourceTypes" ("TemplatesTiles.id", "id") ON "TemplatesTiles"."id" = "ResourceTypes"."TemplatesTiles.id"
+		JOIN UNNEST(
+			%s,
+			%s
+		) AS "DiceValues" ("TemplatesTiles.id", "value") ON "TemplatesTiles"."id" = "DiceValues"."TemplatesTiles.id"
 		RETURNING *;
 	"""
 
-	cursor.execute(query, (game_id, ports_id, settlements_id, corners_sides_id, sides_corners_id))
-	return dict(cursor.fetchone())
+	resource_type_template_tile_ids = list(resource_types.keys())
+	resource_type_ids = list(resource_types.values())
+	value_template_tile_ids = list(values.keys())
+	value_ids = list(values.values())
 
-
-@connect
-def new_roads_settlements(cursor: psycopg2.extras.RealDictCursor, game_id: int, roads_id: int, settlements_id: int,
-	corners_edges_id: int, edges_corners_id: int
-) -> dict:
-	query = """
-		INSERT INTO "GamesRoadsGamesSettlements" 
-		("Games.id", "GamesRoads.id", "GamesSettlements.id", "Corner's Edges.id", "Edge's Corners.id")
-		VALUES (%s, %s, %s, %s, %s)
-		RETURNING *;
-	"""
-
-	cursor.execute(query, (game_id, roads_id, settlements_id, corners_edges_id, edges_corners_id))
-	return dict(cursor.fetchone())
-
-
-@connect
-def new_roads_tiles(cursor: psycopg2.extras.RealDictCursor, game_id: int, roads_id: int, tiles_id: int,
-	edges_sides_id: int, sides_edges_id: int
-) -> dict:
-	query = """
-		INSERT INTO "GamesRoadsGamesTiles" 
-		("Games.id", "GamesRoads.id", "GamesTiles.id", "Edge's Sides.id", "Side's Edges.id")
-		VALUES (%s, %s, %s, %s, %s)
-		RETURNING *;
-	"""
-
-	cursor.execute(query, (game_id, roads_id, tiles_id, edges_sides_id, sides_edges_id))
-	return dict(cursor.fetchone())
-
-
-@connect
-def new_settlements_tiles(cursor: psycopg2.extras.RealDictCursor, game_id: int, settlements_id: int, tiles_id: int,
-	corners_sides_id: int, sides_corners_id: int
-) -> dict:
-	query = """
-		INSERT INTO "GamesSettlementsGamesTiles" 
-		("Games.id", "GamesSettlements.id", "GamesTiles.id", "Corner's Sides.id", "Side's Corners.id")
-		VALUES (%s, %s, %s, %s, %s)
-		RETURNING *;
-	"""
-
-	cursor.execute(query, (game_id, settlements_id, tiles_id, corners_sides_id, sides_corners_id))
-	return dict(cursor.fetchone())
+	cursor.execute(query,
+		(game_id, resource_type_template_tile_ids, resource_type_ids, value_template_tile_ids, value_ids)
+	)
+	return list(map(dict, cursor))

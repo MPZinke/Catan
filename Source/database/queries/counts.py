@@ -8,19 +8,19 @@ from database.connect import connect
 
 
 @connect
-def get_dice_value_counts(cursor: psycopg2.extras.RealDictCursor, board_id: int) -> list[dict]:
+def get_dice_value_counts(cursor: psycopg2.extras.RealDictCursor, template_id: int) -> list[dict]:
 	query = """
 		SELECT *
 		FROM "TemplatesDiceValuesCounts"
 		WHERE "Templates.id" = %s;
 	"""
 
-	cursor.execute(query, (board_id,))
+	cursor.execute(query, (template_id,))
 	return list(map(dict, cursor))
 
 
 @connect
-def get_ports_resource_types_counts(cursor: psycopg2.extras.RealDictCursor, board_id: int) -> list[dict]:
+def get_ports_resource_types_counts(cursor: psycopg2.extras.RealDictCursor, template_id: int) -> list[dict]:
 	query = """
 		SELECT *
 		FROM "TemplatesPortsResourceTypesCounts"
@@ -28,12 +28,12 @@ def get_ports_resource_types_counts(cursor: psycopg2.extras.RealDictCursor, boar
 		WHERE "Templates.id" = %s;
 	"""
 
-	cursor.execute(query, (board_id,))
+	cursor.execute(query, (template_id,))
 	return list(map(dict, cursor))
 
 
 @connect
-def get_tiles_resource_types_counts(cursor: psycopg2.extras.RealDictCursor, board_id: int) -> list[dict]:
+def get_tiles_resource_types_counts(cursor: psycopg2.extras.RealDictCursor, template_id: int) -> list[dict]:
 	query = """
 		SELECT *
 		FROM "TemplatesTilesResourceTypesCounts"
@@ -41,5 +41,5 @@ def get_tiles_resource_types_counts(cursor: psycopg2.extras.RealDictCursor, boar
 		WHERE "Templates.id" = %s;
 	"""
 
-	cursor.execute(query, (board_id,))
+	cursor.execute(query, (template_id,))
 	return list(map(dict, cursor))

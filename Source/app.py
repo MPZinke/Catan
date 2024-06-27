@@ -10,8 +10,8 @@ from game import Game
 app = Flask("Catan")
 
 
-@app.route("/new/<int:board_id>")
-def new(board_id: int):
+@app.route("/new/<int:template_id>")
+def new(template_id: int):
 	game: Game = new_game(game_id)
 	return game.id
 

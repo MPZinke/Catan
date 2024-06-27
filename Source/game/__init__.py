@@ -15,22 +15,34 @@ __author__ = "MPZinke"
 
 
 from database import queries
-from game.player.Player import Player, Players
 from game.Game import Game
+from game.board import Board
+from game.board.construct import construct_board, BoardData
+from game.player.Player import Player, Players
 
 
 def game(game_id: int) -> Game:
-	game_dict: dict = queries.games.get_game(game_id)
+	game_dict: dict = queries.games.get_game(game_id)  # pylint: disable=no-value-for-parameter
 
-	port_dicts: list[dict] = queries.games.get_ports(game_id)
-	roads_dicts: list[dict] = queries.games.get_roads(game_id)
-	settlements_dicts: list[dict] = queries.games.get_settlements(game_id)
-	tiles_dicts: list[dict] = queries.games.get_tiles(game_id)
+	port_dicts: list[dict] = queries.games.get_ports(game_id)  # pylint: disable=no-value-for-parameter
+	roads_dicts: list[dict] = queries.games.get_roads(game_id)  # pylint: disable=no-value-for-parameter
+	settlements_dicts: list[dict] = queries.games.get_settlements(game_id)  # pylint: disable=no-value-for-parameter
+	tiles_dicts: list[dict] = queries.games.get_tiles(game_id)  # pylint: disable=no-value-for-parameter
+	robber_dict: dict = queries.games.get_robber(game_id)  # pylint: disable=no-value-for-parameter
 
-	ports_settlements: list[dict] = queries.games.get_ports_settlements(game_id)
-	roads_settlements: list[dict] = queries.games.get_roads_settlements(game_id)
-	roads_tiles: list[dict] = queries.games.get_roads_tiles(game_id)
-	settlements_tiles: list[dict] = queries.games.get_settlements_tiles(game_id)
+	# players: list[dict] = queries.games.get_players(game_id)
 
-	players: list[dict] = queries.games.get_players(game_id)
-	
+	board_data = BoardData(
+		id=game_dict["id"],
+		template_id=game_dict["Templates.id"],
+		ports=port_dicts,
+		roads=roads_dicts,
+		robber=robber_dict,
+		settlements=settlements_dicts,
+		tiles=tiles_dicts,
+	)
+
+	board: Board = construct_board(board_data)
+	game = Game(game_dict["id"], board, [])
+
+	return game

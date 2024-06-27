@@ -10,11 +10,7 @@ class TemplateData:
 		ports: DictList,
 		roads: DictList,
 		settlements: DictList,
-		tiles: DictList,
-		ports_settlements: DictList,
-		roads_settlements: DictList,
-		roads_tiles: DictList,
-		settlements_tiles: DictList
+		tiles: DictList
 	):
 		self.id: int = id
 		self.name: str = name
@@ -22,8 +18,4 @@ class TemplateData:
 		self.roads: DictList = roads
 		self.settlements: DictList = settlements
 		self.tiles: DictList = tiles
-		self.ports_settlements: DictList = ports_settlements
-		self.roads_settlements: DictList = roads_settlements
-		self.roads_tiles: DictList = roads_tiles
-		self.settlements_tiles: DictList = settlements_tiles
 	

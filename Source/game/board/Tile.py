@@ -135,5 +135,3 @@ class Tile:
 			r"     \___{k}___/     " "\n"
 			r"   {l}         {m}   " "\n"
 		).format(a=s_tl, b=r_t_, c=s_tr, d=r_tl, e=r_tr, f=s_l_, g=id, h=s_r_, i=r_bl, j=r_br, k=r_b_, l=s_bl, m=s_br)
-
-print(Tile.Settlements.items())

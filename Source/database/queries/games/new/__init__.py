@@ -19,15 +19,6 @@ from typing import Optional
 
 
 from database.connect import connect
-from database.queries.games.new.board import new_port
-from database.queries.games.new.board import new_road
-from database.queries.games.new.board import new_robber
-from database.queries.games.new.board import new_settlement
-from database.queries.games.new.board import new_tile
-from database.queries.games.new.board import new_ports_settlements
-from database.queries.games.new.board import new_roads_settlements
-from database.queries.games.new.board import new_roads_tiles
-from database.queries.games.new.board import new_settlements_tiles
 
 
 @connect

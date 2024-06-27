@@ -18,41 +18,33 @@ from database import queries
 from game.board import Board
 from game.board.template import TemplateData, DictList
 from game.board.construct import BoardData
+from game.board.new.associate import associate_board_data
 from game.board.new.random import ResourceAndValueMapping
 
 
-def new_board(game_id: int, template_data: TemplateData, random_resource_and_value_mapping: ResourceAndValueMapping
+def new_board(game_id: int, template_data: TemplateData, resource_and_value_mapping: ResourceAndValueMapping
 ) -> BoardData:
-	port_dicts: DictList = new_ports(game_id, template_data.ports,
-		random_resource_and_value_mapping.port_resources_dict
-	)
-	road_dicts: DictList = new_roads(game_id, template_data.roads)
-	settlement_dicts: DictList = new_settlements(game_id, template_data.settlements)
-	tile_dicts: DictList = new_tiles(game_id, template_data.tiles,
-		random_resource_and_value_mapping.tile_dice_values_dict,
-		random_resource_and_value_mapping.tile_resources_dict
-	)
-
-	ports_settlements_dicts: DictList = new_ports_settlements(template_data, game_id, port_dicts, settlement_dicts)
-	roads_settlements_dicts: DictList = new_roads_settlements(template_data, game_id, road_dicts, settlement_dicts)
-	roads_tiles_dicts: DictList = new_roads_tiles(template_data, game_id, road_dicts, tile_dicts)
-	settlements_tiles_dicts: DictList = new_settlements_tiles(template_data, game_id, settlement_dicts, tile_dicts)
+	port_dicts: DictList = queries.games.new_ports(game_id, resource_and_value_mapping.port_resources_dict)
+	road_dicts: DictList = queries.games.new_roads(game_id)
+	settlement_dicts: DictList = queries.games.new_settlements(game_id)
+	tile_dicts: DictList = queries.games.new_tiles(game_id, resource_and_value_mapping.tile_resources_dict, resource_and_value_mapping.tile_dice_values_dict)
 
 	robber_dict: dict = new_robber(game_id)
 
-	return BoardData(
+	board_data = BoardData(
 		id=game_id,
-		board_id=template_data.id,
+		template_id=template_data.id,
 		ports=port_dicts,
-		ports_settlements=ports_settlements_dicts,
 		roads=road_dicts,
-		roads_settlements=roads_settlements_dicts,
-		roads_tiles=roads_tiles_dicts,
 		robber=robber_dict,
 		settlements=settlement_dicts,
-		settlements_tiles=settlements_tiles_dicts,
 		tiles=tile_dicts,
 	)
+
+	associate_board_data(board_data, template_data)
+	update_board(board_data)
+
+	return board_data
 
 
 def new_ports(game_id: int, port_dicts: DictList, port_resources_dict: dict) -> DictList:
@@ -104,50 +96,15 @@ def new_tiles(game_id: int, tile_dicts: DictList, tile_dice_values_dict: dict, t
 	return game_tile_dicts
 
 
-def filter_parts(part_name: str, part_dicts: DictList, mapping: DictList) -> int:
-	part_filter: callable = lambda part_dict: part_dict[f"Templates{part_name}.id"] == mapping[f"Templates{part_name}.id"]
-	return next(filter(part_filter, part_dicts))["id"]
+def update_board(board_data: BoardData) -> None:
+	for port in board_data.ports:
+		queries.games.update.update_port_settlements(port["id"], port["GamesSettlements.ids"])
 
+	for road in board_data.roads:
+		queries.games.update.update_road_settlements_and_tiles(road["id"], road["GamesSettlements.ids"], road["GamesTiles.ids"])
 
-def new_ports_settlements(template_data: TemplateData, game_id: int, port_dicts: DictList, settlement_dicts: DictList) -> DictList:
-	ports_settlements_dicts: DictList = []
-	for ports_settlements_mapping in template_data.ports_settlements:
-		port_id: dict = filter_parts("Ports", port_dicts, 	ports_settlements_mapping)
-		settlement_id: dict = filter_parts("Settlements", settlement_dicts, ports_settlements_mapping)
+	for settlement in board_data.settlements:
+		queries.games.update.update_settlement_ports_roads_and_tiles(settlement["id"], settlement["GamesPorts.ids"], settlement["GamesRoads.ids"], settlement["GamesTiles.ids"])
 
-		ports_settlements_dicts.append(queries.games.new_ports_settlements(game_id, port_id, settlement_id, ports_settlements_mapping["Corner's Sides.id"], ports_settlements_mapping["Side's Corners.id"]))
-
-	return ports_settlements_dicts
-
-
-def new_roads_settlements(template_data: TemplateData, game_id: int, road_dicts: DictList, settlement_dicts: DictList) -> DictList:
-	roads_settlements_dicts: DictList = []
-	for roads_settlements_mapping in template_data.roads_settlements:
-		road_id: dict = filter_parts("Roads", road_dicts, roads_settlements_mapping)
-		settlement_id: dict = filter_parts("Settlements", settlement_dicts, roads_settlements_mapping)
-
-		roads_settlements_dicts.append(queries.games.new_roads_settlements(game_id, road_id, settlement_id, roads_settlements_mapping["Corner's Edges.id"], roads_settlements_mapping["Edge's Corners.id"]))
-
-	return roads_settlements_dicts
-
-
-def new_roads_tiles(template_data: TemplateData, game_id: int, road_dicts: DictList, tile_dicts: DictList) -> DictList:
-	roads_tiles_dicts: DictList = []
-	for roads_tiles_mapping in template_data.roads_tiles:
-		road_id: dict = filter_parts("Roads", road_dicts, roads_tiles_mapping)
-		tile_id: dict = filter_parts("Tiles", tile_dicts, roads_tiles_mapping)
-
-		roads_tiles_dicts.append(queries.games.new_roads_tiles(game_id, road_id, tile_id, roads_tiles_mapping["Edge's Sides.id"], roads_tiles_mapping["Side's Edges.id"]))
-
-	return roads_tiles_dicts
-
-
-def new_settlements_tiles(template_data: TemplateData, game_id: int, settlement_dicts: DictList, tile_dicts: DictList) -> DictList:
-	settlements_tiles_dicts: DictList = []
-	for settlements_tiles_mapping in template_data.settlements_tiles:
-		settlement_id: dict = filter_parts("Settlements", settlement_dicts, settlements_tiles_mapping)
-		tile_id: dict = filter_parts("Tiles", tile_dicts, settlements_tiles_mapping)
-
-		settlements_tiles_dicts.append(queries.games.new_settlements_tiles(game_id, settlement_id, tile_id, settlements_tiles_mapping["Corner's Sides.id"], settlements_tiles_mapping["Side's Corners.id"]))
-
-	return settlements_tiles_dicts
+	for tile in board_data.tiles:
+		queries.games.update.update_tile_roads_and_settlements(tile["id"], tile["GamesRoads.ids"], tile["GamesSettlements.ids"])

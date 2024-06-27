@@ -14,8 +14,8 @@ __author__ = "MPZinke"
 ########################################################################################################################
 
 
-from game.board import associate
 from game.board import Board, Port, Ports, Road, Roads, Robber, Settlement, Settlements, Tile, Tiles
+from game.board.construct.associate import associate_board_parts
 from game.board.construct.BoardData import BoardData
 
 
@@ -28,7 +28,7 @@ def construct_board(board_data: BoardData) -> Board:
 
 	board = Board(port_objects, road_objects, robber_object, settlement_objects, tile_objects)
 
-	associate.board_parts(board_data, board)
+	associate_board_parts(board_data, board)
 
 	return board
 
