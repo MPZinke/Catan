@@ -1,5 +1,277 @@
 <html>
 	<body>
-		<canvas></canvas>
+		<canvas
+			id="canvas"
+		>
+		</canvas>
 	</body>
 </html>
+
+
+<script>
+	const COS30 = 0.8660254037844386;
+	const COS60 = 0.5;
+	const SIN30 = 0.5;
+	const SIN60 = 0.8660254037844386;
+	const SQUAREROOT_3 = 1.7320508076;
+
+	const CANVAS = document.getElementById("canvas");
+	const CONTEXT = CANVAS.getContext('2d');
+
+
+	function set_canvas_width_and_height(columns, rows, hexagon_height)
+	{
+		const radius = 2 * hexagon_height / SQUAREROOT_3;
+
+		const width_incremental_increase = 2 + (3 * columns);
+		const width_size_multiplier = hexagon_height * width_incremental_increase / SQUAREROOT_3;
+		const width = Math.floor(width_size_multiplier + radius);
+		const height = hexagon_height * 2 * rows + hexagon_height;
+
+		CANVAS.width  = width;
+		CANVAS.height = height;
+	}
+
+
+	class HexagonGrid
+	{
+		constructor(columns, rows, hexagon_height)
+		{
+			this.columns = columns;
+			this.rows = rows;
+			this.hexagon_height = hexagon_height;
+
+			this.grid = [];
+			for(let row = 0; row < rows; row++)
+			{
+				this.grid.push([]);
+				for(let column = 0; column < columns; column++)
+				{
+					const center_x = this.x_position_for_index(column, row);
+					const center_y = this.y_position_for_index(column, row);
+					this.grid[row].push(new Hexagon(center_x, center_y, hexagon_height));
+					this.grid[row][column].draw();
+				}
+			}
+		}
+
+
+		x_position_for_index(column, row)
+		{
+			const incremental_increase = 2 + (3 * column);
+			const size_multiplier = this.hexagon_height * incremental_increase / SQUAREROOT_3;
+			const distance_to_hexagon_center = Math.floor(size_multiplier);
+			return distance_to_hexagon_center;
+		}
+
+
+		y_position_for_index(column, row)
+		{
+			// The span to the current hexagon's top.
+			const offset_for_column_index = this.hexagon_height * (column & 0b1);
+			const distance_to_hexagon_top = this.hexagon_height * 2 * row + offset_for_column_index;
+			// Adds height to get to center.
+			const distance_to_hexagon_center = distance_to_hexagon_top + this.hexagon_height;
+			return distance_to_hexagon_center;
+		}
+
+
+		hexagon(column, row)
+		{
+			if(column > this.columns || row > this.rows)
+			{
+				throw new Error(`Column-Row index [${column}-${row}] is out of range [${this.columns}-${this.rows}]`);
+			}
+		}
+	}
+
+
+	class Hexagon
+	{
+		constructor(center_x, center_y, height)
+		{
+			this.x = center_x;
+			this.y = center_y;
+			this.height = height;
+			this.radius = 2 * height / SQUAREROOT_3;
+			this.radius = height;
+			
+			this.points = [
+				[this.x - this.radius * COS60, this.y - this.radius * SIN60],
+				[this.x + this.radius * COS60, this.y - this.radius * SIN60],
+				[this.x + this.radius,         this.y],
+				[this.x + this.radius * COS60, this.y + this.radius * SIN60],
+				[this.x - this.radius * COS60, this.y + this.radius * SIN60],
+				[this.x - this.radius,         this.y],
+			];
+		}
+
+
+		point_in_hexagon(x, y)
+		/*
+		Points outside of the encompassing square can be trivially rejected.
+		 _______________
+		|  /         \  |
+		| /           \ | 
+		|/             \|
+		|\             /|
+		| \           / |
+		|__\_________/__|
+
+		If something is within the square, then the hexagon can be broken up into 3 main parts & 5 subparts.
+		
+		Main parts: left (L), center (C), right (R).
+		    _________
+		   /|       |\  
+		  / |       | \ 
+		 / L|   C   |R \
+		 \  |       |  /
+		  \ |       | /
+		   \|_______|/  
+
+		Subparts: left-top (LT), left-bottom (LB), right-top (RT), and right-bottom (RB).
+		    _________     
+		   /|       |\  
+		LT/ |       | \RT 
+		 /__|   C   |__\
+		 \  |       |  /
+		LB\ |       | /RB
+		   \|_______|/  
+
+
+		For left (L) and right (R), the following formulae can be used based on lines left-top (LT), left-bottom (LB),
+		 right-top (RT), and right-bottom (RB):
+		|	m = (y2 - y1) / (x2 - x1)
+		|	y - y1 = m(x - x1) 
+		|	y = m(x - x1) + y1
+		*/
+		{
+			// Trivial rejects
+			if(x < this.x - this.radius || this.x + this.radius < x)
+			{
+				return false;
+			}
+			if(y < this.y - this.height || this.y + this.height < y)
+			{
+				return false;
+			}
+
+
+			if(x < this.points[0][0] || this.points[1][0] < x)
+			{
+				let x1;
+				let x2;
+				let y1;
+				let y2;
+
+				if(y <= this.y)  // Top
+				{
+					y1 = this.y - this.height;
+					y2 = this.y;
+
+					if(x < this.points[0][0])  // Top-left
+					{
+						x1 = this.points[0][0];
+						x2 = this.x - this.radius;
+					}
+					else  // Top-right
+					{
+						x1 = this.points[1][0];
+						x2 = this.x + this.radius;
+					}
+				}
+				else  // Bottom
+				{
+					y1 = this.y;
+					y2 = this.y + this.height;
+
+					if(x < this.points[0][0])  // Bottom-left
+					{
+						x1 = this.x - this.radius;
+						x2 = this.points[4][0];
+					}
+					else  // Bottom-right
+					{
+						x1 = this.points[1][0];
+						x2 = this.x + this.radius;
+					}
+				}
+
+				const slope = this.height / (x2 - x1);
+				const y_value_for_x = slope * (x - x1) + y1;
+				if(y > this.y)
+				{
+					return y <= y_value_for_x;
+				}
+				else
+				{
+					return y_value_for_x <= y;
+				}
+			}
+
+			// Should be within center (C) of hexagon otherwise, it would have been rejected by trivial reject.
+			return true;
+		}
+
+
+		draw(color="#f00")
+		{
+			// FROM: https://stackoverflow.com/a/4840009
+			CONTEXT.fillStyle = color;
+			CONTEXT.beginPath();
+			CONTEXT.moveTo(this.points[0][0], this.points[0][1]);
+			for(let index = 1; index < 6; index++)
+			{
+				CONTEXT.lineTo(this.points[index][0], this.points[index][1]);
+			}
+			CONTEXT.closePath();
+			CONTEXT.fill();
+
+			CONTEXT.beginPath();
+			CONTEXT.moveTo(this.points[0][0], this.points[0][1]);
+			for(let index = 1; index < 6; index++)
+			{
+				CONTEXT.lineTo(this.points[index][0], this.points[index][1]);
+				CONTEXT.stroke();
+			}
+			CONTEXT.lineTo(this.points[0][0], this.points[0][1]);
+			CONTEXT.stroke();
+		}
+	}
+
+	const rows = 7;
+	const columns = 16;
+	set_canvas_width_and_height(columns, rows, 100)
+	const hexagon_grid = new HexagonGrid(columns, rows, 100);
+
+
+	function mouse_click_position(event)
+	{
+		var rectangle = CANVAS.getBoundingClientRect();
+		return {
+			x: event.clientX - rectangle.left,
+			y: event.clientY - rectangle.top,
+		};
+	}
+
+
+	// FROM: https://stackoverflow.com/a/24384882
+	canvas.addEventListener('click',
+		function(event)
+		{
+			var mousePos = mouse_click_position(event);
+			for(let row = 0; row < hexagon_grid.rows; row++)
+			{
+				for(let column = 0; column < hexagon_grid.columns; column++)
+				{
+					const hexagon = hexagon_grid.grid[row][column];
+					if(hexagon.point_in_hexagon(mousePos.x, mousePos.y))
+					{
+						hexagon.draw("00F");
+					}
+				}
+			}
+		},
+		false
+	);
+</script>

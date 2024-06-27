@@ -32,8 +32,6 @@ def new_board(game_id: int, template_data: TemplateData, resource_and_value_mapp
 	robber_dict: dict = new_robber(game_id)
 
 	board_data = BoardData(
-		id=game_id,
-		template_id=template_data.id,
 		ports=port_dicts,
 		roads=road_dicts,
 		robber=robber_dict,

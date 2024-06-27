@@ -14,8 +14,6 @@ __author__ = "MPZinke"
 ########################################################################################################################
 
 
-
-
 from game.board.Board import Board
 from game.board.Port import Port, Ports
 from game.board.Road import Road, Roads

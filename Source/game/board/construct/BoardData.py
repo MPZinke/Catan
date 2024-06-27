@@ -22,16 +22,12 @@ DictList = list[dict]
 
 class BoardData:
 	def __init__(self, *,
-		id: Optional[int]=None,
-		template_id: Optional[int]=None,
 		ports: Optional[DictList]=None,
 		roads: Optional[DictList]=None,
 		robber: Optional[dict]=None,
 		settlements: Optional[DictList]=None,
 		tiles: Optional[DictList]=None,
 	):
-		self.id: Optional[int] = id
-		self.template_id: Optional[int] = template_id
 		self.ports: Optional[DictList] = ports
 		self.roads: Optional[DictList] = roads
 		self.robber: Optional[DictList] = robber

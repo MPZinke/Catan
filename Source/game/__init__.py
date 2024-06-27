@@ -33,8 +33,6 @@ def game(game_id: int) -> Game:
 	# players: list[dict] = queries.games.get_players(game_id)
 
 	board_data = BoardData(
-		id=game_dict["id"],
-		template_id=game_dict["Templates.id"],
 		ports=port_dicts,
 		roads=roads_dicts,
 		robber=robber_dict,
