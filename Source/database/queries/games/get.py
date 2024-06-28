@@ -37,7 +37,8 @@ def get_ports(cursor: psycopg2.extras.RealDictCursor, game_id: int) -> list[dict
 	query = """
 		SELECT *
 		FROM "GamesPorts"
-		WHERE "Games.id" = %s;
+		WHERE "Games.id" = %s
+		ORDER BY "TemplatesPorts.id" ASC;  -- Ensure that games order is the same as the templates order
 	"""
 
 	cursor.execute(query, (game_id,))
@@ -49,7 +50,8 @@ def get_roads(cursor: psycopg2.extras.RealDictCursor, game_id: int) -> list[dict
 	query = """
 		SELECT *
 		FROM "GamesRoads"
-		WHERE "Games.id" = %s;
+		WHERE "Games.id" = %s
+		ORDER BY "TemplatesRoads.id" ASC;  -- Ensure that games order is the same as the templates order
 	"""
 
 	cursor.execute(query, (game_id,))
@@ -73,7 +75,8 @@ def get_settlements(cursor: psycopg2.extras.RealDictCursor, game_id: int) -> lis
 	query = """
 		SELECT *
 		FROM "GamesSettlements"
-		WHERE "Games.id" = %s;
+		WHERE "Games.id" = %s
+		ORDER BY "TemplatesSettlements.id" ASC;  -- Ensure that games order is the same as the templates order
 	"""
 
 	cursor.execute(query, (game_id,))
@@ -85,7 +88,8 @@ def get_tiles(cursor: psycopg2.extras.RealDictCursor, game_id: int) -> list[dict
 	query = """
 		SELECT *
 		FROM "GamesTiles"
-		WHERE "Games.id" = %s;
+		WHERE "Games.id" = %s
+		ORDER BY "TemplatesTiles.id" ASC;  -- Ensure that games order is the same as the templates order
 	"""
 
 	cursor.execute(query, (game_id,))

@@ -1,0 +1,15 @@
+{
+	"compilerOptions":
+	{
+		// "module": "commonjs",
+		"module": "es6",
+		"noImplicitAny": true,
+		"outDir": "Webpage/Static/Scripts/",
+		"preserveConstEnums": true,
+		"rootDir": "Webpage/Scripts.ts/",
+		"removeComments": true,
+		"sourceMap": false,
+		"strictNullChecks": true,
+		"strictPropertyInitialization": true
+	}
+}

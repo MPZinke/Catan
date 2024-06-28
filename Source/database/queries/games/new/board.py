@@ -42,6 +42,7 @@ def new_ports(cursor: psycopg2.extras.RealDictCursor, game_id: int, resource_typ
 			%s,
 			%s
 		) AS "ResourceTypes" ("TemplatesPorts.id", "id") ON "TemplatesPorts"."id" = "ResourceTypes"."TemplatesPorts.id"
+		ORDER BY "TemplatesPorts"."id" ASC  -- Ensure order is the same for game as it is for template
 		RETURNING *;
 	"""
 
@@ -69,6 +70,7 @@ def new_roads(cursor: psycopg2.extras.RealDictCursor, game_id: int) -> dict:
 		INSERT INTO "GamesRoads" ("Games.id", "TemplatesRoads.id")
 		SELECT %s, "TemplatesRoads"."id"
 		FROM "TemplatesRoads"
+		ORDER BY "TemplatesRoads"."id" ASC  -- Ensure order is the same for game as it is for template
 		RETURNING *;
 	"""
 
@@ -108,6 +110,7 @@ def new_settlements(cursor: psycopg2.extras.RealDictCursor, game_id: int) -> dic
 		INSERT INTO "GamesSettlements" ("Games.id", "TemplatesSettlements.id")
 		SELECT %s, "TemplatesSettlements"."id"
 		FROM "TemplatesSettlements"
+		ORDER BY "TemplatesSettlements"."id" ASC  -- Ensure order is the same for game as it is for template
 		RETURNING *;
 	"""
 
@@ -141,6 +144,7 @@ def new_tiles(cursor: psycopg2.extras.RealDictCursor, game_id: int, resource_typ
 			%s,
 			%s
 		) AS "DiceValues" ("TemplatesTiles.id", "value") ON "TemplatesTiles"."id" = "DiceValues"."TemplatesTiles.id"
+		ORDER BY "TemplatesTiles"."id" ASC  -- Ensure order is the same for game as it is for template
 		RETURNING *;
 	"""
 

@@ -24,7 +24,10 @@ from database.connect import connect
 @connect
 def new_game(cursor: psycopg2.extras.RealDictCursor, template_id: int) -> dict:
 	query = """
-		INSERT INTO "Games" ("Templates.id") VALUES (%s)
+		INSERT INTO "Games" ("Templates.id", "size")
+		SELECT "Templates"."id", "Templates"."size"
+		FROM "Templates"
+		WHERE "id" = %s
 		RETURNING *;
 	"""
 

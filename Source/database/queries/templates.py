@@ -34,7 +34,8 @@ def get_ports(cursor: psycopg2.extras.RealDictCursor, boards_id: str) -> list[di
 	query = """
 		SELECT *
 		FROM "TemplatesPorts"
-		WHERE "Templates.id" = %s;
+		WHERE "Templates.id" = %s
+		ORDER BY "TemplatesPorts"."id" ASC;
 	"""
 
 	cursor.execute(query, (boards_id,))
@@ -46,7 +47,8 @@ def get_roads(cursor: psycopg2.extras.RealDictCursor, boards_id: str) -> list[di
 	query = """
 		SELECT *
 		FROM "TemplatesRoads"
-		WHERE "Templates.id" = %s;
+		WHERE "Templates.id" = %s
+		ORDER BY "TemplatesRoads"."id" ASC;
 	"""
 
 	cursor.execute(query, (boards_id,))
@@ -58,7 +60,8 @@ def get_settlements(cursor: psycopg2.extras.RealDictCursor, boards_id: str) -> l
 	query = """
 		SELECT *
 		FROM "TemplatesSettlements"
-		WHERE "Templates.id" = %s;
+		WHERE "Templates.id" = %s
+		ORDER BY "TemplatesSettlements"."id" ASC;
 	"""
 
 	cursor.execute(query, (boards_id,))
@@ -70,7 +73,8 @@ def get_tiles(cursor: psycopg2.extras.RealDictCursor, boards_id: str) -> list[di
 	query = """
 		SELECT *
 		FROM "TemplatesTiles"
-		WHERE "Templates.id" = %s;
+		WHERE "Templates.id" = %s
+		ORDER BY "TemplatesTiles"."id" ASC;
 	"""
 
 	cursor.execute(query, (boards_id,))

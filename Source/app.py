@@ -12,12 +12,12 @@ from game import Game
 
 
 ROOT_DIR = str(Path(__file__).absolute().parent)
-TEMPLATE_FOLDER = os.path.join(ROOT_DIR, "webpage")
-STATIC_FOLDER = os.path.join(ROOT_DIR, "Frontend/Static")
+TEMPLATE_FOLDER = os.path.join(ROOT_DIR, "Webpage")
+STATIC_FOLDER = os.path.join(ROOT_DIR, "Webpage/Static")
 
 
 
-app = Flask("Catan", template_folder=TEMPLATE_FOLDER)
+app = Flask("Catan", template_folder=TEMPLATE_FOLDER, static_folder=STATIC_FOLDER)
 
 
 @app.route("/new/<int:template_id>")

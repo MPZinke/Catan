@@ -102,7 +102,8 @@ CREATE TABLE "Side's Edges"  -- The edges of a side.
 CREATE TABLE "Templates"
 (
 	"id" SERIAL NOT NULL PRIMARY KEY,
-	"name" VARCHAR(32) NOT NULL UNIQUE
+	"name" VARCHAR(32) NOT NULL UNIQUE,
+	"size" INT[2] NOT NULL  -- [columns, rows]
 );
 
 
@@ -193,6 +194,7 @@ CREATE TABLE "Games"
 	"id" SERIAL NOT NULL PRIMARY KEY,
 	"started" TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
 	"finished" TIMESTAMP DEFAULT NULL,
+	"size" INT[2] NOT NULL,  -- [columns, rows]
 	"Templates.id" INT DEFAULT NULL
 );
 

@@ -1,6 +1,6 @@
 
-INSERT INTO "Templates" ("name") VALUES
-('Board 1');
+INSERT INTO "Templates" ("name", "size") VALUES
+('Board 1', ARRAY[4, 5]::INT[2]);
 
 
 INSERT INTO "TemplatesPorts" ("id", "Templates.id", "ResourceTypes.id", "TemplatesSettlements.ids") VALUES
