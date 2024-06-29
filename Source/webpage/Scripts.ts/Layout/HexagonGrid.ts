@@ -1,9 +1,9 @@
 
 
-import Hexagon from "./Hexagon.js";
+import { Hexagon } from "./Hexagon.js";
 
 
-export default class HexagonGrid
+export class HexagonGrid
 {
 	readonly COS60: number = 0.5;
 	readonly SIN60: number = 0.8660254037844386;

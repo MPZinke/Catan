@@ -22,16 +22,15 @@ from database.connect import connect
 
 
 @connect
-def new_game(cursor: psycopg2.extras.RealDictCursor, template_id: int) -> dict:
+def new_game(cursor: psycopg2.extras.RealDictCursor) -> dict:
 	query = """
-		INSERT INTO "Games" ("Templates.id", "size")
-		SELECT "Templates"."id", "Templates"."size"
-		FROM "Templates"
-		WHERE "id" = %s
+		INSERT INTO "Games" ("started")
+		VALUES
+		(CURRENT_TIMESTAMP)
 		RETURNING *;
 	"""
 
-	cursor.execute(query, (template_id,))
+	cursor.execute(query)
 	return dict(cursor.fetchone())
 
 

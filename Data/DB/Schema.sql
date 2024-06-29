@@ -13,22 +13,15 @@ DROP TABLE IF EXISTS "TemplatesPorts" CASCADE;
 DROP TABLE IF EXISTS "TemplatesRoads" CASCADE;
 DROP TABLE IF EXISTS "TemplatesSettlements" CASCADE;
 DROP TABLE IF EXISTS "TemplatesTiles" CASCADE;
-DROP TABLE IF EXISTS "TemplatesPortsSettlements" CASCADE;
-DROP TABLE IF EXISTS "TemplatesRoadsSettlements" CASCADE;
-DROP TABLE IF EXISTS "TemplatesRoadsTiles" CASCADE;
-DROP TABLE IF EXISTS "TemplatesSettlementsTiles" CASCADE;
 DROP TABLE IF EXISTS "TemplatesDiceValuesCounts" CASCADE;
 DROP TABLE IF EXISTS "TemplatesPortsResourceTypesCounts" CASCADE;
 DROP TABLE IF EXISTS "TemplatesTilesResourceTypesCounts" CASCADE;
 DROP TABLE IF EXISTS "Games" CASCADE;
+DROP TABLE IF EXISTS "GamesBoards" CASCADE;
 DROP TABLE IF EXISTS "GamesPorts" CASCADE;
 DROP TABLE IF EXISTS "GamesRoads" CASCADE;
 DROP TABLE IF EXISTS "GamesSettlements" CASCADE;
 DROP TABLE IF EXISTS "GamesTiles" CASCADE;
-DROP TABLE IF EXISTS "GamesPortsGamesSettlements" CASCADE;
-DROP TABLE IF EXISTS "GamesRoadsGamesSettlements" CASCADE;
-DROP TABLE IF EXISTS "GamesRoadsGamesTiles" CASCADE;
-DROP TABLE IF EXISTS "GamesSettlementsGamesTiles" CASCADE;
 DROP TABLE IF EXISTS "Players" CASCADE;
 DROP TABLE IF EXISTS "PlayersResources" CASCADE;
 DROP TABLE IF EXISTS "GamesRobbers" CASCADE;
@@ -193,9 +186,19 @@ CREATE TABLE "Games"
 (
 	"id" SERIAL NOT NULL PRIMARY KEY,
 	"started" TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-	"finished" TIMESTAMP DEFAULT NULL,
+	"finished" TIMESTAMP DEFAULT NULL
+);
+
+
+CREATE TABLE "GamesBoards"
+(
+	"id" SERIAL NOT NULL PRIMARY KEY,
+	"hexagon_height" INT NOT NULL DEFAULT 100,
 	"size" INT[2] NOT NULL,  -- [columns, rows]
-	"Templates.id" INT DEFAULT NULL
+	"Games.id" INT DEFAULT NULL UNIQUE,
+	"Templates.id" INT DEFAULT NULL,
+	FOREIGN KEY ("Games.id") REFERENCES "Games"("id"),
+	FOREIGN KEY ("Templates.id") REFERENCES "Templates"("id")
 );
 
 
@@ -205,17 +208,17 @@ CREATE TABLE "GamesPorts"
 (
 	"id" SERIAL NOT NULL PRIMARY KEY,
 	"TemplatesPorts.id" INT NOT NULL,
-	"Games.id" INT NOT NULL,
+	"GamesBoards.id" INT NOT NULL,
 	"ResourceTypes.id" INT,
 	"GamesSettlements.ids" INT[6] DEFAULT ARRAY[NULL, NULL, NULL, NULL, NULL, NULL]::INT[6],
 	FOREIGN KEY ("TemplatesPorts.id") REFERENCES "TemplatesPorts"("id"),
-	FOREIGN KEY ("Games.id") REFERENCES "Games"("id"),
+	FOREIGN KEY ("GamesBoards.id") REFERENCES "GamesBoards"("id"),
 	FOREIGN KEY ("ResourceTypes.id") REFERENCES "ResourceTypes"("id")
 );
 
 
 CREATE UNIQUE INDEX "GamesPortsUniqueIndex"
-ON "GamesPorts" ("TemplatesPorts.id", "Games.id");
+ON "GamesPorts" ("TemplatesPorts.id", "GamesBoards.id");
 
 
 -- ————————————————————————————————————————————————————— ROADS —————————————————————————————————————————————————————  --
@@ -224,17 +227,17 @@ CREATE TABLE "GamesRoads"
 (
 	"id" SERIAL NOT NULL PRIMARY KEY,
 	"TemplatesRoads.id" INT NOT NULL,
-	"Games.id" INT NOT NULL,
+	"GamesBoards.id" INT NOT NULL,
 	"Players.id" INT DEFAULT NULL,
 	"GamesSettlements.ids" INT[2] DEFAULT ARRAY[NULL, NULL]::INT[2],
 	"GamesTiles.ids" INT[2] DEFAULT ARRAY[NULL, NULL]::INT[2],
 	FOREIGN KEY ("TemplatesRoads.id") REFERENCES "TemplatesRoads"("id"),
-	FOREIGN KEY ("Games.id") REFERENCES "Games"("id")
+	FOREIGN KEY ("GamesBoards.id") REFERENCES "GamesBoards"("id")
 );
 
 
 CREATE UNIQUE INDEX "GamesRoadsUniqueIndex"
-ON "GamesRoads" ("TemplatesRoads.id", "Games.id");
+ON "GamesRoads" ("TemplatesRoads.id", "GamesBoards.id");
 
 
 -- —————————————————————————————————————————————————— SETTLEMENTS ——————————————————————————————————————————————————  --
@@ -243,20 +246,20 @@ CREATE TABLE "GamesSettlements"
 (
 	"id" SERIAL NOT NULL PRIMARY KEY,
 	"TemplatesSettlements.id" INT NOT NULL,
-	"Games.id" INT NOT NULL,
+	"GamesBoards.id" INT NOT NULL,
 	"GamesPorts.ids" INT[3] DEFAULT ARRAY[NULL, NULL, NULL]::INT[3],
 	"GamesRoads.ids" INT[3] DEFAULT ARRAY[NULL, NULL, NULL]::INT[3],
 	"GamesTiles.ids" INT[3] DEFAULT ARRAY[NULL, NULL, NULL]::INT[3],
 	"Players.id" INT DEFAULT NULL,
 	"SettlementTypes.id" INT NOT NULL,
 	FOREIGN KEY ("TemplatesSettlements.id") REFERENCES "TemplatesSettlements"("id"),
-	FOREIGN KEY ("Games.id") REFERENCES "Games"("id"),
+	FOREIGN KEY ("GamesBoards.id") REFERENCES "GamesBoards"("id"),
 	FOREIGN KEY ("SettlementTypes.id") REFERENCES "SettlementTypes"("id")
 );
 
 
 CREATE UNIQUE INDEX "GamesSettlementsUniqueIndex"
-ON "GamesSettlements" ("TemplatesSettlements.id", "Games.id");
+ON "GamesSettlements" ("TemplatesSettlements.id", "GamesBoards.id");
 
 
 -- ————————————————————————————————————————————————————— TILES —————————————————————————————————————————————————————  --
@@ -265,20 +268,20 @@ CREATE TABLE "GamesTiles"
 (
 	"id" SERIAL NOT NULL PRIMARY KEY,
 	"TemplatesTiles.id" INT NOT NULL,
-	"Games.id" INT NOT NULL,
+	"GamesBoards.id" INT NOT NULL,
 	"coordinate" INT[2] NOT NULL,
 	"GamesRoads.ids" INT[6] DEFAULT ARRAY[NULL, NULL, NULL, NULL, NULL, NULL]::INT[6],
 	"GamesSettlements.ids" INT[6] DEFAULT ARRAY[NULL, NULL, NULL, NULL, NULL, NULL]::INT[6],
 	"value" INT NOT NULL CHECK("value" <= 12 AND 0 <= "value"),
 	"ResourceTypes.id" INT NOT NULL,
 	FOREIGN KEY ("TemplatesTiles.id") REFERENCES "TemplatesTiles"("id"),
-	FOREIGN KEY ("Games.id") REFERENCES "Games"("id"),
+	FOREIGN KEY ("GamesBoards.id") REFERENCES "GamesBoards"("id"),
 	FOREIGN KEY ("ResourceTypes.id") REFERENCES "ResourceTypes"("id")
 );
 
 
 CREATE UNIQUE INDEX "GamesTilesUniqueIndex"
-ON "GamesTiles" ("TemplatesTiles.id", "Games.id");
+ON "GamesTiles" ("TemplatesTiles.id", "GamesBoards.id");
 
 
 -- ———————————————————————————————————————————————————— PLAYERS  ———————————————————————————————————————————————————— --
@@ -312,9 +315,9 @@ CREATE TABLE "GamesRobbers"
 (
 	"id" SERIAL NOT NULL PRIMARY KEY,
 	"is_friendly" BOOL NOT NULL DEFAULT TRUE,
-	"Games.id" INT NOT NULL,
+	"GamesBoards.id" INT NOT NULL,
 	"GamesTiles.id" INT NOT NULL,
-	FOREIGN KEY ("Games.id") REFERENCES "Games"("id"),
+	FOREIGN KEY ("GamesBoards.id") REFERENCES "GamesBoards"("id"),
 	FOREIGN KEY ("GamesTiles.id") REFERENCES "GamesTiles"("id")
 );
 
@@ -353,7 +356,7 @@ AS $$ BEGIN
 			SELECT "GamesTiles"."id"
 			FROM "GamesTiles"
 			JOIN "ResourceTypes" ON "GamesTiles"."ResourceTypes.id" = "ResourceTypes"."id"
-			WHERE "GamesTiles"."Games.id" = NEW."Games.id"
+			WHERE "GamesTiles"."GamesBoards.id" = NEW."GamesBoards.id"
 			  AND "ResourceTypes"."label" = 'DESERT'
 		);
 	END IF;

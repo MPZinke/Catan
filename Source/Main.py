@@ -22,19 +22,20 @@ from game.new import new_game
 def main():
 	template_id = 1
 	game = new_game(template_id)
+	print(str(game))
 	board = game.board
 	ports, roads, settlements, tiles = board.ports, board.roads, board.settlements, board.tiles
-	ports_strings = list(map(str, ports))
-	roads_strings = list(map(str, roads))
-	settlements_strings = list(map(str, settlements))
-	tiles_strings = list(map(str, tiles))
-	print(tiles[0].settlements[tiles[0].Settlements.TOP_LEFT])
-	print(
-		"\n".join(ports_strings),
-		"\n".join(roads_strings),
-		"\n".join(settlements_strings),
-		"\n".join(tiles_strings)
-	)
+	# ports_strings = list(map(str, ports))
+	# roads_strings = list(map(str, roads))
+	# settlements_strings = list(map(str, settlements))
+	# tiles_strings = list(map(str, tiles))
+	# print(tiles[0].settlements[tiles[0].Settlements.TOP_LEFT])
+	# print(
+	# 	"\n".join(ports_strings),
+	# 	"\n".join(roads_strings),
+	# 	"\n".join(settlements_strings),
+	# 	"\n".join(tiles_strings)
+	# )
 
 	gui.draw_tiles(tiles)
 # def main():

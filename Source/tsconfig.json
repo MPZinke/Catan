@@ -1,8 +1,7 @@
 {
 	"compilerOptions":
 	{
-		// "module": "commonjs",
-		"module": "es6",
+		"module": "es6",  // FROM: https://stackoverflow.com/a/78391195
 		"noImplicitAny": true,
 		"outDir": "Webpage/Static/Scripts/",
 		"preserveConstEnums": true,
@@ -10,6 +9,7 @@
 		"removeComments": true,
 		"sourceMap": false,
 		"strictNullChecks": true,
-		"strictPropertyInitialization": true
+		"strictPropertyInitialization": true,
+		"target": "es6"
 	}
 }

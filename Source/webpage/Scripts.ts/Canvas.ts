@@ -1,14 +1,28 @@
 
 
-import HexagonGrid from "./HexagonGrid.js";
-import Hexagon from "./Hexagon.js";
+import { HexagonGrid, Hexagon } from "./Layout/index.js";
+
+
+import { get_board_data } from "./Requests.js";
+import { RESOURCE_TYPES } from "./Headers.js";
 
 
 export default class Canvas
 {
+	readonly color_mapping: {[type: string]: string} = {
+		"DESERT": "rgb(189, 160, 106)",
+		"WHEAT": "rgb(246, 215, 99)",
+		"WOOD": "rgb(74, 111, 62)",
+		"SHEEP": "rgb(154, 185, 86)",
+		"STONE": "rgb(163, 150, 140)",
+		"BRICK": "rgb(139, 83, 48)",
+	};
+
 	private canvas: HTMLCanvasElement;
 	private context: CanvasRenderingContext2D;
 	private hexagon_grid: HexagonGrid;
+	board_data: any;
+
 
 	constructor(hexagon_grid: HexagonGrid)
 	{
@@ -16,13 +30,8 @@ export default class Canvas
 		this.context = this.canvas.getContext('2d')!;
 
 		this.hexagon_grid = hexagon_grid;
-		for(var row = 0; row < hexagon_grid.rows; row++)
-		{
-			for(var column = 0; column < hexagon_grid.columns; column++)
-			{
-				this.draw_tile(hexagon_grid.hexagon(column, row));
-			}		
-		}
+
+		this.board_data = get_board_data();
 
 		this.set_canvas_width_and_height_for_grid();
 		this.add_listeners();
@@ -48,7 +57,7 @@ export default class Canvas
 						const hexagon = hexagon_grid.hexagon(column, row);
 						if(hexagon.point_in_hexagon(...mousePos))
 						{
-							draw_tile(hexagon, "00F");
+							draw_tile(hexagon, "#F00");
 						}
 					}
 				}
@@ -94,12 +103,23 @@ export default class Canvas
 
 	draw_tiles()
 	{
+		const board = this.board_data.board!;
+		const tiles = board.tiles!;
+
 		for(var row = 0; row < this.hexagon_grid.rows; row++)
 		{
 			for(var column = 0; column < this.hexagon_grid.columns; column++)
 			{
 				const hexagon = this.hexagon_grid.hexagon(column, row);
-				this.draw_tile(hexagon);
+				for(var tile_index = 0; tile_index < tiles.length; tile_index++)
+				{
+					if(tiles[tile_index].coordinate[1] == row && tiles[tile_index].coordinate[0] == column)
+					{
+						const tile_type = tiles[tile_index].type;
+						const color = this.color_mapping[Object.keys(RESOURCE_TYPES).find(key => RESOURCE_TYPES[key] === tile_type) as string];
+						this.draw_tile(hexagon, color);
+					}
+				}
 			}
 		}
 	}
@@ -108,18 +128,17 @@ export default class Canvas
 	set_canvas_width_and_height_for_grid(): void
 	{
 		const hexagon_grid = this.hexagon_grid;
+		const hexagon_height = hexagon_grid.hexagon_height;
 
-		const radius: number = 2 * hexagon_grid.hexagon_height / hexagon_grid.SQUAREROOT_3;
+		const radius: number = 2 * hexagon_height / hexagon_grid.SQUAREROOT_3;
 
-		const width_incremental_increase: number = 2 + (3 * hexagon_grid.columns);
-		const width_size_multiplier: number = hexagon_grid.hexagon_height * width_incremental_increase / hexagon_grid.SQUAREROOT_3;
-		const width: number = Math.floor(width_size_multiplier + radius);
-		const height: number = hexagon_grid.hexagon_height * 2 * hexagon_grid.rows + hexagon_grid.hexagon_height;
-
-		console.log(width);
-		console.log(height);
+		const height: number = hexagon_height * 2 * hexagon_grid.rows + hexagon_height;
+		const width: number = (radius * 2) + (hexagon_grid.columns - 1) * (radius * 1.5);
 
 		this.canvas.width = width;
 		this.canvas.height = height;
+
+		this.context.fillStyle = "rgb(66, 149, 208)";
+		this.context.fillRect(0, 0, width, height);
 	}
 }

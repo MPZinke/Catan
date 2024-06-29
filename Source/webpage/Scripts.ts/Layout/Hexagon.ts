@@ -1,6 +1,6 @@
 
 
-export default class Hexagon
+export class Hexagon
 {
 	readonly COS60: number = 0.5;
 	readonly SIN60: number = 0.8660254037844386;

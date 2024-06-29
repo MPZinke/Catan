@@ -24,14 +24,25 @@ from game.board.new.random import ResourceAndValueMapping
 
 def new_board(game_id: int, template_data: TemplateData, resource_and_value_mapping: ResourceAndValueMapping
 ) -> BoardData:
-	port_dicts: DictList = queries.games.new_ports(game_id, resource_and_value_mapping.port_resources_dict)
-	road_dicts: DictList = queries.games.new_roads(game_id)
-	settlement_dicts: DictList = queries.games.new_settlements(game_id)
-	tile_dicts: DictList = queries.games.new_tiles(game_id, resource_and_value_mapping.tile_resources_dict, resource_and_value_mapping.tile_dice_values_dict)
+	template_id: int = template_data.id
 
-	robber_dict: dict = new_robber(game_id)
+	board_dict: dict = queries.games.new_board(game_id, template_id)  # pylint: disable=no-value-for-parameter
+	board_id: int = board_dict["id"]
+
+	port_dicts: DictList = queries.games.new_ports(board_id, resource_and_value_mapping.port_resources_dict)  # pylint: disable=no-value-for-parameter
+	road_dicts: DictList = queries.games.new_roads(board_id)  # pylint: disable=no-value-for-parameter
+	settlement_dicts: DictList = queries.games.new_settlements(board_id)  # pylint: disable=no-value-for-parameter
+	tile_dicts: DictList = queries.games.new_tiles(board_id, resource_and_value_mapping.tile_resources_dict,  # pylint: disable=no-value-for-parameter
+		resource_and_value_mapping.tile_dice_values_dict
+	)
+
+	robber_dict: dict = new_robber(board_id)
 
 	board_data = BoardData(
+		id=board_id,
+		size=board_dict["size"],
+		game_id=board_dict["Games.id"],
+		template_id=board_dict["Templates.id"],
 		ports=port_dicts,
 		roads=road_dicts,
 		robber=robber_dict,

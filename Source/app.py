@@ -6,7 +6,7 @@ from pathlib import Path
 
 from flask import render_template, Flask
 
-
+from database import queries
 import game
 from game import Game
 
@@ -27,9 +27,18 @@ def new(template_id: int):
 
 
 @app.route("/game/<int:game_id>")
-def game(game_id: int):
+def ui_game(game_id: int):
 	return render_template("game.j2")
 
+
+@app.route("/api/game/<int:game_id>")
+def api_game(game_id: int) -> dict:
+	return dict(game.get_game(game_id))
+
+
+@app.route("/api/resource_types")
+def api_resource_types() -> dict:
+	return {type["label"]: type["id"]-1 for type in queries.types.get_resource_types()}  # pylint: disable=no-value-for-parameter
 
 
 app.run(host="0.0.0.0", port=80, debug=True)

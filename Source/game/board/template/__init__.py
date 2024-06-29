@@ -24,7 +24,9 @@ DictList = list[dict]
 
 
 def template_data(template_id: int) -> TemplateData:
-	name: str = queries.templates.get_template(template_id)["name"]  # pylint: disable=no-value-for-parameter
+	template_dict: dict = queries.templates.get_template(template_id)  # pylint: disable=no-value-for-parameter
+	name: str = template_dict["name"]
+	size: str = template_dict["size"]
 	ports: DictList = queries.templates.get_ports(template_id)  # pylint: disable=no-value-for-parameter
 	roads: DictList = queries.templates.get_roads(template_id)  # pylint: disable=no-value-for-parameter
 	settlements: DictList = queries.templates.get_settlements(template_id)  # pylint: disable=no-value-for-parameter
@@ -33,6 +35,7 @@ def template_data(template_id: int) -> TemplateData:
 	return TemplateData(
 		id=template_id,
 		name=name,
+		size=size,
 		ports=ports,
 		roads=roads,
 		settlements=settlements,

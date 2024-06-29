@@ -14,19 +14,26 @@ __author__ = "MPZinke"
 ########################################################################################################################
 
 
+from typing import Tuple
+
+
 from game.board import Board, Port, Ports, Road, Roads, Robber, Settlement, Settlements, Tile, Tiles
 from game.board.construct.associate import associate_board_parts
 from game.board.construct.BoardData import BoardData
 
 
 def construct_board(board_data: BoardData) -> Board:
+	print(board_data.id)
+	print(board_data.size)
+	id: int = board_data.id
+	size: Tuple[int, int]= board_data.size
 	port_objects: Ports = construct_ports(board_data.ports)
 	road_objects: Roads = construct_roads(board_data.roads)
 	robber_object: Robber = construct_robber(board_data.robber)
 	settlement_objects: Settlements = construct_settlements(board_data.settlements)
 	tile_objects: Tiles = construct_tiles(board_data.tiles)
 
-	board = Board(port_objects, road_objects, robber_object, settlement_objects, tile_objects)
+	board = Board(id, size, port_objects, road_objects, robber_object, settlement_objects, tile_objects)
 
 	associate_board_parts(board_data, board)
 
@@ -51,7 +58,7 @@ def construct_roads(road_dicts: list[dict]) -> Roads:
 
 
 def construct_robber(robber_dict: dict) -> Robber:
-	robber = Robber(robber_dict["Games.id"], robber_dict["is_friendly"])
+	robber = Robber(robber_dict["GamesBoards.id"], robber_dict["is_friendly"])
 	return robber
 
 

@@ -1,5 +1,6 @@
 
 
+import json
 from typing import Optional, TypeVar
 
 
@@ -26,3 +27,19 @@ class Port:
 
 	def __eq__(self, right: Port) -> bool:
 		return self.id == right.id
+
+
+	def __iter__(self) -> dict:
+		yield from {
+			"id": self.id,
+			"type": self.type,
+			"settlements": [settlement.id if(settlement) else None for settlement in self.settlements],
+		}.items()
+
+
+	def __repr__(self) -> str:
+		return str(self)
+
+
+	def __str__(self) -> str:
+		return json.dumps(dict(self), indent=4)
