@@ -20,9 +20,10 @@ export function get_resource_types(): any
 
 export function get_game_data(): any
 {
-	// const url: string = `${window.location.href}/data`;
+	const game_id = window.location.pathname.split('/')[2];
+	const url: string = `/api/game/${game_id}`;
 	var xmlhttp = new XMLHttpRequest();
-	xmlhttp.open("GET", "/api/game/1", false);
+	xmlhttp.open("GET", url, false);
 	xmlhttp.send();
 	if(xmlhttp.status == 400)
 	{
