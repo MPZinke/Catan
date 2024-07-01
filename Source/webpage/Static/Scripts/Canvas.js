@@ -1,7 +1,8 @@
-import { get_board_data } from "./Requests.js";
+import { HexagonGrid } from "./Layout/index.js";
+import { get_game_data } from "./Requests.js";
 import { RESOURCE_TYPES } from "./Headers.js";
 export default class Canvas {
-    constructor(hexagon_grid) {
+    constructor(columns, rows, hexagon_height) {
         this.color_mapping = {
             "DESERT": "rgb(189, 160, 106)",
             "WHEAT": "rgb(246, 215, 99)",
@@ -12,11 +13,10 @@ export default class Canvas {
         };
         this.canvas = document.getElementById("canvas");
         this.context = this.canvas.getContext('2d');
-        this.hexagon_grid = hexagon_grid;
-        this.board_data = get_board_data();
+        this.hexagon_grid = new HexagonGrid(columns, rows, hexagon_height);
+        this.board_data = get_game_data();
         this.set_canvas_width_and_height_for_grid();
         this.add_listeners();
-        this.draw_tiles();
     }
     add_listeners() {
         const draw_tile = this.draw_tile.bind(this);
@@ -56,21 +56,13 @@ export default class Canvas {
         this.context.lineTo(hexagon.points[0][0], hexagon.points[0][1]);
         this.context.stroke();
     }
-    draw_tiles() {
-        const board = this.board_data.board;
-        const tiles = board.tiles;
-        for (var row = 0; row < this.hexagon_grid.rows; row++) {
-            for (var column = 0; column < this.hexagon_grid.columns; column++) {
-                const hexagon = this.hexagon_grid.hexagon(column, row);
-                for (var tile_index = 0; tile_index < tiles.length; tile_index++) {
-                    if (tiles[tile_index].coordinate[1] == row && tiles[tile_index].coordinate[0] == column) {
-                        const tile_type = tiles[tile_index].type;
-                        const color = this.color_mapping[Object.keys(RESOURCE_TYPES).find(key => RESOURCE_TYPES[key] === tile_type)];
-                        this.draw_tile(hexagon, color);
-                    }
-                }
-            }
-        }
+    draw_tiles(tiles) {
+        tiles.forEach((tile) => {
+            const hexagon = this.hexagon_grid.hexagon(tile.coordinate[0], tile.coordinate[1]);
+            const tile_type = tile.type;
+            const color = this.color_mapping[Object.keys(RESOURCE_TYPES).find(key => RESOURCE_TYPES[key] === tile_type)];
+            this.draw_tile(hexagon, color);
+        });
     }
     set_canvas_width_and_height_for_grid() {
         const hexagon_grid = this.hexagon_grid;

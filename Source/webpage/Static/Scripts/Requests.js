@@ -10,9 +10,9 @@ export function get_resource_types() {
     }
     return JSON.parse(xmlhttp.responseText);
 }
-export function get_board_data() {
+export function get_game_data() {
     var xmlhttp = new XMLHttpRequest();
-    xmlhttp.open("GET", "/api/game/2", false);
+    xmlhttp.open("GET", "/api/game/1", false);
     xmlhttp.send();
     if (xmlhttp.status == 400) {
         return alert('There was an error 400');

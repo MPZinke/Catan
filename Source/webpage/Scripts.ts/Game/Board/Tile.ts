@@ -9,25 +9,22 @@ import { ResourceType } from "../../Types.d.js";
 
 export class Tile
 {
+	id: number;
 	coordinate: [number, number];
-	roads: [Road?, Road?, Road?, Road?, Road?, Road?];
-	settlements: [Settlement?, Settlement?, Settlement?, Settlement?, Settlement?, Settlement?];
 	value: number;
-	resource_type: string;
+	type: number;
+	roads: [Road|null, Road|null, Road|null, Road|null, Road|null, Road|null];
+	settlements: [Settlement|null, Settlement|null, Settlement|null, Settlement|null, Settlement|null, Settlement|null];
 
 
-	constructor(
-		coordinate: [number, number],
-		roads: [Road?, Road?, Road?, Road?, Road?, Road?],
-		settlements: [Settlement?, Settlement?, Settlement?, Settlement?, Settlement?, Settlement?],
-		value: number,
-		resource_type: string
-	)
+	constructor(id: number, coordinate: [number, number], value: number, type: number)
 	{
+		this.id = id;
 		this.coordinate = coordinate;
-		this.roads = roads;
-		this.settlements = settlements;
 		this.value = value;
-		this.resource_type = resource_type;
+		this.type = type;
+
+		this.roads = [null, null, null, null, null, null];
+		this.settlements = [null, null, null, null, null, null];
 	}
 }

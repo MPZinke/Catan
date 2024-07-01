@@ -18,11 +18,11 @@ export function get_resource_types(): any
 }
 
 
-export function get_board_data(): any
+export function get_game_data(): any
 {
 	// const url: string = `${window.location.href}/data`;
 	var xmlhttp = new XMLHttpRequest();
-	xmlhttp.open("GET", "/api/game/2", false);
+	xmlhttp.open("GET", "/api/game/1", false);
 	xmlhttp.send();
 	if(xmlhttp.status == 400)
 	{
