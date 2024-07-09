@@ -26,12 +26,12 @@ export default class Canvas
 	board_data: any;
 
 
-	constructor(columns: number, rows: number, hexagon_height: number)
+	constructor(columns: number, rows: number, hexagon_height: number, hexagon_padding: number)
 	{
 		this.canvas = document.getElementById("canvas")! as HTMLCanvasElement;
 		this.context = this.canvas.getContext('2d')!;
 
-		this.hexagon_grid = new HexagonGrid(columns, rows, hexagon_height);
+		this.hexagon_grid = new HexagonGrid(columns, rows, hexagon_height, hexagon_padding);
 
 		this.board_data = get_game_data();
 
@@ -119,13 +119,7 @@ export default class Canvas
 
 	set_canvas_width_and_height_for_grid(): void
 	{
-		const hexagon_grid = this.hexagon_grid;
-		const hexagon_height = hexagon_grid.hexagon_height;
-
-		const radius: number = 2 * hexagon_height / hexagon_grid.SQUAREROOT_3;
-
-		const height: number = hexagon_height * 2 * hexagon_grid.rows + hexagon_height;
-		const width: number = (radius * 2) + (hexagon_grid.columns - 1) * (radius * 1.5);
+		const [width, height] = this.hexagon_grid.dimensions();
 
 		this.canvas.width = width;
 		this.canvas.height = height;

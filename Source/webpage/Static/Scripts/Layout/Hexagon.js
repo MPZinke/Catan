@@ -1,13 +1,14 @@
 export class Hexagon {
-    constructor(center_x, center_y, height) {
+    constructor(center_x, center_y, height, padding) {
         this.COS60 = 0.5;
         this.SIN60 = 0.8660254037844386;
         this.SQUAREROOT_3 = 1.7320508076;
+        this.TWO_OVER_SQUAREROOT_3 = 1.1547005384;
         this.x = center_x;
         this.y = center_y;
         this.height = height;
-        this.radius = 2 * height / this.SQUAREROOT_3;
-        this.radius = height;
+        this.padding = padding;
+        this.radius = height * this.TWO_OVER_SQUAREROOT_3;
         this.points = [
             [this.x - this.radius * this.COS60, this.y - this.radius * this.SIN60],
             [this.x + this.radius * this.COS60, this.y - this.radius * this.SIN60],

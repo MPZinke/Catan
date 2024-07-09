@@ -2,7 +2,7 @@ import { HexagonGrid } from "./Layout/index.js";
 import { get_game_data } from "./Requests.js";
 import { RESOURCE_TYPES } from "./Headers.js";
 export default class Canvas {
-    constructor(columns, rows, hexagon_height) {
+    constructor(columns, rows, hexagon_height, hexagon_padding) {
         this.color_mapping = {
             "DESERT": "rgb(189, 160, 106)",
             "WHEAT": "rgb(246, 215, 99)",
@@ -13,7 +13,7 @@ export default class Canvas {
         };
         this.canvas = document.getElementById("canvas");
         this.context = this.canvas.getContext('2d');
-        this.hexagon_grid = new HexagonGrid(columns, rows, hexagon_height);
+        this.hexagon_grid = new HexagonGrid(columns, rows, hexagon_height, hexagon_padding);
         this.board_data = get_game_data();
         this.set_canvas_width_and_height_for_grid();
         this.add_listeners();
@@ -65,11 +65,7 @@ export default class Canvas {
         });
     }
     set_canvas_width_and_height_for_grid() {
-        const hexagon_grid = this.hexagon_grid;
-        const hexagon_height = hexagon_grid.hexagon_height;
-        const radius = 2 * hexagon_height / hexagon_grid.SQUAREROOT_3;
-        const height = hexagon_height * 2 * hexagon_grid.rows + hexagon_height;
-        const width = (radius * 2) + (hexagon_grid.columns - 1) * (radius * 1.5);
+        const [width, height] = this.hexagon_grid.dimensions();
         this.canvas.width = width;
         this.canvas.height = height;
         this.context.fillStyle = "rgb(66, 149, 208)";

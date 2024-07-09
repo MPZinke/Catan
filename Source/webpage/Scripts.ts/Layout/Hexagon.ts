@@ -5,28 +5,33 @@ export class Hexagon
 	readonly COS60: number = 0.5;
 	readonly SIN60: number = 0.8660254037844386;
 	readonly SQUAREROOT_3: number = 1.7320508076;
+	readonly TWO_OVER_SQUAREROOT_3: number = 1.1547005384;
 
 	x: number;
 	y: number;
 	height: number;
+	padding: number;
 	radius: number;
 	points: number[][];
 
-	constructor(center_x: number, center_y: number, height: number)
+	constructor(center_x: number, center_y: number, height: number, padding: number)
 	{
 		this.x = center_x;
 		this.y = center_y;
 		this.height = height;
-		this.radius = 2 * height / this.SQUAREROOT_3;
-		this.radius = height;
+		this.padding = padding;
+		this.radius = height * this.TWO_OVER_SQUAREROOT_3;
 		
+		const radius_cos60: number = this.radius * this.COS60;
+		const radius_sin60: number = this.radius * this.SIN60;
+
 		this.points = [
-			[this.x - this.radius * this.COS60, this.y - this.radius * this.SIN60],
-			[this.x + this.radius * this.COS60, this.y - this.radius * this.SIN60],
-			[this.x + this.radius,         this.y],
-			[this.x + this.radius * this.COS60, this.y + this.radius * this.SIN60],
-			[this.x - this.radius * this.COS60, this.y + this.radius * this.SIN60],
-			[this.x - this.radius,         this.y],
+			[this.x - radius_cos60, this.y - radius_sin60],
+			[this.x + radius_cos60, this.y - radius_sin60],
+			[this.x + this.radius,  this.y],
+			[this.x + radius_cos60, this.y + radius_sin60],
+			[this.x - radius_cos60, this.y + radius_sin60],
+			[this.x - this.radius,  this.y],
 		];
 	}
 
