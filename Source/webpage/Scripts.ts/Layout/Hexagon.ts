@@ -127,8 +127,8 @@ export class Hexagon
 				}
 				else  // Bottom-right
 				{
-					x1 = this.points[1][0];
-					x2 = this.x + this.radius;
+					x1 = this.x + this.radius;
+					x2 = this.points[3][0];
 				}
 			}
 

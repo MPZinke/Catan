@@ -47,8 +47,8 @@ export class Hexagon {
                     x2 = this.points[4][0];
                 }
                 else {
-                    x1 = this.points[1][0];
-                    x2 = this.x + this.radius;
+                    x1 = this.x + this.radius;
+                    x2 = this.points[3][0];
                 }
             }
             const slope = this.height / (x2 - x1);
