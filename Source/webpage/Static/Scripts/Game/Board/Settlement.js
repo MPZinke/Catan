@@ -1,3 +1,4 @@
+import { DIRECTIONS } from "../../Globals.js";
 export class Settlement {
     constructor(id, type) {
         this.id = id;
@@ -8,3 +9,6 @@ export class Settlement {
         this.player = null;
     }
 }
+Settlement.Port = DIRECTIONS["Corner's Sides"];
+Settlement.Roads = DIRECTIONS["Corner's Edges"];
+Settlement.Tiles = DIRECTIONS["Corner's Sides"];

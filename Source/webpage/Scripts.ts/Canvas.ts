@@ -2,10 +2,10 @@
 
 import { HexagonGrid, Hexagon } from "./Layout/index.js";
 import { get_game_data } from "./Requests.js";
-import { RESOURCE_TYPES } from "./Headers.js";
+import { RESOURCE_TYPES } from "./Globals.js";
 
 
-import { Tile } from "./Game/Board/index.js";
+import { Settlement, Tile } from "./Game/Board/index.js";
 
 
 
@@ -23,7 +23,6 @@ export default class Canvas
 	private canvas: HTMLCanvasElement;
 	private context: CanvasRenderingContext2D;
 	private hexagon_grid: HexagonGrid;
-	board_data: any;
 
 
 	constructor(columns: number, rows: number, hexagon_height: number, hexagon_padding: number)
@@ -32,8 +31,6 @@ export default class Canvas
 		this.context = this.canvas.getContext('2d')!;
 
 		this.hexagon_grid = new HexagonGrid(columns, rows, hexagon_height, hexagon_padding);
-
-		this.board_data = get_game_data();
 
 		this.set_canvas_width_and_height_for_grid();
 		this.add_listeners();
@@ -75,30 +72,83 @@ export default class Canvas
 	}
 
 
+	draw_hexagon(center_x: number, center_y: number, height: number)
+	{
+		const radius = height * Hexagon.TWO_OVER_SQUAREROOT_3;
+		const radius_cos60: number = radius * Hexagon.COS60;
+		const radius_sin60: number = radius * Hexagon.SIN60;
+		const points: Array<[number, number]> = [
+			[center_x - radius_cos60, center_y - radius_sin60],
+			[center_x + radius_cos60, center_y - radius_sin60],
+			[center_x + radius,  center_y],
+			[center_x + radius_cos60, center_y + radius_sin60],
+			[center_x - radius_cos60, center_y + radius_sin60],
+			[center_x - radius,  center_y]
+		];
+		this.draw_polygon(points);
+	}
+
+
+	draw_polygon(points: Array<[number, number]>, fill: string="#CCC", outline: string="#CCC")
+	{
+		this.context.fillStyle = fill;
+		this.context.strokeStyle = outline;
+		this.context.beginPath();
+		this.context.moveTo(points[0][0], points[0][1]);
+		for(var index = 1; index < points.length; index++)
+		{
+			this.context.lineTo(points[index][0], points[index][1]);
+			this.context.stroke();
+		}
+
+		this.context.closePath();
+		this.context.fill();
+		this.context.stroke();
+	}
+
+
+	draw_settlement(settlement: Settlement)
+	{
+		const tile: Tile = settlement.tiles.find((tile: Tile|null) => tile !== null) as Tile;
+		const tile_coordinate: [number, number] = tile.coordinate;
+		const settlement_direction: number = tile.settlements.findIndex(
+			(temp_settlement: Settlement) => settlement.id === temp_settlement.id
+		);
+
+		const height: number = this.hexagon_grid.hexagon_padding * .5;
+		const radius = height * Hexagon.TWO_OVER_SQUAREROOT_3;
+		const radius_cos60: number = radius * Hexagon.COS60;
+
+		const [x, y] = this.hexagon_grid.hexagon(tile_coordinate[0], tile_coordinate[1]).points[settlement_direction];
+		const [x_offset, y_offset] = {
+			[Tile.Settlements.TOP_LEFT]:     [-radius_cos60, -height],
+			[Tile.Settlements.TOP_RIGHT]:    [ radius_cos60, -height],
+			[Tile.Settlements.RIGHT]:        [ radius,       0],
+			[Tile.Settlements.BOTTOM_RIGHT]: [ radius_cos60, height],
+			[Tile.Settlements.BOTTOM_LEFT]:  [-radius_cos60, height],
+			[Tile.Settlements.LEFT]:         [-radius,       0],
+		}[settlement_direction];
+
+		this.draw_hexagon(x+x_offset, y+y_offset, height);
+	}
+
+
+	draw_settlements(settlements: Settlement[])
+	{
+		settlements.forEach(
+			(settlement: Settlement) =>
+			{
+				this.draw_settlement(settlement);
+			}
+		)
+	}
+
+
 	draw_tile(hexagon: Hexagon, color: string="#f00"): void
 	{
 		// FROM: https://stackoverflow.com/a/4840009
 		// Draw Hexagon interior.
-		this.context.fillStyle = color;
-		this.context.beginPath();
-		this.context.moveTo(hexagon.points[0][0], hexagon.points[0][1]);
-		for(var index = 1; index < 6; index++)
-		{
-			this.context.lineTo(hexagon.points[index][0], hexagon.points[index][1]);
-		}
-		this.context.closePath();
-		this.context.fill();
-
-		// Draw Hexagon exterior.
-		this.context.beginPath();
-		this.context.moveTo(hexagon.points[0][0], hexagon.points[0][1]);
-		for(var index = 1; index < 6; index++)
-		{
-			this.context.lineTo(hexagon.points[index][0], hexagon.points[index][1]);
-			this.context.stroke();
-		}
-		this.context.lineTo(hexagon.points[0][0], hexagon.points[0][1]);
-		this.context.stroke();
+		this.draw_polygon(hexagon.points, color, "#000")
 	}
 
 

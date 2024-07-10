@@ -1,14 +1,19 @@
 
 
-import { Road } from "./Road.js";
-import { Settlement } from "./Settlement.js";
+import { Directions, ResourceType } from "../../Types.d.js";
 
 
-import { ResourceType } from "../../Types.d.js";
+import { Road, Settlement } from "./index.js";
+
+
+import { DIRECTIONS } from "../../Globals.js";
 
 
 export class Tile
 {
+	static readonly Settlements: Directions = DIRECTIONS["Side's Corners"];
+	static readonly Roads: Directions = DIRECTIONS["Side's Edges"];
+
 	id: number;
 	coordinate: [number, number];
 	value: number;

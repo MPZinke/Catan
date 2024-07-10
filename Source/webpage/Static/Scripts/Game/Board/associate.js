@@ -10,7 +10,7 @@ export function associate_port_settlements(board_data, ports, settlements) {
                 continue;
             }
             const settlement = settlements.find(settlement => settlement.id == settlement_id);
-            port.settlements[settlement_id] = settlement;
+            port.settlements[port_settlement_index] = settlement;
             const settlement_dict = settlement_dicts.find(dict => dict.id == settlement_id);
             const settlement_port_index = settlement_dict.ports.indexOf(port_id);
             settlement.ports[settlement_port_index] = port;
@@ -29,7 +29,7 @@ export function associate_road_settlements(board_data, roads, settlements) {
                 continue;
             }
             const settlement = settlements.find(settlement => settlement.id == settlement_id);
-            road.settlements[settlement_id] = settlement;
+            road.settlements[road_settlement_index] = settlement;
             const settlement_dict = settlement_dicts.find(dict => dict.id == settlement_id);
             const settlement_road_index = settlement_dict.roads.indexOf(road_id);
             settlement.roads[settlement_road_index] = road;
@@ -48,7 +48,7 @@ export function associate_road_tiles(board_data, roads, tiles) {
                 continue;
             }
             const tile = tiles.find(tile => tile.id == tile_id);
-            road.tiles[tile_id] = tile;
+            road.tiles[road_tile_index] = tile;
             const tile_dict = tile_dicts.find(dict => dict.id == tile_id);
             const tile_road_index = tile_dict.roads.indexOf(road_id);
             tile.roads[tile_road_index] = road;
@@ -67,7 +67,7 @@ export function associate_settlement_tiles(board_data, settlements, tiles) {
                 continue;
             }
             const tile = tiles.find(tile => tile.id == tile_id);
-            settlement.tiles[tile_id] = tile;
+            settlement.tiles[settlement_tile_index] = tile;
             const tile_dict = tile_dicts.find(dict => dict.id == tile_id);
             const tile_settlement_index = tile_dict.settlements.indexOf(settlement_id);
             tile.settlements[tile_settlement_index] = settlement;

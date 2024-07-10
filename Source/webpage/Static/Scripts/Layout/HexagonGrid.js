@@ -23,15 +23,15 @@ export class HexagonGrid {
     x_position_for_index(column) {
         const incremental_increase = 2 + (3 * column);
         const size_multiplier = this.hexagon_height * incremental_increase / this.SQUAREROOT_3;
-        const padding_distance = (column + 1) * this.hexagon_padding;
+        const padding_distance = (column + 1) * (this.hexagon_padding * Hexagon.SIN60);
         const distance_to_hexagon_center = Math.floor(size_multiplier + padding_distance);
         return distance_to_hexagon_center;
     }
     y_position_for_index(column, row) {
         const offset_for_column_index = (this.hexagon_height + this.hexagon_padding * .5) * (column & 0b1);
-        const padding_distance = this.hexagon_padding * (row + 1);
+        const padding_distance = this.hexagon_padding + row * this.hexagon_padding;
         const hexagon_distance = this.hexagon_height * 2 * row;
-        const distance_to_hexagon_top = padding_distance + hexagon_distance + offset_for_column_index;
+        const distance_to_hexagon_top = offset_for_column_index + padding_distance + hexagon_distance;
         const distance_to_hexagon_center = distance_to_hexagon_top + this.hexagon_height;
         return distance_to_hexagon_center;
     }
@@ -40,7 +40,7 @@ export class HexagonGrid {
         const hexagon_width = this.hexagon_height * this.TWO_OVER_SQUAREROOT_3 * 2;
         const width_distance = hexagon_width + .75 * hexagon_width * (this.columns - 1);
         const width = width_padding + width_distance;
-        const height_padding_distance = this.hexagon_padding * (this.rows + 1);
+        const height_padding_distance = this.hexagon_padding + this.rows * this.hexagon_padding;
         const height_hexagon_distance = this.rows * this.hexagon_height * 2;
         const height_offset = +(this.columns > 1) * this.hexagon_height;
         const height = height_padding_distance + height_hexagon_distance + height_offset;

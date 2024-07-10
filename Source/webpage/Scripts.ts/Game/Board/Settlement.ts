@@ -1,17 +1,21 @@
 
 
-import { Port } from "./Port.js";
-import { Road } from "./Road.js";
-import { Tile } from "index.js";
+import { Directions, ResourceType, SettlementType } from "../../Types.d.js";
 
+
+import { Port, Road, Tile } from "./index.js";
 import { Player } from "../Player.js";
 
 
-import { ResourceType, SettlementType } from "../../Types.d.js";
+import { DIRECTIONS } from "../../Globals.js";
 
 
 export class Settlement
 {
+	static readonly Port: Directions = DIRECTIONS["Corner's Sides"];
+	static readonly Roads: Directions = DIRECTIONS["Corner's Edges"];
+	static readonly Tiles: Directions = DIRECTIONS["Corner's Sides"];
+
 	id: number;
 	type: SettlementType;
 

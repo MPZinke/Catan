@@ -1,22 +1,19 @@
+import { DIRECTIONS } from "../Globals.js";
 export class Hexagon {
     constructor(center_x, center_y, height, padding) {
-        this.COS60 = 0.5;
-        this.SIN60 = 0.8660254037844386;
-        this.SQUAREROOT_3 = 1.7320508076;
-        this.TWO_OVER_SQUAREROOT_3 = 1.1547005384;
         this.x = center_x;
         this.y = center_y;
         this.height = height;
         this.padding = padding;
-        this.radius = height * this.TWO_OVER_SQUAREROOT_3;
-        this.points = [
-            [this.x - this.radius * this.COS60, this.y - this.radius * this.SIN60],
-            [this.x + this.radius * this.COS60, this.y - this.radius * this.SIN60],
-            [this.x + this.radius, this.y],
-            [this.x + this.radius * this.COS60, this.y + this.radius * this.SIN60],
-            [this.x - this.radius * this.COS60, this.y + this.radius * this.SIN60],
-            [this.x - this.radius, this.y],
-        ];
+        this.radius = height * Hexagon.TWO_OVER_SQUAREROOT_3;
+        const radius_cos60 = this.radius * Hexagon.COS60;
+        this.points = Array(6);
+        this.points[Hexagon.Corners.TOP_LEFT] = [this.x - radius_cos60, this.y - height];
+        this.points[Hexagon.Corners.TOP_RIGHT] = [this.x + radius_cos60, this.y - height];
+        this.points[Hexagon.Corners.RIGHT] = [this.x + this.radius, this.y];
+        this.points[Hexagon.Corners.BOTTOM_RIGHT] = [this.x + radius_cos60, this.y + height];
+        this.points[Hexagon.Corners.BOTTOM_LEFT] = [this.x - radius_cos60, this.y + height];
+        this.points[Hexagon.Corners.LEFT] = [this.x - this.radius, this.y];
     }
     point_in_hexagon(x, y) {
         if (x < this.x - this.radius || this.x + this.radius < x) {
@@ -66,3 +63,8 @@ export class Hexagon {
         return true;
     }
 }
+Hexagon.COS60 = 0.5;
+Hexagon.SIN60 = 0.8660254037844386;
+Hexagon.SQUAREROOT_3 = 1.7320508076;
+Hexagon.TWO_OVER_SQUAREROOT_3 = 1.1547005384;
+Hexagon.Corners = DIRECTIONS["Side's Corners"];

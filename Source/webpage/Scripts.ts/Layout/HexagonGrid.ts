@@ -43,8 +43,9 @@ export class HexagonGrid
 	{
 		const incremental_increase: number = 2 + (3 * column);
 		const size_multiplier: number = this.hexagon_height * incremental_increase / this.SQUAREROOT_3;
-		const padding_distance: number = (column + 1) * this.hexagon_padding;
+		const padding_distance: number = (column + 1) * this.hexagon_padding * Hexagon.SIN60;
 		const distance_to_hexagon_center: number = Math.floor(size_multiplier + padding_distance);
+
 		return distance_to_hexagon_center;
 	}
 
@@ -52,12 +53,14 @@ export class HexagonGrid
 	y_position_for_index(column: number, row: number): number
 	{
 		// The span to the current hexagon's top.
+		// Height offset + padding offset.
 		const offset_for_column_index: number = (this.hexagon_height + this.hexagon_padding * .5) * (column & 0b1);
-		const padding_distance: number = this.hexagon_padding * (row + 1);
+		const padding_distance: number = this.hexagon_padding + row * this.hexagon_padding;
 		const hexagon_distance: number = this.hexagon_height * 2 * row;
-		const distance_to_hexagon_top: number = padding_distance + hexagon_distance + offset_for_column_index;
+		const distance_to_hexagon_top: number = offset_for_column_index + padding_distance + hexagon_distance;
 		// Adds height to get to center.
 		const distance_to_hexagon_center: number = distance_to_hexagon_top + this.hexagon_height;
+
 		return distance_to_hexagon_center;
 	}
 
@@ -71,7 +74,7 @@ export class HexagonGrid
 		const width: number = width_padding + width_distance;
 
 		// Height
-		const height_padding_distance: number = this.hexagon_padding * (this.rows + 1);
+		const height_padding_distance: number = this.hexagon_padding + this.rows * this.hexagon_padding;
 		const height_hexagon_distance: number = this.rows * this.hexagon_height * 2;
 		const height_offset: number = +(this.columns > 1) * this.hexagon_height;
 		const height: number = height_padding_distance + height_hexagon_distance + height_offset;

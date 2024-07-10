@@ -1,15 +1,20 @@
 
 
-import { Settlement } from "./Settlement.js";
-import { Tile } from "./Tile.js";
+import { Directions, ResourceType } from "../../Types.d.js";
 
+
+import { Settlement, Tile } from "./index.js";
 import { Player } from "../Player.js";
 
-import { ResourceType } from "../../Types.d.js";
+
+import { DIRECTIONS } from "../../Globals.js";
 
 
 export class Road
 {
+	static readonly Settlements: Directions = DIRECTIONS["Edge's Corners"];
+	static readonly Tiles: Directions = DIRECTIONS["Edge's Sides"];
+
 	id: number;
 	type: ResourceType;
 

@@ -1,18 +1,26 @@
 
 
+import { Directions } from "../Types.d.js";
+
+
+import { DIRECTIONS } from "../Globals.js";
+
+
 export class Hexagon
 {
-	readonly COS60: number = 0.5;
-	readonly SIN60: number = 0.8660254037844386;
-	readonly SQUAREROOT_3: number = 1.7320508076;
-	readonly TWO_OVER_SQUAREROOT_3: number = 1.1547005384;
+	static readonly COS60: number = 0.5;
+	static readonly SIN60: number = 0.8660254037844386;
+	static readonly SQUAREROOT_3: number = 1.7320508076;
+	static readonly TWO_OVER_SQUAREROOT_3: number = 1.1547005384;
+
+	static readonly Corners: Directions = DIRECTIONS["Side's Corners"];
 
 	x: number;
 	y: number;
 	height: number;
 	padding: number;
 	radius: number;
-	points: number[][];
+	points: Array<[number, number]>;
 
 	constructor(center_x: number, center_y: number, height: number, padding: number)
 	{
@@ -20,19 +28,17 @@ export class Hexagon
 		this.y = center_y;
 		this.height = height;
 		this.padding = padding;
-		this.radius = height * this.TWO_OVER_SQUAREROOT_3;
+		this.radius = height * Hexagon.TWO_OVER_SQUAREROOT_3;
 		
-		const radius_cos60: number = this.radius * this.COS60;
-		const radius_sin60: number = this.radius * this.SIN60;
+		const radius_cos60: number = this.radius * Hexagon.COS60;
 
-		this.points = [
-			[this.x - radius_cos60, this.y - radius_sin60],
-			[this.x + radius_cos60, this.y - radius_sin60],
-			[this.x + this.radius,  this.y],
-			[this.x + radius_cos60, this.y + radius_sin60],
-			[this.x - radius_cos60, this.y + radius_sin60],
-			[this.x - this.radius,  this.y],
-		];
+		this.points = Array(6);
+		this.points[Hexagon.Corners.TOP_LEFT    ] = [this.x - radius_cos60, this.y - height];
+		this.points[Hexagon.Corners.TOP_RIGHT   ] = [this.x + radius_cos60, this.y - height];
+		this.points[Hexagon.Corners.RIGHT       ] = [this.x + this.radius,  this.y];
+		this.points[Hexagon.Corners.BOTTOM_RIGHT] = [this.x + radius_cos60, this.y + height];
+		this.points[Hexagon.Corners.BOTTOM_LEFT ] = [this.x - radius_cos60, this.y + height];
+		this.points[Hexagon.Corners.LEFT        ] = [this.x - this.radius,  this.y];
 	}
 
 

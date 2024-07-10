@@ -1,3 +1,4 @@
+import { DIRECTIONS } from "../../Globals.js";
 export class Tile {
     constructor(id, coordinate, value, type) {
         this.id = id;
@@ -8,3 +9,5 @@ export class Tile {
         this.settlements = [null, null, null, null, null, null];
     }
 }
+Tile.Settlements = DIRECTIONS["Side's Corners"];
+Tile.Roads = DIRECTIONS["Side's Edges"];
