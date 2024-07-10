@@ -21,10 +21,12 @@ export class HexagonGrid {
         }
     }
     x_position_for_index(column) {
-        const incremental_increase = 2 + (3 * column);
-        const size_multiplier = this.hexagon_height * incremental_increase / this.SQUAREROOT_3;
-        const padding_distance = (column + 1) * (this.hexagon_padding * Hexagon.SIN60);
-        const distance_to_hexagon_center = Math.floor(size_multiplier + padding_distance);
+        const padding_over_2 = this.hexagon_padding * .5;
+        const total_height = padding_over_2 + this.hexagon_height;
+        const total_radius = total_height * this.TWO_OVER_SQUAREROOT_3;
+        const initial_hexagon_center = total_radius;
+        const additional_radius = column * this.SQUAREROOT_3 * total_height;
+        const distance_to_hexagon_center = initial_hexagon_center + additional_radius;
         return distance_to_hexagon_center;
     }
     y_position_for_index(column, row) {
@@ -36,7 +38,8 @@ export class HexagonGrid {
         return distance_to_hexagon_center;
     }
     dimensions() {
-        const width_padding = this.hexagon_padding * this.columns + this.hexagon_padding;
+        const hexagon_padding_sin60 = this.hexagon_padding * this.SIN60;
+        const width_padding = hexagon_padding_sin60 * this.columns + hexagon_padding_sin60;
         const hexagon_width = this.hexagon_height * this.TWO_OVER_SQUAREROOT_3 * 2;
         const width_distance = hexagon_width + .75 * hexagon_width * (this.columns - 1);
         const width = width_padding + width_distance;
