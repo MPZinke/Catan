@@ -37,6 +37,12 @@ export default class Canvas {
         var rectangle = this.canvas.getBoundingClientRect();
         return [event.clientX - rectangle.left, event.clientY - rectangle.top];
     }
+    draw_circle(center_x, center_y, radius) {
+        this.context.beginPath();
+        this.context.arc(center_x, center_y, radius, 0, 2 * Math.PI, false);
+        this.context.fillStyle = 'green';
+        this.context.fill();
+    }
     draw_hexagon(center_x, center_y, height) {
         const radius = height * Hexagon.TWO_OVER_SQUAREROOT_3;
         const radius_cos60 = radius * Hexagon.COS60;

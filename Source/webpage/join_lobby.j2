@@ -1,0 +1,33 @@
+<html>
+	<title>
+		Join Lobby
+	</title>
+
+	<h1>
+		Join Lobby
+	</h1>
+
+	<form
+		method="POST"
+	>
+		<input
+			name="name"
+		/>
+
+		<select>
+			{% for index, color in colors %}
+				<option
+					value="{{ loop.index0 }}"
+				>
+					{{ color.name }}
+				</option>
+			{% endfor %}
+		</select>
+
+		<button
+			type="submit"
+		>
+			Join Lobby
+		</button>
+	</form>
+</html>

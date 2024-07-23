@@ -1,5 +1,8 @@
 
 
+DROP TABLE IF EXISTS "PlayerColors" CASCADE;
+DROP TABLE IF EXISTS "Lobbies" CASCADE;
+DROP TABLE IF EXISTS "LobbiesPlayers" CASCADE;
 DROP TABLE IF EXISTS "ResourceTypes" CASCADE;
 DROP TABLE IF EXISTS "SettlementTypes" CASCADE;
 DROP TABLE IF EXISTS "Corner's Edges" CASCADE;
@@ -27,6 +30,67 @@ DROP TABLE IF EXISTS "PlayersResources" CASCADE;
 DROP TABLE IF EXISTS "GamesRobbers" CASCADE;
 DROP TABLE IF EXISTS "GamesBiggestArmies" CASCADE;
 DROP TABLE IF EXISTS "GamesLongestRoads" CASCADE;
+
+
+
+CREATE TABLE "PlayerColors"
+(
+	"id" SERIAL NOT NULL PRIMARY KEY,
+	"label" VARCHAR(32) NOT NULL UNIQUE,
+	"rgb" INT[3] NOT NULL,
+	"hex" CHAR(6) NOT NULL
+);
+
+
+-- FROM: https://stackoverflow.com/a/42784814
+CREATE OR REPLACE FUNCTION SetPlayerColorsRGBAndHex()
+RETURNS TRIGGER 
+AS $$ BEGIN
+	IF NEW."rgb" IS NOT NULL THEN
+		NEW."hex" = LPAD(TO_HEX(NEW."rgb"[1]), 2, '0') || LPAD(TO_HEX(NEW."rgb"[2]), 2, '0') || LPAD(TO_HEX(NEW."rgb"[3]), 2, '0');
+	ELSIF NEW."hex" IS NOT NULL THEN
+		-- FROM: https://stackoverflow.com/a/26441148
+		NEW."rgb" = ARRAY[
+			substr(NEW."hex", 0, 2)::bit(8)::int,
+			substr(NEW."hex", 2, 2)::bit(8)::int,
+			substr(NEW."hex", 4, 2)::bit(8)::int
+		]::INT[3];
+	END IF;
+
+	RETURN NEW;
+END; 
+$$ language plpgsql; 
+
+CREATE TRIGGER SetPlayerColorsRGBAndHex
+BEFORE INSERT ON "PlayerColors"
+FOR EACH ROW EXECUTE PROCEDURE SetPlayerColorsRGBAndHex();
+
+
+CREATE TABLE "Lobbies"
+(
+	"id" SERIAL NOT NULL PRIMARY KEY,
+	"uuid" UUID NOT NULL DEFAULT gen_random_uuid() UNIQUE,
+	"created" TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	"updated" TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+
+
+CREATE TABLE "LobbiesPlayers"
+(
+	"id" SERIAL NOT NULL PRIMARY KEY,
+	"uuid" UUID NOT NULL DEFAULT gen_random_uuid() UNIQUE,
+	"created" TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	"updated" TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	"name" VARCHAR(64) NOT NULL DEFAULT '',
+	"PlayerColors.id" INT NOT NULL,
+	"Lobbies.id" INT NOT NULL,
+	FOREIGN KEY ("PlayerColors.id") REFERENCES "PlayerColors"("id"),
+	FOREIGN KEY ("Lobbies.id") REFERENCES "Lobbies"("id")
+);
+
+
+CREATE UNIQUE INDEX "LobbiesPlayersUniqueIndex"
+ON "LobbiesPlayers" ("PlayerColors.id", "Lobbies.id");
 
 
 CREATE TABLE "ResourceTypes"

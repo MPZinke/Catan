@@ -72,6 +72,15 @@ export default class Canvas
 	}
 
 
+	draw_circle(center_x: number, center_y: number, radius: number)
+	{
+		this.context.beginPath();
+		this.context.arc(center_x, center_y, radius, 0, 2 * Math.PI, false);
+		this.context.fillStyle = 'green';
+		this.context.fill();
+	}
+
+
 	draw_hexagon(center_x: number, center_y: number, height: number)
 	{
 		const radius = height * Hexagon.TWO_OVER_SQUAREROOT_3;
@@ -130,6 +139,7 @@ export default class Canvas
 		}[settlement_direction];
 
 		this.draw_hexagon(x+x_offset, y+y_offset, height);
+		// this.draw_circle(x+x_offset, y+y_offset, height);
 	}
 
 

@@ -1,0 +1,38 @@
+
+<html>
+	<h1
+		style="color: rgb({{ player.color.red}}, {{player.color.green}}, {{player.color.blue }})"
+	>
+		Welcome Back {{ player.name }}
+	</h1>
+	<select
+		id="color"
+	>
+		<option
+			value="rgb(238, 168, 59)"
+			style="color: rgb(238, 168, 59); background-color: rgb(238, 168, 59)"
+		>
+			<span
+				style="color: rgb(238, 168, 59); background-color: rgb(238, 168, 59)"
+			>
+				
+			</span>
+		</option>
+	</select>
+	<form>
+		<button
+			type="submit"
+		>
+			Start Game
+		</button>
+	</form>
+	<div>
+		<button
+			onclick="navigator.clipboard.writeText(window.location.href);"
+		>
+			Copy Sharable Link
+		</button>
+	</div>
+</html>
+
+<script></script>
