@@ -5,7 +5,7 @@ __author__ = "MPZinke"
 ########################################################################################################################
 #                                                                                                                      #
 #   created by: MPZinke                                                                                                #
-#   on 2024.04.05                                                                                                      #
+#   on 2024.07.23                                                                                                      #
 #                                                                                                                      #
 #   DESCRIPTION:                                                                                                       #
 #   BUGS:                                                                                                              #
@@ -13,10 +13,6 @@ __author__ = "MPZinke"
 #                                                                                                                      #
 ########################################################################################################################
 
-import database.queries.counts
-import database.queries.directions
-import database.queries.games
-import database.queries.lobbies
-import database.queries.player_colors
-import database.queries.templates
-import database.queries.types
+
+from lobby.Lobby import Lobby
+from lobby.LobbyPlayer import LobbyPlayer

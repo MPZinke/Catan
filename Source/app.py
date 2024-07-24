@@ -3,7 +3,7 @@
 from datetime import datetime, timedelta
 import os
 from pathlib import Path
-from typing import Optional
+from typing import Any, Optional
 import uuid
 
 
@@ -13,15 +13,13 @@ from flask import redirect, render_template, request, session, Flask
 from database import queries
 import game
 from game import Game
-from Lobbies import LobbyPlayer, Lobby, Lobbies
+from lobby import Lobby, LobbyPlayer
+from PlayerColor import PlayerColor, PLAYER_COLORS
 
 
 ROOT_DIR = str(Path(__file__).absolute().parent)
 TEMPLATE_FOLDER = os.path.join(ROOT_DIR, "Webpage")
 STATIC_FOLDER = os.path.join(ROOT_DIR, "Webpage/Static")
-
-
-LOBBIES = Lobbies()
 
 
 app = Flask("Catan", template_folder=TEMPLATE_FOLDER, static_folder=STATIC_FOLDER)
@@ -32,24 +30,21 @@ def manage_lobbies(function: callable) -> callable:
 	def wrapper(*args: list, **kwargs: dict):
 		now = datetime.now()
 		# Clear inactive lobbies
-		for lobby_index in range(len(LOBBIES)-1, -1, -1):
-			lobby: Lobby = LOBBIES.lobbies[lobby_index]
-			if(lobby.last_updated + timedelta(minutes=30) < now):
-				del LOBBIES[lobby]
-			else:
-				# Clear inactive players
-				for player_index in range(len(lobby)-1, -1, -1):
-					player: LobbyPlayer = lobby.players[player_index]
-					if(lobby.last_updated + timedelta(minutes=30) < now):
-						del lobby[player]
+		# for lobby_index in range(len(LOBBIES)-1, -1, -1):
+		# 	lobby: Lobby = LOBBIES.lobbies[lobby_index]
+		# 	if(lobby.last_updated + timedelta(minutes=30) < now):
+		# 		del LOBBIES[lobby]
+		# 	else:
+		# 		# Clear inactive players
+		# 		for player_index in range(len(lobby)-1, -1, -1):
+		# 			player: LobbyPlayer = lobby.players[player_index]
+		# 			if(lobby.last_updated + timedelta(minutes=30) < now):
+		# 				del lobby[player]
 
-		param_names: list[str] = list(function.__annotations__)
-		lobby_id_param_index: int = param_names.index("lobby_id") if("lobby_id" in param_names) else None
-		if(lobby_id_param_index is not None):
-			lobby_id = kwargs.get("lobby_id") or args[lobby_id_param_index]
-			lobby: Optional[Lobby] = LOBBIES.get(lobby_id)
-			if(lobby is not None):
-				lobby.update()
+		# param_names: list[str] = list(function.__annotations__)
+		# lobby_uuid_param_index: int = param_names.index("lobby_uuid") if("lobby_uuid" in param_names) else None
+		# if(lobby_uuid_param_index is not None):
+		# 	lobby_uuid = kwargs.get("lobby_uuid") or args[lobby_uuid_param_index]
 
 		return function(*args, **kwargs)
 
@@ -60,73 +55,70 @@ def manage_lobbies(function: callable) -> callable:
 
 
 @app.route("/lobby")
-@manage_lobbies
 def lobby_GET():
 	return render_template("new_lobby.j2")
 
 
 @app.route("/lobby", methods=["POST"])
-@manage_lobbies
 def lobby_POST():
-	lobby_id: str = str(uuid.uuid4())
-	LOBBIES.append(Lobby(lobby_id))
+	lobby_data: dict = queries.lobbies.new_lobby()
+	lobby_uuid = lobby_data["uuid"]
 
-	return redirect(f"/lobby/{lobby_id}")
+	return redirect(f"/lobby/{lobby_uuid}")
 
 
-@app.route("/lobby/<string:lobby_id>")
-@manage_lobbies
-def lobby_id_GET(lobby_id: int):
-	print(session)
-	lobby: Lobby = LOBBIES.get(lobby_id)
-	if(lobby is None):
+@app.route("/lobby/<string:lobby_uuid>")
+# @manage_lobbies
+def lobby_uuid_GET(lobby_uuid: int):
+	lobby_data: Optional[dict] = queries.lobbies.get_lobby_by_uuid(lobby_uuid)
+	if(lobby_data is None):
 		return redirect("/lobby")
 
-	session_lobbies = session.get("lobbies")
-	if(session_lobbies is None):
-		session_lobbies = {}
-		session["lobbies"] = session_lobbies
+	lobby = Lobby(**lobby_data)
 
-	player_id = session_lobbies.get(lobby_id)
-	if(player_id is None):
-		return render_template("join_lobby.j2", colors=LobbyPlayer.COLORS)
+	session_lobbies: dict = session.get("lobbies", {})
+	player_uuid = session_lobbies.get(lobby_uuid)
+	print("player_uuid", player_uuid)
+	if(player_uuid is None):
+		return render_template("join_lobby.j2", colors=PLAYER_COLORS)
 
-	player: Optional[LobbyPlayer] = lobby.get(player_id)
-	if(player is None):
-		return render_template("join_lobby.j2", colors=LobbyPlayer.COLORS)
+	player_data: Optional[dict] = queries.lobbies.get_lobby_player_by_uuid(player_uuid)
+	if(player_data is None):
+		return render_template("join_lobby.j2", colors=PLAYER_COLORS)
 
+	player_color = next(filter(lambda color: color.id == player_data["PlayerColors.id"], PLAYER_COLORS))
+	del player_data["PlayerColors.id"]
+	del player_data["Lobbies.id"]
+	player = LobbyPlayer(**player_data, color=player_color)
+
+	session["lobbies"] = session_lobbies
 	return render_template("lobby.j2", player=player)
 
 
-@app.route("/lobby/<string:lobby_id>", methods=["POST"])
-@manage_lobbies
-def lobby_id_POST(lobby_id: int):
-	session_lobbies = session.get("lobbies")
-	if(session_lobbies is None):
-		session_lobbies = {}
-		session["lobbies"] = session_lobbies
-
-	lobby: Optional[Lobby] = LOBBIES.get(lobby_id)
-	if(lobby is None):
+@app.route("/lobby/<string:lobby_uuid>", methods=["POST"])
+# @manage_lobbies
+def lobby_uuid_POST(lobby_uuid: int):
+	lobby_data: Optional[dict] = queries.lobbies.get_lobby_by_uuid(lobby_uuid)
+	if(lobby_data is None):
 		return redirect("/lobby")
 
-	player_id: Optional[str] = session_lobbies.get(lobby_id)
-	if(player_id is not None):
-		return redirect(f"/lobby/{lobby_id}")
+	lobby_primary_key: int = lobby_data["id"]
+
+	session_lobbies: dict = session.get("lobbies", {})
+	player_uuid: Optional[str] = session_lobbies.get(lobby_uuid)
+	if(player_uuid is not None):
+		if(queries.lobbies.get_lobby_player_by_uuid(player_uuid) is not None):
+			return redirect(f"/lobby/{lobby_uuid}")
 
 	# Create Player
-	player_id = str(uuid.uuid4())
 	player_name = request.form.get("name")
-	player_color = request.form.get("color")
-	player = LobbyPlayer(player_id, player_name, player_color)
-	lobby += player
+	player_color_id = request.form.get("color")
+	player_data: dict = queries.lobbies.new_lobby_player(player_name, player_color_id, lobby_primary_key)
+	player_uuid = player_data["uuid"]
 
-	session_lobbies[lobby_id] = player_id
-	print(session_lobbies)
-	print(session)
+	session_lobbies[lobby_uuid] = player_uuid
 	session["lobbies"] = session_lobbies
-
-	return redirect(f"/lobby/{lobby_id}")
+	return redirect(f"/lobby/{lobby_uuid}")
 
 
 @app.route("/new/<int:template_id>")
@@ -168,23 +160,23 @@ def api_directions() -> dict:
 	}
 
 
-@app.route("/api/lobby/active/<string:lobby_id>")
-def api_lobby_active_GET(lobby_id: str) -> None:
+@app.route("/api/lobby/active/<string:lobby_uuid>")
+def api_lobby_active_GET(lobby_uuid: str) -> None:
 	lobbies = session.get("lobbies")
 	if(lobbies is None):
 		lobbies = {}
 		session["lobbies"] = lobbies
 
-	player_id: Optional[str] = lobbies.get(lobby_id)
-	if(player_id is None):
+	player_uuid: Optional[str] = lobbies.get(lobby_uuid)
+	if(player_uuid is None):
 		return """{"error": {"type": "lobby", "message": "Lobby not found in session"}}""", 400
 
-	lobby: Lobby = LOBBIES.get(lobby_id)
+	lobby: Lobby = LOBBIES.get(lobby_uuid)
 	if(lobby is None):
 		return """{"error": {"type": "lobby", "message": "Lobby not found"}}""", 404
 	lobby.update()
 
-	player: Optional[LobbyPlayer] = lobby.get(player_id)
+	player: Optional[LobbyPlayer] = lobby.get(player_uuid)
 	if(player is None):
 		return """{"error": {"type": "player", "message": "Player not found"}}""", 400
 	player.update()

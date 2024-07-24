@@ -5,7 +5,7 @@ __author__ = "MPZinke"
 ########################################################################################################################
 #                                                                                                                      #
 #   created by: MPZinke                                                                                                #
-#   on 2024.04.05                                                                                                      #
+#   on 2024.07.23                                                                                                      #
 #                                                                                                                      #
 #   DESCRIPTION:                                                                                                       #
 #   BUGS:                                                                                                              #
@@ -13,10 +13,20 @@ __author__ = "MPZinke"
 #                                                                                                                      #
 ########################################################################################################################
 
-import database.queries.counts
-import database.queries.directions
-import database.queries.games
-import database.queries.lobbies
-import database.queries.player_colors
-import database.queries.templates
-import database.queries.types
+
+import psycopg2
+import psycopg2.extras
+
+
+from database.connect import connect
+
+
+@connect
+def get_player_colors(cursor: psycopg2.extras.RealDictCursor) -> list[dict]:
+	query = """
+		SELECT *
+		FROM "PlayerColors";
+	"""
+
+	cursor.execute(query)
+	return list(map(dict, cursor))
