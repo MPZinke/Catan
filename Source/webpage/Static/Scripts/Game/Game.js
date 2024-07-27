@@ -1,5 +1,5 @@
 import { construct_board } from "./Board/index.js";
-import { get_game_data } from "../Requests.js";
+import { get_game_data } from "../Requests/index.js";
 export function construct_game() {
     const game_data = get_game_data();
     const id = game_data.id;

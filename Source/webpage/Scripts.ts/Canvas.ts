@@ -1,7 +1,7 @@
 
 
 import { HexagonGrid, Hexagon } from "./Layout/index.js";
-import { get_game_data } from "./Requests.js";
+import { get_game_data } from "./Requests/index.js";
 import { RESOURCE_TYPES } from "./Globals.js";
 
 

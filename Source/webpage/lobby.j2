@@ -1,24 +1,37 @@
 
 <html>
 	<h1
-		style="color: rgb({{ player.color.red}}, {{player.color.green}}, {{player.color.blue }})"
+		style="color: rgb({{ player.color.rgb | join(", ") }})"
 	>
 		Welcome Back {{ player.name }}
 	</h1>
-	<select
-		id="color"
-	>
-		<option
-			value="rgb(238, 168, 59)"
-			style="color: rgb(238, 168, 59); background-color: rgb(238, 168, 59)"
+	<div>
+		<h2>
+			Current Lobby
+		</h2>
+
+		Change Color
+		<select
+			id="player_color-select"
 		>
-			<span
-				style="color: rgb(238, 168, 59); background-color: rgb(238, 168, 59)"
+			<option
+				value="{{ player.color.id }}"
+				selected
 			>
-				
-			</span>
-		</option>
-	</select>
+				{{ player.color.label }}
+			</option>
+			{% for color in colors %}
+				<option
+					value="{{ color.id }}"
+				>
+					{{ color.label }}
+				</option>
+			{% endfor %}
+		</select>
+
+		{% include("lobby_status.j2") %}
+
+	</div>
 	<form>
 		<button
 			type="submit"
@@ -26,6 +39,13 @@
 			Start Game
 		</button>
 	</form>
+
+	<button
+		type="submit"
+	>
+		Leave Lobby
+	</button>
+
 	<div>
 		<button
 			onclick="navigator.clipboard.writeText(window.location.href);"
@@ -35,4 +55,8 @@
 	</div>
 </html>
 
-<script></script>
+<script
+	src="{{ url_for("static", filename="Scripts/Lobby.js") }}"
+	type="module"
+>
+</script>

@@ -22,21 +22,28 @@ class LobbyPlayer:
 		self.color: PlayerColor = color
 
 
-	def __eq__(self, right: str | LobbyPlayer) -> bool:
+	def __eq__(self, right: int | str | LobbyPlayer) -> bool:
 		if(isinstance(right, LobbyPlayer)):
 			return self.id == right.id
 
 		if(isinstance(right, str)):
+			return self.uuid == right
+
+		if(isinstance(right, int)):
 			return self.id == right
 
-		raise TypeError(f"LobbyPlayer.__eq__ expects type uuid|LobbyPlayer, not {type(right).__name__}")
+		raise TypeError(f"LobbyPlayer.__eq__ expects type int | str | LobbyPlayer, not {type(right).__name__}")
 
 
 	def __iter__(self) -> dict:
 		yield from {
 			"id": self.id,
+			"uuid": self.uuid,
+			"created": self.created,
+			"updated": self.updated,
+			"expired": self.expired,
 			"name": self.name,
-			"color": list(self.color),
+			"color": dict(self.color)
 		}.items()
 
 

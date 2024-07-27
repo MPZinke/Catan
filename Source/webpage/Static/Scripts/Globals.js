@@ -1,3 +1,2 @@
-import { get_directions, get_resource_types } from "./Requests.js";
-export const DIRECTIONS = get_directions();
-export const RESOURCE_TYPES = get_resource_types();
+import { get_constants } from "./Requests/index.js";
+export const { DIRECTIONS, PLAYER_COLORS, RESOURCE_TYPES } = get_constants();

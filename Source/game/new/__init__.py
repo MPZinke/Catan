@@ -16,7 +16,7 @@ __author__ = "MPZinke"
 
 from database import queries
 import game
-from game import Game
+from game.Game import Game
 from game.board import template, Board
 from game.board.construct import construct_board, BoardData
 from game.board.new import new_board

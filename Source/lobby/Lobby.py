@@ -19,6 +19,9 @@ import json
 from typing import Optional, TypeVar
 
 
+from PlayerColor import PlayerColor, PLAYER_COLORS
+
+
 Lobby = TypeVar("Lobby")
 LobbyPlayer = TypeVar("LobbyPlayer")
 
@@ -36,13 +39,16 @@ class Lobby:
 
 
 	def __eq__(self, right: str | Lobby) -> bool:
-		if(isinstance(right, str)):
-			return self.id == right
-
 		if(isinstance(right, Lobby)):
 			return self.id == right.id
 
-		raise TypeError(f"Lobby.__eq__ expects type str | Lobby, not {type(right).__name__}")
+		if(isinstance(right, str)):
+			return self.uuid == right
+
+		if(isinstance(right, int)):
+			return self.id == right
+
+		raise TypeError(f"Lobby.__eq__ expects type int | str | Lobby, not {type(right).__name__}")
 
 
 	def __iadd__(self, player: LobbyPlayer) -> Lobby:
@@ -57,26 +63,6 @@ class Lobby:
 		return left in self.players
 
 
-	def __delitem__(self, player_id: str | LobbyPlayer) -> None:
-		if(not isinstance(player_id, (str, LobbyPlayer))):
-			raise TypeError(f"`player_id` must be of type `str | LobbyPlayer`, not {type(player_id)}")
-
-		if(isinstance(player_id, LobbyPlayer)):
-			player_id = player_id.id
-
-		for index in range(len(self.players)-1, -1, -1):
-			if(self.players[index].id == player_id):
-				del self.players[index]
-
-
-	def __getitem__(self, player_id: str) -> Lobby:
-		player: Optional[LobbyPlayer] = self.get(player_id)
-		if(player is None):
-			raise IndexError(f"LobbyPlayer with id '{player_id}' not found.")
-
-		return player
-
-
 	def __len__(self) -> int:
 		return len(self.players)
 
@@ -84,8 +70,11 @@ class Lobby:
 	def __iter__(self) -> dict:
 		yield from {
 			"id": self.id,
+			"uuid": self.uuid,
 			"created": self.created,
-			"players": list(map(dict, self.players)),
+			"updated": self.updated,
+			"expired": self.expired,
+			"players": list(map(dict, self.players))
 		}.items()
 
 
@@ -97,13 +86,14 @@ class Lobby:
 		return json.dumps(dict(self), default=str, indent=4)
 
 
+	def available_player_colors(self) -> list[PlayerColor]:
+		player_color_ids = [player.color.id for player in self.players]
+		return [player_color for player_color in PLAYER_COLORS if(player_color.id not in player_color_ids)]
+
+
 	def get(self, player_id) -> Optional[LobbyPlayer]:
 		for player in self.players:
 			if(player == player_id):
 				return player
 
 		return None		
-
-
-	def update(self) -> None:
-		self.last_updated = datetime.now()

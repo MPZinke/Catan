@@ -14,6 +14,9 @@ __author__ = "MPZinke"
 ########################################################################################################################
 
 
+from typing import Optional
+
+
 import psycopg2.extras
 
 
@@ -29,7 +32,11 @@ def get_game(cursor: psycopg2.extras.RealDictCursor, game_id: int) -> dict:
 	"""
 
 	cursor.execute(query, (game_id,))
-	return dict(cursor.fetchone())
+	game_dict: Optional[dict] = cursor.fetchone()
+	if(game_dict is None):
+		return None
+
+	return dict(game_dict)
 
 
 @connect
@@ -41,7 +48,11 @@ def get_board(cursor: psycopg2.extras.RealDictCursor, game_id: int) -> dict:
 	"""
 
 	cursor.execute(query, (game_id,))
-	return dict(cursor.fetchone())
+	board_dict: Optional[dict] = cursor.fetchone()
+	if(board_dict is None):
+		return None
+
+	return dict(board_dict)
 
 
 @connect
@@ -79,7 +90,11 @@ def get_robber(cursor: psycopg2.extras.RealDictCursor, game_id: int) -> list[dic
 	"""
 
 	cursor.execute(query, (game_id,))
-	return dict(cursor.fetchone())
+	robber_dict: Optional[dict] = cursor.fetchone()
+	if(robber_dict is None):
+		return None
+
+	return dict(robber_dict)
 
 
 @connect

@@ -1,0 +1,19 @@
+
+<div
+	id="lobby_status-div"
+>
+	<table>
+		{% for lobby_player in lobby.players %}
+			<tr>
+				<td>
+					{{ lobby_player.name }}
+				</td>
+				<td
+					style="color: rgb({{ lobby_player.color.rgb | join(", ") }})"
+				>
+					{{ lobby_player.color.label }}
+				</td>
+			</tr>
+		{% endfor %}
+	</table>
+</div>

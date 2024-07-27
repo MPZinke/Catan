@@ -4,7 +4,7 @@ import { Player } from "Player.js";
 import { construct_board, Board, Port, Road, Settlement, Tile } from "./Board/index.js";
 
 
-import { get_game_data } from "../Requests.js";
+import { get_game_data } from "../Requests/index.js";
 
 
 import { ResourceType } from "../Types.d.js";

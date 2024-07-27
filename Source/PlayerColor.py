@@ -29,19 +29,40 @@ class PlayerColor:
 	def __init__(self, id: int, label: str, rgb: Tuple[int, int, int], hex: str):
 		self.id: int = id
 		self.label: str = label
-		self.red: int = rgb[0]
-		self.green: int = rgb[1]
-		self.blue: int = rgb[2]
+		self.rgb: Tuple[int, int, int] = list(rgb)
 		self.hex: str = hex
+
+
+	def __eq__(self, right: int | str | PlayerColor) -> bool:
+		if(isinstance(right, PlayerColor)):
+			return self.id == right.id
+
+		if(isinstance(right, str)):
+			return self.label == right
+
+		if(isinstance(right, int)):
+			return self.id == right
+
+		raise TypeError(f"PlayerColor.__eq__ expects type int | str | PlayerColor, not {type(right).__name__}")
 
 
 	@property
 	def rgb(self) -> Tuple[int, int, int]:
-		return [self.red, self.green, self.blue]
+		return [self._rgb[0], self._rgb[1], self._rgb[2]]
 
 
-	def __iter__(self) -> list[int]:
-		yield from [self.red, self.green, self.blue]
+	@rgb.setter
+	def rgb(self, rgb: Tuple[int, int, int]) -> None:
+		self._rgb = list(rgb)
+
+
+	def __iter__(self) -> dict:
+		yield from {
+			"id": self.id,
+			"label": self.label,
+			"rgb": self.rgb,
+			"hex": self.hex
+		}.items()
 
 
 _player_color_dicts: list[dict] = queries.player_colors.get_player_colors()

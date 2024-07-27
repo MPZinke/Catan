@@ -5,16 +5,10 @@ __author__ = "MPZinke"
 ########################################################################################################################
 #                                                                                                                      #
 #   created by: MPZinke                                                                                                #
-#   on 2024.05.12                                                                                                      #
+#   on 2024.07.27                                                                                                      #
 #                                                                                                                      #
 #   DESCRIPTION:                                                                                                       #
 #   BUGS:                                                                                                              #
 #   FUTURE:                                                                                                            #
 #                                                                                                                      #
 ########################################################################################################################
-
-
-from database.queries.games.get import *
-from database.queries.games.new import *
-from database.queries.games.new.board import *
-from database.queries.games.update import *
