@@ -42,6 +42,11 @@ function update_lobby()
 	const lobby_status_div: HTMLElement = document.getElementById("lobby_status-div") as HTMLElement;
 
 	const new_lobby_status: object = get_lobby_status();
+	if(new_lobby_status.game_id !== null)
+	{
+		window.location.href = `/games/${new_lobby_status.game_id}`;
+	}
+	console.log(new_lobby_status);
 	// const new_lobby_status_element: DocumentFragment = html_to_element(new_lobby_status_html);
 	// lobby_status_div.replaceChildren(new_lobby_status_element);
 }

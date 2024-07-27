@@ -32,6 +32,8 @@ DROP TABLE IF EXISTS "GamesBiggestArmies" CASCADE;
 DROP TABLE IF EXISTS "GamesLongestRoads" CASCADE;
 
 
+-- ————————————————————————————————————————————————————— TYPES  ————————————————————————————————————————————————————— --
+-- —————————————————————————————————————————————————————————————————————————————————————————————————————————————————— --
 
 CREATE TABLE "PlayerColors"
 (
@@ -64,35 +66,6 @@ $$ language plpgsql;
 CREATE TRIGGER SetPlayerColorsRGBAndHex
 BEFORE INSERT ON "PlayerColors"
 FOR EACH ROW EXECUTE PROCEDURE SetPlayerColorsRGBAndHex();
-
-
-CREATE TABLE "Lobbies"
-(
-	"id" SERIAL NOT NULL PRIMARY KEY,
-	"uuid" UUID NOT NULL DEFAULT gen_random_uuid() UNIQUE,
-	"created" TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-	"updated" TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-	"expired" BOOL NOT NULL DEFAULT FALSE
-);
-
-
-CREATE TABLE "LobbiesPlayers"
-(
-	"id" SERIAL NOT NULL PRIMARY KEY,
-	"uuid" UUID NOT NULL DEFAULT gen_random_uuid() UNIQUE,
-	"created" TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-	"updated" TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-	"expired" BOOL NOT NULL DEFAULT FALSE,
-	"name" VARCHAR(64) NOT NULL DEFAULT '',
-	"PlayerColors.id" INT NOT NULL,
-	"Lobbies.id" INT NOT NULL,
-	FOREIGN KEY ("PlayerColors.id") REFERENCES "PlayerColors"("id"),
-	FOREIGN KEY ("Lobbies.id") REFERENCES "Lobbies"("id")
-);
-
-
-CREATE UNIQUE INDEX "LobbiesPlayersUniqueIndex"
-ON "LobbiesPlayers" ("PlayerColors.id", "Lobbies.id");
 
 
 CREATE TABLE "ResourceTypes"
@@ -245,6 +218,59 @@ CREATE TABLE "TemplatesTilesResourceTypesCounts"
 );
 
 
+-- ———————————————————————————————————————————————————— LOBBIES  ———————————————————————————————————————————————————— --
+-- —————————————————————————————————————————————————————————————————————————————————————————————————————————————————— --
+
+CREATE TABLE "Lobbies"
+(
+	"id" SERIAL NOT NULL PRIMARY KEY,
+	"uuid" UUID NOT NULL DEFAULT gen_random_uuid() UNIQUE,
+	"created" TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	"updated" TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	"expired" BOOL NOT NULL DEFAULT FALSE,
+	"Games.id" INT DEFAULT NULL
+);
+
+
+CREATE TABLE "LobbiesPlayers"
+(
+	"id" SERIAL NOT NULL PRIMARY KEY,
+	"uuid" UUID NOT NULL DEFAULT gen_random_uuid() UNIQUE,
+	"created" TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	"updated" TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	"expired" BOOL NOT NULL DEFAULT FALSE,
+	"name" VARCHAR(64) NOT NULL DEFAULT '',
+	"PlayerColors.id" INT NOT NULL,
+	"Lobbies.id" INT NOT NULL,
+	FOREIGN KEY ("PlayerColors.id") REFERENCES "PlayerColors"("id"),
+	FOREIGN KEY ("Lobbies.id") REFERENCES "Lobbies"("id")
+);
+
+
+CREATE UNIQUE INDEX "LobbiesPlayersUniqueIndex"
+ON "LobbiesPlayers" ("PlayerColors.id", "Lobbies.id");
+
+
+-- FROM: https://stackoverflow.com/a/42784814
+CREATE OR REPLACE FUNCTION UpdateExpiredPlayers()
+RETURNS TRIGGER 
+AS $$ BEGIN
+	IF NEW."expired" = TRUE THEN
+		UPDATE "LobbiesPlayers"
+		SET "expired" = TRUE
+		WHERE "Lobbies.id" = NEW."id";
+	END IF;
+
+	RETURN NEW;
+END; 
+$$ language plpgsql; 
+
+
+CREATE TRIGGER UpdateExpiredPlayers
+AFTER UPDATE ON "Lobbies"
+FOR EACH ROW EXECUTE PROCEDURE UpdateExpiredPlayers();
+
+
 -- —————————————————————————————————————————————————————— GAME —————————————————————————————————————————————————————— --
 -- —————————————————————————————————————————————————————————————————————————————————————————————————————————————————— --
 
@@ -254,6 +280,9 @@ CREATE TABLE "Games"
 	"started" TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
 	"finished" TIMESTAMP DEFAULT NULL
 );
+
+
+ALTER TABLE "Lobbies" ADD CONSTRAINT "Lobbies.Games.id" FOREIGN KEY ("Games.id") REFERENCES "Games"("id");
 
 
 CREATE TABLE "GamesBoards"

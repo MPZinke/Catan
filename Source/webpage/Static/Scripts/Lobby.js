@@ -15,6 +15,7 @@ function update_lobby_status(players) {
 function update_lobby() {
     const lobby_status_div = document.getElementById("lobby_status-div");
     const new_lobby_status = get_lobby_status();
+    console.log(new_lobby_status);
 }
 setInterval(() => {
     update_lobby();

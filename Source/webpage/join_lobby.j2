@@ -7,6 +7,15 @@
 		Join Lobby
 	</h1>
 
+	<div>
+		<h2>
+			Current Lobby
+		</h2>
+
+		{% include("lobby_status.j2") %}
+
+	</div>
+
 	<form
 		method="POST"
 	>
@@ -17,7 +26,7 @@
 		<select
 			name="color"
 		>
-			{% for color in colors %}
+			{% for color in lobby.available_player_colors() %}
 				<option
 					value="{{ color.id }}"
 				>

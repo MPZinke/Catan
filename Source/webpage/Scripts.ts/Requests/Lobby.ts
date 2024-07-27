@@ -25,7 +25,7 @@ export function get_lobby_status(): object
 export function get_lobby_status_html(): string
 {
 	const lobby_uuid = window.location.pathname.split('/')[2];
-	const url: string = `/html/lobby/${lobby_uuid}`;
+	const url: string = `/lobby/${lobby_uuid}/html`;
 	var xmlhttp = new XMLHttpRequest();
 	xmlhttp.open("GET", url, false);
 	xmlhttp.send();

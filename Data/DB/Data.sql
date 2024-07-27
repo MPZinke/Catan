@@ -6,7 +6,7 @@ INSERT INTO "PlayerColors" ("rgb", "label") VALUES
 (ARRAY[ 48, 110, 178]::INT[8], 'Blue'),
 (ARRAY[245, 196,  67]::INT[8], 'Yellow'),
 (ARRAY[214,  75,  70]::INT[8], 'Red'),
-(ARRAY[ 83,  53,  68]::INT[8], 'Purple');
+(ARRAY[170, 127, 255]::INT[8], 'Purple');
 
 
 INSERT INTO "ResourceTypes" ("label") VALUES

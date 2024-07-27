@@ -28,7 +28,7 @@ LobbyPlayer = TypeVar("LobbyPlayer")
 
 class Lobby:
 	def __init__(self, id: int, uuid: str, created: datetime, updated: datetime, expired: bool,
-		players: Optional[list[LobbyPlayer]]=None
+		players: Optional[list[LobbyPlayer]]=None, game_id: Optional[int]=None
 	):
 		self.id: str = id
 		self.uuid: str = uuid
@@ -36,6 +36,7 @@ class Lobby:
 		self.updated: datetime = updated
 		self.expired: bool = expired
 		self.players: list[LobbyPlayer] = list(players) if(players is not None) else []
+		self.game_id: Optional[int] = game_id
 
 
 	def __eq__(self, right: str | Lobby) -> bool:
@@ -74,7 +75,8 @@ class Lobby:
 			"created": self.created,
 			"updated": self.updated,
 			"expired": self.expired,
-			"players": list(map(dict, self.players))
+			"players": list(map(dict, self.players)),
+			"game_id": self.game_id
 		}.items()
 
 

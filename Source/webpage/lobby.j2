@@ -20,7 +20,7 @@
 			>
 				{{ player.color.label }}
 			</option>
-			{% for color in colors %}
+			{% for color in lobby.available_player_colors() %}
 				<option
 					value="{{ color.id }}"
 				>
